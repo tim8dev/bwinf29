@@ -60,7 +60,7 @@ class BerechnenderAktor(val ziel: PackenderAktor, val kiste: Kiste) extends Pack
   }
 }
 
-class ActingPacker(kistenListe: Seq[KisteLeer]) extends SortierteKisten(kistenListe) {
+class ActingPacker(kistenListe: Seq[KisteLeer]) extends SortierenderPacker(kistenListe) {
   private val ziel = new EmpfangenderAktor(kisten)
 
   private def erzeugeAktoren(i: Int): PackenderAktor = {

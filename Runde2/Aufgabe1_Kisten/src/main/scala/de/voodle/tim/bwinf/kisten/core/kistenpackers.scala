@@ -7,15 +7,15 @@ trait KistenPacker {
   def min: KistenSatz
 }
 
-object SortierteKisten {
+object SortierenderPacker {
   // Sortiert wird von Groß nach Klein!
   // D'rum muss die Ordnung 'falsch'rum sein
   def sortieren(input: Seq[KisteLeer]): List[KisteLeer] =
     input.toList.sorted(Kiste.Ordnung.nachVolumen.reverse)
 }
 
-abstract class SortierteKisten(kartonListe: Seq[KisteLeer]) extends KistenPacker {
-  val kisten = SortierteKisten.sortieren(kartonListe) // sortieren; umdrehen
+abstract class SortierenderPacker(kartonListe: Seq[KisteLeer]) extends KistenPacker {
+  val kisten = SortierenderPacker.sortieren(kartonListe) // sortieren; umdrehen
 }
 
 trait SimplerPacker extends KistenPacker {
@@ -23,9 +23,9 @@ trait SimplerPacker extends KistenPacker {
   def packe: Traversable[KistenSatz]
 }
 
-trait HilfsPacken extends SimplerPacker {
-  def packe = (Set[KistenSatz]() /: kisten) ( hilfsPacken )
-  protected def hilfsPacken(sätze: Set[KistenSatz], kiste: KisteLeer): Set[KistenSatz]
+trait SchrittPacker extends SimplerPacker {
+  def packe = (Set[KistenSatz]() /: kisten) ( packSchritt )
+  protected def packSchritt(sätze: Set[KistenSatz], kiste: KisteLeer): Set[KistenSatz]
 }
 
 trait GraphPacker extends KistenPacker {

@@ -1,39 +1,46 @@
 package de.voodle.tim.bwinf.kisten.core
 package online
 
-class OfflinePacker(kistenSeq: Seq[KisteLeer]) extends SortierteKisten(kistenSeq)
-                                               with HilfsPacken {
-  var onlinePacker = OnlinePacker()
-  protected def hilfsPacken(sätze: Set[KistenSatz], kiste: KisteLeer) = {
-    onlinePacker += kiste
-    Set()
+/** Glieder den OnlineAlgo in die Packer Hierarchie */
+class OnlinePacker(kistenSeq: Seq[KisteLeer], val onlinePacker: OnlineAlgo)
+                                         extends SortierenderPacker(kistenSeq) {
+  def this(kistenSeq: Seq[KisteLeer], strategien: List[Strategie]) =
+    this(kistenSeq, OnlineAlgo(strategien))
+  def this(kistenSeq: Seq[KisteLeer]) =
+    this(kistenSeq, List(FindeGrößerenLeeren, FindeZwischenraum))
+
+  override def min = (onlinePacker ++ kistenSeq).kisten
+}
+
+case class OnlineAlgo(kisten: KistenSatz, kistenGraph: KistenGraph, strategien: List[Strategie]) {
+  /** Einfach alle nacheinander hineinfügen! */
+  def ++ (die: Seq[KisteLeer]) = (this /: die)(_ + _)
+
+  def + (der: KisteLeer): OnlineAlgo = {
+    val neuerKistenGraph = kistenGraph + der // O(n)
+    val neueKisten = (Option.empty[KistenSatz] /: strategien) {
+        // wenn es  vorher gibt, dann vorher sonst diese strategie benutzen!
+         (vorher, strat) => vorher orElse strat(kisten)(der)(neuerKistenGraph)
+      } getOrElse (kisten + der) // sonst aneinanderreihen, wie einfach :D
+    OnlineAlgo(neueKisten, neuerKistenGraph, strategien)
   }
 }
 
-case class OnlinePacker(kisten: KistenSatz, kistenGraph: KistenGraph, strategien: List[Strategie]) {
-  def + (der: KisteLeer): OnlinePacker = {
-    val neuerKistenGraph = kistenGraph + der           // O(n)
-    //val groessere = neuerKistenGraph findeGroessere der // O(n)
-    //val kleinere  = neuerKistenGraph findeKleiner  der // O(n)
-    val moeglicheKisten = (Option.empty[KistenSatz] /: strategien) {
-      (vorher, strategie) => // entweder vorher, oder, diese strategie benutzen!
-       vorher orElse strategie(kisten)(der)(neuerKistenGraph)
-    }
-    // sonst aneinanderreihen, wie einfach :D
-    val neueKisten = moeglicheKisten getOrElse ( kisten + der )
-    OnlinePacker(neueKisten, neuerKistenGraph, strategien)
-  }
-}
+object OnlineAlgo { // Hilfsmethoden zum schnellen erzeugen! :)
+  def apply(): OnlineAlgo = apply(KistenSatz(Nil))
+  def apply(strategien: List[Strategie]): OnlineAlgo =
+    OnlineAlgo(KistenSatz(Nil), strategien)
+  def apply(kistenSatz: KistenSatz): OnlineAlgo =
+    OnlineAlgo(kistenSatz, standardStrategien)
+  def apply(kistenSatz: KistenSatz, strategien: List[Strategie]): OnlineAlgo =
+    OnlineAlgo(kistenSatz,
+               KistenGraph(kistenSatz.kisten map (_.alsLeer)),
+               strategien)
 
-object OnlinePacker { // Hilfsmethoden zum schnellen erzeugen! :)
-  def apply(): OnlinePacker = apply(KistenSatz(Nil))
-  def apply(kartons: KistenSatz): OnlinePacker = apply(kartons,
-      FindeGroesserenLeeren :: // (2)
+  def standardStrategien =
+      FindeGrößerenLeeren :: // (2)
       FindeZwischenraum     :: // (3)
       FindeHalbleeren       :: // (1)
       FindeKleinereWurzel   :: // (4)
-      Nil)
-  def apply(kartons: KistenSatz, strategien: List[Strategie]): OnlinePacker =
-    OnlinePacker(kartons,
-                 KistenGraph(kartons.kisten.map{ _. alsLeer }), strategien)
+      Nil
 }

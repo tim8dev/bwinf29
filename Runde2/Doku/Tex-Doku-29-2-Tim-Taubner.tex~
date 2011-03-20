@@ -1,0 +1,166 @@
+\documentclass[a4paper,10pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amsmath}\usepackage{amsfonts}\usepackage{amssymb}\usepackage{amsthm}
+
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{a4wide}
+\usepackage{textcomp}
+
+\usepackage[small,bf]{caption}
+\usepackage{subfig}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[L]{Aufgabe \thesection}
+\fancyhead[R]{Seite \thepage}
+\fancyfoot[C]{\footnotesize 29.\ BWINF, 1.\ Runde; Einsendung: Tim Taubner, Nr.\ 108}
+
+\hypersetup{%
+colorlinks=true,
+linkcolor=darkblue
+}%
+
+%opening
+\title{29. Bundeswettbewerb Informatik 2010/2011 2. Runde}
+\author{Tim Taubner, Verwaltungsnummer 29.108.01}
+
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.6,0,0}
+\definecolor{darkgreen}{rgb}{0,.3,0}
+
+\lstset{commentstyle=\color{darkgreen}\textbf, keywordstyle=\color{darkblue}\textbf}
+\lstset{inputencoding=utf8, extendedchars=true}
+\lstset{numbers=left, numberstyle=\tiny, numbersep=5pt}
+%Define Scala Language Highlighting
+\lstdefinelanguage{Scala}[]{Java}
+  {morekeywords={trait, object, override, val, var, lazy, def, yield, List, Int, Double, Seq, Ordered, Nil, Set, Kiste},
+   %Ugly fix to ``Umlaute''
+   literate={<-}{{$\gets$}}1 {=>}{{$\Rightarrow$}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1}
+
+\newcommand{\N}{\mathbb{N}}
+
+\newcommand{\comment}[1]{}
+
+% schöne Sätze, Definitionen etc..
+      \newtheorem{satz}{Satz}[section]
+      \newtheorem{koro}[satz]{Korollar}
+      \newtheorem{lem}{Hilfssatz}
+
+      \theoremstyle{definition}
+      \newtheorem{defi}[satz]{Definition}
+      \newtheorem*{beh}{Behauptung}
+
+      \theoremstyle{remark}
+      \newtheorem*{bem}{Bemerkung}
+
+      %
+      % wenn man nicht immer "\begin{proof}[Beweis]" eingeben will: "\begin{bew}":
+      %
+      \newenvironment{bew}{\begin{proof}[Beweis]}{\end{proof}}
+
+\begin{document}
+
+\addtolength{\hoffset}{-0.2cm}
+\addtolength{\voffset}{-1.6cm}
+\addtolength{\textheight}{2cm}
+
+\maketitle
+
+\begin{abstract}
+ Dies ist die Dokumentation zu den von mir bearbeiteten Aufgaben 1 und 2 der 2. Runde des 29.
+ Bundeswettbewerbs Informatik 2010/2011. Meine Verwaltungsnummer ist 29.0108.01.
+ Für alle Aufgabe werden jeweils die Lösungsidee und eine Programm-Dokumentation angegeben,
+ sowie geeeignete Programm-Ablaufprotokolle.
+ Auf die aus\-führ\-baren Lösungen wird in der Dokumentation verwiesen. Der Quelltext ist beigefügt.
+ Ebenfalls enthalten sind weiterführende Gedankengegänge, diese erhalten ebenfalls ein eigenen Unterpunkt.
+ In diesem ist sowohl kurz die Idee als auch die Implementationerläuterung enthalten.
+ Zusätzlich ist am Ende eine allgemeine Beschreibung enthalten, wie die erstellten Programme von der mitgelieferten CD aus gestartet werden können.
+ Alle eingereichten Quelldateien, Kunsterzeugnisse (wie z.B. Bilder) und ausführbare Programmdistributionen
+ wurden alleine von mir, Tim Taubner, erstellt.
+\end{abstract}
+\newpage
+\tableofcontents
+
+\renewcommand{\thesection}{\Alph{section}}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+
+\section{Allgemeines}
+\subsection{Persönliche Anmerkungen}
+\paragraph{Der BWInf und ich} Der Bundeswettbewerb Informatik konnte mich sehr begeistern.
+Viel konnte ich bereits durch die 1. Runde lernen, z.B. wie eine gute Dokumentation erstellt werden kann.
+Auch das Ergebnis lässt sich sehen. Wenn ich gefragt werde was ich eigentlich am PC mache,
+klappe ich mein Laptop auf und zeige die Dokumentation zur 1. Aufgabe\footnote{siehe Einsendung zur 1. Runde, Einsendungsnr. 108, besonders Aufgabe 1}.
+Viel besser kann man finde ich nicht zeigen, dass Informatik \emph{nicht} nur Programmieren ist.
+\paragraph{Wahl der Programmiersprache} Die benutzte Programmiersprache ist durchgehend Scala.
+Das liegt einfach an meiner Neigung, kurzen und dichtgepackten\footnote{
+Hier zeigt sich eine Schwäche der deutschen Sprache: Sie ist \emph{verbose}. Ich versuche hier \emph{concise} aus dem Englischem zu übersetzen}
+Code zu schreiben.
+Ich bin mir durchaus bewusst, dass Scala - noch - keine weit verbreitete Sprache ist.
+Aber ich denke, dass es auch einem Scala-fremden Informatiker gefällt, wenn aussagekräftiger Code abgegeben wird.
+\paragraph{Dank} Ich erlaube mir hier, Personen zu danken, die mir zu dieser Einsendung verholfen haben.
+Auch wenn alle Leistungen im Sinne des Wettbewerbs von mir erbracht wurden, habe ich dazu nicht wenig Energie aus der Umgebung gezogen.\footnote{
+Vergleichen Sie dies mit einem Eisberg, er zieht beim schmilzen die ganze Wärme aus der Umgebung.}
+Zum einen meiner Freundin\footnote{Meine eigene Perle der Informatik ;-]}, aber auch meiner Familie.
+Sie scheinen bereits ein Algorithmus entwickelt haben, mit meinen einsilbigen Antworten fertig zuwerden.
+\subsection{Dateistruktur der CD}
+Die Dateien auf der CD sind folgendermaßen strukturiert.
+Jede Aufgabe hat einen Ordner AufgabeX mit den beiden folgenden Unterordnern.\\
+\begin{tabular}{rl}
+\textbf{src} & Unterordner, in dem die Quelltexte in der Paketstruktur (tau/tim/..) liegen \\
+\textbf{dist} & Unterordner, in dem ausführbare Dateien oder - wie bei Aufgabe 1 - \\
+              & andere Erzeugnisse sowie benötigte Bibliotheken enthalten sind \\
+\end{tabular}
+\newline
+Zusätzlich ist die vorliegende Dokumentation digital unter \textbf{Tex-Doku-Einsendung-2910801-Tim-Taubner.pdf} im Wurzelverzeichnis zu finden.
+Auch die \LaTeX-Quelldateien, mit der diese Dokumentation erzeugt wurden, ist im Verzeichnis ``TeX-Quelldateien-Doku'' zu finden.
+\subsection{Ausführvoraussetzungen}
+\label{Vor}
+Um die Programmbeispiele ausführen zu können, müssen folgende Voraussetzungen erfüllt werden:
+\begin{description}
+ \item[Java Runtime:] Mindestens Version 1.5 (Java 5), empfohlen: $\geq$ 1.6 
+ \item[Prozessor:] Mindestens 1 GHz, empfohlen: $\geq$ 1.6 GHz
+ \item[Arbeitsspeicher:] Mindestens 512 MB, empfohlen: $\geq$ 1 GB
+ \item[Grafikkarte:] beliebig
+ \item[Getestete Betriebsysteme:] Windows 7, Windows XP, Linux (Ubuntu 10.04, Kubuntu 10.10)
+\end{description}
+\subsection{Starten der Programme}
+\paragraph{Wurzelverzeichnis} Im Wurzelverzeichnis der CD beginnt die Ordnerhierarchie der mitgelieferten Dateien.
+Stellen Sie bitte sicher, dass Sie im Wurzelverzeichnis sind, bevor Sie die in den jeweiligen Aufgaben beschriebene Startanleitungen ausführen.
+(z.B. durch neues Starten der Kommandozeile gemäß folgender Anleitung)
+\paragraph{Starten der Kommandozeile}
+Da die meisten mitgelieferten Programme aus der Kommandozeile gestartet werden müssen, soll hier kurz erläutert werden,
+wie Sie die Kommandozeile unter den gängigeren Betriebsystemen starten können.
+\footnote{Ich respektiere Ihre wahrscheinlich umfassenden Kenntnisse mit Perl. Die Anleitung zum Kommandozeilestart dient lediglich der Vollständigkeit.}
+\newcommand{\then}{\textrightarrow{} }
+\paragraph{Unter Windows}
+Unter Windows starten Sie die Kommandozeile durch: Start \then Ausführen \then `cmd' eingeben \then Kommandozeile.
+Nun können Sie durch Angabe des Laufwerkbuchstabens des CD-Laufwerks (z.B.\ ``E:'') auf das Wurzelverzeichnis der CD wechseln.
+Alle Befehle können nun durch Copy\&Paste entsprechend der Nutzungsdokumentation der jeweiligen Aufgabe ausgeführt werden. Z.B. für Aufgabe 3 mit:
+\begin{center} java -jar Aufgabe3/dist/Logistik.jar \end{center}
+\paragraph{Unter GNOME}
+Unter gängigeren GNOME Distributionen wie z.B. Ubuntu 8 starten sie die Kommandozeile durch:
+Applikationen \then System \then Terminal.
+Die CD wird unter Standard-distributionen unter /media/disk o.ä. eingehängt. Wechseln Sie durch `cd /media/disk' in das Wurzelverzeichnis der CD.
+Alle Befehle können nun durch Copy\&Paste entsprechend der Nutzungsdokumentation der jeweiligen Aufgabe ausgeführt werden. Z.B. für Aufgabe 3 mit:
+\begin{center} java -jar Aufgabe3/dist/Logistik.jar \end{center}
+\paragraph{Unter KDE}
+Unter gängigeren KDE-Distributionen wie z.B. Kubuntu 9 starten sie die Kommandozeile durch:
+Start \then Applikationen \then System \then Terminal.
+Die CD wird unter Standard-distributionen unter /media/disk o.ä. eingehängt. Wechseln Sie durch `cd /media/disk' in das Wurzelverzeichnis der CD.
+Alle Befehle können nun durch Copy\&Paste entsprechend der Nutzungsdokumentation der jeweiligen Aufgabe ausgeführt werden. Z.B. für Aufgabe 3 mit:
+\begin{center} java -jar Aufgabe3/dist/Logistik.jar \end{center}
+\paragraph{Unter Mac OS X}
+Leider steht mir kein Mac zur Benutzung bereit, das Öffnen der Konsole sollte jedoch entweder selbsterklärend oder
+ähnlich der unter KDE/GNOME sein. (Beachten Sie bitte, dass Aufgabe2 leider nicht unter Mac OS X lauffähig ist)
+
+\include{Aufgabe1}
+\include{Aufgabe2}
+
+\end{document}

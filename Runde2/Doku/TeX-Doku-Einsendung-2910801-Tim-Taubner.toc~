@@ -1,0 +1,35 @@
+\select@language {ngerman}
+\contentsline {section}{\numberline {A}Allgemeines}{2}{section.1}
+\contentsline {subsection}{\numberline {1}Pers\IeC {\"o}nliche Anmerkungen}{2}{subsection.1.1}
+\contentsline {paragraph}{Der BWInf und ich}{2}{section*.2}
+\contentsline {paragraph}{Wahl der Programmiersprache}{2}{section*.3}
+\contentsline {paragraph}{Dank}{2}{section*.4}
+\contentsline {subsection}{\numberline {2}Dateistruktur der CD}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {3}Ausf\IeC {\"u}hrvoraussetzungen}{3}{subsection.1.3}
+\contentsline {subsection}{\numberline {4}Starten der Programme}{3}{subsection.1.4}
+\contentsline {paragraph}{Wurzelverzeichnis}{3}{section*.5}
+\contentsline {paragraph}{Starten der Kommandozeile}{3}{section*.6}
+\contentsline {paragraph}{Unter Windows}{3}{section*.7}
+\contentsline {paragraph}{Unter GNOME}{3}{section*.8}
+\contentsline {paragraph}{Unter KDE}{3}{section*.9}
+\contentsline {paragraph}{Unter Mac OS X}{3}{section*.10}
+\contentsline {section}{\numberline {B}Aufgabe 1: Kisten in Kisten in Kisten}{4}{section.2}
+\contentsline {subsection}{\numberline {1}L\IeC {\"o}sungsidee}{4}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {1.1}Allgemein}{4}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {1.2}Bruteforce}{4}{subsubsection.2.1.2}
+\contentsline {subparagraph}{Laufzeitverhalten}{4}{section*.11}
+\contentsline {subparagraph}{Verk\IeC {\"u}rzung der Laufzeit}{4}{section*.12}
+\contentsline {subsubsection}{\numberline {1.3}Bruteforce nach Aufteilung}{5}{subsubsection.2.1.3}
+\contentsline {subparagraph}{Laufzeitverhalten}{5}{section*.13}
+\contentsline {subsubsection}{\numberline {1.4}Online Packer}{5}{subsubsection.2.1.4}
+\contentsline {paragraph}{Ansatz}{5}{section*.14}
+\contentsline {paragraph}{Onlinealgorithmus\let \reserved@d =[\def \par }{5}{section*.15}
+\contentsline {paragraph}{Strategien}{5}{section*.16}
+\contentsline {paragraph}{Offlinealgorithmus}{5}{section*.17}
+\contentsline {subsection}{\numberline {2}Implementation}{6}{subsection.2.2}
+\contentsline {subsection}{\numberline {3}Erweiterung}{6}{subsection.2.3}
+\contentsline {subsection}{\numberline {4}Programmabl\IeC {\"a}ufe}{6}{subsection.2.4}
+\contentsline {subsubsection}{\numberline {4.1}Algorithm-Contest (Packdichte)}{6}{subsubsection.2.4.1}
+\contentsline {subsubsection}{\numberline {4.2}Algorithm-Contest (Laufzeit)}{6}{subsubsection.2.4.2}
+\contentsline {subsection}{\numberline {5}Programmtext}{6}{subsection.2.5}
+\contentsline {subsection}{\numberline {6}Programmnutzung}{6}{subsection.2.6}

@@ -2,102 +2,107 @@ package de.voodle.tim.bwinf.kisten
 package bench
 
 import core._
+import online._
 
-import java.util.concurrent.Future
 import scala.actors.Actor
 import Actor._
-import scala.collection.immutable.Stack
+
 
 private[bench] abstract sealed trait BenchNachricht
 private[bench] case object StarteBench extends BenchNachricht
 private[bench] case object StoppeBench extends BenchNachricht
-private[bench] case class WertUpdate(packer: BenchPacker, wert: BenchWert) extends BenchNachricht
+private[bench] case class WertUpdate(packer: BenchPacker, wert: Long) extends BenchNachricht
 
-abstract sealed trait BenchWert {
-  val time: Long
-  val wert: Long
-}
-case class AussenVolumen(time: Long, wert: Long)     extends BenchWert
-case class EinzelVolumen(time: Long, wert: Long)     extends BenchWert
-case class AnzahlKistenSätze(time: Long, wert: Long) extends BenchWert
+/*
+class BenchBucket {
+import scala.collection.mutable.Stack
+  private val avs = Stack[AussenVolumen]()
+  private val evs = Stack[EinzelVolumen]()
+  private val aks = Stack[AnzahlKistenSätze]()
+  private val ak = Stack[AnzahlKisten]()
 
-class BenchBucket(val werteSpeichern: Boolean) {
-  private var avs = Stack[AussenVolumen]()
-  private var evs = Stack[EinzelVolumen]()
-  private var aks = Stack[AnzahlKistenSätze]()
-
-  private def updateStack[T <: BenchWert](wert: T, stack: Stack[T]): Stack[T] = {
-    if(werteSpeichern)
-      if(!stack.isEmpty) {
-        val (last, newStack) = stack.pop2
-        if(last.wert == wert.wert)
-          newStack push wert
-        else
-          stack push wert
-      } else
+  private def updateStack[T <: BenchWertTyp.Value](wert: T, stack: Stack[T]) {
+    if(!stack.isEmpty) {
+      val last = stack.pop
+      if(last.wert == wert.wert)
         stack push wert
-    else
-      Stack(wert)
+      else
+        stack push (last, wert)
+    } else
+      stack push wert
   }
 
   def update(benchWert: BenchWert) = benchWert match {
-    case wert: AussenVolumen => avs = updateStack(wert, avs)
-    case wert: EinzelVolumen => evs = updateStack(wert, evs)
-    case wert: AnzahlKistenSätze => aks = updateStack(wert, aks)
+    case wert: AussenVolumen => updateStack(wert, avs)
+    case wert: EinzelVolumen => updateStack(wert, evs)
+    case wert: AnzahlKistenSätze => updateStack(wert, aks)
+    case wert: AnzahlKisten => updateStack(wert, ak)
   }
 
-  override def toString = Seq(avs,evs,aks) mkString ("\n", "\n", "\n")
-}
+  override def toString = Seq(avs,evs,aks,ak) mkString ("\n", "\n", "\n")
+}*/
 
-class Bencher(werteSpeichern: Boolean, packer: Seq[BenchPacker],
-                                       listener: Seq[BenchListener]) extends Actor {
-  val buckets = Map(packer map (_ -> new BenchBucket(werteSpeichern)) : _*)
+class Bencher(werteSpeichern: Boolean, val packers: Seq[BenchPacker],
+                                       val listener: Seq[BenchListener]) {
+  //val buckets = Map(packer map (_ -> new BenchBucket) : _*)
+  private def actorFor(f: (BenchListener) => (BenchPacker, Long) => Unit) =
+    actor { loop { react {
+      case WertUpdate(packer, wert) => listener.foreach(f(_)(packer, wert))
+          }      }       }
+  val AussenVolumen = actorFor(_.updateAussenVolumen _)
+  val EinzelVolumen = actorFor(_.updateEinzelVolumen _)
+  val AnzahlKistenSätze = actorFor(_.updateAnzahlKistenSätze _)
+  val AnzahlKisten = actorFor(_.updateAnzahlKisten _)
 
-  def act() {
-    this ! StarteBench
-    loop {
-      react {
-        case StarteBench =>
-          buckets.keySet.foreach(_.start(this))
-        case StoppeBench =>
-          buckets.keySet.foreach(_.exit)
-        case WertUpdate(packer, wert) =>
-          update(packer, wert)
-      }
+  def start() {
+    actor {
+      packers.foreach(_.start(this))
     }
   }
 
-  private def update(packer: BenchPacker, wert: BenchWert) = {
-    listener.foreach(_.update(packer, wert))
-    buckets(packer).update(wert)
-  }
-
   def stop(force: Boolean) =
-    if(force) this !? StoppeBench // TODO: Force!
-    else this ! StoppeBench // TODO: Wait for termination.
+    if(force) Actor.exit // TODO: Force!
+    else () // TODO: Wait for termination.
 
-  override def toString = buckets mkString "\n"
+  override def toString = packers mkString "\n"
+}
+
+object Bencher {
+  def defaultOfflineBenchPacker(kisten: Seq[KisteLeer]) = List(
+    new OnlineBenchPacker(kisten, OnlineAlgo()),
+    new OfflineBenchPacker(kisten, FindeHalbleeren ::
+                                   FindeGrößerenLeeren :: Nil) )
+
+  def defaultBencher(kisten: Seq[KisteLeer],
+                     listener: BenchListener*): Bencher =
+    defaultBencherFromPackers(new OptimalBenchPacker(kisten) ::
+                              defaultOfflineBenchPacker(kisten), listener)
+
+  def defaultBencherFromPackers(packer: Seq[BenchPacker],
+                              listener: Seq[BenchListener]) =
+    new Bencher(false, packer,listener)
 }
 
 trait BenchListener {
-  def update(packer: BenchPacker, wert: BenchWert): Unit
+  def updateAussenVolumen(packer: BenchPacker, wert: Long): Unit
+  def updateEinzelVolumen(packer: BenchPacker, wert: Long): Unit
+  def updateAnzahlKistenSätze(packer: BenchPacker, wert: Long): Unit
+  def updateAnzahlKisten(packer: BenchPacker, wert: Long): Unit
 }
 
-trait BenchPacker extends HilfsPacken {
+trait BenchPacker {
   def start(bencher: Bencher): Unit
   def exit: Unit
 }
 
 object BenchPacker {
-  def curTime = System.currentTimeMillis
-  def update(bencher: Bencher, packer: BenchPacker,
-             aussenVolumen: Long, einzelVolumen: Long, anzahl: Long) {
-    val time = curTime
-    bencher ! WertUpdate(packer, AussenVolumen(time, aussenVolumen))
-    bencher ! WertUpdate(packer, EinzelVolumen(time, einzelVolumen))
-    bencher ! WertUpdate(packer, AnzahlKistenSätze(time, anzahl))
+  //private[bench] def curTime = System.currentTimeMillis
+  private[bench] def update(bencher: Bencher, packer: BenchPacker,
+             einzelVolumen: Long, aussenVolumen: Long,
+             anzahlKistenSätze: Long, anzahlKisten: Long) {
+    bencher.EinzelVolumen ! WertUpdate(packer, einzelVolumen)
+    bencher.AussenVolumen ! WertUpdate(packer, aussenVolumen)
+    bencher.AnzahlKistenSätze ! WertUpdate(packer, anzahlKistenSätze)
+    bencher.AnzahlKisten ! WertUpdate(packer, anzahlKisten)
   }
-
-  // TODO: Default Bencher!
-  
 }

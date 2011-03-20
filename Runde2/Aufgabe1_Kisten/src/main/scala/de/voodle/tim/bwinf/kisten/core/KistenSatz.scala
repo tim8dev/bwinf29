@@ -13,9 +13,17 @@ case class KistenSatz (kistenBaum: TreeMap[Kiste, Int],
 
   def find(f: Kiste => Boolean): List[Kiste] =
     kistenBaum.find(k => f(k._1)) map (_._1 :: Nil) getOrElse // Gibt es Wurzel?
-    (kistenSet.map(_.finde(f)).find(!_.isEmpty) getOrElse // Sonst suche in Elementen.
-     Nil) // Sonst leer.
-    
+    (((None: Option[List[Kiste]]) /: kistenSet) { // Sonst suche in Elementen.
+      (vorher, kiste) =>
+        if(vorher.isEmpty) {
+          val pfad = kiste.finde(f)
+          if(pfad.isEmpty)
+            None
+          else
+            Some(pfad)
+        } else vorher
+    } getOrElse Nil)
+
   def -(der: Kiste) = KistenSatz(subFromTree(kistenBaum, der), v-der.v, length-1)
   def +(der: Kiste) = KistenSatz(  addToTree(kistenBaum, der), v+der.v, length+1)
   

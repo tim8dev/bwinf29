@@ -66,7 +66,7 @@ object KistenPacken {
     //val sortKisten = kisten.sorted(Kiste.Ordnung.nachVolumen).reverse
     val head = kisten.take(1)
     val (online, time) = bench {
-      var online = OnlinePacker(KistenSatz(head))
+      var online = OnlineAlgo(KistenSatz(head))
       for(kart <- kisten.tail) online += kart
       online
     }

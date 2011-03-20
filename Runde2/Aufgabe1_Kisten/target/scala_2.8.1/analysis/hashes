@@ -1,18 +1,19 @@
 #Source Hashes
-#Thu Feb 10 22:09:17 CET 2011
-src/main/scala/de/voodle/tim/bwinf/kisten/core/online/OnlinePacker.scala=848f833d8a533af5ef9a3e97f6bac9c11ff80ddc
+#Tue Mar 01 15:17:00 CET 2011
+src/main/scala/de/voodle/tim/bwinf/kisten/core/online/OnlinePacker.scala=dc4711f6b8dcd135dfdc980b1d8e1d7e1dd44546
 src/main/scala/de/voodle/tim/bwinf/kisten/core/Raum.scala=c963a74d7f635d89da788c7d7b03634f8b085ec8
-src/main/scala/de/voodle/tim/bwinf/kisten/bench/benchPackers.scala=ee9d693fade579e8ceb1e72119708f15a15c9ec8
+src/main/scala/de/voodle/tim/bwinf/kisten/bench/benchPackers.scala=5479af554556fa2ccb81da0d931265f015f37021
 src/main/scala/de/voodle/tim/bwinf/kisten/main/kisten.scala=9615eff77df5d7721ebccebc748eab6b6852287a
-src/main/scala/de/voodle/tim/bwinf/kisten/core/optimalPackers.scala=4c5a3340ce4af7c7fbe6d820a4ccc19670c66146
+src/main/scala/de/voodle/tim/bwinf/kisten/core/optimalPackers.scala=12ea5c629c97e914beb20b57c194d6df210ec7ea
 src/main/scala/de/voodle/tim/bwinf/kisten/core/kistenVergleiche.scala=5341a5b036173ea101d8a36a89c48781ae6a17a4
-src/main/scala/de/voodle/tim/bwinf/kisten/core/KistenSatz.scala=b92b21285a3776e7ea149a7064e722b14c68f87d
-src/main/scala/de/voodle/tim/bwinf/kisten/core/kistenpackers.scala=78e216788002bd94b8e586174f530a67753bc819
-src/main/scala/de/voodle/tim/bwinf/kisten/core/online/strategien.scala=0ad6f4aae0dd28fb334ef4127e8332e235a9d85f
-src/main/scala/de/voodle/tim/bwinf/kisten/bench/benching.scala=340951b5d6f33ef6fa1e3718afe133441b0d45e7
-src/main/scala/de/voodle/tim/bwinf/kisten/core/kisten.scala=b5dafc684e3f33aaac8dd7beb52507c634c26890
+src/main/scala/de/voodle/tim/bwinf/kisten/core/KistenSatz.scala=e50dadd8bab216de1e10ba5a8d2eb8de4b8cee2d
+src/main/scala/de/voodle/tim/bwinf/kisten/core/kistenpackers.scala=8443fd97ac78851376ed97213be6e887c75dce53
+src/main/scala/de/voodle/tim/bwinf/kisten/core/online/strategien.scala=f4a10dab6e6944102a2e35547ea5e34b19963d7e
+src/main/scala/de/voodle/tim/bwinf/kisten/bench/BenchAggregator.scala=a43e8662f1edb49013d6905d377dfcab050ce979
+src/main/scala/de/voodle/tim/bwinf/kisten/bench/benching.scala=c5c97b62851a640594b75770db495a9a6bea08a2
+src/main/scala/de/voodle/tim/bwinf/kisten/core/kisten.scala=068182c0706acb1cc4994411a9c112312c9bb27f
 src/main/scala/de/voodle/tim/bwinf/kisten/main/KistenLogger.scala=be17e18684955ecce5c0afb41f723cd3d06c633f
-src/main/scala/de/voodle/tim/bwinf/kisten/main/KistenPacken.scala=490fd421fea848eb620a9d580a1fc54d7f873ea0
-src/main/scala/de/voodle/tim/bwinf/kisten/mt/ActingPacker.scala=d1dd070fc7dbbe840a7edb728c768ad080587df0
+src/main/scala/de/voodle/tim/bwinf/kisten/mt/ActingPacker.scala=3cbc72e65d546dfe6c7b63cb8310e7181059f54c
 src/main/scala/de/voodle/tim/bwinf/kisten/core/kistenGraphs.scala=3394aae76e49ba0b3aa39a0124c16e9f5eb3ae31
+src/main/scala/de/voodle/tim/bwinf/kisten/main/KistenPacken.scala=f62ccd4c4c0da5fe32caa572017cefba203fe83e
 src/main/scala/de/voodle/tim/bwinf/kisten/mt/msgs.scala=cde38e4aa14e4aae0e72afac6a2f31f42c3184fc

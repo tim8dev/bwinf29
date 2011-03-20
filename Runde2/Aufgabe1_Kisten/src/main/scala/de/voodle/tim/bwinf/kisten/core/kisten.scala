@@ -24,15 +24,16 @@ sealed abstract class Kiste extends Ordered[Kiste] {
   final def ⊆(der: Kiste) = der ⊇ this
 
   // Symmetrisch!
-  final def |(der: Kiste) = (Set[KisteVoll]() tuple_/: der) {
+  final def |(der: Kiste) =
+    (Set[KisteVoll]() tuple_/: der) {
       (kisten, x,y,z) =>
          val (d,e,f) = (max(a,x), max(b,y), max(c,z))
          val (i,j,k) = (min(a,x), min(b,y), min(c,z))
          val neueKisten = Seq(Kiste(d+i,e,f,this,der), Kiste(d,e+j,f,this,der), Kiste(d,e,f+k,this,der))
          (kisten /: neueKisten) {
-	     (vorher, kiste) =>
-	       if(vorher.exists(_ ⊆ kiste)) vorher else vorher + kiste
-	   }
+           (vorher, kiste) => // Wenn es bereits ein größeren gab, nicht hinzufügen
+             if(vorher.exists(_ ⊆ kiste)) vorher else vorher + kiste
+         }
     }
 
   // Benutzung intern.
@@ -51,9 +52,9 @@ sealed abstract class Kiste extends Ordered[Kiste] {
   private def baumString(lvl: Int): String = {
     val pref = " " * lvl + (if(lvl > 0) "\\-" else "")
     val selbst = getClass.getSimpleName + (a,b,c)
-    pref + selbst +
+    pref + selbst + (if(kinder.isEmpty) "" else "\n") +
       kinder.map(_.baumString(lvl + 1)).
-             mkString(if(lvl > 0) "\n" else "", "\n", "")
+             mkString("\n")
   }
 
   override def equals(that: Any) = that match {
