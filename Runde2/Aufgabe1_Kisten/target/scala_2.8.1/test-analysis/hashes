@@ -1,0 +1,5 @@
+#Source Hashes
+#Thu Feb 10 22:04:26 CET 2011
+src/test/scala/de/voodle/tim/bwinf/kisten/core/online/OnlinePackerSpec.scala=c4a2a564c1b990c477dcece628160fad27ca062c
+src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala=203d7438c16962a4fc4958879ec64433df6f8cff
+src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala=4d4f0e8121f116177c5a2adb71ebe44fd1221125

@@ -1,0 +1,15 @@
+#External Dependencies
+#Thu Feb 10 22:04:26 CET 2011
+/home/tim/Projects/BWinf/Runde2/Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/KisteHalb.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala
+/home/tim/Projects/BWinf/Runde2/Kisten/lib_managed/scala_2.8.1/test/scalacheck_2.8.1-1.8.jar=src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala\:src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala
+/home/tim/Projects/BWinf/Runde2/Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/Raum$.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala
+/home/tim/Projects/BWinf/Runde2/Kisten/project/boot/scala-2.8.1/lib/scala-library.jar=src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala\:src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala
+/home/tim/Projects/BWinf/Runde2/Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/KisteVoll.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala
+/home/tim/Projects/BWinf/Runde2/Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/KisteLeer.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala
+/home/tim/Projects/BWinf/Runde2/Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/PartialRaumA.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala
+/home/tim/Projects/BWinf/Runde2/Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/Raum.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala\:src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala
+/home/tim/Projects/BWinf/Runde2/Kisten/lib_managed/scala_2.8.1/test/specs_2.8.1-1.6.7.jar=src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala\:src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala
+/home/tim/Projects/BWinf/Runde2/Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/Kiste.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala
+/usr/lib/jvm/java-6-openjdk/jre/lib/rt.jar=src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala\:src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala
+/home/tim/Projects/BWinf/Runde2/Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/PartialRaumAB.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala
+/home/tim/Projects/BWinf/Runde2/Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/Kiste$.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala

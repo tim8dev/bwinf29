@@ -1,0 +1,36 @@
+package de.voodle.tim.bwinf2
+package kartons
+package core
+
+import scala.collection.mutable.HashSet
+
+class KartonPacker(val kartons: List[Karton]) {
+  def this(input: Seq[Tuple3[Int, Int, Int]]) =
+    this(input.map {
+        tuple => Karton(Raum.make(tuple._1, tuple._2, tuple._3).get)
+      }.toList.sorted) // sortieren
+
+  lazy val packe: Set[KartonSatz] =
+    kartons.foldLeft(Set[KartonSatz]()) { (gepackt, u) => hilfsPacker(gepackt, u) }
+
+  protected def hilfsPacker(sätze: Set[KartonSatz], karton: Karton): Set[KartonSatz] =
+    if(sätze.isEmpty) Set(KartonSatz(karton :: Nil))
+    else {
+      val fertig: HashSet[KartonSatz] = new HashSet
+      for(satz <- sätze)
+        fertig ++= (satz +< karton)
+      fertig.toSet
+    }
+
+}
+
+object KartonPacker {
+  object Optimierer {
+    private def kleineBoxen(größer: List[Karton], kleiner: Set[Karton], karton: Karton) = {
+      // größer: von klein nach groß!, kleiner: von groß nach klein
+      val k = größer.head
+      // TODO: Ein Karton k kann in einen anderen gepackt werden, wenn in diesen nur k passt.
+      //       (und in k kein Anderer.)
+    }
+  }
+}

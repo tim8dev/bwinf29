@@ -1,0 +1,72 @@
+run
+test
+run
+test
+~test
+run
+~run
+compile
+~compile
+~run
+~compile
+run
+test
+run
+test
+run
+test
+scala
+help
+actions
+console
+run
+test
+run
+scala
+console
+test
+run
+test
+console
+test
+run
+test
+run
+compile
+run
+console
+run
+compile
+run
+javap
+help
+actions
+javap de.voodle.tim.bwinf.core.Raum
+javap de.voodle.tim.bwinf.kartons.core.Raum
+javap de.voodle.tim.bwinf.kisten.core.Raum
+compile
+javap
+run
+compile
+javap
+javap de.voodle.tim.bwinf.kisten.core.Raum
+javah de.voodle.tim.bwinf.kisten.core.Raum
+actions
+javap de.voodle.tim.bwinf.kisten.core.Raum
+compile
+exit
+javap -c de.voodle.tim.bwinf.kisten.core.Raum
+~compile
+help
+actions
+release
+publish-local
+actions
+package-project
+actions
+package-all
+console
+publish-local
+package
+console
+publish-local

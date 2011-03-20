@@ -1,0 +1,4 @@
+#Classes with main methods
+#Thu Feb 10 22:04:26 CET 2011
+src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala=de.voodle.tim.bwinf.kisten.core.RaumSpec
+src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala=de.voodle.tim.bwinf.kisten.core.KistenSpec
