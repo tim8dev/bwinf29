@@ -42,10 +42,10 @@ ReadWrite=true
 
 [item:Aufgabe1.tex]
 archive=true
-column=0
+column=67
 encoding=UTF-8
 highlight=LaTeX
-line=110
+line=0
 mode=LaTeX
 open=true
 order=0
@@ -62,10 +62,10 @@ order=1
 
 [item:TeX-Doku-Einsendung-2910801-Tim-Taubner.tex]
 archive=true
-column=16
+column=18
 encoding=UTF-8
 highlight=LaTeX
-line=59
+line=155
 mode=LaTeX
 open=true
 order=1
@@ -81,13 +81,13 @@ open=false
 order=-1
 
 [view-settings,view=0,item:Aufgabe1.tex]
-CursorColumn=0
-CursorLine=110
+CursorColumn=67
+CursorLine=0
 
 [view-settings,view=0,item:Aufgabe1n.tex]
 CursorColumn=17
 CursorLine=141
 
 [view-settings,view=0,item:TeX-Doku-Einsendung-2910801-Tim-Taubner.tex]
-CursorColumn=16
-CursorLine=59
+CursorColumn=18
+CursorLine=155

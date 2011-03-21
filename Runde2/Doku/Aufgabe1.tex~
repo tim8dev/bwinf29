@@ -1,4 +1,4 @@
-\section{Aufgabe 1: Kisten in Kisten in Kisten}
+\section{Erste bearbeitete Aufgabe: Kisten in Kisten in Kisten}
 \subsection{Lösungsidee}
 \subsubsection{Definitionen}
 % TODO: reformulate:
@@ -111,7 +111,7 @@ Wichtig ist, um den Code zu verstehen, dass (satz $++<$ kiste) alle Möglichkeit
 \lstset{language=Scala}
 \lstset{basicstyle=\scriptsize}
 \begin{lstlisting}
-  // Nacheinander die Kisten "auffalten" mithilfe der hilfsPacken Funktion
+  // Nacheinander die Kisten "auffalten" mit Hilfe der hilfsPacken Funktion
   def packe = (Set[KistenSatz]() /: kisten) ( hilfsPacken )
   def hilfsPacken(sätze: Set[KistenSatz], kiste: Kiste) =
     if(sätze.isEmpty)

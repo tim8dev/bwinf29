@@ -39,7 +39,7 @@ object Putter {
       if(cur > idx) {
 	idx += 1
 	instrs ::= MoveRight
-      } else if(cur < idx)
+      } else if(cur < idx) {
 	if(transStarts.isEmpty || idx == len) {
           idx -= 1
 	  instrs ::= MoveLeft
@@ -52,6 +52,7 @@ object Putter {
 	  if(cur != 0) instrs ::= Take
 	  transStarts -= idx
 	}
+      }
     }
     (gleis, (instrs drop 1).reverse) // Drop last MoveLeft!
   }
