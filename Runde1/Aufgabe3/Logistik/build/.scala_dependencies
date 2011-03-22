@@ -1,0 +1,24 @@
+/home/tim/Projects/BWinf/Aufgabe3/Logistik/lib/junit_4/junit-4.5.jar:/home/tim/Programs/scala-2.8.0.final/lib/jline.jar:/home/tim/Programs/scala-2.8.0.final/lib/scala-compiler.jar:/home/tim/Programs/scala-2.8.0.final/lib/scala-dbc.jar:/home/tim/Programs/scala-2.8.0.final/lib/scala-library.jar:/home/tim/Programs/scala-2.8.0.final/lib/scala-swing.jar:/home/tim/Programs/scala-2.8.0.final/lib/scalap.jar:/home/tim/Projects/BWinf/Aufgabe3/Logistik/build/classes
+-------
+../src/tau/tim/logistik/TestCases.scala -> ../src/tau/tim/logistik/TourenPlan.scala
+../src/tau/tim/logistik/TestCases.scala -> ../src/tau/tim/logistik/TestCases.scala
+../src/tau/tim/logistik/Main.scala -> ../src/tau/tim/logistik/TourenPlan.scala
+../src/tau/tim/logistik/Main.scala -> ../src/tau/tim/logistik/Main.scala
+../src/tau/tim/logistik/TourenPlan.scala -> ../src/tau/tim/logistik/TourenPlan.scala
+-------
+../src/tau/tim/logistik/TestCases.scala -> classes/tau/tim/logistik/TestCases.class
+../src/tau/tim/logistik/TestCases.scala -> classes/tau/tim/logistik/TestCases$$anonfun$1.class
+../src/tau/tim/logistik/TestCases.scala -> classes/tau/tim/logistik/TestCases$$anonfun$2.class
+../src/tau/tim/logistik/TestCases.scala -> classes/tau/tim/logistik/TestCases$.class
+../src/tau/tim/logistik/TestCases.scala -> classes/tau/tim/logistik/TestCases$$anonfun$3.class
+../src/tau/tim/logistik/Main.scala -> classes/tau/tim/logistik/Main.class
+../src/tau/tim/logistik/Main.scala -> classes/tau/tim/logistik/Main$$anonfun$main$1.class
+../src/tau/tim/logistik/Main.scala -> classes/tau/tim/logistik/Main$.class
+../src/tau/tim/logistik/TourenPlan.scala -> classes/tau/tim/logistik/TourenPlan$$anonfun$4.class
+../src/tau/tim/logistik/TourenPlan.scala -> classes/tau/tim/logistik/TourenPlan$$anonfun$6.class
+../src/tau/tim/logistik/TourenPlan.scala -> classes/tau/tim/logistik/TourenPlan.class
+../src/tau/tim/logistik/TourenPlan.scala -> classes/tau/tim/logistik/TourenPlan$$anonfun$2.class
+../src/tau/tim/logistik/TourenPlan.scala -> classes/tau/tim/logistik/TourenPlan$$anonfun$3.class
+../src/tau/tim/logistik/TourenPlan.scala -> classes/tau/tim/logistik/TourenPlan$.class
+../src/tau/tim/logistik/TourenPlan.scala -> classes/tau/tim/logistik/TourenPlan$$anonfun$1.class
+../src/tau/tim/logistik/TourenPlan.scala -> classes/tau/tim/logistik/TourenPlan$$anonfun$5.class

@@ -1,0 +1,4 @@
+#External Dependencies
+#Mon Mar 21 19:11:36 CET 2011
+/usr/lib/jvm/java-6-openjdk/jre/lib/rt.jar=src/main/scala/bwinf/instructions.scala\:src/main/scala/bwinf/Transposition.scala\:src/main/scala/bwinf/Gleis.scala\:src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/algorithms.scala
+/home/tim/Projects/git/bwinf/Runde2/Aufgabe2_Container/project/boot/scala-2.8.1/lib/scala-library.jar=src/main/scala/bwinf/instructions.scala\:src/main/scala/bwinf/Transposition.scala\:src/main/scala/bwinf/Gleis.scala\:src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/algorithms.scala
