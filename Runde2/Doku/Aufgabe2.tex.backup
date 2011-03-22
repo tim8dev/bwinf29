@@ -1,0 +1,19 @@
+\section{Zweite bearbeitete Aufgabe: (2) Containerklamüsel}
+\subsection{Lösungsidee}
+\subsubsection{Vorüberlegungen}
+Die Anordnung der Waggons zu den Container ist eine bijektive Abbildung von $[1,n]$ nach $[1,n]$, sprich, eine Permutation.
+Jede Permutation lässt sich als Folge von disjunkten Transpositionen darstellen. \\ %TODO: CITE!
+Dies erwies sich als günstig, denn nun ist das Problem aufgebrochen in folgende zwei Teile.
+Der erste ist, die Container einer Transposition an die richtige Stelle zu bringen.
+Der zweite - etwas schwierige - Teil besteht darin, die Transpositionsabarbeitung dort zu unterbrechen, wo eine andere beginnt.
+% Transpositionen
+\subsubsection{Algorithmen}
+\paragraph{Ergebnisoptimaler Algorithmus}
+\subparagraph{Optimale Ergebnisse}
+\subparagraph{Laufzeitverhalten} % n²
+\paragraph{Optimaler Algorithmus}
+\subparagraph{Optimale Ergebnisse}
+
+\subparagraph{Optimale Laufzeitkomplexität}
+
+\subsection{Implementation}

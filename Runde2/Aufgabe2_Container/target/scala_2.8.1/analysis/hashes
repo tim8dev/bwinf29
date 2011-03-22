@@ -1,0 +1,7 @@
+#Source Hashes
+#Mon Mar 21 19:11:36 CET 2011
+src/main/scala/bwinf/instructions.scala=4b6e5d765930c5b7467e7c1aab670b61332c89f0
+src/main/scala/bwinf/algorithms.scala=414b0b1102a60216b267433563256d0038bee5f1
+src/main/scala/bwinf/Gleis.scala=76f75a8ced2295199bee66854381a7a1da274f41
+src/main/scala/bwinf/maschines.scala=509531203ee492fc1801de236215f26e5b477536
+src/main/scala/bwinf/Transposition.scala=fe045f7b3504c87dd9eafa56b3a53ceeaa102c5b

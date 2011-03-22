@@ -1,0 +1,12 @@
+Material Bound : Common/MatDefs/Light/Lighting.j3md {
+    MaterialParameters {
+        m_Diffuse: 0.937 0.9098 0.937 1
+        m_Diffuse: 0.937 0.9098 0.937 1
+        m_UseMaterialColors: true
+        m_Shininess : 2
+        m_HighQuality : true
+        m_UseAlpha : true
+    }
+
+
+}
