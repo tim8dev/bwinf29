@@ -1,0 +1,124 @@
+\documentclass[a4paper,11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{amsmath}\usepackage{amsfonts}\usepackage{amssymb}
+
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{a4wide}
+\usepackage{textcomp}
+
+\usepackage[small,bf]{caption}
+\usepackage{subfig}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[L]{Aufgabe \thesection}
+\fancyhead[R]{Seite \thepage}
+\fancyfoot[C]{\footnotesize 29.\ BWINF, 1.\ Runde; Einsendung: Tim Taubner, Nr.\ 108}
+
+%opening
+\title{29. Bundeswettbewerb Informatik 2010/2011 1. Runde}
+\author{Tim Taubner, Einsendungsnummer 108}
+
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.6,0,0}
+\definecolor{darkgreen}{rgb}{0,.6,0}
+\definecolor{red}{rgb}{.98,0,0}
+
+\lstset{commentstyle=\color{darkgreen}\textbf, keywordstyle=\color{darkblue}\textbf}
+\lstset{inputencoding=utf8, extendedchars=true}
+\lstset{numbers=left, numberstyle=\tiny, numbersep=5pt}
+
+\begin{document}
+\addtolength{\hoffset}{-0.2cm}
+\addtolength{\voffset}{-1.6cm}
+\addtolength{\textheight}{2cm}
+
+\maketitle
+
+\begin{abstract}
+ Dies ist die Dokumentation zu den von mir bearbeiteten Aufgaben 1 bis einschließlich 4 des 29.
+Bundeswettbewerb Informatik 2010/2011 mit der Einsendungsnummer 108.
+ Für alle Aufgabe werden - wie in der Aufgabenstellung verlangt - jeweils die Lösungsidee und eine Programm-Dokumentation angegeben,
+ sowie geeeignete Programm-Ablaufprotokolle.
+ Bei den Aufgaben, zu der eine ausführbare Lösung erstellt wurde, wird auf diese in der Dokumentation verwiesen.
+ Zusätzlich ist am Ende eine allgemeine Beschreibung enthalten, wie die erstellten Programme von der mitgelieferten CD aus gestartet werden können.
+ Alle eingereichten Quelldateien, Kunsterzeugnisse (wie z.B. Bilder) und ausführbare Programmdistributionen
+ wurden alleine von mir, Tim Taubner, erstellt.
+\end{abstract}
+\newpage
+\tableofcontents
+
+%Define Scala Language Highlighting
+\lstdefinelanguage{Scala}[]{Java}
+  {morekeywords={trait, object, override, val, var, lazy, def, yield, List, Int, Double, Seq, Ordered, Nil},
+   %Ugly fix to ``Umlaute''
+   literate={<-}{{$\gets$}}1 {=>}{{$\Rightarrow$}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1}
+
+\include{Aufgabe1}
+\include{Aufgabe2}
+\include{Aufgabe3}
+\include{Aufgabe4}
+
+\section{Allgemeine Nutzungsanleitung}
+\subsection{Dateistruktur der CD}
+Die Dateien auf der CD sind folgendermaßen strukturiert.
+Jede Aufgabe hat einen Ordner AufgabeX mit den beiden folgenden Unterordnern.\\
+\begin{tabular}{rl}
+\textbf{src} & Unterordner, in dem die Quelltexte in der Paketstruktur (tau/tim/..) liegen \\
+\textbf{dist} & Unterordner, in dem ausführbare Dateien oder - wie bei Aufgabe 1 - \\
+              & andere Erzeugnisse sowie benötigte Bibliotheken enthalten sind \\
+\end{tabular}
+\newline
+Zusätzlich ist die vorliegende Dokumentation digital unter \textbf{Doku-Einsendung-108-Tim-Taubner.pdf} im Wurzelverzeichnis zu finden.
+Auch die \LaTeX-Quelldateien, mit der diese Dokumentation erzeugt wurden, ist im Verzeichnis ``TeX-Quelldateien-Doku'' zu finden.
+\subsection{Ausführvoraussetzungen}
+\label{Vor}
+Um die Programmbeispiele ausführen zu können, müssen folgende Voraussetzungen erfüllt werden:
+\begin{description}
+ \item[Aufgabe 1:] cfdg muss vorinstalliert sein
+ \item[Aufgabe 2, 3, 4:] Java Version 5, besser 6, muss installiert sein.
+\end{description}
+Zusätzlich sind folgende Systemvorausetzungen zu erfüllen (beachten Sie bitte die zusätzlichen Anforderungen bei Aufgabe 2):
+\begin{description}
+ \item[Prozessor:] Mindestens 1 GHz, empfohlen: $>=$ 1.6 GHz
+ \item[Arbeitsspeicher:] Mindestens 512 MB, empfohlen: $>=$ 1 GB
+ \item[Grafikkarte:] beliebig
+ \item[Getestete Betriebsysteme:] Windows 7, Windows XP, Linux (Ubuntu 10.04, Kubuntu 10.10)
+\end{description}
+\subsection{Starten der Programme}
+\paragraph{Wurzelverzeichnis} Im Wurzelverzeichnis der CD beginnt die Ordnerhierarchie der mitgelieferten Dateien.
+Stellen Sie bitte sicher, dass Sie im Wurzelverzeichnis sind, bevor Sie die in den jeweiligen Aufgaben beschriebene Startanleitungen ausführen.
+(z.B. durch neues Starten der Kommandozeile gemäß folgender Anleitung)
+\paragraph{Starten der Kommandozeile}
+Da die meisten mitgelieferten Programme aus der Kommandozeile gestartet werden müssen, soll hier kurz erläutert werden,
+wie Sie die Kommandozeile unter den gängigeren Betriebsystemen starten können.
+\newcommand{\then}{\textrightarrow{} }
+\paragraph{Unter Windows}
+Unter Windows starten Sie die Kommandozeile durch: Start \then Ausführen \then `cmd' eingeben \then Kommandozeile.
+Nun können Sie durch Angabe des Laufwerkbuchstabens des CD-Laufwerks (z.B.\ ``E:'') auf das Wurzelverzeichnis der CD wechseln.
+Alle Befehle können nun durch Copy\&Paste entsprechend der Nutzungsdokumentation der jeweiligen Aufgabe ausgeführt werden. Z.B. für Aufgabe 3 mit:
+\begin{center} java -jar Aufgabe3/dist/Logistik.jar \end{center}
+\paragraph{Unter GNOME}
+Unter gängigeren GNOME Distributionen wie z.B. Ubuntu 8 starten sie die Kommandozeile durch:
+Applikationen \then System \then Terminal.
+Die CD wird unter Standard-distributionen unter /media/disk o.ä. eingehängt. Wechseln Sie durch `cd /media/disk' in das Wurzelverzeichnis der CD.
+Alle Befehle können nun durch Copy\&Paste entsprechend der Nutzungsdokumentation der jeweiligen Aufgabe ausgeführt werden. Z.B. für Aufgabe 3 mit:
+\begin{center} java -jar Aufgabe3/dist/Logistik.jar \end{center}
+\paragraph{Unter KDE}
+Unter gängigeren KDE-Distributionen wie z.B. Kubuntu 9 starten sie die Kommandozeile durch:
+Start \then Applikationen \then System \then Terminal.
+Die CD wird unter Standard-distributionen unter /media/disk o.ä. eingehängt. Wechseln Sie durch `cd /media/disk' in das Wurzelverzeichnis der CD.
+Alle Befehle können nun durch Copy\&Paste entsprechend der Nutzungsdokumentation der jeweiligen Aufgabe ausgeführt werden. Z.B. für Aufgabe 3 mit:
+\begin{center} java -jar Aufgabe3/dist/Logistik.jar \end{center}
+\paragraph{Unter Mac OS X}
+Leider steht mir kein Mac zur Benutzung bereit, das Öffnen der Konsole sollte jedoch entweder selbsterklärend oder
+ähnlich der unter KDE/GNOME sein. (Beachten Sie bitte, dass Aufgabe2 leider nicht unter Mac OS X lauffähig ist)
+
+\end{document}

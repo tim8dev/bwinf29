@@ -37,3 +37,14 @@
 \contentsline {subsubsection}{\numberline {3.2}Algorithm-Contest (Laufzeit)}{7}{subsubsection.2.3.2}
 \contentsline {subsection}{\numberline {4}Programmtext}{7}{subsection.2.4}
 \contentsline {subsection}{\numberline {5}Programmnutzung}{7}{subsection.2.5}
+\contentsline {section}{\numberline {C}Zweite bearbeitete Aufgabe: (2) Containerklam\IeC {\"u}sel}{8}{section.3}
+\contentsline {subsection}{\numberline {1}L\IeC {\"o}sungsidee}{8}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {1.1}Vor\IeC {\"u}berlegungen}{8}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {1.2}Algorithmen}{8}{subsubsection.3.1.2}
+\contentsline {paragraph}{Ergebnisoptimaler Algorithmus}{8}{section*.23}
+\contentsline {subparagraph}{Optimale Ergebnisse}{8}{section*.24}
+\contentsline {subparagraph}{Laufzeitverhalten}{8}{section*.25}
+\contentsline {paragraph}{Optimaler Algorithmus}{8}{section*.26}
+\contentsline {subparagraph}{Optimale Ergebnisse}{8}{section*.27}
+\contentsline {subparagraph}{Optimale Laufzeitkomplexit\IeC {\"a}t}{8}{section*.28}
+\contentsline {subsection}{\numberline {2}Implementation}{8}{subsection.3.2}

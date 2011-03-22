@@ -1,9 +1,22 @@
 \section{Zweite bearbeitete Aufgabe: (2) Containerklamüsel}
 \subsection{Lösungsidee}
 \subsubsection{Vorüberlegungen}
+Die Anordnung der Waggons zu den Container ist eine bijektive Abbildung von $[1,n]$ nach $[1,n]$, sprich, eine Permutation.
+Jede Permutation lässt sich als Folge von disjunkten Transpositionen darstellen. \\ %TODO: CITE!
+Dies erwies sich als günstig, denn nun ist das Problem aufgebrochen in folgende zwei Teile.
+Der erste ist, die Container einer Transposition an die richtige Stelle zu bringen.
+Dies lässt sich relativ leicht realisieren, indem der Container am Anfang der Transposition an die richtige Position gebracht wird, anschließend der - dortige - zweite an die richtige, usw., bis der Ausgangspunkt wieder erreicht ist.
+Der zweite - etwas schwierige - Teil besteht darin, die Transpositionsabarbeitung dort zu unterbrechen, wo eine andere beginnt. \\
+Etwas anders ausgedrückt:
+Beginnt man an dem Anfang einer Transposition, können alle Container dieser ``in einem Stück'' an die richtige Stelle gebracht werden und anschließend ist man wieder an der Ausgangsposition.
+Wir werden etwas später sehen, dass dies tatsächlich immer ein optimalen Weg (zumindest innerhalb einer Transposition) ist.
+\subsubsection{Datenstruktur}
+Es wurde eine einfache Datenstruktur benötigt, um das Gleis mit Containerstellplätzen und Waggons abzubilden. \\
+Diese ....
 % Transpositionen
 \subsubsection{Algorithmen}
 \paragraph{Ergebnisoptimaler Algorithmus}
+\subparagraph{Entwurf} Der Entwurf dieses Algorithmus' ergibt sich aus den obigen Überlegungen. Zunächst werden die Transpositionen wie folgt gesucht:
 \subparagraph{Optimale Ergebnisse}
 \subparagraph{Laufzeitverhalten} % n²
 \paragraph{Optimaler Algorithmus}

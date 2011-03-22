@@ -1,0 +1,57 @@
+\select@language {ngerman}
+\contentsline {section}{\numberline {1}Aufgabe 1: ``Informatik''}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}L\IeC {\"o}sungsidee}{3}{subsection.1.1}
+\contentsline {paragraph}{K\IeC {\"u}nstlerische Absicht:}{3}{section*.2}
+\contentsline {paragraph}{Formale Definition:}{3}{section*.3}
+\contentsline {paragraph}{Besonderheit dieser Inszenierung:}{3}{section*.5}
+\contentsline {subsection}{\numberline {1.2}Programm-Dokumentation}{3}{subsection.1.2}
+\contentsline {paragraph}{Implementation:}{3}{section*.6}
+\contentsline {subsection}{\numberline {1.3}Programm-Ablaufprotokoll}{4}{subsection.1.3}
+\contentsline {subsubsection}{\numberline {1.3.1}Erzeugung}{4}{subsubsection.1.3.1}
+\contentsline {subsubsection}{\numberline {1.3.2}Ergebnisse}{5}{subsubsection.1.3.2}
+\contentsline {subsection}{\numberline {1.4}Programm-Text}{8}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}Programm-Nutzung}{8}{subsection.1.5}
+\contentsline {section}{\numberline {2}Aufgabe 2: ``Robuttons''}{9}{section.2}
+\contentsline {subsection}{\numberline {2.1}L\IeC {\"o}sungsidee}{9}{subsection.2.1}
+\contentsline {paragraph}{Kollisionerkennung:}{9}{section*.11}
+\contentsline {paragraph}{Reflektion und Drehung:}{9}{section*.12}
+\contentsline {subsection}{\numberline {2.2}Programm-Dokumentation}{10}{subsection.2.2}
+\contentsline {paragraph}{Kern:}{10}{section*.13}
+\contentsline {paragraph}{Simulations-Leistungsf\IeC {\"a}higkeit:}{10}{section*.14}
+\contentsline {paragraph}{Grafische Darstellung:}{11}{section*.15}
+\contentsline {subsection}{\numberline {2.3}Programm-Ablaufprotokoll}{12}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Programm-Text}{16}{subsection.2.4}
+\contentsline {paragraph}{LineShape.java:}{21}{section*.27}
+\contentsline {subsection}{\numberline {2.5}Programm-Nutzung}{22}{subsection.2.5}
+\contentsline {paragraph}{Systemvoraussetzungen:}{22}{section*.28}
+\contentsline {paragraph}{Ausf\IeC {\"u}hrung:}{22}{section*.29}
+\contentsline {paragraph}{Steuerung:}{22}{section*.30}
+\contentsline {section}{\numberline {3}Aufgabe 3: ``Logistisch''}{23}{section.3}
+\contentsline {subsection}{\numberline {3.1}L\IeC {\"o}sungsidee}{23}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Teilaufgabe 1}{23}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Teilaufgabe 2}{23}{subsubsection.3.1.2}
+\contentsline {subsection}{\numberline {3.2}Programm-Dokumentation}{23}{subsection.3.2}
+\contentsline {paragraph}{Implementierung:}{23}{section*.31}
+\contentsline {paragraph}{Testf\IeC {\"a}lle:}{23}{section*.32}
+\contentsline {subsection}{\numberline {3.3}Programm-Ablaufprotokoll}{24}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Programm-Text}{24}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Programm-Nutzung}{25}{subsection.3.5}
+\contentsline {section}{\numberline {4}Aufgabe 4: ``Drehzahl''}{26}{section.4}
+\contentsline {subsection}{\numberline {4.1}L\"osungsidee}{26}{subsection.4.1}
+\contentsline {paragraph}{Das Berechnen der H\IeC {\"o}chstpunktzahl erfolgt rekursiv:}{26}{section*.33}
+\contentsline {subsection}{\numberline {4.2}Programm-Dokumentation}{26}{subsection.4.2}
+\contentsline {paragraph}{Maximale Punktzahl}{26}{section*.35}
+\contentsline {subsection}{\numberline {4.3}Programm-Ablaufprotokoll}{27}{subsection.4.3}
+\contentsline {paragraph}{Ablauf eines ``OptimalSpieles''}{27}{section*.36}
+\contentsline {subsection}{\numberline {4.4}Programm-Text}{27}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Programm-Nutzung}{29}{subsection.4.5}
+\contentsline {section}{\numberline {5}Allgemeine Nutzungsanleitung}{30}{section.5}
+\contentsline {subsection}{\numberline {5.1}Dateistruktur der CD}{30}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Ausf\IeC {\"u}hrvoraussetzungen}{30}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Starten der Programme}{30}{subsection.5.3}
+\contentsline {paragraph}{Wurzelverzeichnis}{30}{section*.37}
+\contentsline {paragraph}{Starten der Kommandozeile}{30}{section*.38}
+\contentsline {paragraph}{Unter Windows}{30}{section*.39}
+\contentsline {paragraph}{Unter GNOME}{31}{section*.40}
+\contentsline {paragraph}{Unter KDE}{31}{section*.41}
+\contentsline {paragraph}{Unter Mac OS X}{31}{section*.42}
