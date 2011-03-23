@@ -1,8 +1,8 @@
 #Source Hashes
-#Tue Mar 22 22:57:31 CET 2011
-src/main/scala/bwinf/instructions.scala=4b6e5d765930c5b7467e7c1aab670b61332c89f0
-src/main/scala/bwinf/algorithms.scala=414b0b1102a60216b267433563256d0038bee5f1
-src/main/scala/bwinf/putter2.scala=029cda4c4fa502ba4765d577b1368f0257a9b93e
-src/main/scala/bwinf/Gleis.scala=76f75a8ced2295199bee66854381a7a1da274f41
-src/main/scala/bwinf/maschines.scala=509531203ee492fc1801de236215f26e5b477536
-src/main/scala/bwinf/Transposition.scala=fe045f7b3504c87dd9eafa56b3a53ceeaa102c5b
+#Wed Mar 23 22:42:52 CET 2011
+src/main/scala/bwinf/instructions.scala=21c59b043c9548b9cf66633d9e3af1db0d9ddaa4
+src/main/scala/bwinf/algorithms.scala=863cac4df2fe9f974a54f539c0f09505972c2f08
+src/main/scala/bwinf/Gleis.scala=d3328c468434c07d6bcb3f48f1b37c318a933b8c
+src/main/scala/bwinf/maschines.scala=6f4e6794ebecaecd83e12dd9ebd1bc77e65b75ea
+src/main/scala/bwinf/FastAlgorithm.scala=2b4eb6948494f91408ad77ecae2a4b8ad7727432
+src/main/scala/bwinf/Transposition.scala=901868c0c429721585cfb019fc29070e72385efb

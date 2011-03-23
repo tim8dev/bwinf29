@@ -1,4 +1,4 @@
 #External Dependencies
-#Tue Mar 22 22:57:31 CET 2011
-/usr/lib/jvm/java-6-sun-1.6.0.24/jre/lib/rt.jar=src/main/scala/bwinf/putter2.scala\:src/main/scala/bwinf/instructions.scala\:src/main/scala/bwinf/Transposition.scala\:src/main/scala/bwinf/Gleis.scala\:src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/algorithms.scala
-/home/tim/Projects/git/bwinf/Runde2/Aufgabe2_Container/project/boot/scala-2.8.1/lib/scala-library.jar=src/main/scala/bwinf/putter2.scala\:src/main/scala/bwinf/instructions.scala\:src/main/scala/bwinf/Transposition.scala\:src/main/scala/bwinf/Gleis.scala\:src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/algorithms.scala
+#Wed Mar 23 22:42:52 CET 2011
+/usr/lib/jvm/java-6-openjdk/jre/lib/rt.jar=src/main/scala/bwinf/Transposition.scala\:src/main/scala/bwinf/Gleis.scala\:src/main/scala/bwinf/instructions.scala\:src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/algorithms.scala\:src/main/scala/bwinf/FastAlgorithm.scala
+/home/tim/Projects/bwinf/Runde2/Aufgabe2_Container/project/boot/scala-2.8.1/lib/scala-library.jar=src/main/scala/bwinf/Transposition.scala\:src/main/scala/bwinf/Gleis.scala\:src/main/scala/bwinf/instructions.scala\:src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/algorithms.scala\:src/main/scala/bwinf/FastAlgorithm.scala

@@ -3,20 +3,19 @@ package de.voodle.tim.bwinf.container
 object Putter {
   def put(perm: Seq[Int]) = {
     var instrs: List[Instruction] = Nil
-    val transs = Transposition trans perm
+    val transs = Utils cyclesOf perm
     val len = perm.length
     var transStarts = transs map (_.head) drop 1 toSet // Drop first, cause it's handled right away.
     val gleis: Gleis = new Gleis(perm)
     var idx = 1
     var cur: Int = (gleis take 1).get
     instrs ::= Take
-    println("(idx,cur,transStarts)" + (idx,cur,transStarts))
     if(cur > idx) {
       idx += 1
       instrs ::= MoveRight
     }
     while(idx > 0) {
-      println("(idx,cur,transStarts)" + (idx,cur,transStarts))
+      //println("(idx,cur,transStarts)" + (idx,cur,transStarts))
       cur = // Find new Current.
 	if(cur == 0) { // Does this occur?
 	  val res = gleis.take(idx) getOrElse 0
