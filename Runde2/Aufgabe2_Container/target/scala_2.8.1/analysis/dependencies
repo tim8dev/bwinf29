@@ -1,7 +1,8 @@
 #Source Dependencies
-#Mon Mar 21 19:11:36 CET 2011
-src/main/scala/bwinf/instructions.scala=src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/algorithms.scala
+#Tue Mar 22 22:57:31 CET 2011
+src/main/scala/bwinf/instructions.scala=src/main/scala/bwinf/putter2.scala\:src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/algorithms.scala
 src/main/scala/bwinf/algorithms.scala=
+src/main/scala/bwinf/putter2.scala=
 src/main/scala/bwinf/Gleis.scala=src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/algorithms.scala
 src/main/scala/bwinf/maschines.scala=
 src/main/scala/bwinf/Transposition.scala=src/main/scala/bwinf/algorithms.scala
