@@ -1,0 +1,156 @@
+\section{Aufgabe 3: ``Logistisch''}
+\subsection{Lösungsidee}
+\subsubsection{Teilaufgabe 1}
+Man betrachte für jeden Standort A, B und C die Fahrzeuge, die an jedem der fünf Tage dort stehen sollen.
+Eine negative Anzahl Fahrzeuge singnalisiert dabei einen entsprechenden bedarf an Fahrzeugen.
+Nun rechnet man den Bedarf an Fahrzeugen für jeden Tag und Standort wie folgt aus:
+Seien zu Beginn der Woche an jedem Standort 0 Fahrzeuge.
+Anhand des Tourenplans, an dem ablesbar ist, wieviele Fahrzeuge von welchem Standort zu welchem fahren,
+lässt sich die Anzahl der erforderlichen Fahrzeuge des nächsten Tages berechnen. So werden auch alle Folgetage berechnet.
+Für jeden Standort wird nun der Tag gesucht an dem der Bedarf an Fahrzeugen am höchsten ist (die Zahl obiger rechnung also am kleinsten, ``negativsten'' ist).
+Ist dieser errechnete Wert negativ, so ist der Betrag dieses Wertes die Startanzahl, ist er jedoch positiv, genügt der Startwert 0.
+Nachdem dies für jeden Standort erfolgt ist, hat man die Startanzahlen für alle Standorte A, B und C.
+\subsubsection{Teilaufgabe 2}
+(Zu dieser Teilaufgabe 2 wurden zwar Überlegungen angestellt, für eine Implementierung fehlte jedoch die Zeit.)
+Um nur eine möglichst niedrige Anzahl Fahrzeuge bereitstellen zu müssen, 
+können Leerfahrten benutzt werden, um überschüssige Fahrzeuge an einem Standort, zu einem anderem zu bringen.
+Hier kann die in Teil 1 erzeugte Liste für jeden Standort mit theoretischen - also auch negativen - Werten benutzt werden.
+Wenn an einem Standort negative Werte auftauchen, wird versucht von den beiden anderen Standorten Fahrzeuge durch Leerfahrten bereitzustellen.
+Da es Ziel ist, den minimalen negativen Wert auszugleichen, sollten immer an dem Tag mit dem minimalen Wert Optimierungsversuche erfolgen.
+Nach einem Optimierungsversuch werden die Listen neu berechnet und bei dem neuem Minimum weiteroptimiert.
+Wichtig ist, dass eine Leerfahrt nur dann erfolgt, wenn dieses Fahrzeug nicht nächsten Tag am derzeitigen Standort gebraucht wird.
+\subsection{Programm-Dokumentation}
+Aus den Vorüberlegung folgt:
+Die Startanzahl der Fahrzeuge für einen Standort ist der Betrag des Minimums aller kalkulierten Fahrzeuganzahlen an einem jedem Tag und dem Startwert 0.
+\paragraph{Implementierung:} Nach dem Einlesen der Daten aus einer Datei, werden zunächst die Differenzen zwischen den Ankünften und Abfahrten
+von Fahrzeugen berechnen. Diese Werte errechnen sich aus der Summe der Zufahrten von den beiden anderen Standorten
+minus die Summe der Abfahrten zu den anderen beiden Standorten.
+Bei mehr Ab- als Zufahrten ist der Differenzwert somit negativ. 
+Da die kalkulierte Fahrzeuganzahl eines Tages sich aus der Addition des Differenzwertes mit dem Vortageswert errechnet, können
+Listen mit den Fahrzeuganzahlen rekursiv an dem ersten Tag beginnend berechnet werden
+(durch eine Hilfsfunktion ``berechneStandort'' und dem theoretischem Startwert 0).
+Nachdem an jede Liste eine 0 (Startwert) angehängt wurde, wird der Betrag des Minimums dieser Liste als tatsächlich benötigter
+Startwert für diesen Standort zurückgegeben.
+(Der Startwert 0 wird angehängt, um ein nicht positives Minimum zu erhalten.)
+\paragraph{Testfälle:} Es wurde eine Datei TestCases.scala erstellt, in der ein ``jUnit TestCase'' implementiert ist.
+Dieser enthält verschiedene Eingaben die getestet werden, unter anderem die Mustereingaben aus der Materialsektion von der Webseite des BWINFs.
+\subsection{Programm-Ablaufprotokoll}
+Ablauf mit einer Mustereingabe (die anderen wurden ebenfalls getestet, dies ist hier jedoch nicht abgebildet):
+\lstset{language=Python}
+\lstset{basicstyle=\footnotesize}
+\begin{lstlisting}
+# A->B A->C B->A B->C C->A C->B
+1 2 3 4 5 6
+2 3 4 5 6 1
+3 4 5 6 7 8
+1 2 3 4 5 6
+1 2 3 4 5 6
+4 3 5 6 1 2
+\end{lstlisting}
+Wird eingelesen und folgt zu diesem Ablaufprotokoll:
+\lstset{language=Scala}
+\lstset{basicstyle=\footnotesize}
+\begin{lstlisting}
+Fahrzeugdifferenzen für Standort A: 
+  5
+  5
+  5
+  5
+  5
+  -1
+Fahrzeugdifferenzen für Standort B: 
+  0
+  -6
+  0
+  0
+  0
+  -5
+Fahrzeugdifferenzen für Standort C: 
+  -5
+  1
+  -5
+  -5
+  -5
+  6
+ Standort A: aktueller Zwischenwert: 5
+ Standort A: aktueller Zwischenwert: 10
+ Standort A: aktueller Zwischenwert: 15
+ Standort A: aktueller Zwischenwert: 20
+ Standort A: aktueller Zwischenwert: 25
+ Standort A: aktueller Zwischenwert: 24
+ Standort B: aktueller Zwischenwert: 0
+ Standort B: aktueller Zwischenwert: -6
+ Standort B: aktueller Zwischenwert: -6
+ Standort B: aktueller Zwischenwert: -6
+ Standort B: aktueller Zwischenwert: -6
+ Standort B: aktueller Zwischenwert: -11
+ Standort C: aktueller Zwischenwert: -5
+ Standort C: aktueller Zwischenwert: -4
+ Standort C: aktueller Zwischenwert: -9
+ Standort C: aktueller Zwischenwert: -14
+ Standort C: aktueller Zwischenwert: -19
+ Standort C: aktueller Zwischenwert: -13
+Anzahl für Standort A: 0
+Anzahl für Standort B: 11
+Anzahl für Standort C: 19
+\end{lstlisting}
+
+\subsection{Programm-Text}
+Der Code ist entnommen aus Aufgabe3/src/tau/tim/logistik/TourenPlan.scala auf der CD.
+Zum Ausführen ist zwar noch zusätzlich Code erforderlich, wie z.B. der Dateieinlesecode, jedoch wird hier nur der inhaltlich relevante Teil eingefügt.
+\lstset{language=Scala}
+\lstset{basicstyle=\footnotesize}
+\begin{lstlisting}
+ /**
+   * Berechnet aus einer Liste mit je 6 Werten eine mögliche Zahl an Fahrzeugen
+   * für jeden Standort A, B, und C.
+   * Die Wert in der Liste sind wie in den Beispieldateien:
+   * A->B, A->C, B->A, B->C, C->A, C->B
+   *
+   * @param einAus: Die Liste mit den Werten.
+   * @param log: Eine Funktion zur Ausgabe des Protokolls
+   */
+  def berechne(einAus: List[(Int,Int,Int,Int,Int,Int)], log: String => _) = {
+    // Aus den Spalten entsprechende Werte einlesen
+    // Berechnet gleichzeitig die Differenz zwischen Ein- und Ausfuhren für jeden Tag.
+    val a_diff = for(i <- einAus) yield i._3+i._5 - (i._1+i._2)
+    val b_diff = for(i <- einAus) yield i._1+i._6 - (i._3+i._4)
+    val c_diff = for(i <- einAus) yield i._2+i._4 - (i._5+i._6)
+
+    log { "Fahrzeugdifferenzen für Standort A: " + a_diff.mkString("\n  ", "\n  ", "") }
+    log { "Fahrzeugdifferenzen für Standort B: " + b_diff.mkString("\n  ", "\n  ", "") }
+    log { "Fahrzeugdifferenzen für Standort C: " + c_diff.mkString("\n  ", "\n  ", "") }
+
+    // Die Fahrzeugzahlen für jeden Standort:
+    val a = 0 :: berechneStandort(0, a_diff, (s:String) => log{ " Standort A: " + s})
+    val b = 0 :: berechneStandort(0, b_diff, (s:String) => log{ " Standort B: " + s})
+    val c = 0 :: berechneStandort(0, c_diff, (s:String) => log{ " Standort C: " + s})
+
+    // Die Anzahl der Fahrzeuge für jeden Standort ist das Minimum.
+    val res = (-a.min, -b.min, -c.min) // Minimum <= 0, weil 0 am Anfang angehängt wurde.
+    log { "Anzahl für Standort A: " + res._1 }
+    log { "Anzahl für Standort B: " + res._2 }
+    log { "Anzahl für Standort C: " + res._3 }
+    res
+  }
+
+ private def berechneStandort(vorher : Int, diffs: Seq[Int], log: String => _) : List[Int] =
+    diffs.headOption match {
+      case Some(diff) =>
+        // Der jetzige Wert ist der vorherige plus die Differenz aus den Ein- und Ausfuhren
+        val jetzt = vorher + diff
+        log { "aktueller Zwischenwert: " + jetzt }
+        jetzt ::
+        // Rekursiver Aufruf mit Zwischenwert jetzt und Restwerten diffs.tail
+        berechneStandort(jetzt, diffs.tail, log)
+      case _ => Nil // wenn keine Werte mehr vorhanden, Rekursionsschluss.
+    }
+\end{lstlisting}
+
+\subsection{Programm-Nutzung}
+% Include Scala lib in Distribution.
+Das Programm kann durch den Befehl `java -jar Aufgabe3/dist/Logistik.jar' ausgeführt werden (Voraussetzungen und Startanleitung siehe \ref{Vor}).
+Die Eingabedaten sind in der Datei Aufgabe3/dist/table.txt. Diese wird zu Programmbeginn eingelesen.
+Um diese Mustereingabe zu ändern, muss der gesamte Aufgabe3 Ordner in ein beschreibbares Verzeichnis kopiert werden. Geben Sie dann Ihre gewünschte
+Eingabe in die Aufgabe3/dist/table.txt Datei. Führen Sie den Befehl statt auf dem Wurzelverzeichnis der CD dann auf dem entprechendem Verzeichnis aus.
+ 
