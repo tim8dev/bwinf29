@@ -1,23 +1,29 @@
 package de.voodle.tim.bwinf.container
 
+import scala.annotation.tailrec
+
 trait Maschine {
   def interpret(instrs: Seq[Instruction]): Gleis
 }
 
-class SimpleMaschine(initial: Gleis) {
+class SimpleMaschine(initial: Gleis) extends Maschine {
   private val gleis = initial
-  final def interpret(instrs: List[Instruction], cur: Int = 0, idx: Int = 1): Unit = {
-    def swap(xs: List[Instruction]) {
-      val swap = (gleis take idx) getOrElse 0
-      gleis put (idx -> cur)
-      interpret(xs, swap, idx)
-    }
+  def interpret(instrs: Seq[Instruction]): Gleis = interpret(instrs.toList, 0, 1)
+  @tailrec
+  final def interpret(instrs: List[Instruction], cur: Int, idx: Int): Gleis = {
     println("Current Item: " + (if(cur == 0) "Nothing" else cur))
     println("Current Index: " + idx)
     println("Current Gleis: \n" + gleis)
+    def swap(xs: List[Instruction]) = { // Helper function
+      val swap = (gleis take idx) getOrElse 0
+      gleis put (idx -> cur)
+      swap
+    }
     instrs match { // Recursivly check
-      case Put :: Take :: xs => swap(xs)
-      case Take :: Put :: xs => swap(xs)
+      case Put :: Take :: xs =>
+        interpret(xs, swap(xs), idx)
+      case Take :: Put :: xs =>
+	interpret(xs, swap(xs), idx)
       case Take :: xs =>
 	interpret(xs, (gleis take idx) getOrElse 0, idx)
       case Put :: xs =>
@@ -27,7 +33,7 @@ class SimpleMaschine(initial: Gleis) {
 	interpret(xs, cur, idx+len)
       case MoveLeft(len) :: xs =>
 	interpret(xs, cur, idx-len)
-      case Nil => () // Do Nothing
+      case Nil => gleis // Do Nothing
     }
    }
   override def toString = gleis.toString
