@@ -2,6 +2,7 @@ package de.voodle.tim.bwinf.container
 
 import scala.annotation.tailrec
 import scala.collection.immutable.Queue
+import scala.collection.mutable.ListBuffer
 
 object FastAlgorithm {
   def compute(perm: Seq[Int]): Seq[Instruction] = compute(Utils cyclesOf perm)
@@ -16,13 +17,13 @@ object FastAlgorithm {
       val (instrs, cyclesLeft, last) =
 	(initial /: (cycle.tail :+ erster)) {
           case ((instrs, cyclesLeft, prev), cur) =>
-	    if(prev == max && (!cyclesLeft.isEmpty)) {
-	      val (prevCycles, afterCycles) = cyclesLeft.partition(_.head < prev) // TODO: Better?.. Well, prevCycles should be Empty
-	      val (cycleInstrs, newCyclesLeft) = computeCycle(afterCycles.head, afterCycles.tail)
+	    if(prev == max && (!cyclesLeft.isEmpty)) { // "Concat" Cycles
+	      //val (prevCycles, afterCycles) = cyclesLeft.partition(_.head < prev) // TODO: Better?.. Well, prevCycles should be Empty
+	      val (cycleInstrs, newCyclesLeft) = computeCycle(cyclesLeft.head, cyclesLeft.tail)
 	      val extraInstrs = instrs + Put + MoveRight ++ cycleInstrs + MoveLeft + Take
-	      step(extraInstrs, prevCycles ::: newCyclesLeft,prev,cur)
+	      step(extraInstrs, /* prevCycles ::: */ newCyclesLeft, prev, cur)
 	    } else
-	      step(instrs,cyclesLeft,prev,cur)
+	      step(instrs, cyclesLeft, prev, cur)
         }
       // Then move last(where we should be) to first.
       // println("instrs: " + instrs)
