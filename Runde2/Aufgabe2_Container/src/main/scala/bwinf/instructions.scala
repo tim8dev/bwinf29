@@ -22,6 +22,7 @@ object Move {
     case MoveLeft(len) => -len
   }
 }
+case object Swap extends Instruction
 case object Take extends Instruction
 case object Put  extends Instruction
 object MoveLeft extends MoveLeft(1)

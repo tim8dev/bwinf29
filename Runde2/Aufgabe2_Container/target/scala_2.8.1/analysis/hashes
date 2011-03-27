@@ -1,8 +1,8 @@
 #Source Hashes
-#Fri Mar 25 11:52:27 CET 2011
-src/main/scala/bwinf/instructions.scala=21c59b043c9548b9cf66633d9e3af1db0d9ddaa4
-src/main/scala/bwinf/Utils.scala=a8c9a8df932a2f189814b468dc14c9f9174fb70f
+#Sun Mar 27 10:16:33 CEST 2011
+src/main/scala/bwinf/instructions.scala=4a6c8bc9f405b90924bcef644fe96b85b569aadd
+src/main/scala/bwinf/Utils.scala=6b943f3ef857e22078ad3739c9ec3b1a93885035
 src/main/scala/bwinf/algorithms.scala=863cac4df2fe9f974a54f539c0f09505972c2f08
-src/main/scala/bwinf/Gleis.scala=d3328c468434c07d6bcb3f48f1b37c318a933b8c
-src/main/scala/bwinf/maschines.scala=a969ca49f50c7b294f6748e9b1ba399c97292267
-src/main/scala/bwinf/FastAlgorithm.scala=c2e65db9ba720572a78b92bbc4f9fa46c2b3707e
+src/main/scala/bwinf/Gleis.scala=eb89ac87705ce0a0032fe32e2ffe35319d51ed46
+src/main/scala/bwinf/maschines.scala=776487523fec52c4583ba504dfd81566cf798652
+src/main/scala/bwinf/FastAlgorithm.scala=aea336bef6b2ceb7b1840558b2e4f045c4d061d4

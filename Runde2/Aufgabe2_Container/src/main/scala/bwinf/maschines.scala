@@ -20,6 +20,8 @@ class SimpleMaschine(initial: Gleis) extends Maschine {
       swap
     }
     instrs match { // Recursivly check
+      case Swap :: xs =>
+        interpret(xs, swap(xs), idx)
       case Put :: Take :: xs =>
         interpret(xs, swap(xs), idx)
       case Take :: Put :: xs =>

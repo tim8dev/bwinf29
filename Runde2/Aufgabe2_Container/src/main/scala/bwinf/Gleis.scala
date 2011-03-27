@@ -2,12 +2,12 @@ package de.voodle.tim.bwinf.container
 
 class Gleis(initCon: Seq[Int]) {
   val length = initCon.length
-  private val con = initCon.toArray
+  private val con = Seq(initCon: _*).toArray
   private val wag = new Array[Int](length)
 
   // Immutable Vectors!
-  def container = con.toIndexedSeq
-  def waggons = wag.toIndexedSeq
+  def container = Vector(con: _*)
+  def waggons = Vector(wag: _*)
 
   private def arrGet(arr: Array[Int], take: Boolean)(i: Int): Option[Int] = {
     val res = arr(i-1)
@@ -24,7 +24,7 @@ class Gleis(initCon: Seq[Int]) {
     }
 
   def apply(i: Int) = arrGet(con, false)(i) orElse arrGet(wag, false)(i)
-  def take(i: Int) = arrGet(con, true)(i) orElse arrGet(wag, true)(i)
+  def take(i: Int)  = arrGet(con, true)(i) orElse arrGet(wag, true)(i)
 
   def put(mapping: (Int,Int)): Option[Unit] = put(mapping._1)(mapping._2)
   def put(i: Int)(what: Int) = arrPut(wag)(i)(what) orElse arrPut(con)(i)(what)
