@@ -40,11 +40,13 @@
 \contentsline {section}{\numberline {C}Zweite bearbeitete Aufgabe: (2) Containerklam\IeC {\"u}sel}{8}{section.3}
 \contentsline {subsection}{\numberline {1}L\IeC {\"o}sungsidee}{8}{subsection.3.1}
 \contentsline {subsubsection}{\numberline {1.1}Vor\IeC {\"u}berlegungen}{8}{subsubsection.3.1.1}
-\contentsline {subsubsection}{\numberline {1.2}Algorithmen}{8}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {1.2}Datenstruktur}{8}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {1.3}Algorithmen}{8}{subsubsection.3.1.3}
 \contentsline {paragraph}{Ergebnisoptimaler Algorithmus}{8}{section*.23}
-\contentsline {subparagraph}{Optimale Ergebnisse}{8}{section*.24}
-\contentsline {subparagraph}{Laufzeitverhalten}{8}{section*.25}
-\contentsline {paragraph}{Optimaler Algorithmus}{8}{section*.26}
-\contentsline {subparagraph}{Optimale Ergebnisse}{8}{section*.27}
-\contentsline {subparagraph}{Optimale Laufzeitkomplexit\IeC {\"a}t}{8}{section*.28}
+\contentsline {subparagraph}{Entwurf}{8}{section*.24}
+\contentsline {subparagraph}{Optimale Ergebnisse}{8}{section*.25}
+\contentsline {subparagraph}{Laufzeitverhalten}{8}{section*.26}
+\contentsline {paragraph}{Optimaler Algorithmus}{8}{section*.27}
+\contentsline {subparagraph}{Optimale Ergebnisse}{8}{section*.28}
+\contentsline {subparagraph}{Optimale Laufzeitkomplexit\IeC {\"a}t}{8}{section*.29}
 \contentsline {subsection}{\numberline {2}Implementation}{8}{subsection.3.2}

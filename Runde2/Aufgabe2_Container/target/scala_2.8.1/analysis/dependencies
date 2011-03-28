@@ -1,8 +1,9 @@
 #Source Dependencies
-#Sun Mar 27 10:16:33 CEST 2011
-src/main/scala/bwinf/instructions.scala=src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/FastAlgorithm.scala\:src/main/scala/bwinf/algorithms.scala
+#Mon Mar 28 12:23:38 CEST 2011
+src/main/scala/bwinf/instructions.scala=src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/FastAlgorithm.scala\:src/main/scala/bwinf/Utils.scala\:src/main/scala/bwinf/algorithms.scala
 src/main/scala/bwinf/Utils.scala=src/main/scala/bwinf/FastAlgorithm.scala\:src/main/scala/bwinf/algorithms.scala
 src/main/scala/bwinf/algorithms.scala=
 src/main/scala/bwinf/Gleis.scala=src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/algorithms.scala
+src/main/scala/bwinf/OldUtils.scala=
 src/main/scala/bwinf/maschines.scala=
 src/main/scala/bwinf/FastAlgorithm.scala=

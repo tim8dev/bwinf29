@@ -2,22 +2,54 @@
 \subsection{Lösungsidee}
 \subsubsection{Vorüberlegungen}
 Die Anordnung der Waggons zu den Container ist eine bijektive Abbildung von $[1,n]$ nach $[1,n]$, sprich, eine Permutation.
-Jede Permutation lässt sich als Folge von disjunkten Transpositionen darstellen. \\ %TODO: CITE!
+Jede Permutation lässt sich als Folge von disjunkten Zyklen darstellen. \\ %TODO: CITE!
 Dies erwies sich als günstig, denn nun ist das Problem aufgebrochen in folgende zwei Teile.
-Der erste ist, die Container einer Transposition an die richtige Stelle zu bringen.
-Dies lässt sich relativ leicht realisieren, indem der Container am Anfang der Transposition an die richtige Position gebracht wird, anschließend der - dortige - zweite an die richtige, usw., bis der Ausgangspunkt wieder erreicht ist.
-Der zweite - etwas schwierige - Teil besteht darin, die Transpositionsabarbeitung dort zu unterbrechen, wo eine andere beginnt. \\
+Der erste ist, die Container eines Zyklus an die richtige Stelle zu bringen.
+Dies lässt sich relativ leicht realisieren, indem der Container am Anfang der Zyklen an die richtige Position gebracht wird, anschließend der - dortige - zweite an die richtige, usw., bis der Ausgangspunkt wieder erreicht ist.
+Der zweite - etwas schwierige - Teil besteht darin, die Zyklenabarbeitung dort zu unterbrechen, wo eine andere beginnt. \\
 Etwas anders ausgedrückt:
-Beginnt man an dem Anfang einer Transposition, können alle Container dieser ``in einem Stück'' an die richtige Stelle gebracht werden und anschließend ist man wieder an der Ausgangsposition.
-Wir werden etwas später sehen, dass dies tatsächlich immer ein optimalen Weg (zumindest innerhalb einer Transposition) ist.
+Beginnt man an dem Anfang eines Zyklus, können dessen Container ``in einem Stück'' an die richtige Stelle gebracht werden und der Kran anschließend wieder an der Ausgangsposition angelangen.
+Wir werden etwas später sehen, dass dadurch tatsächlich auch immer ein optimalen Weg (zumindest innerhalb eines Zyklus) gefunden werden kann.
 \subsubsection{Datenstruktur}
-Es wurde eine einfache Datenstruktur benötigt, um das Gleis mit Containerstellplätzen und Waggons abzubilden. \\
+Permutationen können in jeder indexierten Liste gespeichert werden.
+Da in der Informatik jedoch indexierte Listen (insbesondere Arrays) Indizes aus $[0,n[$ besitzen muss dies beim Zugriff beachtet werden.
+Um also die Zahl $p$ zu finden, auf die $i$ durch $perm$ abgebildet wird, gilt $p = perm(i-1)$ und nicht $p = perm(i)$. \\
+Es wird außerdem noch eine einfache Datenstruktur benötigt, um das Gleis mit Containerstellplätzen und Waggons abzubilden. \\
 Diese ....
-% Transpositionen
+% Zyklen
 \subsubsection{Algorithmen}
 \paragraph{Ergebnisoptimaler Algorithmus}
-\subparagraph{Entwurf} Der Entwurf dieses Algorithmus' ergibt sich aus den obigen Überlegungen. Zunächst werden die Transpositionen wie folgt gesucht:
+\subparagraph{Entwurf}
+Der Entwurf dieses Algorithmus' ergibt sich aus den obigen Überlegungen. Zunächst werden die disjunkten Zyklen berechnet.
+Hierfür wird folgende Hilfsfunktion verwendet.
+%\[
+%cycle(p,start,i) =
+%  \begin{cases}
+%  [] & \text{falls } start == i \\
+%  idx : cycle(p,start,p(i)) & \text{sonst }
+%  \end{cases} \]
+\lstset{language=Scala}
+\lstset{basicstyle=\small}
+\begin{lstlisting}
+def cycle(perm: Seq[Int], start: Int): Cycle = {
+  def step(idx: Int) =
+    if(start == idx) Nil
+    else idx :: step(perm(idx - 1))
+  start :: step(perm(start-1))
+}
+\end{lstlisting}
+Salopp gesagt, hangelt man sich so lange - bei einem Startindex beginnend - durch die Permutation, bis man wieder beim Anfangswert ankommt.\\
+Nun lässt sich auch recht einfach ein Algorithmus zum finden der dijunkten Zyklen einer Permutation p angeben.
+\lstset{language=Scala}
+\lstset{basicstyle=\small}
+\begin{lstlisting}
+ 
+\end{lstlisting}
+
+
 \subparagraph{Optimale Ergebnisse}
+Dieser Algorithmus liefert bereits optimale Ergebnisse. Um dies zu zeigen, wird zunächst bewiesen, dass die Zyklen richtig gefunden werden.
+
 \subparagraph{Laufzeitverhalten} % n²
 \paragraph{Optimaler Algorithmus}
 \subparagraph{Optimale Ergebnisse}
