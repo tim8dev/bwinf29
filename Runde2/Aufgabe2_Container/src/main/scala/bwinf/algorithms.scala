@@ -1,12 +1,12 @@
 package de.voodle.tim.bwinf.container
-
+/*
 object Putter {
   def put(perm: Seq[Int]) = {
     var instrs: List[Instruction] = Nil
     val transs = Utils cyclesOf perm
     val len = perm.length
     var transStarts = transs map (_.head) drop 1 toSet // Drop first, cause it's handled right away.
-    val gleis: Gleis = new Gleis(perm)
+    val gleis: Gleis = new SimpleGleis(perm)
     var idx = 1
     var cur: Int = (gleis take 1).get
     instrs ::= Take
@@ -59,3 +59,4 @@ object Putter {
   }
   def length(instrs: List[Instruction]) = instrs map (_.len) sum
 }
+*/

@@ -9,14 +9,23 @@ object Utils {
 
   import scala.util.Random
   def randPerm(n: Int) = {
-    val a = (0 until n).toArray // O(n)
-    for(i <- n to 2 by -1) { // O(n)
+    // Init array // O(n)
+    val a = new Array[Int](n)
+    var idx = 0
+    while(idx < n) {
+      a(idx) = idx + 1
+      idx += 1
+    }
+    // randomize array // O(n)
+    var i = n
+    while(i >= 2) {
       val di = Random.nextInt(i)
       val swap = a(di)
       a(di) = a(i-1)
       a(i-1) = swap
+      i -= 1
     }
-    a map (_ + 1) // from 0..n -> 1...n
+    a
   }
 
   /** Return the list of disjunct cycles sorted ascending by cycle.head */
@@ -28,7 +37,7 @@ object Utils {
     else {
       val aCycle = cycle(perm, start) // O(n_c)
       for (i <- aCycle) { handled(i-1) = true } // O(n_c); Side effects are not harmful, it's tailrec!
-      (start to perm.length) find (i => !(handled(i-1))) match {
+      (start to perm.length) find (i => !(handled(i-1))) match { // O(n)
         case Some(next) =>
           cycles(ready += aCycle, perm, handled, next)
 	case None =>

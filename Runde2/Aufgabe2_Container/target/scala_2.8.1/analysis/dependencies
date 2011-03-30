@@ -1,9 +1,11 @@
 #Source Dependencies
-#Mon Mar 28 12:23:38 CEST 2011
-src/main/scala/bwinf/instructions.scala=src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/FastAlgorithm.scala\:src/main/scala/bwinf/Utils.scala\:src/main/scala/bwinf/algorithms.scala
-src/main/scala/bwinf/Utils.scala=src/main/scala/bwinf/FastAlgorithm.scala\:src/main/scala/bwinf/algorithms.scala
+#Wed Mar 30 19:27:05 CEST 2011
+src/main/scala/bwinf/Utils.scala=src/main/scala/bwinf/algorithms.scala\:src/main/scala/bwinf/3DUtils.scala\:src/main/scala/bwinf/FastAlgorithm.scala
+src/main/scala/bwinf/FastAlgorithm.scala=src/main/scala/bwinf/3DUtils.scala
+src/main/scala/bwinf/Gleis.scala=src/main/scala/bwinf/algorithms.scala\:src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/3DGleis.scala
+src/main/scala/bwinf/instructions.scala=src/main/scala/bwinf/Utils.scala\:src/main/scala/bwinf/algorithms.scala\:src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/FastAlgorithm.scala
+src/main/scala/bwinf/3DUtils.scala=
 src/main/scala/bwinf/algorithms.scala=
-src/main/scala/bwinf/Gleis.scala=src/main/scala/bwinf/maschines.scala\:src/main/scala/bwinf/algorithms.scala
-src/main/scala/bwinf/OldUtils.scala=
-src/main/scala/bwinf/maschines.scala=
-src/main/scala/bwinf/FastAlgorithm.scala=
+src/main/scala/bwinf/KranMaschine.scala=
+src/main/scala/bwinf/3DGleis.scala=
+src/main/scala/bwinf/maschines.scala=src/main/scala/bwinf/3DUtils.scala

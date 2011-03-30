@@ -1,21 +1,32 @@
 package de.voodle.tim.bwinf.container
 
-class Gleis(initCon: Seq[Int]) {
+trait Gleis {
+  val length: Int
+  def container: Seq[Int]
+  def waggons: Seq[Int]
+  
+  def take(i: Int): Option[Int]
+
+  def put(mapping: (Int,Int)): Option[Unit] = put(mapping._1)(mapping._2)
+  def put(i: Int)(what: Int): Option[Unit]
+}
+
+class SimpleGleis(initCon: Seq[Int]) extends Gleis {
   val length = initCon.length
-  private val con = Seq(initCon: _*).toArray
-  private val wag = new Array[Int](length)
+  protected val con = Seq(initCon: _*).toArray
+  protected val wag = new Array[Int](length)
 
   // Immutable Vectors!
   def container = Vector(con: _*)
   def waggons = Vector(wag: _*)
 
-  private def arrGet(arr: Array[Int], take: Boolean)(i: Int): Option[Int] = {
+  protected def arrGet(arr: Array[Int], take: Boolean)(i: Int): Option[Int] = {
     val res = arr(i-1)
     if(take)
       arr(i-1) = 0
     if (res == 0) None else Some(res)
   }
-  private def arrPut(arr: Array[Int])(i: Int)(what: Int) =
+  protected def arrPut(arr: Array[Int])(i: Int)(what: Int) =
     arr(i-1) match {
       case 0 =>
         arr(i-1) = what
@@ -23,10 +34,9 @@ class Gleis(initCon: Seq[Int]) {
       case _ => None
     }
 
-  def apply(i: Int) = arrGet(con, false)(i) orElse arrGet(wag, false)(i)
+  //def apply(i: Int) = arrGet(con, false)(i) orElse arrGet(wag, false)(i)
   def take(i: Int)  = arrGet(con, true)(i) orElse arrGet(wag, true)(i)
 
-  def put(mapping: (Int,Int)): Option[Unit] = put(mapping._1)(mapping._2)
   def put(i: Int)(what: Int) = arrPut(wag)(i)(what) orElse arrPut(con)(i)(what)
 
   private def arrString(arr: Array[Int]) = arr take 100 map (i => if(i == 0) "_" else i.toString) mkString " "
