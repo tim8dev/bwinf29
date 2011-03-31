@@ -45,8 +45,8 @@
 \contentsline {paragraph}{Ergebnisoptimaler Algorithmus}{8}{section*.23}
 \contentsline {subparagraph}{Entwurf}{8}{section*.24}
 \contentsline {subparagraph}{Optimale Ergebnisse}{8}{section*.25}
-\contentsline {subparagraph}{Laufzeitverhalten}{8}{section*.26}
-\contentsline {paragraph}{Optimaler Algorithmus}{8}{section*.27}
-\contentsline {subparagraph}{Optimale Ergebnisse}{8}{section*.28}
-\contentsline {subparagraph}{Optimale Laufzeitkomplexit\IeC {\"a}t}{8}{section*.29}
-\contentsline {subsection}{\numberline {2}Implementation}{8}{subsection.3.2}
+\contentsline {subparagraph}{Laufzeitverhalten}{9}{section*.26}
+\contentsline {paragraph}{Optimaler Algorithmus}{9}{section*.27}
+\contentsline {subparagraph}{Optimale Ergebnisse}{9}{section*.28}
+\contentsline {subparagraph}{Optimale Laufzeitkomplexit\IeC {\"a}t}{9}{section*.29}
+\contentsline {subsection}{\numberline {2}Implementation}{9}{subsection.3.2}

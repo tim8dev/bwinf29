@@ -20,7 +20,7 @@
 \fancyhf{} % clear all header and footer fields
 \fancyhead[L]{Aufgabe \thesection}
 \fancyhead[R]{Seite \thepage}
-\fancyfoot[C]{\footnotesize 29.\ BWINF, 1.\ Runde; Einsendung: Tim Taubner, Nr.\ 108}
+\fancyfoot[C]{\footnotesize 29.\ BWINF, 2.\ Runde; Einsendung: Tim Taubner, Nr.\ 29.108.01}
 
 \hypersetup{colorlinks=true,linkcolor=darkblue}
 
@@ -28,8 +28,8 @@
 \title{29. Bundeswettbewerb Informatik 2010/2011 2. Runde}
 \author{Tim Taubner, Verwaltungsnummer 29.108.01}
 
-\definecolor{darkblue}{rgb}{0,0,.6}
-\definecolor{darkred}{rgb}{.6,0,0}
+\definecolor{darkblue} {rgb}{0,0,.6}
+\definecolor{darkred}  {rgb}{.6,0,0}
 \definecolor{darkgreen}{rgb}{0,.3,0}
 
 \lstset{commentstyle=\color{darkgreen}\textbf, keywordstyle=\color{darkblue}\textbf}
@@ -37,7 +37,7 @@
 \lstset{numbers=left, numberstyle=\tiny, numbersep=5pt}
 %Define Scala Language Highlighting
 \lstdefinelanguage{Scala}[]{Java}
-  {morekeywords={trait, object, sealed, override, val, var, lazy, def, yield, List, Int, Double, Seq, Ordered, Nil, Set},
+  {morekeywords={trait, object, sealed, override, val, var, lazy, def, yield},%, List, Int, Double, Seq, Ordered, Nil, Set},
    %Ugly fix to ``Umlaute''
    literate={<-}{{$\gets$}}1 {=>}{{$\Rightarrow$}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1}
 \lstMakeShortInline{|}
@@ -58,7 +58,8 @@
   \newenvironment{bew}{\begin{proof}[Beweis]}{\end{proof}}
 
 \begin{document}
-\addtolength{\hoffset}{-0.2cm}
+\addtolength{\hoffset}{-0.4cm}
+\addtolength{\textwidth}{3cm}
 \addtolength{\voffset}{-1.6cm}
 \addtolength{\textheight}{2cm}
 

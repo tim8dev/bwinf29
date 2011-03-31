@@ -1,12 +1,8 @@
 #Source Dependencies
-#Wed Mar 30 22:33:09 CEST 2011
-src/main/scala/bwinf/kran/KranInstructions.scala=src/main/scala/bwinf/kran/KranGleis.scala\:src/main/scala/bwinf/kran/KranUtils.scala\:src/main/scala/bwinf/kran/KranMaschine.scala
-src/main/scala/bwinf/kran/KranUtils.scala=
-src/main/scala/bwinf/Utils.scala=src/main/scala/bwinf/algorithms.scala\:src/main/scala/bwinf/kran/KranUtils.scala\:src/main/scala/bwinf/FastAlgorithm.scala
-src/main/scala/bwinf/FastAlgorithm.scala=src/main/scala/bwinf/kran/KranUtils.scala
-src/main/scala/bwinf/Gleis.scala=src/main/scala/bwinf/Maschine.scala\:src/main/scala/bwinf/kran/KranGleis.scala\:src/main/scala/bwinf/kran/KranMaschine.scala
-src/main/scala/bwinf/instructions.scala=src/main/scala/bwinf/Maschine.scala\:src/main/scala/bwinf/Utils.scala\:src/main/scala/bwinf/algorithms.scala\:src/main/scala/bwinf/kran/KranMaschine.scala\:src/main/scala/bwinf/FastAlgorithm.scala
-src/main/scala/bwinf/kran/KranGleis.scala=src/main/scala/bwinf/kran/KranMaschine.scala
+#Thu Mar 31 14:09:20 CEST 2011
+src/main/scala/bwinf/instructions.scala=src/main/scala/bwinf/FastAlgorithm.scala\:src/main/scala/bwinf/Utils.scala
+src/main/scala/bwinf/Utils.scala=src/main/scala/bwinf/FastAlgorithm.scala
 src/main/scala/bwinf/algorithms.scala=
-src/main/scala/bwinf/Maschine.scala=src/main/scala/bwinf/kran/KranMaschine.scala
-src/main/scala/bwinf/kran/KranMaschine.scala=src/main/scala/bwinf/kran/KranUtils.scala
+src/main/scala/bwinf/Gleis.scala=
+src/main/scala/bwinf/OldUtils.scala=
+src/main/scala/bwinf/FastAlgorithm.scala=

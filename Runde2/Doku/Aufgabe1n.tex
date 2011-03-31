@@ -23,7 +23,7 @@ Lediglich wenige Elemente funktionaler und objektorientierter Elemente müssen d
 Wichtig ist, um den Code zu verstehen, dass \lstinline|(satz ++< kiste)| alle Möglichkeiten erzeugt, wie man die Kiste in einen Satz einfügen kann.
 \footnote{Nähere Erläuterungen dazu später, für den Algorithmus ist dies nicht direkt relevant.}
 \lstset{language=Scala}
-\lstset{basicstyle=\scriptsize}
+\lstset{basicstyle=\small}
 \begin{lstlisting}
   // Nacheinander die Kisten "auffalten" mit Hilfe der hilfsPacken Funktion
   def packe = (Set[KistenSatz]() /: kisten) ( hilfsPacken )

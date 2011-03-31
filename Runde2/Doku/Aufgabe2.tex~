@@ -10,6 +10,7 @@ Der zweite - etwas schwierige - Teil besteht darin, die Zyklenabarbeitung dort z
 Etwas anders ausgedrückt:
 Beginnt man an dem Anfang eines Zyklus, können dessen Container ``in einem Stück'' an die richtige Stelle gebracht werden und der Kran anschließend wieder an der Ausgangsposition angelangen.
 Wir werden etwas später sehen, dass dadurch tatsächlich auch immer ein optimalen Weg (zumindest innerhalb eines Zyklus) gefunden werden kann.
+Durch entsprechend richtige ``Konkatenation'' der einzelnen Befehlsketten für die einzelnen Zyklen lässt sich ein insgesamt richtiger Algorithmus erstellen.
 \subsubsection{Datenstruktur}
 Permutationen können in jeder indexierten Liste gespeichert werden.
 Da in der Informatik jedoch indexierte Listen (insbesondere Arrays) Indizes aus $[0,n[$ besitzen muss dies beim Zugriff beachtet werden.
@@ -31,26 +32,59 @@ Hierfür wird folgende Hilfsfunktion verwendet.
 \lstset{language=Scala}
 \lstset{basicstyle=\small}
 \begin{lstlisting}
-def cycle(perm: Seq[Int], start: Int): Cycle = {
-  def step(idx: Int) =
+def cycle(perm: Seq[Int], start: Int): List[Int] = {
+  def step(idx: Int): List[Int] = // Hilfsfunktion
     if(start == idx) Nil
     else idx :: step(perm(idx - 1))
   start :: step(perm(start-1))
 }
 \end{lstlisting}
 Salopp gesagt, hangelt man sich so lange - bei einem Startindex beginnend - durch die Permutation, bis man wieder beim Anfangswert ankommt.\\
-Nun lässt sich auch recht einfach ein Algorithmus zum finden der dijunkten Zyklen einer Permutation p angeben.
+Nun lässt sich auch recht einfach ein Algorithmus zum finden der disjunkten Zyklen einer Permutation p angeben.
 \lstset{language=Scala}
 \lstset{basicstyle=\small}
 \begin{lstlisting}
+def cyclesOf(perm: Seq[Int], ready: Set[Int]): List[List[Int]] = {
+  val start = (1 to perm.length) find (i => !ready.contains(i)) // bis zu n Aufrufe; Zugriff auf Hashset O(1)
+  val cycle = cycle(perm, start)
+  val newReady = ready ++ cycle // O(n)
+  cycle :: cyclesOf(perm, newReady)
+}
+\end{lstlisting}
 
 \subparagraph{Optimale Ergebnisse}
 Dieser Algorithmus liefert bereits optimale Ergebnisse. Um dies zu zeigen, wird zunächst bewiesen, dass die Zyklen richtig gefunden werden.
+...
+Anschließend zeigen wir die Optimalheit vom eigentlichem Algorithmus, die Berechnung der Instruktionen.
+\subparagraph{Laufzeitverhalten}
+% O(c*n)
+Zunächst wird das Laufzeitverhalten des Algorithmus zum Finden der Zyklen analysiert.
+|cyclesOf| berechnet in jedem Schritt den neuen Startwert |start|.
+Dazu wird die Folge 1 bis zur Permutationslänge traversiert bis ein Wert gefunden wird der noch nicht abgearbeitet - sprich in |ready| enthalten - ist.
+Nimmt man an, dass das Prüfen auf Enthaltensein konstanten Zeitaufwand darstellt (Bsp. bei Verwendung eines |HashSet|s), dann ergibt dies insgesamt eine Komplexität von $O(n)$.
+Die Berechnung eines Zyklus benötigt höchstens die Traversierung der Permutation, also ebenfalls $O(n)$. %TODO: Genauer!
+Anschließend werden die Zahlen, die im Zyklus enthalten sind, in |ready| eingefügt. Unter Annahme, dass wieder ein |HashSet| verwendet wird, ergibt das eine Komplexität von $O(n)$.
+Anschließend erfolgt der rekursive Aufruf. Sei $c$ die Anzahl der Zyklen, dann wird |cyclesOf| $c$-mal aufgerufen.
+Die Laufzeitkomplexität zur Finden der Zyklen ist also $O(c \cdot n)$. \\
 
-\subparagraph{Laufzeitverhalten} % n²
-\paragraph{Optimaler Algorithmus}
+\paragraph{Optimaler Algorithmus} %Erweiterung!
+Das Laufzeitverhalten von $O(c \cdot n)$ ist zwar bereits recht gut, da die Anzahl der Zyklen im Mittel nicht linear mit $n$ steigt. % TODO: Beleg
+Der Worstcase bei $n/2$ Zyklen führt zu einer Worstcase-Komplexität von $O(n²)$. \\
+Als Erweiterung soll die Laufzeitkomplexität weiter verringert werden. \\
+Außerdem sind die Algorithmen, wie sie oben angegeben sind, nicht tail-recursive.
+Das heißt bei jedem rekursivem Aufruf wird ein neuer Stack-frame allokiert.
+In der Praxis heißt dies, dass nur eine Rekursionstiefe von höchstens 10000.
+
 \subparagraph{Optimale Ergebnisse}
+Da oben %TODO: Ref
+bereits gezeigt wurde, dass aus korrekten Zyklen Instruktionen, die einen optimalen Weg für den Kran liefern, berechnet werden.
+Muss hier nur noch gezeigt werden, dass wiederum korrekte Zyklen berechnet werden. \\
 
 \subparagraph{Optimale Laufzeitkomplexität}
+... \\
+Da jeder Container auf einen Waggon gebracht werden muss, muss für jeden Container mindestens ein Befehl erzeugt werden.
+Bei $n$ Container sind dies also $n$ Befehle. Das setzt einen Algorithmus mit einer Laufzeitkomplexität von mindestens $O(n)$ voraus.
+Der erstellte Algorithmus hat also \textbf{optimale Laufzeitkomplexität}.
 
+% TODO?: Concurrent Algorithm.
 \subsection{Implementation}

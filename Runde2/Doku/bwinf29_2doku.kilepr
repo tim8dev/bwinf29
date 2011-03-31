@@ -55,38 +55,38 @@ encoding=UTF-8
 highlight=LaTeX
 line=0
 mode=LaTeX
-open=true
+open=false
 order=0
 
 [item:Aufgabe1n.tex]
 archive=true
-column=0
+column=25
 encoding=UTF-8
 highlight=LaTeX
-line=24
+line=25
 mode=LaTeX
 open=true
-order=2
+order=1
 
 [item:Aufgabe2.tex]
 archive=true
-column=1
+column=10
 encoding=UTF-8
 highlight=LaTeX
-line=45
+line=50
 mode=LaTeX
 open=true
-order=1
+order=0
 
 [item:TeX-Doku-Einsendung-2910801-Tim-Taubner.tex]
 archive=true
-column=18
+column=31
 encoding=UTF-8
 highlight=LaTeX
-line=155
+line=61
 mode=LaTeX
-open=false
-order=1
+open=true
+order=2
 
 [item:bwinf29_2doku.kilepr]
 archive=true
@@ -103,13 +103,13 @@ CursorColumn=67
 CursorLine=0
 
 [view-settings,view=0,item:Aufgabe1n.tex]
-CursorColumn=0
-CursorLine=24
+CursorColumn=25
+CursorLine=25
 
 [view-settings,view=0,item:Aufgabe2.tex]
-CursorColumn=1
-CursorLine=45
+CursorColumn=10
+CursorLine=50
 
 [view-settings,view=0,item:TeX-Doku-Einsendung-2910801-Tim-Taubner.tex]
-CursorColumn=18
-CursorLine=155
+CursorColumn=31
+CursorLine=61

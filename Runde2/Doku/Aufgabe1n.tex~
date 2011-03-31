@@ -23,7 +23,7 @@ Lediglich wenige Elemente funktionaler und objektorientierter Elemente müssen d
 Wichtig ist, um den Code zu verstehen, dass \lstinline|(satz ++< kiste)| alle Möglichkeiten erzeugt, wie man die Kiste in einen Satz einfügen kann.
 \footnote{Nähere Erläuterungen dazu später, für den Algorithmus ist dies nicht direkt relevant.}
 \lstset{language=Scala}
-\lstset{basicstyle=\scriptsize}
+\lstset{basicstyle=\smaller}
 \begin{lstlisting}
   // Nacheinander die Kisten "auffalten" mit Hilfe der hilfsPacken Funktion
   def packe = (Set[KistenSatz]() /: kisten) ( hilfsPacken )
@@ -56,7 +56,7 @@ Es kommt also für Frau Y. somit nicht in Frage die Packberechnung beispielsweis
 \subparagraph{Problem}
 Frau Y. hat also ihre mittlerweile 25 Kisten optimal packen können. Dadurch ist nun Platz in ihrem Keller frei geworden.
 Sie sieht es als ironisch an, dass sie genau deswegen nicht mehr Kisten in ihren Keller stellen kann, weil sie versucht den Platzverbrauch ihrer Kisten zu minimieren.
-Sprich, sie könnte beispielsweise eine Kiste direkt daneben stellen, obwohl diese nicht mehr in die Berechnung einbezogen werden kann.
+Sprich, sie könnte beispielsweise eine Kiste direkt daneben stellen obwohl diese nicht mehr in die Berechnung einbezogen werden kann.
 Es ist offensichtlich, dass die ursprüngliche Motivation dadurch nicht erreicht wird.
 Wenn beispielsweise 200 Kisten gepackt werden sollen, bleiben 170 Kisten neben 30 optimal gepackten ungepackt. \\
 Hierzu habe ich zwei Lösungsideen erstellt. Die grundlegende Motivation ist,

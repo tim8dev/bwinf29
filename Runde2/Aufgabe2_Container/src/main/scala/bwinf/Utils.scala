@@ -37,7 +37,7 @@ object Utils {
     else {
       val aCycle = cycle(perm, start) // O(n_c)
       for (i <- aCycle) { handled(i-1) = true } // O(n_c); Side effects are not harmful, it's tailrec!
-      (start to perm.length) find (i => !(handled(i-1))) match { // O(n)
+      (start to perm.length) find (i => !(handled(i-1))) match { // O(i_c) //\sum{i_c} = n
         case Some(next) =>
           cycles(ready += aCycle, perm, handled, next)
 	case None =>
