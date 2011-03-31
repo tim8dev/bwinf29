@@ -1,8 +1,0 @@
-#Source Hashes
-#Thu Mar 31 14:09:20 CEST 2011
-src/main/scala/bwinf/instructions.scala=edd64b615bd051cae5e4929e066e321fe8277ed8
-src/main/scala/bwinf/Utils.scala=5fb65636bffea6c2a184ee678616a1d66ed542f3
-src/main/scala/bwinf/algorithms.scala=0e6533b3b85b3fcedfec0731d4aba5b805501b3e
-src/main/scala/bwinf/Gleis.scala=1a91621644db1cade9332ff2f02acf3d602b10ed
-src/main/scala/bwinf/OldUtils.scala=026cbb8f743a385a5cc13a5e5e690a3f1402c03d
-src/main/scala/bwinf/FastAlgorithm.scala=34a1f45d39258cc4db3ba1ed6f4d46d73123676c
