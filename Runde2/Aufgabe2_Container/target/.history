@@ -54,3 +54,5 @@ publish
 publish-local
 console
 make-pom
+console
+publish-local

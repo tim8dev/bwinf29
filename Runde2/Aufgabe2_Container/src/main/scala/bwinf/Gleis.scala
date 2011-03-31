@@ -1,17 +1,6 @@
 package de.voodle.tim.bwinf.container
 
-trait Gleis {
-  val length: Int
-  def container: Seq[Int]
-  def waggons: Seq[Int]
-  
-  def take(i: Int): Option[Int]
-
-  def put(mapping: (Int,Int)): Option[Unit] = put(mapping._1)(mapping._2)
-  def put(i: Int)(what: Int): Option[Unit]
-}
-
-class SimpleGleis(initCon: Seq[Int]) extends Gleis {
+class Gleis(initCon: Seq[Int]) {
   val length = initCon.length
   protected val con = Seq(initCon: _*).toArray
   protected val wag = new Array[Int](length)
@@ -30,13 +19,16 @@ class SimpleGleis(initCon: Seq[Int]) extends Gleis {
     arr(i-1) match {
       case 0 =>
         arr(i-1) = what
-	Some(())
+	    Some(())
       case _ => None
     }
 
   //def apply(i: Int) = arrGet(con, false)(i) orElse arrGet(wag, false)(i)
   def take(i: Int)  = arrGet(con, true)(i) orElse arrGet(wag, true)(i)
 
+  def put(map: (Int, Int)): Option[Unit] = map match {
+    case (i, what) => put(i)(what)
+  }
   def put(i: Int)(what: Int) = arrPut(wag)(i)(what) orElse arrPut(con)(i)(what)
 
   private def arrString(arr: Array[Int]) = arr take 100 map (i => if(i == 0) "_" else i.toString) mkString " "

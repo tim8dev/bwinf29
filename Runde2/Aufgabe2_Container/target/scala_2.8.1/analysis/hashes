@@ -1,11 +1,12 @@
 #Source Hashes
-#Wed Mar 30 19:27:05 CEST 2011
+#Wed Mar 30 22:33:09 CEST 2011
+src/main/scala/bwinf/kran/KranInstructions.scala=7d74b7c297dfdf51890eaf83f0f92effea3769e9
+src/main/scala/bwinf/kran/KranUtils.scala=e03f3f10610520699fa52a13abaeeaea728c92b0
 src/main/scala/bwinf/Utils.scala=3da6c50365186ed57bc27af6817661a0e894dcdf
 src/main/scala/bwinf/FastAlgorithm.scala=f664bea19268bced461bafb5558ba245bf2e6870
-src/main/scala/bwinf/Gleis.scala=9bcc481d8f7aafea12f9b67f03063d5b00f7f42f
+src/main/scala/bwinf/Gleis.scala=1a91621644db1cade9332ff2f02acf3d602b10ed
 src/main/scala/bwinf/instructions.scala=edd64b615bd051cae5e4929e066e321fe8277ed8
-src/main/scala/bwinf/3DUtils.scala=3b719987f639dc3a42e9c09d1ba775a1279f48bd
-src/main/scala/bwinf/algorithms.scala=19090f3aa25bf609e0ab0762d1cd467197f39726
-src/main/scala/bwinf/KranMaschine.scala=033f04256b4f750959e190f4d0dc29936e136619
-src/main/scala/bwinf/3DGleis.scala=123a3c99e5532fd8eef672b6c6ff1687201e6816
-src/main/scala/bwinf/maschines.scala=2aded712ba3274181096b59ff1f69ecce198c2f1
+src/main/scala/bwinf/kran/KranGleis.scala=fe0e2b19f6712aa33397bf3acb634d7167f61f24
+src/main/scala/bwinf/algorithms.scala=0e6533b3b85b3fcedfec0731d4aba5b805501b3e
+src/main/scala/bwinf/Maschine.scala=af148d425052a23f4ae007a830dfb8ed1e5f60ed
+src/main/scala/bwinf/kran/KranMaschine.scala=3214e4fe8a0a3719c3a1d2061aeaf98f4187423e
