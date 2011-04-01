@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.1.6)  31 MAR 2011 14:07
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.3.21)  31 MAR 2011 20:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -851,12 +851,12 @@ LaTeX Info: Redefining \subref on input line 60.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \c@lstlisting=\count137
-LaTeX Font Info:    Try loading font information for U+msa on input line 67.
+LaTeX Font Info:    Try loading font information for U+msa on input line 66.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 67.
+LaTeX Font Info:    Try loading font information for U+msb on input line 66.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -879,7 +879,7 @@ Class scrartcl Info: You've told me to use the font selection of the element
 \openout4 = `TeX-Doku-Einsendung-2910801-Tim-Taubner.toc'.
 
 
-[2] [3]
+[2] [3] [4]
 \openout2 = `Aufgabe1n.aux'.
 
  (./Aufgabe1n.tex
@@ -911,14 +911,14 @@ LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <9> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 37.
 
 
-LaTeX Warning: Reference `TODO' on page 4 undefined on input line 48.
+LaTeX Warning: Reference `TODO' on page 5 undefined on input line 48.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 49--56
 
  []
 
-[4
+[5
 
 ]
 
@@ -928,7 +928,7 @@ LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 88.
 LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 88.
 
 Missing character: There is no ² in font cmr10!
-
+[6]
 Underfull \hbox (badness 10000) in paragraph at lines 103--105
 
  []
@@ -953,7 +953,7 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-) [5]
+)
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
@@ -1025,7 +1025,7 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
+) [7]
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
@@ -1048,7 +1048,7 @@ gen ei-ner Kis-te k (Sca-la: [][][][][][]
 
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-) [6]) [7]
+)) [8]
 \openout2 = `Aufgabe2.aux'.
 
  (./Aufgabe2.tex
@@ -1058,12 +1058,6 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
-Overfull \hbox (174.81573pt too wide) in paragraph at lines 48--49
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][] 
- []
-
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
@@ -1078,44 +1072,61 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
-File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
-File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
-Underfull \hbox (badness 10000) in paragraph at lines 61--69
-
- []
-
-[8
+) [9
 
 
 ]
-
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 72.
-
-
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 72.
-
-Missing character: There is no ² in font cmr10!
-
-Underfull \hbox (badness 10000) in paragraph at lines 79--82
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+Underfull \hbox (badness 10000) in paragraph at lines 71--79
 
  []
 
-) [9] (./TeX-Doku-Einsendung-2910801-Tim-Taubner.aux (./Aufgabe1n.aux)
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 83.
+
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 83.
+
+Missing character: There is no ² in font cmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--93
+
+ []
+
+) [10] (./TeX-Doku-Einsendung-2910801-Tim-Taubner.aux (./Aufgabe1n.aux)
 (./Aufgabe2.aux))
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 10582 strings out of 495021
- 154868 string characters out of 1181036
- 273181 words of memory out of 3000000
- 13375 multiletter control sequences out of 15000+50000
+ 10598 strings out of 495021
+ 155506 string characters out of 1181035
+ 272181 words of memory out of 3000000
+ 13377 multiletter control sequences out of 15000+50000
  14968 words of font info for 57 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  43i,11n,51p,346b,1686s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1137,10 +1148,10 @@ type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/publi
 c/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
 m/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti8.pfb
 >
-Output written on TeX-Doku-Einsendung-2910801-Tim-Taubner.pdf (9 pages, 298190 
-bytes).
+Output written on TeX-Doku-Einsendung-2910801-Tim-Taubner.pdf (10 pages, 298749
+ bytes).
 PDF statistics:
- 346 PDF objects out of 1000 (max. 8388607)
- 103 named destinations out of 1000 (max. 500000)
- 185 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 355 PDF objects out of 1000 (max. 8388607)
+ 105 named destinations out of 1000 (max. 500000)
+ 193 words of extra memory for PDF output out of 10000 (max. 10000000)
 

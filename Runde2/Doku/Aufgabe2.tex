@@ -18,22 +18,15 @@ Um also die Zahl $p$ zu finden, auf die $i$ durch $perm$ abgebildet wird, gilt $
 Es wird außerdem noch eine einfache Datenstruktur benötigt, um das Gleis mit Containerstellplätzen und Waggons abzubilden. \\
 Diese ....
 % Zyklen
-\subsubsection{Algorithmen}
-\paragraph{Ergebnisoptimaler Algorithmus}
-\subparagraph{Entwurf}
+\subsubsection{Ergebnisoptimaler Algorithmus}
+\paragraph{Entwurf}
 Der Entwurf dieses Algorithmus' ergibt sich aus den obigen Überlegungen. Zunächst werden die disjunkten Zyklen berechnet.
-Hierfür wird folgende Hilfsfunktion verwendet.
-%\[
-%cycle(p,start,i) =
-%  \begin{cases}
-%  [] & \text{falls } start == i \\
-%  idx : cycle(p,start,p(i)) & \text{sonst }
-%  \end{cases} \]
+Hierfür wird folgende Hilfsfunktion zur Berechnung \emph{eines} Zyklus' verwendet.
 \lstset{language=Scala}
 \lstset{basicstyle=\small}
 \begin{lstlisting}
 def cycle(perm: Seq[Int], start: Int): List[Int] = {
-  def step(idx: Int): List[Int] = // Hilfsfunktion
+  def step(idx: Int): List[Int] =
     if(start == idx) Nil
     else idx :: step(perm(idx - 1))
   start :: step(perm(start-1))
@@ -44,19 +37,36 @@ Nun lässt sich auch recht einfach ein Algorithmus zum finden der disjunkten Zyk
 \lstset{language=Scala}
 \lstset{basicstyle=\small}
 \begin{lstlisting}
-def cyclesOf(perm: Seq[Int], ready: Set[Int]): List[List[Int]] = {
-  val start = (1 to perm.length) find (i => !ready.contains(i)) // bis zu n Aufrufe; Zugriff auf Hashset O(1)
-  val newCycle = cycle(perm, start)
-  val newReady = ready ++ newCycle // O(n)
-  newCycle :: cyclesOf(perm, newReady)
-}
+def cyclesOf(perm: Seq[Int], ready: Set[Int]): List[List[Int]] =
+  if(ready.size == perm.length) Nil
+  else {
+    val start = (1 to perm.length) find (i => !ready.contains(i))
+    val newCycle = cycle(perm, start)
+    val newReady = ready ++ newCycle
+    newCycle :: cyclesOf(perm, newReady)
+  }
 \end{lstlisting}
 
-\subparagraph{Optimale Ergebnisse}
-Dieser Algorithmus liefert bereits optimale Ergebnisse. Um dies zu zeigen, wird zunächst bewiesen, dass die Zyklen richtig gefunden werden.
-...
+\paragraph{Optimale Ergebnisse}
+Dieser Algorithmus liefert bereits optimale Ergebnisse. Um dies zu zeigen, wird zunächst bewiesen, dass die Zyklen richtig gefunden werden. \\
+%Dies zeige ich durch einen Gegenteilbeweis. Nehmen wir an, die Zyklen wären nicht richtig.
+%Dies würde bedeuten, dass entweder
+%\begin{enumerate}
+% \item zwei Zahlen innerhalb eines Zyklus' vertauscht sind, oder
+% \item nicht alle Zahlen enthalten sind, oder
+% \item eine Zahl doppelt enthalten ist. (nicht disjunkt)
+%\end{enumerate}
+Zunächst wird die Hilfsfunktion |step| der Funktion |cycle| auf Korrektheit geprüft. Da es sich um eine rekursive Funktion handelt, bietet sich hier Induktion an.
+Der Beweis, das die Hilfsfunktion |step| zu einer gegebenen Permutation $perm: [0,n[ \rightarrow [1,n]$, einem Start- und Endwert |start| und einem Index |idx|
+eine Liste von Zahlen mit Länge n liefert, für die folgendes gilt. ... \\
+Induktionsanfang:
+
+... \\
+Im folgenden können wir uns also der Korrektheit von |cycle| sicher sein. 
+... \\
 Anschließend zeigen wir die Optimalheit vom eigentlichem Algorithmus, die Berechnung der Instruktionen.
-\subparagraph{Laufzeitverhalten}
+
+\paragraph{Laufzeitverhalten}
 % O(c*n)
 Zunächst wird das Laufzeitverhalten des Algorithmus zum Finden der Zyklen analysiert.
 |cyclesOf| berechnet in jedem Schritt den neuen Startwert |start|.
@@ -67,20 +77,21 @@ Anschließend werden die Zahlen, die im Zyklus enthalten sind, in |ready| eingef
 Anschließend erfolgt der rekursive Aufruf. Sei $c$ die Anzahl der Zyklen, dann wird |cyclesOf| $c$-mal aufgerufen.
 Die Laufzeitkomplexität zur Finden der Zyklen ist also $O(c \cdot n)$. \\
 
-\paragraph{Optimaler Algorithmus} %Erweiterung!
-Das Laufzeitverhalten von $O(c \cdot n)$ ist zwar bereits recht gut, da die Anzahl der Zyklen im Mittel nicht linear mit $n$ steigt. % TODO: Beleg
+\subsubsection{Optimaler Algorithmus} %Erweiterung!
+Das Laufzeitverhalten von $O(c \cdot n)$ ist zwar bereits recht gut, da die Anzahl der Zyklen im Normalfall nicht linear mit $n$ steigen.
+(Eine zufällig erzeugte Permutation mit $10^7$ Elementen hat meist weniger als 20 Zyklen)% TODO: Beleg
 Der Worstcase bei $n/2$ Zyklen führt zu einer Worstcase-Komplexität von $O(n²)$. \\
 Als Erweiterung soll die Laufzeitkomplexität weiter verringert werden. \\
 Außerdem sind die Algorithmen, wie sie oben angegeben sind, nicht tail-recursive.
 Das heißt bei jedem rekursivem Aufruf wird ein neuer Stack-frame allokiert.
-In der Praxis heißt dies, dass nur eine Rekursionstiefe von höchstens 10000.
+In der Praxis heißt dies, dass nur eine Rekursionstiefe von höchstens 10000 möglich ist.
 
-\subparagraph{Optimale Ergebnisse}
+\paragraph{Optimale Ergebnisse}
 Da oben %TODO: Ref
 bereits gezeigt wurde, dass aus korrekten Zyklen Instruktionen, die einen optimalen Weg für den Kran liefern, berechnet werden.
 Muss hier nur noch gezeigt werden, dass wiederum korrekte Zyklen berechnet werden. \\
 
-\subparagraph{Optimale Laufzeitkomplexität}
+\paragraph{Optimale Laufzeitkomplexität}
 ... \\
 Da jeder Container auf einen Waggon gebracht werden muss, muss für jeden Container mindestens ein Befehl erzeugt werden.
 Bei $n$ Container sind dies also $n$ Befehle. Das setzt einen Algorithmus mit einer Laufzeitkomplexität von mindestens $O(n)$ voraus.

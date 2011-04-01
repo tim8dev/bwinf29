@@ -58,10 +58,9 @@
   \newenvironment{bew}{\begin{proof}[Beweis]}{\end{proof}}
 
 \begin{document}
-\addtolength{\hoffset}{-0.4cm}
-\addtolength{\textwidth}{3cm}
-\addtolength{\voffset}{-1.6cm}
-\addtolength{\textheight}{2cm}
+\addtolength{\textwidth}{0.8cm}
+\addtolength{\voffset}{-0.8cm}
+\addtolength{\textheight}{1.6cm}
 
 \maketitle
 

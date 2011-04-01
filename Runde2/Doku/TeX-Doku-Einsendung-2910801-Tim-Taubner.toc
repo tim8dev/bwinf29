@@ -4,49 +4,48 @@
 \contentsline {paragraph}{Der BWInf und ich}{2}{section*.2}
 \contentsline {paragraph}{Wahl der Programmiersprache}{2}{section*.3}
 \contentsline {paragraph}{Dank}{2}{section*.4}
-\contentsline {subsection}{\numberline {2}Dateistruktur der CD}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {2}Dateistruktur der CD}{3}{subsection.1.2}
 \contentsline {subsection}{\numberline {3}Ausf\IeC {\"u}hrvoraussetzungen}{3}{subsection.1.3}
 \contentsline {subsection}{\numberline {4}Starten der Programme}{3}{subsection.1.4}
 \contentsline {paragraph}{Wurzelverzeichnis}{3}{section*.5}
 \contentsline {paragraph}{Starten der Kommandozeile}{3}{section*.6}
 \contentsline {paragraph}{Unter Windows}{3}{section*.7}
 \contentsline {paragraph}{Unter GNOME}{3}{section*.8}
-\contentsline {paragraph}{Unter KDE}{3}{section*.9}
-\contentsline {paragraph}{Unter Mac OS X}{3}{section*.10}
-\contentsline {section}{\numberline {B}Aufgabe 1: Kisten in Kisten in Kisten}{4}{section.2}
-\contentsline {subsection}{\numberline {1}L\IeC {\"o}sungsidee}{4}{subsection.2.1}
-\contentsline {subsubsection}{\numberline {1.1}Allgemein}{4}{subsubsection.2.1.1}
-\contentsline {subsubsection}{\numberline {1.2}Bruteforce}{4}{subsubsection.2.1.2}
-\contentsline {subparagraph}{Laufzeitverhalten}{4}{section*.11}
-\contentsline {subparagraph}{Verk\IeC {\"u}rzung der Laufzeit}{4}{section*.12}
-\contentsline {subparagraph}{Problem}{5}{section*.13}
-\contentsline {subsubsection}{\numberline {1.3}Bruteforce nach Aufteilung}{5}{subsubsection.2.1.3}
-\contentsline {paragraph}{Ansatz}{5}{section*.14}
-\contentsline {subparagraph}{Laufzeitverhalten}{5}{section*.15}
-\contentsline {subsubsection}{\numberline {1.4}Online Packer}{5}{subsubsection.2.1.4}
-\contentsline {paragraph}{Ansatz}{5}{section*.16}
-\contentsline {paragraph}{Onlinealgorithmus}{5}{section*.17}
-\contentsline {paragraph}{Strategien}{5}{section*.18}
-\contentsline {paragraph}{Offlinealgorithmus}{6}{section*.19}
-\contentsline {subsection}{\numberline {2}Implementierung}{6}{subsection.2.2}
-\contentsline {paragraph}{Kisten}{6}{section*.20}
-\contentsline {paragraph}{Kistensatz}{6}{section*.21}
-\contentsline {paragraph}{Kistenpacker}{7}{section*.22}
-\contentsline {subsection}{\numberline {3}Programmabl\IeC {\"a}ufe}{7}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {3.1}Algorithm-Contest (Packdichte)}{7}{subsubsection.2.3.1}
-\contentsline {subsubsection}{\numberline {3.2}Algorithm-Contest (Laufzeit)}{7}{subsubsection.2.3.2}
-\contentsline {subsection}{\numberline {4}Programmtext}{7}{subsection.2.4}
-\contentsline {subsection}{\numberline {5}Programmnutzung}{7}{subsection.2.5}
-\contentsline {section}{\numberline {C}Zweite bearbeitete Aufgabe: (2) Containerklam\IeC {\"u}sel}{8}{section.3}
-\contentsline {subsection}{\numberline {1}L\IeC {\"o}sungsidee}{8}{subsection.3.1}
-\contentsline {subsubsection}{\numberline {1.1}Vor\IeC {\"u}berlegungen}{8}{subsubsection.3.1.1}
-\contentsline {subsubsection}{\numberline {1.2}Datenstruktur}{8}{subsubsection.3.1.2}
-\contentsline {subsubsection}{\numberline {1.3}Algorithmen}{8}{subsubsection.3.1.3}
-\contentsline {paragraph}{Ergebnisoptimaler Algorithmus}{8}{section*.23}
-\contentsline {subparagraph}{Entwurf}{8}{section*.24}
-\contentsline {subparagraph}{Optimale Ergebnisse}{8}{section*.25}
-\contentsline {subparagraph}{Laufzeitverhalten}{9}{section*.26}
-\contentsline {paragraph}{Optimaler Algorithmus}{9}{section*.27}
-\contentsline {subparagraph}{Optimale Ergebnisse}{9}{section*.28}
-\contentsline {subparagraph}{Optimale Laufzeitkomplexit\IeC {\"a}t}{9}{section*.29}
-\contentsline {subsection}{\numberline {2}Implementation}{9}{subsection.3.2}
+\contentsline {paragraph}{Unter KDE}{4}{section*.9}
+\contentsline {paragraph}{Unter Mac OS X}{4}{section*.10}
+\contentsline {section}{\numberline {B}Aufgabe 1: Kisten in Kisten in Kisten}{5}{section.2}
+\contentsline {subsection}{\numberline {1}L\IeC {\"o}sungsidee}{5}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {1.1}Allgemein}{5}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {1.2}Bruteforce}{5}{subsubsection.2.1.2}
+\contentsline {subparagraph}{Laufzeitverhalten}{5}{section*.11}
+\contentsline {subparagraph}{Verk\IeC {\"u}rzung der Laufzeit}{5}{section*.12}
+\contentsline {subparagraph}{Problem}{6}{section*.13}
+\contentsline {subsubsection}{\numberline {1.3}Bruteforce nach Aufteilung}{6}{subsubsection.2.1.3}
+\contentsline {paragraph}{Ansatz}{6}{section*.14}
+\contentsline {subparagraph}{Laufzeitverhalten}{6}{section*.15}
+\contentsline {subsubsection}{\numberline {1.4}Online Packer}{6}{subsubsection.2.1.4}
+\contentsline {paragraph}{Ansatz}{6}{section*.16}
+\contentsline {paragraph}{Onlinealgorithmus}{6}{section*.17}
+\contentsline {paragraph}{Strategien}{7}{section*.18}
+\contentsline {paragraph}{Offlinealgorithmus}{7}{section*.19}
+\contentsline {subsection}{\numberline {2}Implementierung}{7}{subsection.2.2}
+\contentsline {paragraph}{Kisten}{7}{section*.20}
+\contentsline {paragraph}{Kistensatz}{7}{section*.21}
+\contentsline {paragraph}{Kistenpacker}{8}{section*.22}
+\contentsline {subsection}{\numberline {3}Programmabl\IeC {\"a}ufe}{8}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {3.1}Algorithm-Contest (Packdichte)}{8}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {3.2}Algorithm-Contest (Laufzeit)}{8}{subsubsection.2.3.2}
+\contentsline {subsection}{\numberline {4}Programmtext}{8}{subsection.2.4}
+\contentsline {subsection}{\numberline {5}Programmnutzung}{8}{subsection.2.5}
+\contentsline {section}{\numberline {C}Zweite bearbeitete Aufgabe: (2) Containerklam\IeC {\"u}sel}{9}{section.3}
+\contentsline {subsection}{\numberline {1}L\IeC {\"o}sungsidee}{9}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {1.1}Vor\IeC {\"u}berlegungen}{9}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {1.2}Datenstruktur}{9}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {1.3}Ergebnisoptimaler Algorithmus}{9}{subsubsection.3.1.3}
+\contentsline {paragraph}{Entwurf}{9}{section*.23}
+\contentsline {paragraph}{Optimale Ergebnisse}{10}{section*.24}
+\contentsline {paragraph}{Laufzeitverhalten}{10}{section*.25}
+\contentsline {subsubsection}{\numberline {1.4}Optimaler Algorithmus}{10}{subsubsection.3.1.4}
+\contentsline {paragraph}{Optimale Ergebnisse}{10}{section*.26}
+\contentsline {paragraph}{Optimale Laufzeitkomplexit\IeC {\"a}t}{10}{section*.27}
+\contentsline {subsection}{\numberline {2}Implementation}{10}{subsection.3.2}
