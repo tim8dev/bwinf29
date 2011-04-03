@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.3.21)  31 MAR 2011 20:45
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.3.21)  2 APR 2011 12:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1116,17 +1116,29 @@ Underfull \hbox (badness 10000) in paragraph at lines 90--93
 
  []
 
-) [10] (./TeX-Doku-Einsendung-2910801-Tim-Taubner.aux (./Aufgabe1n.aux)
+[10] (/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)) [11]
+(./TeX-Doku-Einsendung-2910801-Tim-Taubner.aux (./Aufgabe1n.aux)
 (./Aufgabe2.aux))
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 10598 strings out of 495021
- 155506 string characters out of 1181035
- 272181 words of memory out of 3000000
- 13377 multiletter control sequences out of 15000+50000
+ 10640 strings out of 495021
+ 156317 string characters out of 1181035
+ 272301 words of memory out of 3000000
+ 13397 multiletter control sequences out of 15000+50000
  14968 words of font info for 57 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  43i,11n,51p,346b,1686s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1148,10 +1160,10 @@ type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/publi
 c/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
 m/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti8.pfb
 >
-Output written on TeX-Doku-Einsendung-2910801-Tim-Taubner.pdf (10 pages, 298749
+Output written on TeX-Doku-Einsendung-2910801-Tim-Taubner.pdf (11 pages, 305628
  bytes).
 PDF statistics:
- 355 PDF objects out of 1000 (max. 8388607)
- 105 named destinations out of 1000 (max. 500000)
- 193 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 387 PDF objects out of 1000 (max. 8388607)
+ 119 named destinations out of 1000 (max. 500000)
+ 217 words of extra memory for PDF output out of 10000 (max. 10000000)
 

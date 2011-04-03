@@ -1,17 +1,6 @@
 package de.voodle.tim.bwinf.container
 package kran
 
-//import kran.KranInstructions
-
-/**
- * Responsible for calling put/take on KranInterface;
- * Also responsible for moving the Kran; // TODO: Better Design!
- * TODO(*): REMOVE HACKING CODE!
-  // NOTE: Current Container should always be 'left' on the waggons' side
-  //         after any (trans)action completed
-  // NOTE: right === containers' side
-  // NOTE: left === waggons' side
- */
 class KranGleis(initCon: Seq[Int], kranBuff: KranInstrsBuffer) extends Gleis(initCon) {
   import KranGleis._ // import from companion
   

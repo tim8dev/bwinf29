@@ -13,7 +13,7 @@
 \contentsline {paragraph}{Unter GNOME}{3}{section*.8}
 \contentsline {paragraph}{Unter KDE}{4}{section*.9}
 \contentsline {paragraph}{Unter Mac OS X}{4}{section*.10}
-\contentsline {section}{\numberline {B}Aufgabe 1: Kisten in Kisten in Kisten}{5}{section.2}
+\contentsline {section}{\numberline {B}Erste bearbeitete Aufgabe: (1) Kisten in Kisten in Kisten}{5}{section.2}
 \contentsline {subsection}{\numberline {1}L\IeC {\"o}sungsidee}{5}{subsection.2.1}
 \contentsline {subsubsection}{\numberline {1.1}Allgemein}{5}{subsubsection.2.1.1}
 \contentsline {subsubsection}{\numberline {1.2}Bruteforce}{5}{subsubsection.2.1.2}
@@ -49,3 +49,7 @@
 \contentsline {paragraph}{Optimale Ergebnisse}{10}{section*.26}
 \contentsline {paragraph}{Optimale Laufzeitkomplexit\IeC {\"a}t}{10}{section*.27}
 \contentsline {subsection}{\numberline {2}Implementation}{10}{subsection.3.2}
+\contentsline {subsection}{\numberline {3}Programmabl\IeC {\"a}ufe}{11}{subsection.3.3}
+\contentsline {paragraph}{Beispiel aus der Aufgabenstellung}{11}{section*.28}
+\contentsline {subsection}{\numberline {4}Programmtext}{11}{subsection.3.4}
+\contentsline {subsection}{\numberline {5}Programmnutzung}{11}{subsection.3.5}

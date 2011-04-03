@@ -1,9 +1,0 @@
-Material jME Logo : Common/MatDefs/Light/Lighting.j3md {
-    MaterialParameters {
-        m_UseMaterialColors: true
-        m_Diffuse : 0.855 0.5411 0.404 1
-        m_Specular : 0.855 0.5411 0.404 1
-        m_HighQuality : true
-        m_Shininess : 12
-    }
-}

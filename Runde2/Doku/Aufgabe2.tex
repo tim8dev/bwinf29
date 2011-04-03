@@ -99,3 +99,44 @@ Der erstellte Algorithmus hat also \textbf{optimale Laufzeitkomplexität}.
 
 % TODO?: Concurrent Algorithm.
 \subsection{Implementation}
+\newpage
+\subsection{Programmabläufe}
+\paragraph{Beispiel aus der Aufgabenstellung}
+Das Folgende zeigt den Ablauf, bei Eingabe des Beispiels aus der Aufgabestellung. \\
+Zunächst wird die Permutation in |perm| gespeichert.
+\begin{lstlisting}
+scala> val perm = Seq(4,3,2,1)               
+perm: Seq[Int] = List(4, 3, 2, 1)
+\end{lstlisting}
+Anschließend werden die Instruktionen erzeugt und in |instrs| gespeichert.
+\begin{lstlisting}
+scala> val instrs = FastAlgorithm compute perm
+instrs: Seq[de.voodle.tim.bwinf.container.Instruction] =
+  Queue(Take, MoveRight(1), Put, Take, MoveRight(1),
+        Swap, MoveLeft(1), Put, Take, MoveRight(2),
+        Swap, MoveLeft(3), Put)
+\end{lstlisting}
+Nun wird eine |Maschine| erzeugt, die die Instruktionen ausführen kann.
+\begin{lstlisting}
+scala> val maschine = new Maschine(new Gleis(perm),true)
+maschine: de.voodle.tim.bwinf.container.Maschine = 
+Container: 4 3 2 1
+Waggons:   _ _ _ _
+\end{lstlisting}
+Zuletzt soll die Maschine die Instruktionen interpretieren.
+\begin{lstlisting}
+scala> maschine interpret instrs                        
+4 3 2 1
+-->
+  -->
+  <--
+  ---->
+<------
+res0: de.voodle.tim.bwinf.container.Gleis = 
+Container: _ _ _ _
+Waggons:   1 2 3 4
+\end{lstlisting}
+
+
+\subsection{Programmtext}
+\subsection{Programmnutzung}

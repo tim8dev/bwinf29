@@ -3,7 +3,7 @@
 \BOOKMARK [2][-]{subsection.1.2}{Dateistruktur der CD}{section.1}
 \BOOKMARK [2][-]{subsection.1.3}{Ausf\374hrvoraussetzungen}{section.1}
 \BOOKMARK [2][-]{subsection.1.4}{Starten der Programme}{section.1}
-\BOOKMARK [1][-]{section.2}{Aufgabe 1: Kisten in Kisten in Kisten}{}
+\BOOKMARK [1][-]{section.2}{Erste bearbeitete Aufgabe: \(1\) Kisten in Kisten in Kisten}{}
 \BOOKMARK [2][-]{subsection.2.1}{L\366sungsidee}{section.2}
 \BOOKMARK [3][-]{subsubsection.2.1.1}{Allgemein}{subsection.2.1}
 \BOOKMARK [3][-]{subsubsection.2.1.2}{Bruteforce}{subsection.2.1}
@@ -22,3 +22,6 @@
 \BOOKMARK [3][-]{subsubsection.3.1.3}{Ergebnisoptimaler Algorithmus}{subsection.3.1}
 \BOOKMARK [3][-]{subsubsection.3.1.4}{Optimaler Algorithmus}{subsection.3.1}
 \BOOKMARK [2][-]{subsection.3.2}{Implementation}{section.3}
+\BOOKMARK [2][-]{subsection.3.3}{Programmabl\344ufe}{section.3}
+\BOOKMARK [2][-]{subsection.3.4}{Programmtext}{section.3}
+\BOOKMARK [2][-]{subsection.3.5}{Programmnutzung}{section.3}

@@ -23,6 +23,15 @@ class Gleis(initCon: Seq[Int]) {
       case _ => None
     }
 
+  def takeWag(i: Int) = arrGet(wag, true)(i)
+  def takeCon(i: Int) = arrGet(con, true)(i)
+  def putWag(map: (Int, Int)) = map match {
+    case (i, what) => arrPut(wag)(i)(what)
+  }
+  def putCon(map: (Int, Int)) = map match {
+    case (i, what) => arrPut(con)(i)(what)
+  }
+
   //def apply(i: Int) = arrGet(con, false)(i) orElse arrGet(wag, false)(i)
   def take(i: Int)  = arrGet(con, true)(i) orElse arrGet(wag, true)(i)
 
