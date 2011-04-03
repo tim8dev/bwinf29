@@ -19,7 +19,7 @@ class Gleis(initCon: Seq[Int]) {
     arr(i-1) match {
       case 0 =>
         arr(i-1) = what
-	    Some(())
+	      Some(())
       case _ => None
     }
 

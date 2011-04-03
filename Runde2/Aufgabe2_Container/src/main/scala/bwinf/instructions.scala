@@ -1,28 +1,5 @@
 package de.voodle.tim.bwinf.container
 
-import scala.annotation.tailrec
-
-object Instruction {
-  def simplifyPath(instrs: List[Instruction]) = {
-    @tailrec
-    def simplify(ready: List[Instruction], instrs: List[Instruction]): List[Instruction] =
-      instrs match {
-	case Put :: Take :: xs =>
-	  simplify(ready, Swap :: xs)
-	case Take :: Put :: xs =>
-	  simplify(ready, Swap :: xs)
-	case MoveRight(len1) :: MoveRight(len2) :: xs =>
-	  simplify(ready, MoveRight(len1 + len2) :: xs)
-	case other :: xs =>
-	  simplify(other :: ready, xs)
-	case Nil =>
-	  ready
-      }
-
-    simplify(Nil, instrs).reverse
-  }
-}
-
 sealed trait Instruction {
   type Path = Seq[Instruction]
   def len: Int = 0
@@ -51,9 +28,6 @@ object Move {
     case MoveLeft(len) => -len
   }
 }
-case object Swap extends Instruction
-case object Take extends Instruction
-case object Put  extends Instruction
 object MoveLeft extends MoveLeft(1)
 case class MoveLeft(override val len: Int) extends Move
 object MoveRight extends MoveRight(1)

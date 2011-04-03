@@ -11,7 +11,8 @@ class KranMaschine(initial: KranGleis, private val kranBuff: KranInstrsBuffer) e
   private var idx = 1
 
   override def interpret(instrs: Seq[Instruction]) =
-    super.interpret(Instruction simplifyPath instrs.toList)
+    super.interpret(//Instruction simplifyPath
+                    instrs.toList)
 
   override def act(instrs: List[Instruction]) =
     instrs match {

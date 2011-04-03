@@ -48,18 +48,26 @@ class Maschine(initial: Gleis,
       case TakeCon :: xs =>
         interpret(xs, (gleis takeCon idx) getOrElse 0, wag, idx)
       case TakeWag :: xs =>
-        interpret(xs, (gleis takeWag idx) getOrElse 0, wag, idx)
+        interpret(xs, 0, (gleis takeWag idx) getOrElse 0, idx)
       case PutCon :: xs =>
-        gleis putCon (idx -> con)
+        if(
+          gleis putCon (idx -> con) isEmpty
+        ) log("WARNING! Con:@" + (idx -> con))
         interpret(xs, 0, wag, idx)
       case PutWag :: xs =>
-        gleis putCon (idx -> wag)
+        if(
+          gleis putWag (idx -> wag) isEmpty
+        ) log("WARNING! Wag:@" + (idx -> con))
         interpret(xs, con, 0, idx)
       case MoveRight(len) :: xs =>
         log(space * (idx-1) + arr * len + ">")
+        if(wag != 0)
+          log("Warning: transporting " + wag)
         interpret(xs, con, wag, idx+len)
       case MoveLeft(len) :: xs =>
         log(space * (idx-1-len) + "<" + arr * len)
+        if(wag != 0)
+          log("Warning: transporting " + wag)
         interpret(xs, con, wag, idx-len)
       case Nil => gleis // Do Nothing
     }
