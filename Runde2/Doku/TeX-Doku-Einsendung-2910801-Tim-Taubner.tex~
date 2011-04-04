@@ -1,4 +1,4 @@
-\documentclass[a4paper,10pt]{scrartcl}
+\documentclass[a4paper,11pt]{scrartcl}
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
 
@@ -60,7 +60,7 @@
 \begin{document}
 \addtolength{\textwidth}{0.8cm}
 \addtolength{\voffset}{-0.8cm}
-\addtolength{\textheight}{1.6cm}
+\addtolength{\textheight}{0.8cm}
 
 \maketitle
 

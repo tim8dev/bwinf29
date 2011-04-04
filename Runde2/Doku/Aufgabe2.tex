@@ -1,9 +1,29 @@
 \section{Zweite bearbeitete Aufgabe: (2) Containerklamüsel}
 \subsection{Lösungsidee}
 \subsubsection{Vorüberlegungen}
-Die Anordnung der Waggons zu den Container ist eine bijektive Abbildung von $[1,n]$ nach $[1,n]$, sprich, eine Permutation.
+Die Anordnung der Waggons zu den Container ist eine bijektive Abbildung von $[1,n]$ nach $[1,n]$, sprich, eine Permutation der Menge $[1,n]$.
 Jede Permutation lässt sich als Folge von disjunkten Zyklen darstellen. \\ %TODO: CITE!
-Dies erwies sich als günstig, denn nun ist das Problem aufgebrochen in folgende zwei Teile.
+``Eine Permutation $\pi$ einer Menge wird \emph{Zyklus} genannt, falls - grob gesprochen - die Elemente, die von $\pi$ bewegt werden,
+zyklisch vertauscht werden. Genauer gesagt: Eine Permutation $\pi$ heißt zyklisch,
+falls es ein $ i \in X$ und eine natürliche Zahl $k$ gibt, so dass die folgenden drei Bedingungen gelten:
+\begin{enumerate}
+ \item $\pi^k(i) = i$,
+ \item die Elemente $i,\pi(i),\pi^2(i),\dots,\pi^{k-1}(i)$ sind paarweise verschieden,
+ \item jedes Element, das verschieden von $i,\pi(i),\pi^2(i),\dots,\pi^{k-1}(i) (=i)$ ist, wird von $\pi$ fest gelassen.
+\end{enumerate}
+Die kleinste natürliche Zahl k mit obiger Eigenschaft wird die \emph{Länge} des Zyklus $\pi$ genannt.
+Ein Zyklus der Länge k heißt auch k-Zyklus. Wir schreiben dann \[\pi=(i\;\pi(i)\;\pi^2(i) \; \dots \;\pi^{k-1}(i)).\]
+[..]
+\paragraph{Darstellung einer Permutation als Produkt disjunker Zyklen.}
+\emph{Jede Permutation kann als Produkt zyklischer Permutationen geschrieben werden, von denen keine zwei ein Element gemeinsam haben.}\\
+\emph{Das heißt: Zu jedem $\pi \in S_n$ gibt es zyklische Permutationen $\zeta_1,\dots,\zeta_s \in S_n$,
+so dass folgendes Eigenschaften erfüllt sind: \\
+ - $\pi=\zeta_1\cdot \zeta_2 \cdot \ldots \cdot \zeta_s$ \\
+ - kein Element aus X, das als Komponente in $\zeta_i$ vorkommt, kommt in $\zeta_j$ vor ($i,j=1,\dots,n, i \neq j$).
+(Das bedeuted: Wenn ein Element $x \in X$ in einem Zyklus $\zeta_i$ ``vorkommt'',
+ so wird $x$ von jedem anderen Zyklus $\zeta_j \: (j \neq i)$ fest gelassen.)
+}''\footnote{Definitionen, Sätze und Erklärung übernommen aus Lineare Algebra, Albrecht Beutelspacher}\\
+Dies erwies sich als günstig, denn nun kann das Problem in folgende zwei Teile aufgebrochen werden.
 Der erste ist, die Container eines Zyklus an die richtige Stelle zu bringen.
 Dies lässt sich relativ leicht realisieren, indem der Container am Anfang der Zyklen an die richtige Position gebracht wird, anschließend der - dortige - zweite an die richtige, usw., bis der Ausgangspunkt wieder erreicht ist.
 Der zweite - etwas schwierige - Teil besteht darin, die Zyklenabarbeitung dort zu unterbrechen, wo eine andere beginnt. \\
@@ -20,8 +40,9 @@ Diese ....
 % Zyklen
 \subsubsection{Ergebnisoptimaler Algorithmus}
 \paragraph{Entwurf}
-Der Entwurf dieses Algorithmus' ergibt sich aus den obigen Überlegungen. Zunächst werden die disjunkten Zyklen berechnet.
+Der Entwurf dieses Algorithmus' ergibt sich aus den obigen Überlegungen. Zunächst wird die Zerlegung in disjunkte Zyklen berechnet.
 Hierfür wird folgende Hilfsfunktion zur Berechnung \emph{eines} Zyklus' verwendet.
+Wichtig ist hierbei zu beachten, dass die Waggonnummer an der Stelle |idx| durch |perm(idx-1)| dargestellt wird.
 \lstset{language=Scala}
 \lstset{basicstyle=\small}
 \begin{lstlisting}
@@ -33,7 +54,18 @@ def cycle(perm: Seq[Int], start: Int): List[Int] = {
 }
 \end{lstlisting}
 Salopp gesagt, hangelt man sich so lange - bei einem Startindex beginnend - durch die Permutation, bis man wieder beim Anfangswert ankommt.\\
-Nun lässt sich auch recht einfach ein Algorithmus zum finden der disjunkten Zyklen einer Permutation p angeben.
+Nun lässt sich auch recht einfach ein Algorithmus zum Finden der disjunkten Zyklen einer Permutation p angeben.
+Die folgend dargestellte rekursive Funktion |cyclesOf| liefert eine Liste von disjunkten Zyklen (also eine Liste von Listen von Zahlen)
+die die Permutation darstellen. Um disjunkte Zyklen zu finden, müssen sich jeweils alle bisher abgearbeiteten Zahlen gemerkt werden.
+Dies erfolgt in einem |Set| (standardmäßig ein |HashSet| in Scala). \\
+In jedem Rekursionsschritt wird zunächst der neue Startwert |start| gesucht.
+Der Startwert ist die erste Zahl von $1..n$ der noch nicht abgearbeitet wurde (also nicht in |ready| enthalten ist).
+Anschließend wird der neue Zyklus |newCycle| mit Hilfe von |cycle| berechnet.
+Dann wird die neue Menge aller abgearbeiteten Zahlen |newReady| gebildet, indem alle Zahlen aus |newCycle| in |ready| eingefügt werden.
+Zuletzt erfolgt der rekursive Aufruf, wobei |newCycle| vor die rekursiv berechneten Zyklen gesetzt wird.
+% TODO: Wording.
+Die Rekursion wird abgebrochen, sobald alle Zahlen abgearbeitet wurden. Dies lässt sich daran erkennen,
+dass die Länge der Permutation gleich der Anzahl der abgearbeiteten Zahlen sind. \\
 \lstset{language=Scala}
 \lstset{basicstyle=\small}
 \begin{lstlisting}
@@ -49,13 +81,6 @@ def cyclesOf(perm: Seq[Int], ready: Set[Int]): List[List[Int]] =
 
 \paragraph{Optimale Ergebnisse}
 Dieser Algorithmus liefert bereits optimale Ergebnisse. Um dies zu zeigen, wird zunächst bewiesen, dass die Zyklen richtig gefunden werden. \\
-%Dies zeige ich durch einen Gegenteilbeweis. Nehmen wir an, die Zyklen wären nicht richtig.
-%Dies würde bedeuten, dass entweder
-%\begin{enumerate}
-% \item zwei Zahlen innerhalb eines Zyklus' vertauscht sind, oder
-% \item nicht alle Zahlen enthalten sind, oder
-% \item eine Zahl doppelt enthalten ist. (nicht disjunkt)
-%\end{enumerate}
 Zunächst wird die Hilfsfunktion |step| der Funktion |cycle| auf Korrektheit geprüft. Da es sich um eine rekursive Funktion handelt, bietet sich hier Induktion an.
 Der Beweis, das die Hilfsfunktion |step| zu einer gegebenen Permutation $perm: [0,n[ \rightarrow [1,n]$, einem Start- und Endwert |start| und einem Index |idx|
 eine Liste von Zahlen mit Länge n liefert, für die folgendes gilt. ... \\
@@ -112,9 +137,11 @@ Anschließend werden die Instruktionen erzeugt und in |instrs| gespeichert.
 \begin{lstlisting}
 scala> val instrs = FastAlgorithm compute perm
 instrs: Seq[de.voodle.tim.bwinf.container.Instruction] =
-  Queue(Take, MoveRight(1), Put, Take, MoveRight(1),
-        Swap, MoveLeft(1), Put, Take, MoveRight(2),
-        Swap, MoveLeft(3), Put)
+  Queue(TakeCon, MoveRight(1), Rotate, TakeCon, Rotate, PutCon,
+        Rotate,  MoveRight(1), Rotate, PutWag,
+        TakeCon, MoveLeft(1),  Rotate, PutWag,
+        TakeCon, MoveRight(2), Rotate, PutWag,
+        TakeCon, MoveLeft(3),  Rotate, PutWag, TakeCon)
 \end{lstlisting}
 Nun wird eine |Maschine| erzeugt, die die Instruktionen ausführen kann.
 \begin{lstlisting}
@@ -126,6 +153,7 @@ Waggons:   _ _ _ _
 Zuletzt soll die Maschine die Instruktionen interpretieren.
 \begin{lstlisting}
 scala> maschine interpret instrs                        
+1 2 3 4
 4 3 2 1
 -->
   -->
@@ -136,7 +164,12 @@ res0: de.voodle.tim.bwinf.container.Gleis =
 Container: _ _ _ _
 Waggons:   1 2 3 4
 \end{lstlisting}
+Bemerkenswert ist hier, dass dies genau den gleichen Weg liefert wie im Beispiel der Aufgabenstellung angegeben.
+(Obwohl es viele verschieden optimale Wege gibt, bspsweise.....)\\
+Ein nächtes - etwas größeres Beispiel: %TODO: ..
+\begin{lstlisting}
 
+\end{lstlisting}
 
 \subsection{Programmtext}
 \subsection{Programmnutzung}

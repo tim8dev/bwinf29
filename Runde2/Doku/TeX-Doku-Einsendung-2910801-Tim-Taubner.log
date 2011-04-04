@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.3.21)  2 APR 2011 12:10
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.3.21)  3 APR 2011 23:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -41,16 +41,16 @@ Package tocbasic Info: omitting babel extension for `lof'
 Package tocbasic Info: omitting babel extension for `lot'
 (tocbasic)             because of feature `nobabel' available
 (tocbasic)             for `lot' on input line 117.
-Package scrartcl Info: You've used obsolete option `10pt'.
-(scrartcl)             \KOMAExecuteOptions{fontsize=10pt} will be
+Package scrartcl Info: You've used obsolete option `11pt'.
+(scrartcl)             \KOMAExecuteOptions{fontsize=11pt} will be
 (scrartcl)             used instead.
-(scrartcl)             You may simply replace `10pt'
-(scrartcl)             by `fontsize=10pt'.
-Class scrartcl Info: File `scrsize10pt.clo' used to setup font sizes on input l
+(scrartcl)             You may simply replace `11pt'
+(scrartcl)             by `fontsize=11pt'.
+Class scrartcl Info: File `scrsize11pt.clo' used to setup font sizes on input l
 ine 1171.
 
-(/usr/share/texmf-texlive/tex/latex/koma-script/scrsize10pt.clo
-File: scrsize10pt.clo 2009/07/24 v3.04a KOMA-Script font size class option (10p
+(/usr/share/texmf-texlive/tex/latex/koma-script/scrsize11pt.clo
+File: scrsize11pt.clo 2009/07/24 v3.04a KOMA-Script font size class option (11p
 t)
 )
 (/usr/share/texmf-texlive/tex/latex/koma-script/typearea.sty
@@ -72,21 +72,21 @@ Package typearea Info: You've used standard option `a4paper'.
 \ta@vblk=\skip43
 \ta@temp=\skip44
 Package typearea Info: These are the values describing the layout:
-(typearea)             DIV  = 8
+(typearea)             DIV  = 10
 (typearea)             BCOR = 0.0pt
 (typearea)             \paperwidth      = 597.50793pt
-(typearea)              \textwidth      = 373.44246pt
-(typearea)              DIV departure   = -4%
-(typearea)              \evensidemargin = 39.76274pt
-(typearea)              \oddsidemargin  = 39.76274pt
+(typearea)              \textwidth      = 418.25555pt
+(typearea)              DIV departure   = -6%
+(typearea)              \evensidemargin = 17.3562pt
+(typearea)              \oddsidemargin  = 17.3562pt
 (typearea)             \paperheight     = 845.04694pt
-(typearea)              \textheight     = 538.0pt
-(typearea)              \topmargin      = 0.36087pt
-(typearea)              \headheight     = 15.0pt
-(typearea)              \headsep        = 18.0pt
-(typearea)              \topskip        = 10.0pt
-(typearea)              \footskip       = 42.0pt
-(typearea)              \baselineskip   = 12.0pt
+(typearea)              \textheight     = 595.80026pt
+(typearea)              \topmargin      = -25.16531pt
+(typearea)              \headheight     = 17.0pt
+(typearea)              \headsep        = 20.40001pt
+(typearea)              \topskip        = 11.0pt
+(typearea)              \footskip       = 47.60002pt
+(typearea)              \baselineskip   = 13.6pt
 (typearea)              on input line 1115.
 )
 \c@part=\count80
@@ -860,11 +860,17 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 66.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
-) [1
+)
+Overfull \hbox (52.89645pt too wide) in paragraph at lines 68--78
+\OT1/cmr/m/n/10.95 und ei-ne Programm-Dokumentation an-ge-ge-ben, so-wie ge-e-e
+ig-ne-te Programm-Ablaufprotokolle
+ []
+
+[1
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./TeX-Doku-Einsendung-291
-0801-Tim-Taubner.toc
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+(./TeX-Doku-Einsendung-2910801-Tim-Taubner.toc
 Class scrartcl Info: You've told me to use the font selection of the element
 (scrartcl)           `sectioning' that is an alias of element `disposition'
 (scrartcl)            on input line 2.
@@ -878,15 +884,26 @@ Class scrartcl Info: You've told me to use the font selection of the element
 \tf@toc=\write4
 \openout4 = `TeX-Doku-Einsendung-2910801-Tim-Taubner.toc'.
 
+ [2]
+Overfull \hbox (8.98114pt too wide) in paragraph at lines 104--114
+\OT1/cmr/m/n/10.95 Zus[]atzlich ist die vor-lie-gen-de Do-ku-men-ta-ti-on di-gi
+-tal un-ter \OT1/cmr/bx/n/10.95 TeX-Doku-Einsendung-2910801-
+ []
 
-[2] [3] [4]
+[3]
+Overfull \hbox (3.00623pt too wide) in paragraph at lines 145--149
+\OT1/cmr/m/n/10.95 man-do-zei-le durch: Start \TS1/cmr/m/n/10.95 ^^Y \OT1/cmr/m
+/n/10.95 Ap-pli-ka-tio-nen \TS1/cmr/m/n/10.95 ^^Y \OT1/cmr/m/n/10.95 Sys-tem \T
+S1/cmr/m/n/10.95 ^^Y \OT1/cmr/m/n/10.95 Ter-mi-nal. Die CD wird un-ter Standard
+-
+ []
+
+[4]
 \openout2 = `Aufgabe1n.aux'.
 
- (./Aufgabe1n.tex
-(/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
+ (./Aufgabe1n.tex (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
-)
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+) (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
 LaTeX Font Info:    Try loading font information for OML+cmr on input line 23.
@@ -894,33 +911,36 @@ LaTeX Font Info:    Try loading font information for OML+cmr on input line 23.
 (/usr/share/texmf-texlive/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <7> not available
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 23.
 
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 34.
+Overfull \hbox (7.35083pt too wide) in paragraph at lines 28--29
+[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
+][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
+ []
 
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 34.
 (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 34.
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <9> not available
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 37.
 
 
 LaTeX Warning: Reference `TODO' on page 5 undefined on input line 48.
 
+[5
 
+]
 Underfull \hbox (badness 10000) in paragraph at lines 49--56
 
  []
 
-[5
-
-]
 
 LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 88.
 
@@ -999,27 +1019,9 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 135.
 
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
-File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
-File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
-File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
-File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
-File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
-File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
@@ -1041,41 +1043,51 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
-Overfull \hbox (0.59117pt too wide) in paragraph at lines 151--158
-\OT1/cmr/m/n/10 baum) in die-sem Kis-ten-satz. So-mit er-folgt ei-ne hin-zuf[]u
-gen ei-ner Kis-te k (Sca-la: [][][][][][]
- []
-
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)) [8]
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)) [8] [9]
 \openout2 = `Aufgabe2.aux'.
 
  (./Aufgabe2.tex
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
-File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
-File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
-File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
-File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
-File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
-File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)
-(/usr/share/texmf-texlive/tex/latex/base/utf8.def
-File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-) [9
+Overfull \hbox (1.54926pt too wide) in paragraph at lines 18--34
+\OT1/cmr/m/it/10.95 - kein Ele-ment aus X, das als Kom-po-nen-te in $\OML/cmm/m
+/it/10.95 ^^P[]$ \OT1/cmr/m/it/10.95 vor-kommt, kommt in $\OML/cmm/m/it/10.95 ^
+^P[]$ \OT1/cmr/m/it/10.95 vor ($\OML/cmm/m/it/10.95 i; j \OT1/cmr/m/n/10.95 = 1
+\OML/cmm/m/it/10.95 ; [] ; n; i \OMS/cmsy/m/n/10.95 6\OT1/cmr/m/n/10.95 =
+ []
+
+[10
 
 
-]
+] (/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+Overfull \hbox (0.20558pt too wide) in paragraph at lines 43--48
+[] \OT1/cmss/bx/n/10.95 Ent-wurf[][] \OT1/cmr/m/n/10.95 Der Ent-wurf die-ses Al
+-go-rith-mus' er-gibt sich aus den obi-gen []Uberlegungen. Zun[]achst
+ []
+
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
@@ -1100,23 +1112,83 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
-Underfull \hbox (badness 10000) in paragraph at lines 71--79
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+Underfull \hbox (badness 10000) in paragraph at lines 56--71
+
+ []
+
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+) [11]
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+Underfull \hbox (badness 10000) in paragraph at lines 96--104
 
  []
 
 
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 83.
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 108.
 
 
-LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 83.
+
+LaTeX Warning: Command \texttwosuperior invalid in math mode on input line 108.
+
 
 Missing character: There is no ² in font cmr10!
 
-Underfull \hbox (badness 10000) in paragraph at lines 90--93
+Underfull \hbox (badness 10000) in paragraph at lines 115--118
 
  []
 
-[10] (/usr/share/texmf-texlive/tex/latex/base/utf8.def
+[12] (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
@@ -1127,7 +1199,19 @@ File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
 )
 (/usr/share/texmf-texlive/tex/latex/base/utf8.def
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
-)) [11]
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)
+(/usr/share/texmf-texlive/tex/latex/base/utf8.def
+File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
+)) [13]
 (./TeX-Doku-Einsendung-2910801-Tim-Taubner.aux (./Aufgabe1n.aux)
 (./Aufgabe2.aux))
 
@@ -1135,35 +1219,31 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 10640 strings out of 495021
- 156317 string characters out of 1181035
- 272301 words of memory out of 3000000
- 13397 multiletter control sequences out of 15000+50000
- 14968 words of font info for 57 fonts, out of 3000000 for 9000
+ 10717 strings out of 495021
+ 158535 string characters out of 1181035
+ 277303 words of memory out of 3000000
+ 13414 multiletter control sequences out of 15000+50000
+ 16514 words of font info for 63 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 43i,11n,51p,346b,1686s stack positions out of 5000i,500n,10000p,200000b,50000s
- </home/tim/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share
+ 43i,11n,51p,346b,1687s stack positions out of 5000i,500n,10000p,200000b,50000s
+ </home/tim/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk></usr/share
 /texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-texl
-ive/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texmf-texlive/fonts/ty
-pe1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/type1/public/a
-msfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
-cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
-/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/t
-exmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive
-/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1
-/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
-nts/cm/cmr6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.p
-fb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/shar
-e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texli
-ve/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/publi
-c/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/c
-m/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti8.pfb
->
-Output written on TeX-Doku-Einsendung-2910801-Tim-Taubner.pdf (11 pages, 305628
+ive/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texmf-texlive/fonts/ty
+pe1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/public/
+amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
+/cmmi8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb><
+/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/t
+exmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-texlive/
+fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/p
+ublic/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
+s/cm/cmssbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy
+10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr
+/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texm
+f-texlive/fonts/type1/public/amsfonts/cm/cmti9.pfb>
+Output written on TeX-Doku-Einsendung-2910801-Tim-Taubner.pdf (13 pages, 276872
  bytes).
 PDF statistics:
- 387 PDF objects out of 1000 (max. 8388607)
- 119 named destinations out of 1000 (max. 500000)
+ 412 PDF objects out of 1000 (max. 8388607)
+ 146 named destinations out of 1000 (max. 500000)
  217 words of extra memory for PDF output out of 10000 (max. 10000000)
 

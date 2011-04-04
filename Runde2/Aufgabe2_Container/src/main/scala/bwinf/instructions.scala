@@ -5,15 +5,15 @@ sealed trait Instruction {
   def len: Int = 0
   def short: String = "" + toString.head
 }
-sealed trait Move extends Instruction {
-  override def len = 1
-  override def short = (toString filter (_.isUpper)) + "(" + len + ")"
-}
 case object PutWag extends Instruction
 case object PutCon extends Instruction
 case object Rotate extends Instruction
 case object TakeWag extends Instruction
 case object TakeCon extends Instruction
+sealed trait Move extends Instruction {
+  override def len = 1
+  override def short = (toString filter (_.isUpper)) + "(" + len + ")"
+}
 
 object Move {
   def apply(len: Int): Move =

@@ -1,5 +1,6 @@
 package de.voodle.tim.bwinf.container
 
+// TODO: clean it up!
 class Gleis(initCon: Seq[Int]) {
   val length = initCon.length
   protected val con = Seq(initCon: _*).toArray
