@@ -21,7 +21,10 @@
 \BOOKMARK [3][-]{subsubsection.3.1.2}{Datenstruktur}{subsection.3.1}
 \BOOKMARK [3][-]{subsubsection.3.1.3}{Ergebnisoptimaler Algorithmus}{subsection.3.1}
 \BOOKMARK [3][-]{subsubsection.3.1.4}{Optimaler Algorithmus}{subsection.3.1}
-\BOOKMARK [2][-]{subsection.3.2}{Implementation}{section.3}
+\BOOKMARK [2][-]{subsection.3.2}{Implementierung}{section.3}
+\BOOKMARK [3][-]{subsubsection.3.2.1}{``SlowAlgorithm''}{subsection.3.2}
+\BOOKMARK [3][-]{subsubsection.3.2.2}{``FastAlgorithm''}{subsection.3.2}
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Randomisierte Permutationen}{subsection.3.2}
 \BOOKMARK [2][-]{subsection.3.3}{Programmabl\344ufe}{section.3}
-\BOOKMARK [2][-]{subsection.3.4}{Programmtext}{section.3}
-\BOOKMARK [2][-]{subsection.3.5}{Programmnutzung}{section.3}
+\BOOKMARK [2][-]{subsection.3.4}{Programmnutzung}{section.3}
+\BOOKMARK [2][-]{subsection.3.5}{Programmtext}{section.3}

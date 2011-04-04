@@ -8,9 +8,11 @@ object Utils {
   type Cycles = List[Cycle]
 
   import scala.util.Random
+  import scala.collection.mutable.IndexedSeq
   def randPerm(n: Int) = {
     // Init array // O(n)
-    val a = new Array[Int](n)
+    // Make sure we don't convert it to an WrappedArray to often.
+    val a: IndexedSeq[Int] = new Array[Int](n)
     var idx = 0
     while(idx < n) {
       a(idx) = idx + 1
@@ -26,6 +28,22 @@ object Utils {
       i -= 1
     }
     a
+  }
+
+  def demonstrate(n: Int) = {
+    val startTime = System.currentTimeMillis
+    val perm = randPerm(n)
+    val cycles = Utils cyclesOf perm
+    println("Time used for computing Cycles: " + (System.currentTimeMillis - startTime))
+    println("Number of cycles: " + cycles.length)
+    val instrs = FastAlgorithm computeFromCycles cycles
+    val endTime = System.currentTimeMillis
+    println("Time used: " + (endTime - startTime))
+    val gleis = new Gleis(perm)
+    val maschine = new Maschine(gleis)
+    maschine interpret instrs
+    println("Time used interpreting: " + (System.currentTimeMillis - endTime))
+    gleis.waggons.zipWithIndex forall (xy => xy._1 == xy._2 + 1)
   }
 
   /** Return the list of disjunct cycles sorted ascending by cycle.head */

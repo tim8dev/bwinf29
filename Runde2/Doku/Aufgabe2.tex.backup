@@ -23,18 +23,22 @@ so dass folgendes Eigenschaften erfüllt sind: \\
 (Das bedeuted: Wenn ein Element $x \in X$ in einem Zyklus $\zeta_i$ ``vorkommt'',
  so wird $x$ von jedem anderen Zyklus $\zeta_j \: (j \neq i)$ fest gelassen.)
 }''\footnote{Definitionen, Sätze und Erklärung übernommen aus Lineare Algebra, Albrecht Beutelspacher}\\
-Dies erwies sich als günstig, denn nun kann das Problem in folgende zwei Teile aufgebrochen werden.
+
+Die Darstellung der Permutation als Produkt disjunkter Zyklen erwies sich als günstig,
+denn nun kann das Problem in folgende zwei Teile aufgebrochen werden.
 Der erste ist, die Container eines Zyklus an die richtige Stelle zu bringen.
-Dies lässt sich relativ leicht realisieren, indem der Container am Anfang der Zyklen an die richtige Position gebracht wird, anschließend der - dortige - zweite an die richtige, usw., bis der Ausgangspunkt wieder erreicht ist.
+Dies lässt sich relativ leicht realisieren, indem der Container am Anfang der Zyklen an die richtige Position gebracht wird,
+anschließend der zweite an die richtige, usw., bis der Ausgangspunkt wieder erreicht ist.
 Der zweite - etwas schwierige - Teil besteht darin, die Zyklenabarbeitung dort zu unterbrechen, wo eine andere beginnt. \\
 Etwas anders ausgedrückt:
 Beginnt man an dem Anfang eines Zyklus, können dessen Container ``in einem Stück'' an die richtige Stelle gebracht werden und der Kran anschließend wieder an der Ausgangsposition angelangen.
 Wir werden etwas später sehen, dass dadurch tatsächlich auch immer ein optimalen Weg (zumindest innerhalb eines Zyklus) gefunden werden kann.
-Durch entsprechend richtige ``Konkatenation'' der einzelnen Befehlsketten für die einzelnen Zyklen lässt sich ein insgesamt richtiger Algorithmus erstellen.
+Durch entsprechend richtige ``Konkatenation'' der einzelnen Befehlsketten für die einzelnen Zyklen lässt sich ein nach dem in der Aufgabenstellung vorgegebenem Gütekriterium optimaler Algorithmus erstellen.
+Der durch Ausführung der berechneten Instruktionen abzufahrende Weg ist also minimal.
 \subsubsection{Datenstruktur}
-Permutationen können in jeder indexierten Liste gespeichert werden.
-Da in der Informatik jedoch indexierte Listen (insbesondere Arrays) Indizes aus $[0,n[$ besitzen muss dies beim Zugriff beachtet werden.
-Um also die Zahl $p$ zu finden, auf die $i$ durch $perm$ abgebildet wird, gilt $p = perm(i-1)$ und nicht $p = perm(i)$. \\
+Permutationen können in einer indexierten Liste jeder Art (beispielsweise einem Array) gespeichert werden.
+Da in der Informatik jedoch indexierte Listen (insbesondere Arrays) meist Indizes aus $[0,n[$ besitzen muss dies beim Zugriff beachtet werden.
+Um also die Zahl $p$ zu finden, auf die $i$ durch $perm$ abgebildet wird, gilt $p = perm(i-1)$ jedoch nicht $p = perm(i)$. \\
 Es wird außerdem noch eine einfache Datenstruktur benötigt, um das Gleis mit Containerstellplätzen und Waggons abzubilden. \\
 Diese ....
 % Zyklen
@@ -59,10 +63,10 @@ Die folgend dargestellte rekursive Funktion |cyclesOf| liefert eine Liste von di
 die die Permutation darstellen. Um disjunkte Zyklen zu finden, müssen sich jeweils alle bisher abgearbeiteten Zahlen gemerkt werden.
 Dies erfolgt in einem |Set| (standardmäßig ein |HashSet| in Scala). \\
 In jedem Rekursionsschritt wird zunächst der neue Startwert |start| gesucht.
-Der Startwert ist die erste Zahl von $1..n$ der noch nicht abgearbeitet wurde (also nicht in |ready| enthalten ist).
-Anschließend wird der neue Zyklus |newCycle| mit Hilfe von |cycle| berechnet.
+Der Startwert ist die erste Zahl von $1..n$ die noch nicht abgearbeitet wurde (also nicht in |ready| enthalten ist).
+Anschließend wird der neue Zyklus |newCycle| mit der Hilfsfunktion |cycle| berechnet.
 Dann wird die neue Menge aller abgearbeiteten Zahlen |newReady| gebildet, indem alle Zahlen aus |newCycle| in |ready| eingefügt werden.
-Zuletzt erfolgt der rekursive Aufruf, wobei |newCycle| vor die rekursiv berechneten Zyklen gesetzt wird.
+Zuletzt erfolgt der rekursive Aufruf, wobei |newCycle| vor den rekursiv berechneten Zyklen gespeichert wird.
 % TODO: Wording.
 Die Rekursion wird abgebrochen, sobald alle Zahlen abgearbeitet wurden. Dies lässt sich daran erkennen,
 dass die Länge der Permutation gleich der Anzahl der abgearbeiteten Zahlen sind. \\
@@ -80,7 +84,9 @@ def cyclesOf(perm: Seq[Int], ready: Set[Int]): List[List[Int]] =
 \end{lstlisting}
 
 \paragraph{Optimale Ergebnisse}
-Dieser Algorithmus liefert bereits optimale Ergebnisse. Um dies zu zeigen, wird zunächst bewiesen, dass die Zyklen richtig gefunden werden. \\
+\label{opt_res}
+Dieser Algorithmus liefert bereits optimale Ergebnisse im Sinne des Gütekriteriums der Aufgabenstellung
+Um dies zu zeigen, wird zunächst bewiesen, dass die Zyklen richtig gefunden werden. \\
 Zunächst wird die Hilfsfunktion |step| der Funktion |cycle| auf Korrektheit geprüft. Da es sich um eine rekursive Funktion handelt, bietet sich hier Induktion an.
 Der Beweis, das die Hilfsfunktion |step| zu einer gegebenen Permutation $perm: [0,n[ \rightarrow [1,n]$, einem Start- und Endwert |start| und einem Index |idx|
 eine Liste von Zahlen mit Länge n liefert, für die folgendes gilt. ... \\
@@ -105,16 +111,15 @@ Die Laufzeitkomplexität zur Finden der Zyklen ist also $O(c \cdot n)$. \\
 \subsubsection{Optimaler Algorithmus} %Erweiterung!
 Das Laufzeitverhalten von $O(c \cdot n)$ ist zwar bereits recht gut, da die Anzahl der Zyklen im Normalfall nicht linear mit $n$ steigen.
 (Eine zufällig erzeugte Permutation mit $10^7$ Elementen hat meist weniger als 20 Zyklen)% TODO: Beleg
-Der Worstcase bei $n/2$ Zyklen führt zu einer Worstcase-Komplexität von $O(n²)$. \\
-Als Erweiterung soll die Laufzeitkomplexität weiter verringert werden. \\
+Der Worstcase bei $n/2$ Zyklen führt jedoch zu einer Worstcase-Komplexität von $O(n^2)$. \\
+Deshalb soll als Erweiterung die Laufzeitkomplexität weiter verringert werden. \\
 Außerdem sind die Algorithmen, wie sie oben angegeben sind, nicht tail-recursive.
 Das heißt bei jedem rekursivem Aufruf wird ein neuer Stack-frame allokiert.
 In der Praxis heißt dies, dass nur eine Rekursionstiefe von höchstens 10000 möglich ist.
 
 \paragraph{Optimale Ergebnisse}
-Da oben %TODO: Ref
-bereits gezeigt wurde, dass aus korrekten Zyklen Instruktionen, die einen optimalen Weg für den Kran liefern, berechnet werden.
-Muss hier nur noch gezeigt werden, dass wiederum korrekte Zyklen berechnet werden. \\
+Wie oben (in \ref{opt_res}) bereits gezeigt, können aus korrekten, sortierten Zyklen Instruktionen, die einen optimalen Weg für den Kran liefern, berechnet werden.
+Deshalb muss hier lediglich noch gezeigt werden, dass der neue Algorithmus wiederum korrekte und sortierte Zyklen berechnet. \\
 
 \paragraph{Optimale Laufzeitkomplexität}
 ... \\
@@ -123,12 +128,21 @@ Bei $n$ Container sind dies also $n$ Befehle. Das setzt einen Algorithmus mit ei
 Der erstellte Algorithmus hat also \textbf{optimale Laufzeitkomplexität}.
 
 % TODO?: Concurrent Algorithm.
-\subsection{Implementation}
+\subsection{Implementierung}
+\subsubsection{``SlowAlgorithm''}
+\subsubsection{``FastAlgorithm''}
+\subsubsection{Randomisierte Permutationen}
+
 \newpage
 \subsection{Programmabläufe}
+\begin{flushright}
+  \begin{scriptsize}
+  \emph{Bemerkung:} Die Ausgaben der Konsole wurden per Hand nachformatiert zwecks besserem Einbetten in den Textfluss.
+  \end{scriptsize}
+\end{flushright}
 \paragraph{Beispiel aus der Aufgabenstellung}
-Das Folgende zeigt den Ablauf, bei Eingabe des Beispiels aus der Aufgabestellung. \\
-Zunächst wird die Permutation in |perm| gespeichert.
+Das Folgende zeigt den Ablauf der sich bei Eingabe des Beispiels aus der Aufgabestellung ergibt. \\
+Zunächst wird die Permutation erzeugt und in |perm| gespeichert.
 \begin{lstlisting}
 scala> val perm = Seq(4,3,2,1)               
 perm: Seq[Int] = List(4, 3, 2, 1)
@@ -164,41 +178,90 @@ res0: de.voodle.tim.bwinf.container.Gleis =
 Container: _ _ _ _
 Waggons:   1 2 3 4
 \end{lstlisting}
-Bemerkenswert ist hier, dass dies genau den gleichen Weg liefert wie im Beispiel der Aufgabenstellung angegeben.
-(Obwohl es viele verschieden optimale Wege gibt, bspsweise.....)\\
-
+Bemerkenswert ist hier, dass der erstellte Algorithmus in diesem Fall exakt den gleichen Weg liefert wie im Beispiel der Aufgabenstellung angegeben.
+Es gibt noch verschiedene andere Wege.
+Beispielsweise kann das Prüfen auf überlappende Zyklen erst beim Zurückfahren geprüft werden,
+wodurch sich z.B. einer der folgender Ablauf ergeben könnte.
+\begin{lstlisting}                   
+1 2 3 4		1 2 3 4
+4 3 2 1		4 3 2 1
+------>		------>
+    <--		  <----
+  <--		  -->
+  -->		  <--
+<----		<--
+\end{lstlisting}
+\newpage
+\paragraph{Zufällig erzeugte Permutation}
+Ein nächstes - etwas größeres Beispiel ergibt sich aus zufälliger Erzeugung einer Permutation der Länge 20.
+Hierbei wird die Hilfsfunktion |randPerm| des Moduls |Utils| aufgerufen und das Ergebnis wie vorher in |perm| gespeichert.
 \begin{lstlisting}
-scala> val perm =
-  Array(23, 17, 47, 46, 45, 32, 27, 21, 41, 48, 14, 30, 37,  5, 15,
-        22, 57, 58, 25,  1, 38, 36, 40, 34, 12, 49, 55, 19, 59, 16,
-         4, 11, 52, 20, 44, 35, 18, 43, 31,  9, 51, 28, 26, 42, 39,
-        50, 53,  6, 54,  3, 24, 29, 10, 33,  7, 56,  2,  8, 13)
-perm: Array[Int] =
-  Array(23, 17, 47, 46, 45, 32, 27, 21, 41, 48, 14, 30, 37,  5, 15,
-        22, 57, 58, 25,  1, 38, 36, 40, 34, 12, 49, 55, 19, 59, 16,
-         4, 11, 52, 20, 44, 35, 18, 43, 31,  9, 51, 28, 26, 42, 39,
-        50, 53,  6, 54,  3, 24, 29, 10, 33,  7, 56,  2,  8, 13)
-
-scala> val instrs = FastAlgorithm compute perm                                                                                                                                                                                                            
+scala> val perm = Utils randPerm 20
+perm: Array[Int] = Array(20, 11, 2, 8,  1, 16, 10, 17, 19, 14,
+                          5, 12, 9, 3, 13, 15, 18,  4,  7,  6)
+\end{lstlisting}
+Anschließend werden wieder die Instruktionen mit der Funktion |compute| des Moduls |FastAlgorithm| berechnet und in |instrs| gespeichert.
+\begin{lstlisting}
+scala> val instrs = FastAlgorithm compute perm
 instrs: Seq[de.voodle.tim.bwinf.container.Instruction] =
-  Queue(TakeCon, MoveRight(1),  Rotate, TakeCon, Rotate, PutCon,
-        Rotate,  MoveRight(1),  Rotate, TakeCon, Rotate, PutCon,
-        Rotate,  MoveRight(4),  Rotate, TakeCon, Rotate, PutCon,
-        Rotate,  MoveRight(1),  Rotate, TakeCon, Rotate, PutCon,
-        Rotate,  MoveRight(4),  Rotate, TakeCon, Rotate, PutCon,
-        Rotate,  MoveRight(3),  Rotate, TakeCon, Rotate, PutCon,
-        Rotate,  MoveLeft(0),   Rotate, PutWag,
-        TakeCon, MoveRight(15), Rotate, PutWag,
-        TakeCon, MoveLeft(14),  Rotate, PutWag,
-        TakeCon, MoveRight(6),  Rotate, PutWag,
-        TakeCon, MoveRight(14), Rotate, PutWag,
-        TakeCon, MoveLeft(1),   Rotate, PutWag,
-        TakeCon, MoveRight(9),  Rotate, PutWag,
-        TakeCon, MoveLeft(2),   Rotate, PutWag,
-        TakeCon, MoveLeft(14),  Rotate, PutWag,
-        TakeCon, MoveLeft(9),   Rotate, PutWag,
-        TakeCon, MoveRig...
+  Queue(TakeCon, MoveRight(3),  Rotate, TakeCon, Rotate, PutCon,
+	Rotate,  MoveRight(4),  Rotate, PutWag,
+	TakeCon, MoveRight(4),  Rotate, TakeCon, Rotate, PutCon,
+	Rotate,  MoveLeft(0),   Rotate, PutWag,
+	TakeCon, MoveRight(5),  Rotate, PutWag,
+	TakeCon, MoveRight(1),  Rotate, PutWag, T...
+\end{lstlisting}
+Zuletzt wird wieder eine |Maschine| |maschine| erzeugt um die Instruktionen zu interpretieren.
+\begin{lstlisting}
+scala> val maschine = new Maschine(new Gleis(perm),true)      
+maschine: de.voodle.tim.bwinf.container.Maschine = 
+Container: 20 11 2 8 1 16 10 17 19 14 5 12 9 3 13 15 18 4 7 6
+Waggons:    _  _ _ _ _  _  _  _  _  _ _  _ _ _  _  _  _ _ _ _
+
+scala> maschine interpret instrs
+ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+20 11  2  8  1 16 10 17 19 14  5 12  9  3 13 15 18  4  7  6
+--------->
+         ------------>
+                     ------------>
+                                 <
+                                 --------------->
+                                                --->
+         <------------------------------------------
+         ------------------------------------------------>
+               <------------------------------------------
+               ------------------------------>
+                                          <---
+                                    <------
+                        <------------
+                        ------------------------------>
+                  <------------------------------------
+                  --------->
+                           ------------>
+      <---------------------------------
+   <---
+   --------------------------->
+            <------------------
+<------------
+res0: de.voodle.tim.bwinf.container.Gleis = 
+Container: _ _ _ _ _ _ _ _ _  _  _  _  _  _  _  _  _  _  _  _
+Waggons:   1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+\end{lstlisting}
+\emph{TODO:} Interpretation!
+\paragraph{Demonstration der Skalierbarkeit}
+Nun soll die Skalierbarkeit demonstriert werden,
+die als Erweiterung in Form von Tail-rekursiven Funktionen und linearer Laufzeitkomplexität implementiert wurde.\\
+Hierfür erzeugen wir eine zufällige Permutation von 10 Millionen ($10^7$) Zahlen, die unsere Container darstellt.
+Anschließend werden wie oben auch, die Instruktionen berechnet und interpretiert. \\
+Für Demonstrationszwecke wird außerdem die benötigte Zeit für jeden Schritt berechnet.
+Dies hat nicht das Ziel genaue Benchmarkwerte zu liefern, sondern vielmehr einen Anhaltspunkt für das Laufzeitverhalten.
+\footnote{Die Scala-Konsole wäre für ein Benchmark denkbar ungeeignet, da viele JVM Optimierungen z.B. nicht angewendet werden würden.}
+\\
+Nun wird zunächst die Permutation erzeugt.
+\begin{lstlisting}
+
+val perm = Utils randPerm 10000000
 \end{lstlisting}
 
-\subsection{Programmtext}
 \subsection{Programmnutzung}
+\subsection{Programmtext}

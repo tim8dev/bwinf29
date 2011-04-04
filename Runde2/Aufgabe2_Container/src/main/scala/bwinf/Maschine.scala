@@ -3,17 +3,16 @@ package de.voodle.tim.bwinf.container
 import scala.annotation.tailrec
 
 // TODO: New Instruction set.
-class Maschine(initial: Gleis,
-               val print: Boolean = false) {
-  protected val gleis = initial
+class Maschine(protected val gleis: Gleis,
+               private val print: Boolean = false) {
   private def digits(num: Int) = (math.log10(num) + 1).floor.toInt
-  private val numLength = digits(initial.length)
+  private val numLength = digits(gleis.length)
   private val space = " " * (numLength+1)
   private val arr = "-" * (numLength+1)
 
   def log(str: =>Any) = if(print) println(str) else ()
 
-  def logInts(ints: Seq[Int]): Unit =
+  def logInts(ints: =>Seq[Int]): Unit =
     log(ints map {
         con =>
         val diff = numLength - digits(con)
@@ -21,8 +20,8 @@ class Maschine(initial: Gleis,
       } mkString (" "))
 
   def interpret(instrs: Seq[Instruction]): Gleis = {
-    logInts(1 to initial.length)
-    logInts(initial.container)
+    logInts(1 to gleis.length)
+    logInts(gleis.container)
     interpret(instrs.toList,0,0,1)
   }
 
