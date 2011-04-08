@@ -28,7 +28,8 @@ object Move {
     case MoveLeft(len) => -len
   }
 }
-object MoveLeft extends MoveLeft(1)
 case class MoveLeft(override val len: Int) extends Move
-object MoveRight extends MoveRight(1)
 case class MoveRight(override val len: Int) extends Move
+
+object MoveLeft extends MoveLeft(1)
+object MoveRight extends MoveRight(1)

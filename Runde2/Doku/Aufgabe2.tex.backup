@@ -86,7 +86,58 @@ def cyclesOf(perm: Seq[Int], ready: Set[Int]): List[List[Int]] =
   }
 \end{lstlisting}
 
-Mit den fertigen Zyklen
+Anhand der berechneten Zyklen wird im nächsten Schritt die Instruktionskette errechnet.
+Folgend ist der Scalacode abgebildet, welcher die Instruktionen berechnet. \\
+Bemerkung: Um den Code gut in der Dokumentenzeilenbreite darstellen zu können,
+wurden die ``type aliases'' |Cycle| für |List[Int]|, |Cycles| für |List[Cycle]| und,
+speziell für die Hilfsfunktion |step| |Step| für |(ListBuffer[Instruction], Cycles, Int)|
+
+\lstset{basicstyle=\footnotesize}
+\begin{lstlisting}
+def computeFromCycles(cycles: Cycles): Seq[Instruction] =
+  TakeCon :: computeCycle(cycles.head, cycles.tail)._1.toList
+
+def computeCycle(cycle: Cycle, other: Cycles): (ListBuffer[Instruction], Cycles) = {
+    val max = cycle.max
+
+    type Step = (ListBuffer[Instruction], Cycles, Int)
+    def step(instrs: ListBuffer[Instruction], cyclesLeft: Cycles,
+             prev: Int, cur: Int): Step =
+      cyclesLeft.headOption match {
+        // Gibt es ein nächsten Zyklus und beginnt dieser direkt nach diesem?
+        case Some(nextCycle @ (next :: _)) if prev == max && max+1 == next => // (1)
+	  // Wenn ja, "konkateniere" diese.
+          val (cycleInstrs, newCyclesLeft) =
+            computeCycle(cyclesLeft.head, cyclesLeft.tail)
+          val extraInstrs = instrs ++=
+            ListBuffer(PutCon, MoveRight, TakeCon) ++=
+            cycleInstrs ++= ListBuffer(MoveLeft, TakeCon)
+          step(extraInstrs, newCyclesLeft, prev, cur)
+	// Gibt es ein nächsten Zyklus und beginnt dieser vor dem nächsten Element?
+        case Some(nextCycle @ (next :: _)) if next < cur => // (2)
+	  // Wenn ja, dann arbeite erst nextCycle ab.
+          val (transInstrs, newCyclesLeft) = computeCycle(nextCycle, cyclesLeft.tail)
+          val newInstrs = instrs ++=
+            ListBuffer(Move(prev -> next), Rotate, TakeCon, Rotate, PutCon, Rotate) ++=
+            transInstrs
+          step(newInstrs, newCyclesLeft, next, cur)
+        case _ => // (3)
+	  // Andernfalls, fahre einfach mit der Abarbeitung fort.
+          val newInstrs = instrs ++=
+            ListBuffer(Move(prev -> cur), Rotate, PutWag, TakeCon)
+          (newInstrs, cyclesLeft, cur)
+      }
+
+    val erster = cycle.head
+    val initial = (ListBuffer[Instruction](), other, erster)
+    val (instrs, cyclesLeft, last) = (initial /: (cycle.tail :+ erster)) {
+        case ((instrs, cyclesLeft, prev), cur) =>
+            step(instrs, cyclesLeft, prev, cur)
+      }
+    (instrs, cyclesLeft)
+  }
+\end{lstlisting}
+\emph{TODO!}
 
 \paragraph{Optimale Ergebnisse}
 \label{opt_res}
@@ -104,7 +155,7 @@ Nun betrachten wir nochmals die Funktionsweise von |cycle|, bzw. von |step|.
 Wir behaupten zunächst |step| liefert zu einer Zahl $j = \pi^x(i)$ die Zahlen $\pi^x(i), \pi^{x+1}(i), \dots, \pi^{k-1}(i)$.
 Dies machen wir uns durch Induktion über $x$ klar. Sei also $x = k$.
 Dann gilt nach Definition eines Zyklus' $j = \pi^x(i) = \pi^k(i) = i$, also bricht |step| hier ab und liefert die leere Liste, was in der Tat korrekt ist.
-Nun können wir annehmen, |step| liefert für ein $j = \pi^x(i)$ bereits die Zahlen $\pi^x(i), \pi^{x+1}(i), \dots, \pi^{k-1}(i)$ gefunden.
+Nun können wir annehmen, |step| liefert für ein $j = \pi^x(i)$ bereits die Zahlen $\pi^x(i), \pi^{x+1}(i), \dots, \pi^{k-1}(i)$.
 Also zeigen wir nun, dass |step| auch für ein $l = \pi^{x-1}$ die richtigen Zahlen liefert.
 |step| reiht also $l$ vor die Zahlen, die durch Aufruf von |step| mit $\pi(l) = \pi(\pi^{x-1}) = \pi^x = j$ berechnet werden.
 Das ergibt genau die Zahlen $\pi^{x-1}(i), \pi^x(i), \pi^{x+1}(i), \dots, \pi^{k-1}(i)$.
@@ -114,17 +165,28 @@ Wird nun |step| - wie in |cycle| - mit $j = \pi^0(i) = i$ aufgerufen, erhalten w
 
 Im Folgenden können wir uns also der Korrektheit von |cycle| sicher sein. Nun soll die Korrektheit von |cyclesOf| gezeigt werden.
 Wir wollen also beweisen, dass |cyclesOf| zu einer gegebenen Permutation $\pi$ und einer leeren Menge von ``fertigen'' Elementen eine Liste
-von disjunkten Zyklen $\phi_1, \phi_2, \dots, \phi_o$ zurückgibt, wobei $x < y \Leftrightarrow \ min(\phi_x) < min(\phi_y)$ für alle $x,y=0 \dots o$.
+von disjunkten Zyklen $\phi_1, \phi_2, \dots, \phi_o$ zurückgibt, wobei $o$ die Anzahl disjunkter Zyklen ist und $x < y \Leftrightarrow \ min(\phi_x) < min(\phi_y)$ für alle $x,y=0 \dots o$.
 Es sollen also nach Startwert sortierte Zyklen zurückgeliefert werden.
 Es wird im folgenden wieder Induktion verwendet.
-Im Induktionsanfang soll also gezeigt werden, dass |cyclesOf| für $ready = \phi_1 \cup \phi_2 \cup \dots \cup \phi_o$ die Zyklen $\phi_x, \phi_{x+1}, \dots, \phi_o$ findet.
+Im Induktionsanfang soll also gezeigt werden, dass |cyclesOf| für $ready = \phi_1 \cup \phi_2 \cup \dots \cup \phi_o$ alle verbleibende Zyklen - nämlich gar keine - findet.
+Da $\|ready\| = \|\phi_1 \cup \dots \cup \phi_o\|$, bricht |cyclesOf| ab mit der leeren Liste. Dies ist korrekt, denn es sind bereits alle Zyklen gefunden.
+Nun gelte, dass |cyclesOf| für ein $x \in \{0, \dots, o\}$ und $ready = \phi_1 \cup \phi_2 \cup \dots \cup \phi_{x-1} \cup \phi_x$ die Zyklen $\phi_{x+1}, \dots, \phi_o$ findet.
+Wir zeigen, dass dies auch für $x \rightarrow x-1$ gilt.
+Zunächst wird der Wert $s \in \{1, \dots, n\}$ ($s=$|start|, $n$ ist die Länge von $\pi$) mit $s \notin ready$ gesucht.
+Nun wird der neue Zyklus $\phi_x$ berechnet. Dieser ist sicher disjunkt von den zuvor berechneten Zyklen, da er bei $s \notin ready$ beginnt.
+Anschließend wird |cyclesOf| rekursiv aufgerufen, mit $ready = \phi_1 \cup \dots \cup \phi_{x-1} \cup \phi_{x}$.
+Dieser Aufruf liefert nach Induktionsannahme die Zyklen $\phi_{x+1}, \dots, \phi_o$.
+Also werden insgesamt die Zyklen $\phi_{x}, \phi_{x+1}, \dots, \phi_o$ ausgegeben.
+Das auch die Sortierung richtig ist, sieht man anhand der Tatsache, dass immer der kleinstmögliche Startwert gesucht wird.
+Also ist auch dieser Algorithmus korrekt, bei Aufruf von |cyclesOf| mit $ready = \empty$ werde nämlich die Zyklen $\phi_1, \dots, \phi_o$ zurückgegeben.\\
+
 Anschließend zeigen wir die Optimalheit vom eigentlichem Algorithmus, die Berechnung der Instruktionen.
 
 \paragraph{Laufzeitverhalten}
 % O(c*n)
 Zunächst wird das Laufzeitverhalten des Algorithmus zum Finden der Zyklen analysiert.
 |cyclesOf| berechnet in jedem Schritt den neuen Startwert |start|.
-Dazu wird die Folge 1 bis zur Permutationslänge traversiert bis ein Wert gefunden wird der noch nicht abgearbeitet - sprich in |ready| enthalten - ist.
+Dazu wird die Folge 1 bis zur Permutationslänge $n$ traversiert bis ein Wert gefunden wird der noch nicht abgearbeitet - sprich in |ready| enthalten - ist.
 Nimmt man an, dass das Prüfen auf Enthaltensein konstanten Zeitaufwand darstellt (Bsp. bei Verwendung eines |HashSet|s), dann ergibt dies insgesamt eine Komplexität von $O(n)$.
 Die Berechnung eines Zyklus benötigt höchstens die Traversierung der Permutation, also ebenfalls $O(n)$. %TODO: Genauer!
 Anschließend werden die Zahlen, die im Zyklus enthalten sind, in |ready| eingefügt. Unter Annahme, dass wieder ein |HashSet| verwendet wird, ergibt das eine Komplexität von $O(n)$.

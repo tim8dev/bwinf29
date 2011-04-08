@@ -39,7 +39,7 @@
 \lstdefinelanguage{Scala}[]{Java}
   {morekeywords={trait, object, sealed, override, val, var, lazy, def, yield},%, List, Int, Double, Seq, Ordered, Nil, Set},
    %Ugly fix to ``Umlaute''
-   literate={<-}{{$\gets$}}1 {=>}{{$\Rightarrow$}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1}
+   literate={<-}{{$\gets$}}1 {=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1}
 \lstMakeShortInline{|}
 
 \newcommand{\comment}[1]{}
