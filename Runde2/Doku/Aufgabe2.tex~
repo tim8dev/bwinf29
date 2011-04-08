@@ -32,15 +32,15 @@ anschließend der zweite an die richtige, usw., bis der Ausgangspunkt wieder err
 Der zweite - etwas schwierige - Teil besteht darin, die Zyklenabarbeitung dort zu unterbrechen, wo eine andere beginnt. \\
 Etwas anders ausgedrückt:
 Beginnt man an dem Anfang eines Zyklus, können dessen Container ``in einem Stück'' an die richtige Stelle gebracht werden und der Kran anschließend wieder an der Ausgangsposition angelangen.
-Wir werden etwas später sehen, dass dadurch tatsächlich auch immer ein optimalen Weg (zumindest innerhalb eines Zyklus) gefunden werden kann.
-Durch entsprechend richtige ``Konkatenation'' der einzelnen Befehlsketten für die einzelnen Zyklen lässt sich ein nach dem in der Aufgabenstellung vorgegebenem Gütekriterium optimaler Algorithmus erstellen.
-Der durch Ausführung der berechneten Instruktionen abzufahrende Weg ist also minimal.
+Wir werden etwas später sehen, dass dadurch tatsächlich auch immer ein optimaler Weg (zumindest innerhalb eines Zyklus) gefunden werden kann.
+Durch entsprechend richtige ``Konkatenation'' der einzelnen Befehlsketten für die einzelnen Zyklen lässt immer sich ein nach dem in der Aufgabenstellung vorgegebenem Gütekriterium optimaler Weg erstellen.
+Der durch Ausführung der durch einen Algorithmus berechneten Instruktionen abzufahrende Weg ist also minimal.
 \subsubsection{Datenstruktur}
 Permutationen können in einer indexierten Liste jeder Art (beispielsweise einem Array) gespeichert werden.
 Da in der Informatik jedoch indexierte Listen (insbesondere Arrays) meist Indizes aus $[0,n[$ besitzen muss dies beim Zugriff beachtet werden.
 Um also die Zahl $p$ zu finden, auf die $i$ durch $perm$ abgebildet wird, gilt $p = perm(i-1)$ jedoch nicht $p = perm(i)$. \\
 Es wird außerdem noch eine einfache Datenstruktur benötigt, um das Gleis mit Containerstellplätzen und Waggons abzubilden. \\
-Diese ....
+Diese ist in \ref{2.3}
 % Zyklen
 \subsubsection{Ergebnisoptimaler Algorithmus}
 \paragraph{Entwurf}
@@ -130,12 +130,12 @@ Der erstellte Algorithmus hat also \textbf{optimale Laufzeitkomplexität}.
 % TODO?: Concurrent Algorithm.
 \subsection{Implementierung}
 Die Implementierung gliedert sich folgendermaßen.
-\begin{itemize}
+\begin{description}
  \item[Utils] hilfreiche Methoden, unter anderem zur Zyklenfindung.
  \item[SlowUtils] wie Utils, bloß werden die zuerst vorgestellten, langsameren Funktionen zur Zyklenfindung benutzt.
  \item[FastAlgorithm]
  \item[SlowAlgorithm]
-\end{itemize}
+\end{description}
 \subsubsection{``SlowAlgorithm''}
 \subsubsection{``FastAlgorithm''}
 \subsubsection{Randomisierte Permutationen}
