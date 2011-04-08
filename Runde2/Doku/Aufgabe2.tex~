@@ -22,7 +22,7 @@ so dass folgendes Eigenschaften erfüllt sind: \\
  - kein Element aus X, das als Komponente in $\zeta_i$ vorkommt, kommt in $\zeta_j$ vor ($i,j=1,\dots,n, i \neq j$).
 (Das bedeuted: Wenn ein Element $x \in X$ in einem Zyklus $\zeta_i$ ``vorkommt'',
  so wird $x$ von jedem anderen Zyklus $\zeta_j \: (j \neq i)$ fest gelassen.)
-}''\footnote{Definitionen, Sätze und Erklärung übernommen aus Lineare Algebra, Albrecht Beutelspacher}\\
+}''\footnote{Definitionen, Sätze und Erklärung übernommen aus Lineare Algebra, Albrecht Beutelspacher, S.174f}\\
 
 Die Darstellung der Permutation als Produkt disjunkter Zyklen erwies sich als günstig,
 denn nun kann das Problem in folgende zwei Teile aufgebrochen werden.
@@ -31,19 +31,22 @@ Dies lässt sich relativ leicht realisieren, indem der Container am Anfang der Z
 anschließend der zweite an die richtige, usw., bis der Ausgangspunkt wieder erreicht ist.
 Der zweite - etwas schwierige - Teil besteht darin, die Zyklenabarbeitung dort zu unterbrechen, wo eine andere beginnt. \\
 Etwas anders ausgedrückt:
-Beginnt man an dem Anfang eines Zyklus, können dessen Container ``in einem Stück'' an die richtige Stelle gebracht werden und der Kran anschließend wieder an der Ausgangsposition angelangen.
-Wir werden etwas später sehen, dass dadurch tatsächlich auch immer ein optimalen Weg (zumindest innerhalb eines Zyklus) gefunden werden kann.
-Durch entsprechend richtige ``Konkatenation'' der einzelnen Befehlsketten für die einzelnen Zyklen lässt sich ein nach dem in der Aufgabenstellung vorgegebenem Gütekriterium optimaler Algorithmus erstellen.
+Beginnt man an dem Anfang eines Zyklus, können dessen Container ``in einem Stück'' an die richtige Stelle gebracht werden
+ und der Kran anschließend wieder an der Ausgangsposition angelangen.
+Wir werden etwas später sehen, dass dadurch tatsächlich auch immer ein optimaler Weg (zumindest innerhalb eines Zyklus) gefunden werden kann.
+Durch entsprechend richtige ``Konkatenation'' der einzelnen Befehlsketten für die einzelnen Zyklen lässt sich immer
+ ein nach dem in der Aufgabenstellung vorgegebenem Gütekriterium optimaler Weg erstellen.
 Der durch Ausführung der berechneten Instruktionen abzufahrende Weg ist also minimal.
 \subsubsection{Datenstruktur}
 Permutationen können in einer indexierten Liste jeder Art (beispielsweise einem Array) gespeichert werden.
 Da in der Informatik jedoch indexierte Listen (insbesondere Arrays) meist Indizes aus $[0,n[$ besitzen muss dies beim Zugriff beachtet werden.
 Um also die Zahl $p$ zu finden, auf die $i$ durch $perm$ abgebildet wird, gilt $p = perm(i-1)$ jedoch nicht $p = perm(i)$. \\
-Es wird außerdem noch eine einfache Datenstruktur benötigt, um das Gleis mit Containerstellplätzen und Waggons abzubilden. \\
-Diese ....
+Es wird außerdem noch eine einfache Datenstruktur benötigt, um das Gleis mit Containerstellplätzen und Waggons abzubilden.
+Diese wird in \ref{gleis} noch genauer erläutert.
 % Zyklen
 \subsubsection{Ergebnisoptimaler Algorithmus}
 \paragraph{Entwurf}
+\label{slow_cycler}
 Der Entwurf dieses Algorithmus' ergibt sich aus den obigen Überlegungen. Zunächst wird die Zerlegung in disjunkte Zyklen berechnet.
 Hierfür wird folgende Hilfsfunktion zur Berechnung \emph{eines} Zyklus' verwendet.
 Wichtig ist hierbei zu beachten, dass die Waggonnummer an der Stelle |idx| durch |perm(idx-1)| dargestellt wird.
@@ -54,7 +57,7 @@ def cycle(perm: Seq[Int], start: Int): List[Int] = {
   def step(idx: Int): List[Int] =
     if(start == idx) Nil
     else idx :: step(perm(idx - 1))
-  start :: step(perm(start-1))
+  step(start)
 }
 \end{lstlisting}
 Salopp gesagt, hangelt man sich so lange - bei einem Startindex beginnend - durch die Permutation, bis man wieder beim Anfangswert ankommt.\\
@@ -83,18 +86,45 @@ def cyclesOf(perm: Seq[Int], ready: Set[Int]): List[List[Int]] =
   }
 \end{lstlisting}
 
+Mit den fertigen Zyklen
+
 \paragraph{Optimale Ergebnisse}
 \label{opt_res}
 Dieser Algorithmus liefert bereits optimale Ergebnisse im Sinne des Gütekriteriums der Aufgabenstellung
 Um dies zu zeigen, wird zunächst bewiesen, dass die Zyklen richtig gefunden werden. \\
-Zunächst wird die Hilfsfunktion |step| der Funktion |cycle| auf Korrektheit geprüft. Da es sich um eine rekursive Funktion handelt, bietet sich hier Induktion an.
-Der Beweis, das die Hilfsfunktion |step| zu einer gegebenen Permutation $perm: [0,n[ \rightarrow [1,n]$, einem Start- und Endwert |start| und einem Index |idx|
-eine Liste von Zahlen mit Länge n liefert, für die folgendes gilt. ... \\
-Induktionsanfang:
 
-... \\
-Im folgenden können wir uns also der Korrektheit von |cycle| sicher sein. 
-... \\
+Zunächst wird die Korrektheit der Hilfsfunktion |cycle| gezeigt.
+Das heißt, wir vergewissern und, dass |cycle| zu einer gegebenen Permutation $\pi$ immer den Zyklus $\phi$ findet, der an dem Startindex $i$ beginnt.
+Es ist also ein Zyklus $\phi$ der folgenden Form gesucht.
+\[ \phi = (i, \phi(i),\phi^2(i), \dots, \phi^{k-i}(i)) \]
+Für alle $x$ die im Zyklus $\phi$ enthalten sind gilt $\phi(x) = \pi(x)$.
+Weiter sind genau die Elemente $i, \phi(i),\phi^2(i), \dots, \phi^{k-i}(i)$ enthalten, also gilt
+\[ \phi = (i, \phi(i),\phi^2(i), \dots, \phi^{k-i}(i)) = (i, \pi(i),\pi^2(i), \dots, \pi^{k-1}(i)) \]
+Nun betrachten wir nochmals die Funktionsweise von |cycle|, bzw. von |step|.
+Wir behaupten zunächst |step| liefert zu einer Zahl $j = \pi^x(i)$ die Zahlen $\pi^x(i), \pi^{x+1}(i), \dots, \pi^{k-1}(i)$.
+Dies machen wir uns durch Induktion über $x$ klar. Sei also $x = k$.
+Dann gilt nach Definition eines Zyklus' $j = \pi^x(i) = \pi^k(i) = i$, also bricht |step| hier ab und liefert die leere Liste, was in der Tat korrekt ist.
+Nun können wir annehmen, |step| liefert für ein $j = \pi^x(i)$ bereits die Zahlen $\pi^x(i), \pi^{x+1}(i), \dots, \pi^{k-1}(i)$ gefunden.
+Also zeigen wir nun, dass |step| auch für ein $l = \pi^{x-1}$ die richtigen Zahlen liefert.
+|step| reiht also $l$ vor die Zahlen, die durch Aufruf von |step| mit $\pi(l) = \pi(\pi^{x-1}) = \pi^x = j$ berechnet werden.
+Das ergibt genau die Zahlen $\pi^{x-1}(i), \pi^x(i), \pi^{x+1}(i), \dots, \pi^{k-1}(i)$.
+Die Aussage ist somit bewiesen.
+Wird nun |step| - wie in |cycle| - mit $j = \pi^0(i) = i$ aufgerufen, erhalten wir korrekterweise die Zahlen
+\[ (\pi^x(i), \pi^{x+1}(i), \dots, \pi^{k-1}(i)) = (\pi^0(i), \pi^1(i), \dots, \pi^{k-1}(i)) = (i, \pi(i), \pi^2(i), \dots, \pi^{k-1}(i)) = \phi.\]
+
+Im Folgenden können wir uns also der Korrektheit von |cycle| sicher sein. Nun soll die Korrektheit von |cyclesOf| gezeigt werden.
+Wir wollen also beweisen, dass |cyclesOf| zu einer gegebenen Permutation $\pi$ und einer leeren Menge von ``fertigen'' Elementen eine Liste
+von disjunkten Zyklen $\phi_1, \phi_2, \dots, \phi_o$ zurückgibt, wobei $x < y \Leftrightarrow \ min(\phi_x) < min(\phi_y)$ für alle $x,y=0 \dots o$.
+Es sollen also nach Startwert sortierte Zyklen zurückgeliefert werden.
+Es wird im folgenden wieder Induktion verwendet.
+Im Induktionsanfang soll also gezeigt werden, dass |cyclesOf| für $ready = \phi_1 \cup \phi_2 \cup \dots \cup \phi_o$ die Zyklen $\phi_x, \phi_{x+1}, \dots, \phi_o$ findet, für ein $x \in {0, \dots, o}$.
+Da $\|ready\| = \|\phi_1 \cup \dots \cup \phi_o\|$, bricht |cyclesOf| ab mit der leeren Liste. Dies ist korrekt, denn es sind bereits alle Zyklen gefunden.
+Nun gelte, dass |cyclesOf| für ein $x \in {0, \dots, o}$ und $ready = \phi_1 \cup \phi_2 \cup \dots \cup \phi_x$ die Zyklen $\phi_x, \phi_{x+1}, \dots, \phi_o$ findet.
+Wir zeigen, dass dies auch für $x \rightarrow x+1$ gilt.
+Zunächst wird der Wert $s \in \{1, \dots, n\}$ ($s=$|start|, $n$ ist die Länge von $\pi$) mit $s \notin ready$ gesucht.
+Nun wird der neue Zyklus $\phi_x$ berechnet. Dieser ist sicher disjunkt von den zuvor berechneten Zyklen, da er bei $s \notin ready$ beginnt.
+Also ist auch dieser Algorithmus korrekt.
+
 Anschließend zeigen wir die Optimalheit vom eigentlichem Algorithmus, die Berechnung der Instruktionen.
 
 \paragraph{Laufzeitverhalten}
@@ -117,6 +147,9 @@ Außerdem sind die Algorithmen, wie sie oben angegeben sind, nicht tail-recursiv
 Das heißt bei jedem rekursivem Aufruf wird ein neuer Stack-frame allokiert.
 In der Praxis heißt dies, dass nur eine Rekursionstiefe von höchstens 10000 möglich ist.
 
+\paragraph{Verbesserung}
+\label{fast_cycler}
+
 \paragraph{Optimale Ergebnisse}
 Wie oben (in \ref{opt_res}) bereits gezeigt, können aus korrekten, sortierten Zyklen Instruktionen, die einen optimalen Weg für den Kran liefern, berechnet werden.
 Deshalb muss hier lediglich noch gezeigt werden, dass der neue Algorithmus wiederum korrekte und sortierte Zyklen berechnet. \\
@@ -127,42 +160,92 @@ Da jeder Container auf einen Waggon gebracht werden muss, muss für jeden Contai
 Bei $n$ Container sind dies also $n$ Befehle. Das setzt einen Algorithmus mit einer Laufzeitkomplexität von mindestens $O(n)$ voraus.
 Der erstellte Algorithmus hat also \textbf{optimale Laufzeitkomplexität}.
 
-% TODO?: Concurrent Algorithm.
+\paragraph{Mögliche Parallelisierung}
+Es wurden Überlegungen zur Parallelisierung des Algorithmus zur Berechnung der Instruktionen gemacht.
+Aus Zeigründen wurde jedoch auf eine Implementierung verzichtet.
+Der Algorithmus kann parallelisiert werden,
+indem zunächst für jeden Zyklus die Instruktionsketten berechnet werden und diese nachträglich kombiniert werden.
+
 \subsection{Implementierung}
 Die Implementierung gliedert sich folgendermaßen.
-\begin{itemize}
- \item[Utils] hilfreiche Methoden, unter anderem zur Zyklenfindung.
- \item[SlowUtils] wie Utils, bloß werden die zuerst vorgestellten, langsameren Funktionen zur Zyklenfindung benutzt.
- \item[FastAlgorithm]
- \item[SlowAlgorithm]
-\end{itemize}
-\subsubsection{``SlowAlgorithm''}
-\subsubsection{``FastAlgorithm''}
-\subsubsection{Randomisierte Permutationen}
+\begin{description}
+ \item[cycler] Algorithmen zur Berechnung der Zyklen (Sowohl langsamerer, als auch schnellerer)
+ \item[Instructor] Algorithmus zur Berechnung der Instruktionen aus den Zyklen
+ \item[Gleis] Datenstruktur zur Verwaltung der Containerstellplätze und Waggons
+ \item[Maschine] Klasse zur Simulation einer Maschine
+ \item[ListBuffer] Modifizierte Variante des standardmäßigem Scala ListBuffer
+ \item[Utils] hilfreiche Methoden, u.a. zur Ausgabe in Dateien
+\end{description}
+
+\subsubsection{Cycler - Berechnung der Zyklen}
+Da beide Algorithmen zur Zyklenfindung implementiert werden sollen, wurde zunächst das |trait| |Cycler| implementiert,
+welches die einzige Methode des Moduls |cyclesOf(Seq[Int]):List[List[Int]]| definiert.
+Diese soll zu einer gegebenen Permutation eine Liste von nach Startelementen sortierte Zyklen zurückgeben. \\
+Die Implementierung des |SlowCycler| erfolgte wie in \ref{slow_cycler}, die des |FastCycler| nach \ref{fast_cycler}.
+
+\subsubsection{Instructor - Berechnung der Instruktionen}
+Anschließend wurden im Modul |Instructor| Funktionen zur Berechnung der Instruktionen erstellt.
+Diese gliedern sich in die von ``außen'' zu benutzenden Funktionen sowie die ``innen'' benötigten Hilfsfunktionen.
+Von außen sind |compute(Seq[Int], Cycler): Seq[Instruction]| und |computeFromCycles(List[List[Int]]): Seq[Instruction]| zu benutzen.
+Die letztere berechnet die Liste der Instruktionen aus (meist vorher berechneten) Zyklen,
+während die erstere die Benutzung dadurch vereinfacht, nur die Permutation angeben zu müssen (die Zyklen werden dann automatisch berechnet).
+Die ``inneren'' Hilfsfunktionen sind folgende. \\
+|computeCycle(List[Int], List[List[Int]]): (ListBuffer[Instruction], List[List[Int]])|
+gibt zu einem zu bearbeitenden Startzyklus und restlichen Zyklen eine Liste von Instruktionen und eine Liste von unbearbeiteten Zyklen zurück.
+
+\subsubsection{Gleis - Speichern des Zustand}
+\label{gleis}
+Die Datenstruktur zum Speichern des aktuellen Status der Container, Containerstellplätzen und Waggons wird in der Klasse |Gleis| implementiert.
+Ein |Gleis| verwaltet zwei Arrays der Länge $n$. Das erste Array |con| speichert die jeweilige Containernummer auf dem zugehörigen Containerstellplatz.
+Das andere Array |wag| speichert die jeweilige Nummer des Container auf einem Waggon.
+Zu Beginn wird das Array |con| mit der Permutation initialisiert. \\
+Ein |Gleis| stellt die Methoden |takeCon(Int): Int|, |takeWag(Int): Int|, |putCon((Int, Int)): Int| und |putWag((Int, Int)): Int|.
+Außerdem wurde die |toString: String| Methode überschrieben, um eine formatierte Ausgabe zu erhalten.
+Die oben genannten Methoden sind zur Manipulation der Containernummern zu den jewiligen Containerstellplätzen, bzw. Waggons da.
+Genauere Verwendung wird bei späterer Referenz genauer beschrieben.
+
+\subsubsection{Maschine - Interpretieren der Instruktionen}
+Um die erzeugten Instruktionen interpretieren zu können, wurde die Klasse |Maschine| geschrieben.
+Diese stellt eine Methode |interpret| dar, die eine Befehlskette ausführt.
+Eine |Maschine| bedient sich einem |Gleis| um den Zustand zu speichern.
+Außerdem wurde die Klasse so gestaltet, dass Unterklassen leicht geschrieben werden können, um beispielsweise eine echte Kransteuerung anzubinden.
+
+\subsubsection{ListBuffer - Erweiterung einer Standardklasse}
+Um die Befehlsketten effizient erstellen zu können wird eine Datenstruktur benötigt,
+auf der das Anhängen einer zweiten Befehlskette in konstanter Zeit implementiert werden kann.
+Anschließend muss sie beginnend bei dem zuerst eingefügtem Element der Einfügereihenfolge folgend in linearer Zeit traversierbar sein.
+Diese Bedingungen erfüllt - leider - keine Standardklasse aus der Scala Collections API.
+Deswegen wurde die Klasse |ListBuffer| um das Anhängen eines zweiten |ListBuffer|s mit konstantem Zeitaufwand erweitert.
+
+\subsubsection{Utils - Helfende Methoden}
+Weitere Methoden, die nützlich im Rahmen der Nutzung des Programmes sind, jedoch nicht direkt zur Implementierung der Aufgabelösung dienen,
+wurden in das Modul |Utils| ausgelagert. Besondere Bedeutung hat die Funktion |randPerm|, die zu einer gegebenen Permutationslänge
+eine zufällige Permutation berechnet. %TODO: Cite where alg came from?
+Außerdem wurden auch Methoden zum Speichern der Instruktionsketten und Permutationen implementiert.
 
 \newpage
 \subsection{Programmabläufe}
 \begin{flushright}
   \begin{scriptsize}
-  \emph{Bemerkung:} Die Ausgaben der Konsole wurden per Hand nachformatiert zwecks besserem Einbetten in den Textfluss.
+  \emph{Bemerkung:} Die Ausgaben der Konsole wurden per Hand nachformatiert zwecks besserer Einbettung in den Textfluss.
   \end{scriptsize}
 \end{flushright}
 \paragraph{Beispiel aus der Aufgabenstellung}
-Das Folgende zeigt den Ablauf der sich bei Eingabe des Beispiels aus der Aufgabestellung ergibt. \\
+Folgend ist der Ablauf der sich bei Eingabe des Beispiels aus der Aufgabestellung ergibt dargestellt. \\
 Zunächst wird die Permutation erzeugt und in |perm| gespeichert.
 \begin{lstlisting}
 scala> val perm = Seq(4,3,2,1)               
-perm: Seq[Int] = List(4, 3, 2, 1)
+perm: IndexedSeq[Int] = WrappedArray(4, 3, 2, 1)
 \end{lstlisting}
 Anschließend werden die Instruktionen erzeugt und in |instrs| gespeichert.
 \begin{lstlisting}
-scala> val instrs = FastAlgorithm compute perm
+scala> val instrs = Instructor compute perm
 instrs: Seq[de.voodle.tim.bwinf.container.Instruction] =
-  Queue(TakeCon, MoveRight(1), Rotate, TakeCon, Rotate, PutCon,
-        Rotate,  MoveRight(1), Rotate, PutWag,
-        TakeCon, MoveLeft(1),  Rotate, PutWag,
-        TakeCon, MoveRight(2), Rotate, PutWag,
-        TakeCon, MoveLeft(3),  Rotate, PutWag, TakeCon)
+  List(TakeCon, MoveRight(1), Rotate, TakeCon, Rotate, PutCon,
+       Rotate,  MoveRight(1), Rotate, PutWag,
+       TakeCon, MoveLeft(1),  Rotate, PutWag,
+       TakeCon, MoveRight(2), Rotate, PutWag,
+       TakeCon, MoveLeft(3),  Rotate, PutWag, TakeCon)
 \end{lstlisting}
 Nun wird eine |Maschine| erzeugt, die die Instruktionen ausführen kann.
 \begin{lstlisting}
@@ -174,29 +257,30 @@ Waggons:   _ _ _ _
 Zuletzt soll die Maschine die Instruktionen interpretieren.
 \begin{lstlisting}
 scala> maschine interpret instrs                        
-1 2 3 4
-4 3 2 1
--->
-  -->
-  <--
-  ---->
-<------
+1 2 3 4;(m=8)
+4 3 2 1;(l=8)
+-->	(1)
+  -->	(1)
+  <--	(1)
+  ---->	(2)
+<------	(3)
 res0: de.voodle.tim.bwinf.container.Gleis = 
 Container: _ _ _ _
 Waggons:   1 2 3 4
 \end{lstlisting}
 Bemerkenswert ist hier, dass der erstellte Algorithmus in diesem Fall exakt den gleichen Weg liefert wie im Beispiel der Aufgabenstellung angegeben.
 Es gibt noch verschiedene andere Wege.
-Beispielsweise kann das Prüfen auf überlappende Zyklen erst beim Zurückfahren geprüft werden,
-wodurch sich z.B. einer der folgender Ablauf ergeben könnte.
+Beispielsweise kann das Prüfen auf überlappende Zyklen erst beim Zurückfahren erfolgen.
+Andere Möglichkeiten für einen optimalen Weg wären folgend dargestellte Abläufen.
+Es gibt also insgesamt vier verschieden Fahrpläne, die für das Beispiel einen optimalen Weg ergeben.
 \begin{lstlisting}                   
-1 2 3 4		1 2 3 4
-4 3 2 1		4 3 2 1
------->		------>
-    <--		  <----
-  <--		  -->
-  -->		  <--
-<----		<--
+1 2 3 4;(m=8)	1 2 3 4;(m=8)	1 2 3 4;(m=8)
+4 3 2 1;(l=8)	4 3 2 1;(l=8)	4 3 2 1;(l=8)
+------>	(3)	------>	(3)	---->	(2)
+    <--	(1)	  <----	(2)	  <--	(1)
+  <--	(1)	  -->	(1)	  -->	(1)
+  -->	(1)	  <--	(1)	    -->	(1)
+<----	(2)	<--	(1)	<------	(3)
 \end{lstlisting}
 \newpage
 \paragraph{Zufällig erzeugte Permutation}
@@ -204,19 +288,20 @@ Ein nächstes - etwas größeres Beispiel ergibt sich aus zufälliger Erzeugung 
 Hierbei wird die Hilfsfunktion |randPerm| des Moduls |Utils| aufgerufen und das Ergebnis wie vorher in |perm| gespeichert.
 \begin{lstlisting}
 scala> val perm = Utils randPerm 20
-perm: Array[Int] = Array(20, 11, 2, 8,  1, 16, 10, 17, 19, 14,
-                          5, 12, 9, 3, 13, 15, 18,  4,  7,  6)
+perm: IndexedSeq[Int] =
+  WrappedArray(20, 11, 2, 8,  1, 16, 10, 17, 19, 14,
+                5, 12, 9, 3, 13, 15, 18,  4,  7,  6)
 \end{lstlisting}
 Anschließend werden wieder die Instruktionen mit der Funktion |compute| des Moduls |FastAlgorithm| berechnet und in |instrs| gespeichert.
 \begin{lstlisting}
-scala> val instrs = FastAlgorithm compute perm
+scala> val instrs = Instructor compute perm
 instrs: Seq[de.voodle.tim.bwinf.container.Instruction] =
-  Queue(TakeCon, MoveRight(3),  Rotate, TakeCon, Rotate, PutCon,
+   List(TakeCon, MoveRight(3),  Rotate, TakeCon, Rotate, PutCon,
 	Rotate,  MoveRight(4),  Rotate, PutWag,
 	TakeCon, MoveRight(4),  Rotate, TakeCon, Rotate, PutCon,
 	Rotate,  MoveLeft(0),   Rotate, PutWag,
 	TakeCon, MoveRight(5),  Rotate, PutWag,
-	TakeCon, MoveRight(1),  Rotate, PutWag, T...
+	TakeCon, MoveRight(1),  Rotate, PutWag, ...
 \end{lstlisting}
 Zuletzt wird wieder eine |Maschine| |maschine| erzeugt um die Instruktionen zu interpretieren.
 \begin{lstlisting}
@@ -226,45 +311,47 @@ Container: 20 11 2 8 1 16 10 17 19 14 5 12 9 3 13 15 18 4 7 6
 Waggons:    _  _ _ _ _  _  _  _  _  _ _  _ _ _  _  _  _ _ _ _
 
 scala> maschine interpret instrs
- 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
-20 11  2  8  1 16 10 17 19 14  5 12  9  3 13 15 18  4  7  6
---------->
-         ------------>
-                     ------------>
-                                 <
-                                 --------------->
-                                                --->
-         <------------------------------------------
-         ------------------------------------------------>
-               <------------------------------------------
-               ------------------------------>
-                                          <---
-                                    <------
-                        <------------
-                        ------------------------------>
-                  <------------------------------------
-                  --------->
-                           ------------>
-      <---------------------------------
-   <---
-   --------------------------->
-            <------------------
-<------------
+ 1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20;(m=138)
+20 11  2  8  1 16 10 17 19 14  5 12  9  3 13 15 18  4  7  6;(l=138)
+--------->                                                 (3)
+         ------------>                                     (4)
+                     ------------>                         (4)
+                                 <                         (0)
+                                 --------------->          (5)
+                                                --->       (1)
+         <------------------------------------------       (14)
+         ------------------------------------------------> (16)
+               <------------------------------------------ (14)
+               ------------------------------>             (10)
+                                          <---             (1)
+                                    <------                (2)
+                        <------------                      (4)
+                        ------------------------------>    (10)
+                  <------------------------------------    (12)
+                  --------->                               (3)
+                           ------------>                   (4)
+      <---------------------------------                   (11)
+   <---                                                    (1)
+   --------------------------->                            (9)
+            <------------------                            (6)
+<------------                                              (4)
 res0: de.voodle.tim.bwinf.container.Gleis = 
 Container: _ _ _ _ _ _ _ _ _  _  _  _  _  _  _  _  _  _  _  _
 Waggons:   1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
 \end{lstlisting}
-\emph{TODO:} Interpretation!
+Permutationen bis zu einer Länge von 20 können wie gezeigt problemlos in der Konsole angezeigt und dargestellt werden.
+Durch das gewählte - and die Aufgabenstellung angelehnte - Ausgabeformat können auch die zu fahrende Wege gut in der Konsole dargestellt werden.
+Die Optimalheit des Weges kann leicht nachvollzogen werden.
+In der ersten Zeile ist die anhand der Permutations ausgerechnete mindestens benötigte Weglänge $m$ ausgegeben.
+In der zweiten Zeile ist die anhand der Instruktionen berechnete Weglänge $l$ ausgegeben. Wie zu sehen, stimmen diese überein.
 \paragraph{Demonstration der Skalierbarkeit}
 Nun soll die Skalierbarkeit demonstriert werden,
 die als Erweiterung in Form von Tail-rekursiven Funktionen und linearer Laufzeitkomplexität implementiert wurde.\\
-Hierfür erzeugen wir eine zufällige Permutation von 6,4 Millionen ($6,4 * 10^6$) Zahlen, die unsere Container darstellt.
-Anschließend werden wie oben auch, die Instruktionen berechnet und interpretiert. \\
+Hierfür erzeugen wir eine zufällige Permutation von 6,4 Millionen ($6,4 \cdot 10^6$) Zahlen, die unsere Container darstellt.
+Anschließend werden wie oben auch, die Instruktionen berechnet und interpretiert.
 Für Demonstrationszwecke wird außerdem die benötigte Zeit für jeden Schritt berechnet.
-Dies hat nicht das Ziel genaue Benchmarkwerte zu liefern, sondern vielmehr einen Anhaltspunkt für das Laufzeitverhalten.
-Hierfür wurde ein kleines Scala Programm geschrieben, zu finden im Modul |Utils|.
-\\
-Nun wird zunächst das Programm ausgeführt. (Die Permutation wird nicht ausgegeben, um Platz zu sparen.)
+Dies hat nicht das Ziel genaue Benchmarkwerte zu liefern, sondern vielmehr einen Anhaltspunkt für das Laufzeitverhalten darzustellen.
+Hierfür wurde ein kleines Scala Programm geschrieben welches im Modul |Utils| zu finden ist.
 \begin{lstlisting}
 scala> val verified = Utils demonstrate 6400000
 Time used for computing Cycles: 30093
@@ -274,7 +361,13 @@ Time used interpreting: 10639
 verified: Boolean = true
 \end{lstlisting}
 Interessant ist hier die Beobachtung, dass es nur 18 Zyklen gibt, bei einer Permutationslänge von $~10^7$.
-TODO: !!! Interpret more !!!
+Insgesamt wurden 110879 Millisekunden, also 110 Sekunden bzw. knapp 2 Minuten benötigt, um die Instruktionen zu berechen.
+Dies ist ein Indiz auf oben bewiesene gute Laufzeitkomplexität.
+Nach der Berechnung der Instruktionen wurden diese testweise interpretiert. Hierfür wurden knapp 11 Sekunden benötigt.
+Zum Schluß wurde außerdem verifiziert, dass jeder Container auf der richtigen Position ist.
 
 \subsection{Programmnutzung}
+Die Nutzung des Programms erfolgt primär über eine Scala Console mit richtig eingestelltem Classpath.
+Um dies einfach zu erreichen, empfehle Ich, im Programmordner Aufgabe2/dist/ das Buildprogramm sbt zu starten.
+TODO: Erklären!
 \subsection{Programmtext}

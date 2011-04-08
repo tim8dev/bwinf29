@@ -46,16 +46,21 @@
 \contentsline {paragraph}{Entwurf}{11}{section*.24}
 \contentsline {paragraph}{Optimale Ergebnisse}{12}{section*.25}
 \contentsline {paragraph}{Laufzeitverhalten}{12}{section*.26}
-\contentsline {subsubsection}{\numberline {1.4}Optimaler Algorithmus}{12}{subsubsection.3.1.4}
-\contentsline {paragraph}{Optimale Ergebnisse}{12}{section*.27}
-\contentsline {paragraph}{Optimale Laufzeitkomplexit\IeC {\"a}t}{12}{section*.28}
+\contentsline {subsubsection}{\numberline {1.4}Optimaler Algorithmus}{13}{subsubsection.3.1.4}
+\contentsline {paragraph}{Verbesserung}{13}{section*.27}
+\contentsline {paragraph}{Optimale Ergebnisse}{13}{section*.28}
+\contentsline {paragraph}{Optimale Laufzeitkomplexit\IeC {\"a}t}{13}{section*.29}
+\contentsline {paragraph}{M\IeC {\"o}gliche Parallelisierung}{13}{section*.30}
 \contentsline {subsection}{\numberline {2}Implementierung}{13}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {2.1}``SlowAlgorithm''}{13}{subsubsection.3.2.1}
-\contentsline {subsubsection}{\numberline {2.2}``FastAlgorithm''}{13}{subsubsection.3.2.2}
-\contentsline {subsubsection}{\numberline {2.3}Randomisierte Permutationen}{13}{subsubsection.3.2.3}
-\contentsline {subsection}{\numberline {3}Programmabl\IeC {\"a}ufe}{14}{subsection.3.3}
-\contentsline {paragraph}{Beispiel aus der Aufgabenstellung}{14}{section*.29}
-\contentsline {paragraph}{Zuf\IeC {\"a}llig erzeugte Permutation}{15}{section*.30}
-\contentsline {paragraph}{Demonstration der Skalierbarkeit}{16}{section*.31}
-\contentsline {subsection}{\numberline {4}Programmnutzung}{16}{subsection.3.4}
-\contentsline {subsection}{\numberline {5}Programmtext}{16}{subsection.3.5}
+\contentsline {subsubsection}{\numberline {2.1}Cycler - Berechnung der Zyklen}{14}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {2.2}Instructor - Berechnung der Instruktionen}{14}{subsubsection.3.2.2}
+\contentsline {subsubsection}{\numberline {2.3}Gleis - Speichern des Zustand}{14}{subsubsection.3.2.3}
+\contentsline {subsubsection}{\numberline {2.4}Maschine - Interpretieren der Instruktionen}{14}{subsubsection.3.2.4}
+\contentsline {subsubsection}{\numberline {2.5}ListBuffer - Erweiterung einer Standardklasse}{15}{subsubsection.3.2.5}
+\contentsline {subsubsection}{\numberline {2.6}Utils - Helfende Methoden}{15}{subsubsection.3.2.6}
+\contentsline {subsection}{\numberline {3}Programmabl\IeC {\"a}ufe}{16}{subsection.3.3}
+\contentsline {paragraph}{Beispiel aus der Aufgabenstellung}{16}{section*.31}
+\contentsline {paragraph}{Zuf\IeC {\"a}llig erzeugte Permutation}{17}{section*.32}
+\contentsline {paragraph}{Demonstration der Skalierbarkeit}{18}{section*.33}
+\contentsline {subsection}{\numberline {4}Programmnutzung}{18}{subsection.3.4}
+\contentsline {subsection}{\numberline {5}Programmtext}{18}{subsection.3.5}
