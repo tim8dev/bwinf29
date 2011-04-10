@@ -1,5 +1,4 @@
 package de.voodle.tim.bwinf.kisten.core
-// NOTE: New Version! Decreased Memory Footprint :)
 import math._
 
 sealed abstract class Kiste extends Ordered[Kiste] {
@@ -8,13 +7,10 @@ sealed abstract class Kiste extends Ordered[Kiste] {
 
   final def +<(der: Kiste)(implicit vergleich: KistenVergleich = StandardVergleich) =
     if(this ⊃ der)   // Passt der hinein?-
-      this +<< der // Dann packe ihn ein!
-  else Set.empty // Sonst lass' es sein.
+      this +<< der  // Dann packe ihn ein!
+    else Set.empty // Sonst lass' es sein.
 
   protected def +<<(der:Kiste): Set[Kiste]
-
-  @Deprecated def >~(der: Kiste)  = this ⊃ der
-  @Deprecated def >=~(der: Kiste) = this ⊇ der
 
   // Folgende Methoden prüfen unabhänig vom Inhalt!
   // innen >= der.aussen gdw. aussen > der.aussen
@@ -61,7 +57,7 @@ sealed abstract class Kiste extends Ordered[Kiste] {
     case der: Kiste =>
       getClass() == der.getClass() && a == der.a && b == der.b && c == der.c
     case _ => false
-  } // Don't need equals? case classes overrides it themself
+  }
   override def hashCode = 31*(31*(31*(31*(31 + v) + a) + b) + c)
 
   def finde(f: Kiste => Boolean): List[Kiste] =
@@ -191,11 +187,12 @@ object Kiste {
     val (a,b,c) = ordne(x,y,z)
     new KisteHalb(a,b,c, links)
   }
-  // links muss >= rechts sein!
+  
   def apply(x: Int, y: Int, z: Int, links: Kiste, rechts: Kiste) = {
     val (a,b,c) = ordne(x,y,z)
+    // links muss >= rechts sein!
     if(links >= rechts) new KisteVoll(a,b,c, links, rechts)
-    else                    new KisteVoll(a,b,c, rechts, links)
+    else                new KisteVoll(a,b,c, rechts, links)
   }
 
   object Ordnung {

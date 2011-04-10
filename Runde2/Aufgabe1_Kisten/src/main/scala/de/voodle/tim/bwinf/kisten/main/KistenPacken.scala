@@ -80,15 +80,6 @@ object KistenPacken {
     (komprimierung, time)
   }
 
-  def testWithGraph() {
-    val graphPacker = new MutableOptimalPacker(kisten) // mit Graph!
-    val (minKs, time) = bench(graphPacker.min)
-    logge("Mit Graph gepackt in " + time + " ms." )
-    logge("Minimum[Graph].v: " + minKs.v)
-
-    logge("Minimum[Graph]" + minKs)
-  }
-
   def testMt() {
     val (minKs, time) = bench(new ActingPacker(kisten).min)
     logge("Multithreaded gepackt in " + time + " ms.")
@@ -105,30 +96,4 @@ object KistenPacken {
     logge("Minimum[st]: " + minKs)
     logge("Minimum[st].v: " + minKs.v)
   }
-/*
-  def testRandom(times: Int) {
-    var timesBenched: List[Long] = Nil
-    var volumes: List[Int] = Nil
-    val max = KistenSatz(kisten)
-    var absMin = max
-    for(i <- 0 until times) {
-      val packer = new RandomPacker(kisten)
-      val (kistenSaetze, time) = bench(packer.packe)
-      logge("  RandomKartonPacker gepackt in " + time + " ms.")
-      logge("  Berechnete Möglichkeiten[Random] (von " + kisten.size + " Kartons): "
-              + kistenSaetze.size)
-      
-      val minKs = if(kistenSaetze.isEmpty) max else kistenSaetze.min
-      logge("  Minimum[Random].v : " + minKs.v)
-
-      if(minKs.v < absMin.v) absMin = minKs
-      timesBenched ::= time
-      volumes ::= minKs.v
-    }
-
-    logge("Durchschnittszeit: " + timesBenched.sum / timesBenched.length)
-    logge("Durchschnittsvolumen: " + volumes.sum / volumes.length)
-    logge("Minimum[Overall Random]: " + absMin + "(v = " + absMin.v + ")")
-  }
-*/
 }

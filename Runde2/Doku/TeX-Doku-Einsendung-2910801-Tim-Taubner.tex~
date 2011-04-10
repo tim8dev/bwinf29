@@ -1,5 +1,9 @@
 \documentclass[a4paper,11pt]{scrartcl}
 \usepackage[utf8]{inputenc}
+
+%custom font:
+%\usepackage[T1]{fontenc}
+%\usepackage[math]{iwona}
 \usepackage[ngerman]{babel}
 
 \usepackage{amsmath}\usepackage{amsfonts}\usepackage{amssymb}\usepackage{amsthm}
@@ -32,14 +36,14 @@
 \definecolor{darkred}  {rgb}{.6,0,0}
 \definecolor{darkgreen}{rgb}{0,.3,0}
 
-\lstset{commentstyle=\color{darkgreen}\textbf, keywordstyle=\color{darkblue}\textbf}
+\lstset{commentstyle=\color{darkgreen}\textbf, keywordstyle=\color{blue}\textbf}
 \lstset{inputencoding=utf8, extendedchars=true}
 \lstset{numbers=left, numberstyle=\tiny, numbersep=5pt}
 %Define Scala Language Highlighting
 \lstdefinelanguage{Scala}[]{Java}
-  {morekeywords={trait, object, sealed, override, val, var, lazy, def, yield},%, List, Int, Double, Seq, Ordered, Nil, Set},
+  {morekeywords={trait, object, sealed, override, val, var, lazy, def, yield, type},%, List, Int, Double, Seq, Ordered, Nil, Set},
    %Ugly fix to ``Umlaute''
-   literate={<-}{{$\gets$}}1 {=>}{{$\Rightarrow$}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1}
+   literate={<-}{{$\gets$}}1 {=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1}
 \lstMakeShortInline{|}
 
 \newcommand{\comment}[1]{}
@@ -58,7 +62,6 @@
   \newenvironment{bew}{\begin{proof}[Beweis]}{\end{proof}}
 
 \begin{document}
-\addtolength{\textwidth}{0.8cm}
 \addtolength{\voffset}{-0.8cm}
 \addtolength{\textheight}{0.8cm}
 

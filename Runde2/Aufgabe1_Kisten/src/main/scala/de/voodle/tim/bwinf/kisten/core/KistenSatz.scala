@@ -1,13 +1,10 @@
-package de.voodle.tim.bwinf
-package kisten
+package de.voodle.tim.bwinf.kisten
 package core
 
 import scala.collection.immutable.SortedSet
 import scala.collection.immutable.TreeMap
 
-case class KistenSatz (kistenBaum: TreeMap[Kiste, Int],
-                                v: Int,
-                           length: Int)
+case class KistenSatz (kistenBaum: TreeMap[Kiste, Int], v: Int, length: Int)
   extends Ordered[KistenSatz] {
   import KistenSatz._
 
@@ -40,6 +37,8 @@ case class KistenSatz (kistenBaum: TreeMap[Kiste, Int],
   def ++<(der: Kiste)(implicit vergleich: KistenVergleich = StandardVergleich): Set[KistenSatz] =
     (this +< der)(vergleich) + (this + der)
 
+  def neben(der: KistenSatz) = (this /: der.kisten) { _ + _ }
+
   def compare(der: KistenSatz) = KistenSatz.Ordnung.eindeutig.compare(this, der)
 
   override def equals(other: Any) =
@@ -47,7 +46,7 @@ case class KistenSatz (kistenBaum: TreeMap[Kiste, Int],
   def equals(der: KistenSatz) = // Schneller HashCode basierter Check
     hashCode == der.hashCode && kistenBaum == der.kistenBaum
 
-  override val hashCode = 41* (43 /: kistenBaum) { 47 *(_) + _.hashCode } + v // Speicher im Eifer!
+  override val hashCode = 41* (43 /: kistenBaum) { 47* _ + _.hashCode } + v // Speicher im Eifer!
 
   def kistenSet: SortedSet[Kiste] = SortedSet(kistenBaum.map(_._1).toSeq: _*)
   def kisten = kistenBaum.flatMap((ki) => ki._1 * ki._2).toSeq.sorted
@@ -72,8 +71,8 @@ object KistenSatz {
       apply(createTree(TreeMap.empty, kartons))
   def apply(kistenBaum: TreeMap[Kiste, Int]): KistenSatz =
     KistenSatz(kistenBaum,
-               (0 /: kistenBaum) { (v,ki) => v + ki._1.v * ki._2 },
-               (0 /: kistenBaum) { (n,ki) => n + ki._2 } )
+              (0 /: kistenBaum) { (v,ki) => v + ki._1.v * ki._2 },
+              (0 /: kistenBaum) { (n,ki) => n + ki._2 } )
 
   object Ordnung {
     val nachVolumen = new Ordering[KistenSatz]() {

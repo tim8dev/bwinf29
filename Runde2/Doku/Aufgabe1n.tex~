@@ -1,4 +1,4 @@
-\section{Aufgabe 1: Kisten in Kisten in Kisten}
+\section{Erste bearbeitete Aufgabe: (1) Kisten in Kisten in Kisten}
 \subsection{Lösungsidee}
 \subsubsection{Allgemein}
 %TODO: Better Definitions
@@ -29,12 +29,12 @@ Wichtig ist, um den Code zu verstehen, dass \lstinline|(satz ++< kiste)| alle M�
   def packe = (Set[KistenSatz]() /: kisten) ( hilfsPacken )
   def hilfsPacken(sätze: Set[KistenSatz], kiste: Kiste) =
     if(sätze.isEmpty)
-      Set(KistenSatz(kiste :: Nil)) // KistenSatz nur mit der Kiste
+      Set(KistenSatz(kiste :: Nil)) // KistenSatz nur mit der Kiste kiste
     else
       (Set[KistenSatz]() /: sätze) { // Beginne mit leerer Menge
         (menge, satz) =>
-         menge ++  // Füge neue Möglichkeiten der menge hinzu
-         (satz ++< kiste) // Erzeugt neue Möglichkeiten
+          menge ++  // Füge neue Möglichkeiten der menge hinzu
+          (satz ++< kiste) // Erzeugt neue Möglichkeiten
       }
 \end{lstlisting}
 \subparagraph{Laufzeitverhalten}
@@ -48,8 +48,8 @@ Sprich es können $2*(15-1)=28$ Kisten in allen Möglichkeiten gepackt werden.
 (Unter der Annahme es gibt etwa $x!$ Möglichkeiten für $2x$ Kisten\footnote{Die Annahme zeigt sich als gar nicht so schlecht, wie man in \ref{TODO} sieht})
 \subparagraph{Verkürzung der Laufzeit} Eine Überlegung war, das Laufzeitverhalten durch Parallelisierung zu verkürzen.
 Allerdings verspricht dies aufgrund der hohen Laufzeitkomplexität von $O(n \cdot n!)$ kaum Abhilfe.
-Selbst bei 100 Kernen, sprich einer hundertfachen Beschleunigung\footnote{Dies wird in der Praxis nie erreicht.
-Es muss immer ein gewisser Overhead für Synchronisation und Sequentielle Programmabläufe ``geopfert'' werden.}
+Selbst bei 100 Kernen, sprich einer hundertfachen Beschleunigung\footnote{Dies wird in der Praxis nie erreicht,
+es muss immer ein gewisser Overhead für Synchronisation und sequentielle Programmabläufe ``geopfert'' werden.}
 können gerade mal $17!$ Operationen ausgeführt werden. Das entspricht $2*(17-1)=32$ Kisten.
 Es können also $14\%$($32/28=1.1428\dots$) mehr Kisten gepackt werden, was nicht nennenswert viel ist. \\
 Es kommt also für Frau Y. somit nicht in Frage die Packberechnung beispielsweise auf eine Rechnerfarm zu migrieren. \\
@@ -61,11 +61,10 @@ Es ist offensichtlich, dass die ursprüngliche Motivation dadurch nicht erreicht
 Wenn beispielsweise 200 Kisten gepackt werden sollen, bleiben 170 Kisten neben 30 optimal gepackten ungepackt. \\
 Hierzu habe ich zwei Lösungsideen erstellt. Die grundlegende Motivation ist,
 die optimale Packung aufzugeben und stattdessen in menschlicher Zeit
-\footnote{menschliche Zeit = Lebenserwartung eines Menschen (~75 Jahre)} trotzdem eine gute Packung auch zu einer großen Menge von Kisten zu finden.
-%TODO: No Optimal Packer found... :(
+\footnote{menschliche Zeit $<<$ Lebenserwartung eines Menschen ($~75$ Jahre)} trotzdem eine gute Packung auch zu einer großen Menge von Kisten zu finden.
 \subsubsection{Bruteforce nach Aufteilung}
 \paragraph{Ansatz} Eine Möglichkeit wäre,
-den Bruteforce Algorithmus immer auf 30 Kisten anzuwenden und danach diese Kistensätze nebeneinander zu stellen. \\
+den Bruteforce Algorithmus immer auf einen Teil der Kisten anzuwenden und danach diese so erzeugten Kistensätze nebeneinander zu stellen. \\
 Wichtig ist hierbei, dass die Kisten sinnvoll aufgeteilt werden, so dass jeder Kistenhaufen kleinere und größere Kisten hat um eine hohe Packdichte zu erreichen.
 %TODO:
 ...
@@ -73,11 +72,12 @@ Wichtig ist hierbei, dass die Kisten sinnvoll aufgeteilt werden, so dass jeder K
 \subparagraph{Laufzeitverhalten}
 Dieser Algorithmus ist streng polynomiell. Genauer gesagt kann er sogar in $O(n \log n)$ Zeit ausgeführt werden.
 Dies ergibt sich aus einer Laufzeitanaylse des Algorithmus. \\
+Sei im folgenden $tf$ der Teilungsfaktor, also die Anzahl Kisten die jeweils eine Gruppe bilden.
 Zunächst müssen die Kisten sortiert werden in $O(n \log n)$.
-Das Aufteilen der Kisten in Gruppen braucht $O(n)$. Man erhält also $\frac{n}{30}$ Gruppen.
+Das Aufteilen der Kisten in Gruppen braucht $O(n)$. Man erhält also $\frac{n}{tf}$ Gruppen.
 Eine dieser zu packen geschieht in konstanter Zeit. (Auch wenn der Bruteforce ursprünglich eine Komplexität von $O(m \cdot m!)$ besitzt,
-ist mit $m=30$ seine Laufzeit $O(30 \cdot 30!) = O(1)$, also konstant.)
-Daraus ergibt sich letzendlich \[ O(n\log n + n + \frac{n}{30} \cdot 1) = O(n\log n) \].
+ist mit $m=tf$ seine Laufzeit $O(tf \cdot tf!) = O(1)$, also konstant, bei konstantem tf.)
+Daraus ergibt sich letzendlich \[ O(n\log n + n + \frac{n}{tf} \cdot 1) = O(n\log n) \].
 \subsubsection{Online Packer}
 \paragraph{Ansatz}
 Ein etwas anderer Ansatz ist, Kistensätze inkrementiell zu erzeugen.
@@ -85,7 +85,7 @@ Daher, es wird ein Algorithmus erfordert,
 welcher zu einem - mehr oder weniger gut - gepacktem Kistensatz und einer zu packenden Kiste ein neuen Kistensatz liefert,
 der, möglichst dicht gepackt, diese enthält.
 Eine weitere Beschränkung, die ich an den Algorithmus stelle, ist, dass er in höchstens $O(n)$ Zeit diesen neuen Kistensatz liefert.
-Hat man nun solch einen Algorithmus, lassen sich alle Kisten zusammen in $O(n \cdot n)=O(n²)$ Zeit packen bei inkrementieller Kistensatzerzeugung. 
+Hat man nun solch einen Algorithmus, lassen sich alle Kisten zusammen in $O(n \cdot n)=O(n^2)$ Zeit packen bei inkrementieller Kistensatzerzeugung. 
 %TODO: Betrachte auch O(n²)?%
 \paragraph{Onlinealgorithmus}
 Dieser Algorithmus kann von Frau Y.\ jedoch auch verwendet werden, um eine Kiste in der eine Lieferung verpackt war,

@@ -29,11 +29,8 @@ object KistenLogger {
 
 import LogStufe._
 case class KistenLogger(ausgabe: String => Any, ergebnisAusgabe: String => Any) {
-  //var zeilen = List[String]()
-  
   def logge(zeile: =>String)(implicit stufe: LogStufe = Extra) { // By-name!
     val ausgabenZeile = zeile
-    //zeilen ::= ausgabenZeile
     stufe match {
       case Extra =>
         ausgabe(ausgabenZeile)
@@ -42,8 +39,4 @@ case class KistenLogger(ausgabe: String => Any, ergebnisAusgabe: String => Any) 
         ergebnisAusgabe(ausgabenZeile)
     }
   }
-
-  //def geloggteZeilen = zeilen.reverse
-
-  implicit val alsFunktion: String => Unit = logge(_)
 }

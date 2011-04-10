@@ -14,8 +14,8 @@ object SortierenderPacker {
     input.toList.sorted(Kiste.Ordnung.nachVolumen.reverse)
 }
 
-abstract class SortierenderPacker(kartonListe: Seq[KisteLeer]) extends KistenPacker {
-  val kisten = SortierenderPacker.sortieren(kartonListe) // sortieren; umdrehen
+abstract class SortierenderPacker(kistenListe: Seq[KisteLeer]) extends KistenPacker {
+  val kisten = SortierenderPacker.sortieren(kistenListe) // sortieren; umdrehen
 }
 
 trait SimplerPacker extends KistenPacker {
@@ -27,30 +27,3 @@ trait SchrittPacker extends SimplerPacker {
   def packe = (Set[KistenSatz]() /: kisten) ( packSchritt )
   protected def packSchritt(sätze: Set[KistenSatz], kiste: KisteLeer): Set[KistenSatz]
 }
-
-trait GraphPacker extends KistenPacker {
-  implicit val kistenGraph = KistenGraph(kisten)
-}
-
-/*
-import java.util.Random
-class RandomPacker(kistenSeq: Seq[KisteLeer]) extends SimplerPacker(kistenSeq) {
-  private val rand = new Random
-  
-  lazy val packe: Set[KistenSatz] =
-    kisten.foldLeft(Set[KistenSatz]()) { (gepackt, u) => hilfsPacken(gepackt, u) }
-
-  private var i = 0
-
-  protected def hilfsPacken(sätze: Set[KistenSatz], kiste: Kiste): Set[KistenSatz] =
-    if(sätze.isEmpty) Set(KistenSatz(kiste :: Nil))
-    else {
-      var fertig: Set[KistenSatz] = Set()
-      for(satz <- sätze)
-        if(i < 8 || rand.nextBoolean) // TODO: More random! (Weighted Random!)
-          fertig ++= (satz +< kiste)
-      i += 1
-      fertig
-    }
-}
-*/

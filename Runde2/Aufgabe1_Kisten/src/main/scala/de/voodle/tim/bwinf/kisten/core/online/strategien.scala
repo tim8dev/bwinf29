@@ -5,28 +5,26 @@ abstract trait Strategie {
   // Syntactic sugar :)
   def apply(kisten: KistenSatz)(der: KisteLeer)
            (implicit vergleich: KistenVergleich = StandardVergleich) =
-             finde(kisten)(der)(vergleich)
+    finde(kisten)(der)(vergleich)
 
   protected def finde(kisten: KistenSatz)(der: KisteLeer)
-           (implicit vergleich: KistenVergleich): Option[KistenSatz]
+                     (vergleich: KistenVergleich): Option[KistenSatz]
 }
 
 object Strategie {
-  private[online] def pfadErsetzer(pfad: List[Kiste]) =
-    (_: Kiste, _: Kiste) match {
+  private[online] def pfadErsetzer(pfad: List[Kiste]): (Kiste,Kiste) => Kiste =
+    (_, _) match {
       case (kg: KisteHalb, kl) => kg ersetzeLinks kl
       case (kg: KisteVoll, kl) =>
         if(pfad.contains(kg.links)) kg ersetzeLinks  kl
         else                        kg ersetzeRechts kl
-      case _ => throw new IllegalArgumentException("Leere Kisten nicht im Pfad erlaubt!")
+      case _ => throw new IllegalArgumentException("Leere Kisten im Pfad nicht erlaubt!")
     }
 }
-
 import Strategie._
 
 object FindeHalbleeren extends Strategie {
-  protected def finde(kisten: KistenSatz)(der: KisteLeer)
-           (implicit vergleich: KistenVergleich) =
+  protected def finde(kisten: KistenSatz)(der: KisteLeer)(vergleich: KistenVergleich) =
     kisten.find { _ match {
         case kh: KisteHalb =>
           (kh ⊃ der) && kh.freiFür(der)
@@ -43,10 +41,8 @@ object FindeHalbleeren extends Strategie {
         Some(kisten - alteKiste + neueKiste)
     }
 }
-
 object FindeGrößerenLeeren extends Strategie {
-  protected def finde(kisten: KistenSatz)(der: KisteLeer)
-           (implicit vergleich: KistenVergleich) =
+  protected def finde(kisten: KistenSatz)(der: KisteLeer)(vergleich: KistenVergleich) =
     kisten.find {
       big => (big ⊃ der) && big.istLeer
     } match {
@@ -60,10 +56,8 @@ object FindeGrößerenLeeren extends Strategie {
         Some(kisten - alteKiste + neueKiste)
     }
 }
-
 object FindeZwischenraum extends Strategie {
-  protected def finde(kisten: KistenSatz)(der: KisteLeer)
-           (implicit vergleich: KistenVergleich) =
+  protected def finde(kisten: KistenSatz)(der: KisteLeer)(vergleich: KistenVergleich) =
     kisten.find { k => (k ⊃ der) && (k match {
         case kh: KisteHalb => // Es ist sicher noch Platz für einen Zwischenraum
            (der ⊃ kh.links)
@@ -88,19 +82,9 @@ object FindeZwischenraum extends Strategie {
         Some(kisten - alteKiste + neueKiste)
     }
 }
-
 object FindeKleinereWurzel extends Strategie {
-  protected def finde(kisten: KistenSatz)(der: KisteLeer)
-           (implicit vergleich: KistenVergleich) =
-    kisten.kistenSet.find(der ⊃ _.alsLeer) map {
+  protected def finde(kisten: KistenSatz)(der: KisteLeer)(vergleich: KistenVergleich) =
+    kisten.kistenSet.find(der ⊃ _) map {
       kWurzel => kisten - kWurzel + (der + kWurzel)
     }
 }
-/*
-case class Umpacken(strategien: List[Strategie]) extends Strategie {
-  protected def finde(kisten: KistenSatz)(der: KisteLeer)
-           (implicit vergleich: KistenGraph) = {
-     // Angenommen, es gäbe keine kleineren und keinen Karton der diesen noch aufnehmen könnte.
-     //val groessere = kisten.k
-  }
-}*/

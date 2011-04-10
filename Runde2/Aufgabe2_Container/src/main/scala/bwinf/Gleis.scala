@@ -1,48 +1,33 @@
 package de.voodle.tim.bwinf.container
 
-// TODO: clean it up!
 class Gleis(initCon: Seq[Int]) {
   val length = initCon.length
-  protected val con = Seq(initCon: _*).toArray
-  protected val wag = new Array[Int](length)
+  private val con = Seq(initCon: _*).toArray
+  private val wag = new Array[Int](length)
 
-  // Immutable Vectors!
-  def container = Vector(con: _*)
-  def waggons = Vector(wag: _*)
-
-  protected def arrGet(arr: Array[Int], take: Boolean)(i: Int): Option[Int] = {
+  private def arrTake(arr: Array[Int])(i: Int): Int = {
     val res = arr(i-1)
-    if(take)
-      arr(i-1) = 0
-    if (res == 0) None else Some(res)
+    arr(i-1) = 0
+    res
   }
-  protected def arrPut(arr: Array[Int])(i: Int)(what: Int) =
-    arr(i-1) match {
-      case 0 =>
-        arr(i-1) = what
-	      Some(())
-      case _ => None
-    }
-
-  def takeWag(i: Int) = arrGet(wag, true)(i)
-  def takeCon(i: Int) = arrGet(con, true)(i)
-  def putWag(map: (Int, Int)) = map match {
-    case (i, what) => arrPut(wag)(i)(what)
-  }
-  def putCon(map: (Int, Int)) = map match {
-    case (i, what) => arrPut(con)(i)(what)
+  private def arrPut(arr: Array[Int])(map: (Int, Int)) = map match {
+    case (i, what) =>
+      require(arr(i-1) == 0, "arr(i-1) at " + i + " must be 0, but is " + arr(i-1))
+      arr(i-1) = what
   }
 
-  //def apply(i: Int) = arrGet(con, false)(i) orElse arrGet(wag, false)(i)
-  def take(i: Int)  = arrGet(con, true)(i) orElse arrGet(wag, true)(i)
+  def takeWag(i: Int) = arrTake(wag)(i)
+  def takeCon(i: Int) = arrTake(con)(i)
+  def putWag(map: (Int, Int)) = arrPut(wag)(map)
+  def putCon(map: (Int, Int)) = arrPut(con)(map)
 
-  def put(map: (Int, Int)): Option[Unit] = map match {
-    case (i, what) => put(i)(what)
-  }
-  def put(i: Int)(what: Int) = arrPut(wag)(i)(what) orElse arrPut(con)(i)(what)
-
-  private def arrString(arr: Array[Int]) = arr take 100 map (i => if(i == 0) "_" else i.toString) mkString " "
+  private def arrString(arr: Array[Int]) = // Only print first 100
+    arr take 100 map (i => if(i == 0) "_" else i.toString) mkString " "
   override def toString =
      "Container: " + arrString(con) + "\n" +
      "Waggons:   " + arrString(wag)
+
+  // Immutable Vector copies!
+  def container = Vector(con: _*)
+  def waggons = Vector(wag: _*)
 }
