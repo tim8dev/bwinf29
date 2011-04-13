@@ -142,7 +142,7 @@ Es ergeben sich für die Datenstruktur, diesen Kistenwald (Menge von Kistenbäum
 \begin{enumerate}
  \item Das Ersetzen eines [Teil]baumes sollte möglichst billig sein.
 Da das Ersetzen einer |Kiste| als Löschen und anschließendes Hinzufügen dieser in den Baum implementiert ist,
-  müssen sowohl die Lösch- als auch Hinzufügefunktionen schnelle Laufzeiten haben.
+  müssen sowohl die Lösch- als auch Hinzufügefunktionen kurze Laufzeiten haben.
 Da die Datenstruktur unveränderbar ist, liefert jede Veränderung in dem durch eine |Kiste| repräsentiertem Kistenbaum eine neues Objekt zurück.
 Dieses Objekt muss dann durch eine Lösch- und eine Hinzufügeoperation in den Baum des |KistenSatz| aktualisiert werden.
  \item ``Duplikate'' müssen zugelassen sein, da es passieren kann, das zwei Kisten genau die gleichen Maße haben.

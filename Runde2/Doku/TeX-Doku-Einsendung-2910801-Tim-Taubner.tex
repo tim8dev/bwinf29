@@ -11,7 +11,7 @@
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\usepackage{a4wide}
+\usepackage[textwidth=16.8cm,textheight=23cm]{geometry}
 \usepackage{textcomp}
 
 \usepackage[small,bf]{caption}
@@ -43,7 +43,8 @@
 \lstdefinelanguage{Scala}[]{Java}
   {morekeywords={trait, object, sealed, override, val, var, lazy, def, yield, type},%, List, Int, Double, Seq, Ordered, Nil, Set},
    %Ugly fix to ``Umlaute''
-   literate={<-}{{$\gets$}}1 {=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1}
+   literate=%{<-}{{$\gets$}}1 {=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}1
+            {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1}
 \lstMakeShortInline{|}
 
 \newcommand{\comment}[1]{}
@@ -62,8 +63,8 @@
   \newenvironment{bew}{\begin{proof}[Beweis]}{\end{proof}}
 
 \begin{document}
-\addtolength{\voffset}{-0.8cm}
-\addtolength{\textheight}{0.8cm}
+\addtolength{\voffset}{0.28cm}
+%\addtolength{\textheight}{0.8cm}
 
 \maketitle
 

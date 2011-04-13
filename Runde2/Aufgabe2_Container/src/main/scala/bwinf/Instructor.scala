@@ -23,12 +23,11 @@ object Instructor {
                       prev: Int, cur: Int): Step =
       cyclesLeft.headOption match { // Does another Cycle begins between prev and cur?
         case Some(nextCycle @ (next :: _)) if prev == max && max+1 == next => // (1)
-          val (cycleInstrs, newCyclesLeft) =
-            computeCycle(cyclesLeft.head, cyclesLeft.tail)
+          val (cycleInstrs, _) = computeCycle(cyclesLeft.head, cyclesLeft.tail)
           val extraInstrs = instrs ++=
             ListBuffer(PutCon, MoveRight, TakeCon) ++=
             cycleInstrs ++= ListBuffer(MoveLeft, TakeCon)
-          step(extraInstrs, newCyclesLeft, prev, cur)
+          step(extraInstrs, Nil, prev, cur)
         case Some(nextCycle @ (next :: _)) if next < cur => // (2)
           val (transInstrs, newCyclesLeft) = computeCycle(nextCycle, cyclesLeft.tail)
           // Move from prev to nextCycle.head (next)

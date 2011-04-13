@@ -11,7 +11,7 @@
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\usepackage{a4wide}
+\usepackage[textwidth=16.8cm,textheight=23cm]{geometry}
 \usepackage{textcomp}
 
 \usepackage[small,bf]{caption}
@@ -43,7 +43,8 @@
 \lstdefinelanguage{Scala}[]{Java}
   {morekeywords={trait, object, sealed, override, val, var, lazy, def, yield, type},%, List, Int, Double, Seq, Ordered, Nil, Set},
    %Ugly fix to ``Umlaute''
-   literate={<-}{{$\gets$}}1 {=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}1 {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1}
+   literate=%{<-}{{$\gets$}}1 {=>}{{$\Rightarrow$}}1 {->}{{$\rightarrow$}}1
+            {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1}
 \lstMakeShortInline{|}
 
 \newcommand{\comment}[1]{}
@@ -62,8 +63,8 @@
   \newenvironment{bew}{\begin{proof}[Beweis]}{\end{proof}}
 
 \begin{document}
-\addtolength{\voffset}{-0.8cm}
-\addtolength{\textheight}{0.8cm}
+\addtolength{\voffset}{0.2cm}
+%\addtolength{\textheight}{0.8cm}
 
 \maketitle
 
@@ -107,7 +108,7 @@ Sie scheinen bereits ein Algorithmus entwickelt haben, mit meinen einsilbigen An
 Die Dateien auf der CD sind folgendermaßen strukturiert.
 Jede Aufgabe hat einen Ordner AufgabeX mit den beiden folgenden Unterordnern.\\
 \begin{tabular}{rl}
-\textbf{src} & Unterordner, in dem die Quelltexte in der Paketstruktur (de/voodle/..) liegen \\
+\textbf{src}  & Unterordner, in dem die Quelltexte in der Paketstruktur (de/voodle/..) liegen \\
 \textbf{dist} & Unterordner, in dem ausführbare Dateien oder - wie bei Aufgabe 1 - \\
               & andere Erzeugnisse sowie benötigte Bibliotheken enthalten sind \\
 \end{tabular}

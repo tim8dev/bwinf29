@@ -40,38 +40,38 @@
 \contentsline {section}{\numberline {C}Zweite bearbeitete Aufgabe: (2) Containerklam\IeC {\"u}sel}{10}{section.3}
 \contentsline {subsection}{\numberline {1}L\IeC {\"o}sungsidee}{10}{subsection.3.1}
 \contentsline {subsubsection}{\numberline {1.1}Vor\IeC {\"u}berlegungen}{10}{subsubsection.3.1.1}
-\contentsline {paragraph}{Darstellung einer Permutation als Produkt disjunker Zyklen.}{10}{section*.23}
+\contentsline {paragraph}{Darstellung einer Permutation als Produkt disjunkter Zyklen.}{10}{section*.23}
 \contentsline {subsubsection}{\numberline {1.2}Datenstruktur}{11}{subsubsection.3.1.2}
 \contentsline {subsubsection}{\numberline {1.3}Ergebnisoptimaler Algorithmus}{11}{subsubsection.3.1.3}
 \contentsline {paragraph}{Entwurf}{11}{section*.24}
-\contentsline {paragraph}{Optimale Ergebnisse}{13}{section*.25}
-\contentsline {paragraph}{Laufzeitverhalten}{14}{section*.26}
-\contentsline {subsubsection}{\numberline {1.4}Optimaler Algorithmus}{14}{subsubsection.3.1.4}
-\contentsline {paragraph}{Verbesserung}{14}{section*.27}
-\contentsline {paragraph}{Optimale Ergebnisse}{14}{section*.28}
-\contentsline {paragraph}{Optimale Laufzeitkomplexit\IeC {\"a}t}{15}{section*.29}
-\contentsline {paragraph}{M\IeC {\"o}gliche Parallelisierung}{15}{section*.30}
-\contentsline {subsection}{\numberline {2}Implementierung}{15}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {2.1}Cycler - Berechnung der Zyklen}{15}{subsubsection.3.2.1}
-\contentsline {subsubsection}{\numberline {2.2}Instructor - Berechnung der Instruktionen}{15}{subsubsection.3.2.2}
-\contentsline {subsubsection}{\numberline {2.3}Gleis - Speichern des Zustand}{16}{subsubsection.3.2.3}
-\contentsline {subsubsection}{\numberline {2.4}Maschine - Interpretieren der Instruktionen}{16}{subsubsection.3.2.4}
-\contentsline {subsubsection}{\numberline {2.5}ListBuffer - Erweiterung einer Standardklasse}{16}{subsubsection.3.2.5}
-\contentsline {subsubsection}{\numberline {2.6}Utils - Helfende Methoden}{16}{subsubsection.3.2.6}
-\contentsline {subsection}{\numberline {3}Programmabl\IeC {\"a}ufe}{17}{subsection.3.3}
-\contentsline {paragraph}{Beispiel aus der Aufgabenstellung}{17}{section*.31}
-\contentsline {paragraph}{Zuf\IeC {\"a}llig erzeugte Permutation}{18}{section*.32}
-\contentsline {paragraph}{Demonstration der Skalierbarkeit}{19}{section*.33}
-\contentsline {subsection}{\numberline {4}Programmnutzung}{19}{subsection.3.4}
-\contentsline {subsubsection}{\numberline {4.1}Permutationen erzeugen}{19}{subsubsection.3.4.1}
-\contentsline {subsubsection}{\numberline {4.2}Erzeugen der Instruktionen}{20}{subsubsection.3.4.2}
-\contentsline {subsubsection}{\numberline {4.3}Simulation der Maschine}{20}{subsubsection.3.4.3}
-\contentsline {subsubsection}{\numberline {4.4}Zeitmessung}{21}{subsubsection.3.4.4}
-\contentsline {subsection}{\numberline {5}Programmtext}{22}{subsection.3.5}
-\contentsline {subsubsection}{\numberline {5.1}Cycler}{22}{subsubsection.3.5.1}
-\contentsline {subsubsection}{\numberline {5.2}Instructor}{23}{subsubsection.3.5.2}
-\contentsline {subsubsection}{\numberline {5.3}Gleis}{24}{subsubsection.3.5.3}
-\contentsline {subsubsection}{\numberline {5.4}Maschine}{25}{subsubsection.3.5.4}
-\contentsline {subsubsection}{\numberline {5.5}Instructions}{26}{subsubsection.3.5.5}
-\contentsline {subsubsection}{\numberline {5.6}Utils}{26}{subsubsection.3.5.6}
-\contentsline {subsubsection}{\numberline {5.7}ListBuffer}{27}{subsubsection.3.5.7}
+\contentsline {paragraph}{Optimale Ergebnisse}{14}{section*.25}
+\contentsline {paragraph}{Laufzeitverhalten}{16}{section*.26}
+\contentsline {subsubsection}{\numberline {1.4}Ergebnis und Laufzeitoptimaler Algorithmus}{16}{subsubsection.3.1.4}
+\contentsline {paragraph}{Verbesserung}{16}{section*.27}
+\contentsline {paragraph}{Optimale Ergebnisse}{17}{section*.28}
+\contentsline {paragraph}{Optimale Laufzeitkomplexit\IeC {\"a}t}{17}{section*.29}
+\contentsline {paragraph}{M\IeC {\"o}gliche Parallelisierung}{17}{section*.30}
+\contentsline {subsection}{\numberline {2}Implementierung}{17}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {2.1}Cycler - Berechnung der Zyklen}{18}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {2.2}Instructor - Berechnung der Instruktionen}{18}{subsubsection.3.2.2}
+\contentsline {subsubsection}{\numberline {2.3}Gleis - Speichern des Zustand}{18}{subsubsection.3.2.3}
+\contentsline {subsubsection}{\numberline {2.4}Maschine - Interpretieren der Instruktionen}{18}{subsubsection.3.2.4}
+\contentsline {subsubsection}{\numberline {2.5}ListBuffer - Erweiterung einer Standardklasse}{18}{subsubsection.3.2.5}
+\contentsline {subsubsection}{\numberline {2.6}Utils - Helfende Methoden}{19}{subsubsection.3.2.6}
+\contentsline {subsection}{\numberline {3}Programmabl\IeC {\"a}ufe}{20}{subsection.3.3}
+\contentsline {paragraph}{Beispiel aus der Aufgabenstellung}{20}{section*.31}
+\contentsline {paragraph}{Zuf\IeC {\"a}llig erzeugte Permutation}{21}{section*.32}
+\contentsline {paragraph}{Demonstration der Skalierbarkeit}{22}{section*.33}
+\contentsline {subsection}{\numberline {4}Programmnutzung}{22}{subsection.3.4}
+\contentsline {subsubsection}{\numberline {4.1}Permutationen erzeugen}{22}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {4.2}Erzeugen der Instruktionen}{23}{subsubsection.3.4.2}
+\contentsline {subsubsection}{\numberline {4.3}Simulation der Maschine}{23}{subsubsection.3.4.3}
+\contentsline {subsubsection}{\numberline {4.4}Zeitmessung}{24}{subsubsection.3.4.4}
+\contentsline {subsection}{\numberline {5}Programmtext}{25}{subsection.3.5}
+\contentsline {subsubsection}{\numberline {5.1}Cycler}{25}{subsubsection.3.5.1}
+\contentsline {subsubsection}{\numberline {5.2}Instructor}{26}{subsubsection.3.5.2}
+\contentsline {subsubsection}{\numberline {5.3}Gleis}{27}{subsubsection.3.5.3}
+\contentsline {subsubsection}{\numberline {5.4}Maschine}{28}{subsubsection.3.5.4}
+\contentsline {subsubsection}{\numberline {5.5}Instructions}{29}{subsubsection.3.5.5}
+\contentsline {subsubsection}{\numberline {5.6}Utils}{29}{subsubsection.3.5.6}
+\contentsline {subsubsection}{\numberline {5.7}ListBuffer}{30}{subsubsection.3.5.7}
