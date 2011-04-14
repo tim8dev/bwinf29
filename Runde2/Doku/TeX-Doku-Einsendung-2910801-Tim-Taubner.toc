@@ -1,77 +1,79 @@
 \select@language {ngerman}
-\contentsline {section}{\numberline {A}Allgemeines}{3}{section.1}
-\contentsline {subsection}{\numberline {1}Pers\IeC {\"o}nliche Anmerkungen}{3}{subsection.1.1}
-\contentsline {paragraph}{Der BWInf und ich}{3}{section*.2}
-\contentsline {paragraph}{Wahl der Programmiersprache}{3}{section*.3}
-\contentsline {paragraph}{Dank}{3}{section*.4}
-\contentsline {subsection}{\numberline {2}Dateistruktur der CD}{3}{subsection.1.2}
-\contentsline {subsection}{\numberline {3}Ausf\IeC {\"u}hrvoraussetzungen}{3}{subsection.1.3}
-\contentsline {subsection}{\numberline {4}Starten der Programme}{4}{subsection.1.4}
-\contentsline {paragraph}{Wurzelverzeichnis}{4}{section*.5}
-\contentsline {paragraph}{Starten der Kommandozeile}{4}{section*.6}
-\contentsline {paragraph}{Unter Windows}{4}{section*.7}
-\contentsline {paragraph}{Unter GNOME}{4}{section*.8}
-\contentsline {paragraph}{Unter KDE}{4}{section*.9}
-\contentsline {paragraph}{Unter Mac OS X}{4}{section*.10}
-\contentsline {section}{\numberline {B}Erste bearbeitete Aufgabe: (1) Kisten in Kisten in Kisten}{5}{section.2}
-\contentsline {subsection}{\numberline {1}L\IeC {\"o}sungsidee}{5}{subsection.2.1}
-\contentsline {subsubsection}{\numberline {1.1}Allgemein}{5}{subsubsection.2.1.1}
-\contentsline {subsubsection}{\numberline {1.2}Bruteforce}{5}{subsubsection.2.1.2}
-\contentsline {subparagraph}{Laufzeitverhalten}{5}{section*.11}
-\contentsline {subparagraph}{Verk\IeC {\"u}rzung der Laufzeit}{6}{section*.12}
-\contentsline {subparagraph}{Problem}{6}{section*.13}
-\contentsline {subsubsection}{\numberline {1.3}Bruteforce nach Aufteilung}{6}{subsubsection.2.1.3}
-\contentsline {paragraph}{Ansatz}{6}{section*.14}
-\contentsline {subparagraph}{Laufzeitverhalten}{6}{section*.15}
-\contentsline {subsubsection}{\numberline {1.4}Online Packer}{7}{subsubsection.2.1.4}
-\contentsline {paragraph}{Ansatz}{7}{section*.16}
-\contentsline {paragraph}{Onlinealgorithmus}{7}{section*.17}
-\contentsline {paragraph}{Strategien}{7}{section*.18}
-\contentsline {paragraph}{Offlinealgorithmus}{7}{section*.19}
-\contentsline {subsection}{\numberline {2}Implementierung}{7}{subsection.2.2}
-\contentsline {paragraph}{Kisten}{8}{section*.20}
-\contentsline {paragraph}{Kistensatz}{8}{section*.21}
-\contentsline {paragraph}{Kistenpacker}{8}{section*.22}
-\contentsline {subsection}{\numberline {3}Programmabl\IeC {\"a}ufe}{9}{subsection.2.3}
-\contentsline {subsubsection}{\numberline {3.1}Algorithm-Contest (Packdichte)}{9}{subsubsection.2.3.1}
-\contentsline {subsubsection}{\numberline {3.2}Algorithm-Contest (Laufzeit)}{9}{subsubsection.2.3.2}
-\contentsline {subsection}{\numberline {4}Programmtext}{9}{subsection.2.4}
-\contentsline {subsection}{\numberline {5}Programmnutzung}{9}{subsection.2.5}
-\contentsline {section}{\numberline {C}Zweite bearbeitete Aufgabe: (2) Containerklam\IeC {\"u}sel}{10}{section.3}
-\contentsline {subsection}{\numberline {1}L\IeC {\"o}sungsidee}{10}{subsection.3.1}
-\contentsline {subsubsection}{\numberline {1.1}Vor\IeC {\"u}berlegungen}{10}{subsubsection.3.1.1}
-\contentsline {paragraph}{Darstellung einer Permutation als Produkt disjunkter Zyklen.}{10}{section*.23}
-\contentsline {subsubsection}{\numberline {1.2}Datenstruktur}{11}{subsubsection.3.1.2}
-\contentsline {subsubsection}{\numberline {1.3}Ergebnisoptimaler Algorithmus}{11}{subsubsection.3.1.3}
-\contentsline {paragraph}{Entwurf}{12}{section*.24}
-\contentsline {paragraph}{Optimale Ergebnisse}{14}{section*.25}
-\contentsline {paragraph}{Laufzeitverhalten}{18}{section*.26}
-\contentsline {subsubsection}{\numberline {1.4}Ergebnis- und Laufzeitoptimaler Algorithmus}{19}{subsubsection.3.1.4}
-\contentsline {paragraph}{Verbesserung}{19}{section*.27}
-\contentsline {paragraph}{Optimale Ergebnisse}{21}{section*.28}
-\contentsline {paragraph}{Optimale Laufzeitkomplexit\IeC {\"a}t}{21}{section*.29}
-\contentsline {paragraph}{M\IeC {\"o}gliche Parallelisierung}{21}{section*.30}
-\contentsline {subsection}{\numberline {2}Implementierung}{21}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {2.1}Cycler - Berechnung der Zyklen}{21}{subsubsection.3.2.1}
-\contentsline {subsubsection}{\numberline {2.2}Instructor - Berechnung der Instruktionen}{22}{subsubsection.3.2.2}
-\contentsline {subsubsection}{\numberline {2.3}Gleis - Speichern des Zustand}{22}{subsubsection.3.2.3}
-\contentsline {subsubsection}{\numberline {2.4}Maschine - Interpretieren der Instruktionen}{22}{subsubsection.3.2.4}
-\contentsline {subsubsection}{\numberline {2.5}ListBuffer - Erweiterung einer Standardklasse}{22}{subsubsection.3.2.5}
-\contentsline {subsubsection}{\numberline {2.6}Utils - Helfende Methoden}{22}{subsubsection.3.2.6}
-\contentsline {subsection}{\numberline {3}Programmabl\IeC {\"a}ufe}{24}{subsection.3.3}
-\contentsline {paragraph}{Beispiel aus der Aufgabenstellung}{24}{section*.31}
-\contentsline {paragraph}{Zuf\IeC {\"a}llig erzeugte Permutation}{25}{section*.32}
-\contentsline {paragraph}{Demonstration der Skalierbarkeit}{26}{section*.33}
-\contentsline {subsection}{\numberline {4}Programmnutzung}{26}{subsection.3.4}
-\contentsline {subsubsection}{\numberline {4.1}Permutationen erzeugen}{26}{subsubsection.3.4.1}
-\contentsline {subsubsection}{\numberline {4.2}Erzeugen der Instruktionen}{27}{subsubsection.3.4.2}
-\contentsline {subsubsection}{\numberline {4.3}Simulation der Maschine}{27}{subsubsection.3.4.3}
-\contentsline {subsubsection}{\numberline {4.4}Zeitmessung}{28}{subsubsection.3.4.4}
-\contentsline {subsection}{\numberline {5}Programmtext}{29}{subsection.3.5}
-\contentsline {subsubsection}{\numberline {5.1}Cycler}{29}{subsubsection.3.5.1}
-\contentsline {subsubsection}{\numberline {5.2}Instructor}{30}{subsubsection.3.5.2}
-\contentsline {subsubsection}{\numberline {5.3}Gleis}{31}{subsubsection.3.5.3}
-\contentsline {subsubsection}{\numberline {5.4}Maschine}{32}{subsubsection.3.5.4}
-\contentsline {subsubsection}{\numberline {5.5}Instructions}{33}{subsubsection.3.5.5}
-\contentsline {subsubsection}{\numberline {5.6}Utils}{33}{subsubsection.3.5.6}
-\contentsline {subsubsection}{\numberline {5.7}ListBuffer}{34}{subsubsection.3.5.7}
+\sectbegin 
+\contentsline {section}{\numberline {A}Allgemeines}{2}{section.1}
+\contentsline {subsection}{\numberline {1}Pers\IeC {\"o}nliche Anmerkungen}{2}{subsection.1.1}
+\contentsline {paragraph}{Der BWInf und ich}{2}{subsection.1.1}
+\contentsline {paragraph}{Wahl der Programmiersprache}{2}{subsection.1.1}
+\contentsline {paragraph}{Danksagungen}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {2}Dateistruktur der CD}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {3}Ausf\IeC {\"u}hrvoraussetzungen}{2}{subsection.1.3}
+\contentsline {subsection}{\numberline {4}Starten der Programme}{3}{subsection.1.4}
+\contentsline {paragraph}{Wurzelverzeichnis}{3}{subsection.1.4}
+\contentsline {paragraph}{Starten der Kommandozeile}{3}{subsection.1.4}
+\contentsline {paragraph}{Unter Windows}{3}{subsection.1.4}
+\contentsline {paragraph}{Unter GNOME}{3}{subsection.1.4}
+\contentsline {paragraph}{Unter KDE}{3}{subsection.1.4}
+\contentsline {paragraph}{Unter Mac OS X}{3}{subsection.1.4}
+\contentsline {section}{\numberline {B}Erste bearbeitete Aufgabe: (1) Kisten in Kisten in Kisten}{4}{section.2}
+\contentsline {subsection}{\numberline {1}L\IeC {\"o}sungsidee}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2}Algorithmen und Datenstrukturen}{4}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.1}Datenstrukturen}{4}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2}Brute-force}{4}{subsubsection.2.2.2}
+\contentsline {subparagraph}{Laufzeitverhalten}{5}{lstnumber.-1.11}
+\contentsline {subparagraph}{Verk\IeC {\"u}rzung der Laufzeit}{5}{lstnumber.-1.11}
+\contentsline {subparagraph}{Problem}{5}{lstnumber.-1.11}
+\contentsline {subsubsection}{\numberline {2.3}Brute-force nach Aufteilung}{6}{subsubsection.2.2.3}
+\contentsline {paragraph}{Ansatz}{6}{subsubsection.2.2.3}
+\contentsline {subparagraph}{Laufzeitverhalten}{6}{subsubsection.2.2.3}
+\contentsline {subsubsection}{\numberline {2.4}Online Packer}{6}{subsubsection.2.2.4}
+\contentsline {paragraph}{Ansatz}{6}{subsubsection.2.2.4}
+\contentsline {paragraph}{Onlinealgorithmus}{6}{subsubsection.2.2.4}
+\contentsline {paragraph}{Strategien}{6}{subsubsection.2.2.4}
+\contentsline {paragraph}{Offlinealgorithmus}{7}{subsubsection.2.2.4}
+\contentsline {subsection}{\numberline {3}Implementierung}{7}{subsection.2.3}
+\contentsline {paragraph}{Kisten}{7}{subsection.2.3}
+\contentsline {paragraph}{Kistensatz}{7}{subsection.2.3}
+\contentsline {paragraph}{Kistenpacker}{8}{Item.3}
+\contentsline {subsection}{\numberline {4}Programmabl\IeC {\"a}ufe}{8}{subsection.2.4}
+\contentsline {subsubsection}{\numberline {4.1}Algorithm-Contest (Packdichte)}{8}{subsubsection.2.4.1}
+\contentsline {subsubsection}{\numberline {4.2}Algorithm-Contest (Laufzeit)}{8}{subsubsection.2.4.2}
+\contentsline {subsection}{\numberline {5}Programmtext}{8}{subsection.2.5}
+\contentsline {subsection}{\numberline {6}Programmnutzung}{8}{subsection.2.6}
+\contentsline {section}{\numberline {C}Zweite bearbeitete Aufgabe: (2) Containerklam\IeC {\"u}sel}{9}{section.3}
+\contentsline {subsection}{\numberline {1}L\IeC {\"o}sungsidee}{9}{subsection.3.1}
+\contentsline {paragraph}{Darstellung einer Permutation als Produkt disjunkter Zyklen.}{10}{Item.6}
+\contentsline {subsection}{\numberline {2}Algorithmen und Datenstrukturen}{11}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {2.1}Datenstruktur}{11}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {2.2}Ergebnisoptimaler Algorithmus}{11}{subsubsection.3.2.2}
+\contentsline {paragraph}{Entwurf}{11}{subsubsection.3.2.2}
+\contentsline {paragraph}{Optimale Ergebnisse}{14}{lstnumber.-7.34}
+\contentsline {paragraph}{Laufzeitverhalten}{18}{Item.12}
+\contentsline {subsubsection}{\numberline {2.3}Ergebnis- und Laufzeitoptimaler Algorithmus}{19}{subsubsection.3.2.3}
+\contentsline {paragraph}{Verbesserung}{19}{subsubsection.3.2.3}
+\contentsline {paragraph}{Optimale Ergebnisse}{20}{lstnumber.-9.12}
+\contentsline {paragraph}{Optimale Laufzeitkomplexit\IeC {\"a}t}{21}{lstnumber.-9.12}
+\contentsline {paragraph}{M\IeC {\"o}gliche Parallelisierung}{21}{lstnumber.-9.12}
+\contentsline {subsection}{\numberline {3}Implementierung}{21}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.1}Cycler - Berechnung der Zyklen}{21}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.2}Instructor - Berechnung der Instruktionen}{21}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3}Gleis - Speichern des Zustand}{22}{subsubsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.4}Maschine - Interpretieren der Instruktionen}{22}{subsubsection.3.3.4}
+\contentsline {subsubsection}{\numberline {3.5}ListBuffer - Erweiterung einer Standardklasse}{22}{subsubsection.3.3.5}
+\contentsline {subsubsection}{\numberline {3.6}Utils - Helfende Methoden}{22}{subsubsection.3.3.6}
+\contentsline {subsection}{\numberline {4}Programmabl\IeC {\"a}ufe}{24}{subsection.3.4}
+\contentsline {subsubsection}{\numberline {4.1}Beispiel aus der Aufgabenstellung}{24}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {4.2}Zuf\IeC {\"a}llig erzeugte Permutation}{26}{subsubsection.3.4.2}
+\contentsline {subsubsection}{\numberline {4.3}Demonstration der Skalierbarkeit}{27}{subsubsection.3.4.3}
+\contentsline {subsection}{\numberline {5}Programmnutzung}{27}{subsection.3.5}
+\contentsline {subsubsection}{\numberline {5.1}Permutationen erzeugen}{27}{subsubsection.3.5.1}
+\contentsline {subsubsection}{\numberline {5.2}Erzeugen der Instruktionen}{28}{subsubsection.3.5.2}
+\contentsline {subsubsection}{\numberline {5.3}Simulation der Maschine}{28}{subsubsection.3.5.3}
+\contentsline {subsubsection}{\numberline {5.4}Zeitmessung}{29}{subsubsection.3.5.4}
+\contentsline {subsection}{\numberline {6}Programmtext}{30}{subsection.3.6}
+\contentsline {subsubsection}{\numberline {6.1}Cycler}{30}{subsubsection.3.6.1}
+\contentsline {subsubsection}{\numberline {6.2}Instructor}{31}{subsubsection.3.6.2}
+\contentsline {subsubsection}{\numberline {6.3}Gleis}{32}{subsubsection.3.6.3}
+\contentsline {subsubsection}{\numberline {6.4}Maschine}{33}{subsubsection.3.6.4}
+\contentsline {subsubsection}{\numberline {6.5}Instructions}{34}{subsubsection.3.6.5}
+\contentsline {subsubsection}{\numberline {6.6}Utils}{34}{subsubsection.3.6.6}
+\contentsline {subsubsection}{\numberline {6.7}ListBuffer}{35}{subsubsection.3.6.7}

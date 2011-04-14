@@ -1,5 +1,7 @@
 \section{Erste bearbeitete Aufgabe: (1) Kisten in Kisten in Kisten}
+\secttoc
 \subsection{Lösungsidee}
+\subsection{Algorithmen und Datenstrukturen}
 \subsubsection{Allgemein}
 %TODO: Better Definitions
 Ein \emph{Kistenbaum} ist ein \emph{binärer Baum} von Kisten, indem alle Knoten gleichzeitig in ihren gemeinsamen Vorgänger passen.\\
@@ -9,7 +11,7 @@ Das Grundproblem ist nun, zu einer Menge gegebener Kisten $k_1,k_2,\dots,k_n$
 ein Kistensatz $ks$ mit den Wurzeln $w_1,\dots,w_m$ zu erzeugen mit $elems(ks) = \{k_1,k_2,\dots,k_n\}$.
 Seien $v_1,\dots,v_m$ die jeweiligen Volumina der Wurzeln $w_1,\dots,w_m$.
 Dann gilt es als weitere Aufgabe $\sum_{i=0}^{m}{v_i}$ zu minimieren.
-\subsubsection{Bruteforce}
+\subsubsection{Brute-force}
 \lstset{language=Scala} % for inline codes
 \lstset{basicstyle=\scriptsize}
 Die Liste wird entsprechend dem Volumen von groß nach klein sortiert.
@@ -63,7 +65,7 @@ Wenn beispielsweise 200 Kisten gepackt werden sollen, bleiben 170 Kisten neben 3
 Hierzu habe ich zwei Lösungsideen erstellt. Die grundlegende Motivation ist,
 die optimale Packung aufzugeben und stattdessen in menschlicher Zeit
 \footnote{menschliche Zeit $<<$ Lebenserwartung eines Menschen ($~75$ Jahre)} trotzdem eine gute Packung auch zu einer großen Menge von Kisten zu finden.
-\subsubsection{Bruteforce nach Aufteilung}
+\subsubsection{Brute-force nach Aufteilung}
 \paragraph{Ansatz}
 Eine Möglichkeit wäre,
 den Bruteforce Algorithmus immer auf einen Teil der Kisten anzuwenden und danach diese so erzeugten Kistensätze nebeneinander zu stellen.
@@ -100,7 +102,7 @@ Für nachfolgende Strategien betrachte ich deswegen auch immer die Laufzeit für
 \lstset{basicstyle=}
 \paragraph{Strategien}
 Es gibt unterschiedliche \emph{Strategien} um einen Platz für eine Kiste in einem Kistensatz zu finden.
-Recht naheliegend sind unteranderem folgende.\\
+Recht naheliegend sind unteranderem folgende.
 \begin{center}
 \begin{minipage}{.9\textwidth}
 \begin{description}

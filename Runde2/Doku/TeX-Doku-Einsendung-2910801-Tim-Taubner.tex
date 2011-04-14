@@ -2,7 +2,8 @@
 \usepackage[utf8]{inputenc}
 
 %custom font:
-%\usepackage[T1]{fontenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
 %\usepackage[math]{iwona}
 \usepackage[ngerman]{babel}
 
@@ -10,7 +11,9 @@
 
 \usepackage{color}
 \usepackage{graphicx}
-\usepackage{hyperref}
+\usepackage[pdftex]{hyperref}
+\hypersetup{colorlinks=true,linkcolor=darkblue}
+
 \usepackage[textwidth=15.8cm,textheight=23cm]{geometry}
 \usepackage{textcomp}
 
@@ -19,18 +22,19 @@
 \usepackage{algorithmic}
 \usepackage{listings}
 \usepackage{fancyhdr}
+\usepackage{minitoc}
 
 \pagestyle{fancy}
 \fancyhf{} % clear all header and footer fields
-\fancyhead[L]{Aufgabe \thesection}
 \fancyhead[R]{Seite \thepage}
-\fancyfoot[C]{\footnotesize 29.\ BWINF, 2.\ Runde; Einsendung: Tim Taubner, Nr.\ 29.108.01}
+\fancyfoot[C]{\footnotesize 29.\ BWINF, 2.\ Runde; Einsendung: Tim Taubner, Nr.\ 29.0108.01}
 
-\hypersetup{colorlinks=true,linkcolor=darkblue}
+\renewcommand{\thesection}{\Alph{section}}
+\renewcommand{\thesubsection}{\arabic{subsection}}
 
 %opening
 \title{29. Bundeswettbewerb Informatik 2010/2011 2. Runde}
-\author{Tim Taubner, Verwaltungsnummer 29.108.01}
+\author{Tim Taubner, Verwaltungsnummer 29.0108.01}
 
 \definecolor{darkblue} {rgb}{0,0,.6}
 \definecolor{darkred}  {rgb}{.6,0,0}
@@ -47,77 +51,69 @@
             {ä}{{\"a}}1 {ö}{{\"o}}1 {ü}{{\"u}}1}
 \lstMakeShortInline{|}
 
-\newcommand{\comment}[1]{}
-\newcommand{\N}{\mathbb{N}}
-
-% schöne Sätze, Definitionen etc..
-  \newtheorem{satz}{Satz}[section]
-  \newtheorem{koro}[satz]{Korollar}
-  \newtheorem{lem}{Hilfssatz}
-  \theoremstyle{definition}
-  \newtheorem{defi}[satz]{Definition}
-  \newtheorem*{beh}{Behauptung}
-  \theoremstyle{remark}
-  \newtheorem*{bem}{Bemerkung}
-  % wenn man nicht immer "\begin{proof}[Beweis]" eingeben will: "\begin{bew}":
-  \newenvironment{bew}{\begin{proof}[Beweis]}{\end{proof}}
-
 \begin{document}
-\addtolength{\voffset}{0.28cm}
-\addtolength{\hoffset}{0.68cm}
-%\addtolength{\textheight}{0.8cm}
+%\addtolength{\voffset}{0.28cm}
+%\addtolength{\hoffset}{0.68cm}
 
 \maketitle
-
+\vfill
 \begin{abstract}
  Dies ist die Dokumentation zu den von mir bearbeiteten Aufgaben 1 und 2 der 2. Runde des 29.
  Bundeswettbewerbs Informatik 2010/2011. Die mir zugeteilte Verwaltungsnummer ist 29.0108.01.
- Für alle Aufgabe werden jeweils die Lösungsidee und eine Programm-Dokumentation angegeben,
- sowie geeeignete Programm-Ab\-lauf\-pro\-to\-kol\-le und der Programm-Text selbst.
- Auf die aus\-führ\-baren Lösungen wird in der Dokumentation verwiesen. Der Quelltext ist beigefügt.
- Ebenfalls enthalten sind weiterführende Gedankengegänge, diese erhalten ebenfalls einen eigenen Unterpunkt.
- In diesem ist sowohl kurz die Idee als auch die Implementationerläuterung enthalten.
- Zusätzlich ist am Ende eine allgemeine Beschreibung enthalten, wie die erstellten Programme von der mitgelieferten CD aus gestartet werden können.
- Alle eingereichten Quelldateien, Kunsterzeugnisse (wie z.B. Bilder) und ausführbare Programmdistributionen
- wurden alleine von mir, Tim Taubner, erstellt.
+ Für jede Aufgabe werden jeweils die Lösungsidee und entwickelte Algorithmen und Datenstrukturen,
+ sowie geeeignete Programm-Ab\-lauf\-pro\-to\-kol\-le, wie die Programmnutzung funktioniert und der Programm-Text selbst.
+ Die interaktiv aus\-führ\-baren Lösungen werden in der Dokumentation erklärt. Der Quelltext ist beigefügt.
+ Die Implementierung ist ebenfalls dokumentiert und gibt grobe Überblicke über die strukturierung des Programms und der einzelnen Module/Klassen.
+ In diesem ist sowohl kurz die Idee als auch die Implementationerläuterung enthalten. \\
+ Erweiterungen und weiterführende Gedankengänge, die über die direkte Aufgabenstellung hinausgehen, sind ebenso dokumentiert.
+ Diese werden jeweils entsprechend gekennzeichnet.\\
+ Sämtliche Dokumentation und alle ausführbaren Erzeugnisse sind auf einer seperaten CD mitgeliefert.
+ Wie die erstellten Programme von der mitgelieferten CD aus gestartet werden können, ist im ersten Abschnitt, Allgemeines, erläutert.
+ Alle eingereichten Quelldateien, Kunsterzeugnisse (wie z.B. Bilder) und ausführbare Programmdistributionen wurden alleine von mir - Tim Taubner - erstellt.
 \end{abstract}
-\newpage
+\vfill
+\renewcommand{\stctitle}{Inhalt der Aufgabendokumentation}
+\nostcrule
+\setcounter{secttocdepth}{3}
+\setcounter{tocdepth}{1}
+\dosecttoc
 \tableofcontents
+\dosecttoc
+%
+\newpage
 
-\renewcommand{\thesection}{\Alph{section}}
-\renewcommand{\thesubsection}{\arabic{subsection}}
+\fancyhead[L]{A, Allgemeines}
 
 \section{Allgemeines}
 \subsection{Persönliche Anmerkungen} % TODO: Rewrite.
-\paragraph{Der BWInf und ich} Der Bundeswettbewerb Informatik konnte mich sehr begeistern.
-Viel konnte ich bereits durch die 1. Runde lernen, z.B. wie eine gute Dokumentation erstellt werden kann.
-Auch das Ergebnis lässt sich sehen. Wenn ich gefragt werde was ich eigentlich am PC mache,
-klappe ich mein Laptop auf und zeige die Dokumentation zur 1. Aufgabe\footnote{siehe Einsendung zur 1. Runde, Einsendungsnr. 108, besonders Aufgabe 1}.
-Viel besser kann man finde ich nicht zeigen, dass Informatik \emph{nicht} nur Programmieren ist.
-\paragraph{Wahl der Programmiersprache} Die benutzte Programmiersprache ist durchgehend Scala.
-Das liegt einfach an meiner Neigung, kurzen und dichtgepackten\footnote{
-Hier zeigt sich eine Schwäche der deutschen Sprache: Sie ist \emph{verbose}. Ich versuche hier \emph{concise} aus dem Englischem zu übersetzen}
-Code zu schreiben.
-Ich bin mir durchaus bewusst, dass Scala - noch - keine weit verbreitete Sprache ist.
-Aber ich denke, dass es auch einem Scala-fremden Informatiker gefällt, wenn aussagekräftiger Code abgegeben wird.
-\paragraph{Dank} Ich erlaube mir hier, Personen zu danken, die mir zu dieser Einsendung verholfen haben.
-Auch wenn alle Leistungen im Sinne des Wettbewerbs von mir erbracht wurden, habe ich dazu nicht wenig Energie aus der Umgebung gezogen.\footnote{
-Vergleichen Sie dies mit einem Eisberg, er zieht beim schmilzen die ganze Wärme aus der Umgebung.}
-Zum einen meiner Freundin\footnote{Meine eigene Perle der Informatik ;-]}, aber auch meiner Familie.
-Sie scheinen bereits ein Algorithmus entwickelt haben, mit meinen einsilbigen Antworten fertig zuwerden.
+\paragraph{Der BWInf und ich}
+ Der Bundeswettbewerb Informatik konnte mich sehr begeistern.
+ Viel konnte ich bereits durch die 1. Runde lernen, z.B. wie eine passable Dokumentation erstellt werden sollte.
+ Auch das Ergebnis lässt sich sehen. Wenn ich gefragt werde, was ich eigentlich am PC mache,
+ klappe ich mein Laptop auf und zeige die Dokumentation zur 1. Aufgabe\footnote{siehe Einsendung zur 1. Runde, Einsendungsnr. 108}  ``informatische Kunst''.
+ Viel anschaulicher lässt sich nicht zeigen, dass Informatik \emph{mehr} als nur Programmieren ist.
+\paragraph{Wahl der Programmiersprache}
+ Die von mir zur Aufgabenlösung benutzte Programmiersprache ist durchgehend Scala.
+ Ich bevorzuge Scala, weil es mit ihr möglich ist, knappen und kompakten Code zu schreiben.
+ Ich bin mir durchaus bewusst, dass Scala noch keine weit verbreitete Sprache ist.
+ Aber ich denke, dass es auch einem Scala-fremden Informatiker gefällt, wenn aussagekräftiger Code abgegeben wird.
+ Trotzdem hoffe ich, dass der moderne und aussagekräftige Code allgemein für Informatiker gut lesbar ist.
+ Deswegen habe ich auch auf Pseudo-Code verzichtet. Diese zusätzliche Sprache und Syntax neben Scala und Mathematik stellt eine zusätzliche Komplexität.
+ Stattdessen formuliere ich alle Algorithmen in Scala-Code und erläutere diesen.
+\paragraph{Danksagungen}
+ Ich erlaube mir hier, Personen zu danken, die mir zu der vorliegenden Arbeit verholfen haben.
+ Auch wenn alle Leistungen im Sinne des Wettbewerbs von mir erbracht wurden, habe ich dazu viel Unterstützung meiner Freundin und meiner Familie erhalten.
 \subsection{Dateistruktur der CD}
-Die Dateien auf der CD sind wie folgt strukturiert.
-Jede Aufgabe hat einen Ordner AufgabeX mit den zwei folgenden Unterordnern.\\
-\begin{tabular}{rl}
-\textbf{src}  & Unterordner, in dem die Quelltexte in der Paketstruktur (de/voodle/..) liegen \\
-\textbf{dist} & Unterordner, in dem ausführbare Dateien oder - wie bei Aufgabe 1 - \\
-              & andere Erzeugnisse sowie benötigte Bibliotheken enthalten sind \\
-\end{tabular}
-\newline
-Zusätzlich ist die vorliegende Dokumentation digital unter
-\begin{center}\textbf{TeX-Doku-Einsendung-2910801-Tim-Taubner.pdf}\end{center}
-im Wurzelverzeichnis zu finden.
-Auch die \LaTeX-Quelldateien, mit der diese Dokumentation erzeugt wurden, ist im Verzeichnis ``TeX-Doku-Quelldateien'' zu finden.
+ Die Dateien auf der CD sind wie folgt strukturiert.
+ Zu jeder Aufgabe wurde ein Ordner \textbf{AufgabeX} mit den zwei folgenden Unterordnern angelegt.\\
+ \begin{tabular}{rl}
+  \textbf{src}  & Unterordner, in dem die Quelltexte liegen \\
+  \textbf{dist} & Unterordner, in dem ausführbare Dateien sowie benötigte Bibliotheken enthalten sind \\
+ \end{tabular}\\ \newline
+ Zusätzlich ist die vorliegende Dokumentation digital unter
+ \begin{center}\textbf{TeX-Doku-Einsendung-2910801-Tim-Taubner.pdf}\end{center}
+ im Wurzelverzeichnis zu finden.
+ Auch die \LaTeX-Quelldateien, mit der diese Dokumentation erzeugt wurde sind im Verzeichnis ``TeX-Doku-Quelldateien'' zu finden.
 \subsection{Ausführvoraussetzungen}
 \label{Vor}
 Um die Programmbeispiele ausführen zu können, müssen folgende Voraussetzungen erfüllt werden:
@@ -128,38 +124,35 @@ Um die Programmbeispiele ausführen zu können, müssen folgende Voraussetzungen
  \item[Grafikkarte:] beliebig
  \item[Getestete Betriebsysteme:] Windows 7, Windows XP, Linux (Ubuntu 10.04, Kubuntu 10.10)
 \end{description}
-\subsection{Starten der Programme}
+\subsection{Starten der Kommandozeile}
 \paragraph{Wurzelverzeichnis} Im Wurzelverzeichnis der CD beginnt die Ordnerhierarchie der mitgelieferten Dateien.
 Stellen Sie bitte sicher, dass Sie im Wurzelverzeichnis sind, bevor Sie die in den jeweiligen Aufgaben beschriebene Startanleitungen ausführen.
-(z.B. durch neues Starten der Kommandozeile gemäß folgender Anleitung)
-\paragraph{Starten der Kommandozeile}
-Da die meisten mitgelieferten Programme aus der Kommandozeile gestartet werden müssen, soll hier kurz erläutert werden,
+(z.B. durch neues Starten der Kommandozeile gemäß folgender Anleitung)\\
+Da die mitgelieferten Programme aus der Kommandozeile gestartet werden müssen, soll hier kurz erläutert werden,
 wie Sie die Kommandozeile unter den gängigeren Betriebsystemen starten können.
-\footnote{Ich respektiere Ihre wahrscheinlich umfassenden Kenntnisse mit Perl. Die Anleitung zum Kommandozeilestart dient lediglich der Vollständigkeit.}
 \newcommand{\then}{\textrightarrow{} }
 \paragraph{Unter Windows}
 Unter Windows starten Sie die Kommandozeile durch: Start \then Ausführen \then `cmd' eingeben \then Kommandozeile.
 Nun können Sie durch Angabe des Laufwerkbuchstabens des CD-Laufwerks (z.B.\ ``E:'') auf das Wurzelverzeichnis der CD wechseln.
-Alle Befehle können nun durch Copy\&Paste entsprechend der Nutzungsdokumentation der jeweiligen Aufgabe ausgeführt werden. Z.B. für Aufgabe 3 mit:
-\begin{center} java -jar Aufgabe1/target/Kisten.jar \end{center}
 \paragraph{Unter GNOME}
 Unter gängigeren GNOME Distributionen wie z.B. Ubuntu 8 starten sie die Kommandozeile durch:
 Applikationen \then System \then Terminal.
 Die CD wird unter Standard-distributionen unter /media/disk o.ä. eingehängt. Wechseln Sie durch `cd /media/disk' in das Wurzelverzeichnis der CD.
-Alle Befehle können nun durch Copy\&Paste entsprechend der Nutzungsdokumentation der jeweiligen Aufgabe ausgeführt werden. Z.B. für Aufgabe 3 mit:
-\begin{center} java -jar Aufgabe1/target/Kisten.jar \end{center}
 \paragraph{Unter KDE}
 Unter gängigeren KDE-Distributionen wie z.B. Kubuntu 9 starten sie die Kommandozeile durch:
 Start \then Applikationen \then System \then Terminal.
 Die CD wird unter Standard-distributionen unter /media/disk o.ä. eingehängt. Wechseln Sie durch `cd /media/disk' in das Wurzelverzeichnis der CD.
-Alle Befehle können nun durch Copy\&Paste entsprechend der Nutzungsdokumentation der jeweiligen Aufgabe ausgeführt werden. Z.B. für Aufgabe 3 mit:
-\begin{center} java -jar Aufgabe1/target/Kisten.jar \end{center}
 \paragraph{Unter Mac OS X}
-Leider steht mir kein Mac zur Benutzung bereit, das Öffnen der Konsole sollte jedoch entweder selbsterklärend oder
-ähnlich der unter KDE/GNOME sein. (Beachten Sie bitte, dass Aufgabe2 leider nicht unter Mac OS X lauffähig ist)
+Leider steht mir kein Mac zur Benutzung bereit, das Öffnen der Konsole sollte jedoch entweder selbsterklärend oder ähnlich der unter KDE/GNOME sein.
+\subsection{Starten der Scala-Console}
+In einer Konsole im Wurzelverzeichnis der CD geöffnet haben, kann die Scala-Console (REPL) wie folgt gestartet werden.
+Durch Eingabe von ``./console'' in der Konsole öffnet sich die interaktive Scala-Console.
+Der Classpath wurde bereits so eingestellt, dass die Module beider Aufgaben importiert werden können.
 
-%\include{Aufgabe1}
+\fancyhead[L]{B, Aufgabe 1}
 \include{Aufgabe1n}
+
+\fancyhead[L]{C, Aufgabe 2}
 \include{Aufgabe2}
 
 \end{document}
