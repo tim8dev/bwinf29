@@ -25,7 +25,7 @@ Wichtig ist, um den Code zu verstehen, dass \lstinline|(satz ++< kiste)| alle M�
 \lstset{language=Scala}
 \lstset{basicstyle=\small}
 \begin{lstlisting}
-  // Nacheinander die Kisten "auffalten" mit Hilfe der hilfsPacken Funktion
+ // Nacheinander die Kisten "auffalten" mit Hilfe der hilfsPacken Funktion
   def packe = (Set[KistenSatz]() /: kisten) ( hilfsPacken )
   def hilfsPacken(sätze: Set[KistenSatz], kiste: Kiste) =
     if(sätze.isEmpty)
@@ -46,13 +46,14 @@ würde die Berechnung aller Möglichkeiten bereits $8 \cdot 10^{15}$ Jahre brauc
 Unter der gleichen Annahme, zeigt sich, dass etwa $15!$ Operationen in einer Stunde ausgeführt werden können.
 Sprich es können $2*(15-1)=28$ Kisten in allen Möglichkeiten gepackt werden.
 (Unter der Annahme es gibt etwa $x!$ Möglichkeiten für $2x$ Kisten\footnote{Die Annahme zeigt sich als gar nicht so schlecht, wie man in \ref{TODO} sieht})
-\subparagraph{Verkürzung der Laufzeit} Eine Überlegung war, das Laufzeitverhalten durch Parallelisierung zu verkürzen.
+\subparagraph{Verkürzung der Laufzeit}
+Eine Überlegung war, das Laufzeitverhalten durch Parallelisierung zu verkürzen.
 Allerdings verspricht dies aufgrund der hohen Laufzeitkomplexität von $O(n \cdot n!)$ kaum Abhilfe.
 Selbst bei 100 Kernen, sprich einer hundertfachen Beschleunigung\footnote{Dies wird in der Praxis nie erreicht,
 es muss immer ein gewisser Overhead für Synchronisation und sequentielle Programmabläufe ``geopfert'' werden.}
 können gerade mal $17!$ Operationen ausgeführt werden. Das entspricht $2*(17-1)=32$ Kisten.
-Es können also $14\%$($32/28=1.1428\dots$) mehr Kisten gepackt werden, was nicht nennenswert viel ist. \\
-Es kommt also für Frau Y. somit nicht in Frage die Packberechnung beispielsweise auf eine Rechnerfarm zu migrieren. \\
+Es können also $14\%$($32/28=1.1428\dots$) mehr Kisten gepackt werden, was nicht nennenswert viel ist.
+Es kommt also für Frau Y. somit nicht in Frage die Packberechnung beispielsweise auf eine Rechnerfarm zu migrieren.
 \subparagraph{Problem}
 Frau Y. hat also ihre mittlerweile 25 Kisten optimal packen können. Dadurch ist nun Platz in ihrem Keller frei geworden.
 Sie sieht es als ironisch an, dass sie genau deswegen nicht mehr Kisten in ihren Keller stellen kann, weil sie versucht den Platzverbrauch ihrer Kisten zu minimieren.
@@ -63,21 +64,19 @@ Hierzu habe ich zwei Lösungsideen erstellt. Die grundlegende Motivation ist,
 die optimale Packung aufzugeben und stattdessen in menschlicher Zeit
 \footnote{menschliche Zeit $<<$ Lebenserwartung eines Menschen ($~75$ Jahre)} trotzdem eine gute Packung auch zu einer großen Menge von Kisten zu finden.
 \subsubsection{Bruteforce nach Aufteilung}
-\paragraph{Ansatz} Eine Möglichkeit wäre,
-den Bruteforce Algorithmus immer auf einen Teil der Kisten anzuwenden und danach diese so erzeugten Kistensätze nebeneinander zu stellen. \\
-Wichtig ist hierbei, dass die Kisten sinnvoll aufgeteilt werden, so dass jeder Kistenhaufen kleinere und größere Kisten hat um eine hohe Packdichte zu erreichen.
-%TODO:
-...
-%:TODO
+\paragraph{Ansatz}
+Eine Möglichkeit wäre,
+den Bruteforce Algorithmus immer auf einen Teil der Kisten anzuwenden und danach diese so erzeugten Kistensätze nebeneinander zu stellen.
+Wenn $tf$ die Anzahl Kisten pro Gruppe sein soll, so wird jede $tf$-ste Kiste in eine Gruppe zugeordnet.
 \subparagraph{Laufzeitverhalten}
-Dieser Algorithmus ist streng polynomiell. Genauer gesagt kann er sogar in $O(n \log n)$ Zeit ausgeführt werden.
+Dieser Algorithmus ist streng polynomiell. Genauer gesagt kann er sogar in linearer Zeit ausgeführt werden.
 Dies ergibt sich aus einer Laufzeitanaylse des Algorithmus. \\
 Sei im folgenden $tf$ der Teilungsfaktor, also die Anzahl Kisten die jeweils eine Gruppe bilden.
-Zunächst müssen die Kisten sortiert werden in $O(n \log n)$.
 Das Aufteilen der Kisten in Gruppen braucht $O(n)$. Man erhält also $\frac{n}{tf}$ Gruppen.
 Eine dieser zu packen geschieht in konstanter Zeit. (Auch wenn der Bruteforce ursprünglich eine Komplexität von $O(m \cdot m!)$ besitzt,
 ist mit $m=tf$ seine Laufzeit $O(tf \cdot tf!) = O(1)$, also konstant, bei konstantem tf.)
-Daraus ergibt sich letzendlich \[ O(n\log n + n + \frac{n}{tf} \cdot 1) = O(n\log n) \].
+Daraus ergibt sich letzendlich \[ O(n + n + \frac{n}{tf} \cdot 1) = O(n) \].
+Diese Laufzeitkomplexität ist sogar optimal, denn es müssen in jedem Fall für jede Kiste Laufzeit ``verbraucht'' werden bei der Ausgabe der Packart.
 \subsubsection{Online Packer}
 \paragraph{Ansatz}
 Ein etwas anderer Ansatz ist, Kistensätze inkrementiell zu erzeugen.
@@ -101,7 +100,7 @@ Für nachfolgende Strategien betrachte ich deswegen auch immer die Laufzeit für
 \lstset{basicstyle=}
 \paragraph{Strategien}
 Es gibt unterschiedliche \emph{Strategien} um einen Platz für eine Kiste in einem Kistensatz zu finden.
-Recht naheliegend sind unteranderem folgende. \\
+Recht naheliegend sind unteranderem folgende.
 \begin{center}
 \begin{minipage}{.9\textwidth}
 \begin{description}

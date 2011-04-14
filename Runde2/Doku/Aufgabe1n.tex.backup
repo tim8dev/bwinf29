@@ -1,11 +1,11 @@
-\section{Aufgabe 1: Kisten in Kisten in Kisten}
+\section{Erste bearbeitete Aufgabe: (1) Kisten in Kisten in Kisten}
 \subsection{Lösungsidee}
 \subsubsection{Allgemein}
 %TODO: Better Definitions
 Ein \emph{Kistenbaum} ist ein \emph{binärer Baum} von Kisten, indem alle Knoten gleichzeitig in ihren gemeinsamen Vorgänger passen.\\
 Als einen \emph{Kistensatz} bezeichne ich eine Menge von Wurzeln mehrerer Kistenbäumen. \\
-Mit \emph{$elems(ks)$} sei die Vereinigung der Menge aller Kisten aus den Kistenbäumen bezeichnet.
-Das Grundproblem ist zu einer Menge gegebener Kisten $k_1,k_2,\dots,k_n$
+Mit \emph{$elems(ks)$} sei die Vereinigung der Menge aller Kisten aus den Kistenbäumen bezeichnet. \\
+Das Grundproblem ist nun, zu einer Menge gegebener Kisten $k_1,k_2,\dots,k_n$
 ein Kistensatz $ks$ mit den Wurzeln $w_1,\dots,w_m$ zu erzeugen mit $elems(ks) = \{k_1,k_2,\dots,k_n\}$.
 Seien $v_1,\dots,v_m$ die jeweiligen Volumina der Wurzeln $w_1,\dots,w_m$.
 Dann gilt es als weitere Aufgabe $\sum_{i=0}^{m}{v_i}$ zu minimieren.
@@ -23,18 +23,18 @@ Lediglich wenige Elemente funktionaler und objektorientierter Elemente müssen d
 Wichtig ist, um den Code zu verstehen, dass \lstinline|(satz ++< kiste)| alle Möglichkeiten erzeugt, wie man die Kiste in einen Satz einfügen kann.
 \footnote{Nähere Erläuterungen dazu später, für den Algorithmus ist dies nicht direkt relevant.}
 \lstset{language=Scala}
-\lstset{basicstyle=\scriptsize}
+\lstset{basicstyle=\small}
 \begin{lstlisting}
-  // Nacheinander die Kisten "auffalten" mit Hilfe der hilfsPacken Funktion
+ // Nacheinander die Kisten "auffalten" mit Hilfe der hilfsPacken Funktion
   def packe = (Set[KistenSatz]() /: kisten) ( hilfsPacken )
   def hilfsPacken(sätze: Set[KistenSatz], kiste: Kiste) =
     if(sätze.isEmpty)
-      Set(KistenSatz(kiste :: Nil)) // KistenSatz nur mit der Kiste
+      Set(KistenSatz(kiste :: Nil)) // KistenSatz nur mit der Kiste kiste
     else
       (Set[KistenSatz]() /: sätze) { // Beginne mit leerer Menge
         (menge, satz) =>
-         menge ++  // Füge neue Möglichkeiten der menge hinzu
-         (satz ++< kiste) // Erzeugt neue Möglichkeiten
+          menge ++  // Füge neue Möglichkeiten der menge hinzu
+          (satz ++< kiste) // Erzeugt neue Möglichkeiten
       }
 \end{lstlisting}
 \subparagraph{Laufzeitverhalten}
@@ -46,35 +46,36 @@ würde die Berechnung aller Möglichkeiten bereits $8 \cdot 10^{15}$ Jahre brauc
 Unter der gleichen Annahme, zeigt sich, dass etwa $15!$ Operationen in einer Stunde ausgeführt werden können.
 Sprich es können $2*(15-1)=28$ Kisten in allen Möglichkeiten gepackt werden.
 (Unter der Annahme es gibt etwa $x!$ Möglichkeiten für $2x$ Kisten\footnote{Die Annahme zeigt sich als gar nicht so schlecht, wie man in \ref{TODO} sieht})
-\subparagraph{Verkürzung der Laufzeit} Eine Überlegung war, das Laufzeitverhalten durch Parallelisierung zu verkürzen.
+\subparagraph{Verkürzung der Laufzeit}
+Eine Überlegung war, das Laufzeitverhalten durch Parallelisierung zu verkürzen.
 Allerdings verspricht dies aufgrund der hohen Laufzeitkomplexität von $O(n \cdot n!)$ kaum Abhilfe.
-Selbst bei 100 Kernen, sprich einer hundertfachen Beschleunigung\footnote{Dies wird in der Praxis nie erreicht. Es muss immer ein gewisser Overhead für Synchronisation und Sequentielle Programmabläufe ``geopfert'' werden.}
-können gerade mal $17!$ Operationen ausgeführt werden. Das entspricht $2*(17-1)=32$ Kisten. Immerhin, wir können $14\%$($32/28=1.1428\dots$) mehr Kisten packen!\footnote{Ironie.} \\
-Es kommt also für Frau Y. somit nicht in Frage die Packberechnung auf eine Rechnerfarm zu migrieren. (Obwohl sie durch das geschickte Packen von ihren ~30 Kisten bereits viel Geld sparen konnte!) \\
+Selbst bei 100 Kernen, sprich einer hundertfachen Beschleunigung\footnote{Dies wird in der Praxis nie erreicht,
+es muss immer ein gewisser Overhead für Synchronisation und sequentielle Programmabläufe ``geopfert'' werden.}
+können gerade mal $17!$ Operationen ausgeführt werden. Das entspricht $2*(17-1)=32$ Kisten.
+Es können also $14\%$($32/28=1.1428\dots$) mehr Kisten gepackt werden, was nicht nennenswert viel ist.
+Es kommt also für Frau Y. somit nicht in Frage die Packberechnung beispielsweise auf eine Rechnerfarm zu migrieren.
+\subparagraph{Problem}
 Frau Y. hat also ihre mittlerweile 25 Kisten optimal packen können. Dadurch ist nun Platz in ihrem Keller frei geworden.
 Sie sieht es als ironisch an, dass sie genau deswegen nicht mehr Kisten in ihren Keller stellen kann, weil sie versucht den Platzverbrauch ihrer Kisten zu minimieren.
-Sprich, sie könnte beispielsweise eine Kiste direkt daneben stellen, die nicht mehr in die Berechnung einbezogen werden kann.
+Sprich, sie könnte beispielsweise eine Kiste direkt daneben stellen obwohl diese nicht mehr in die Berechnung einbezogen werden kann.
 Es ist offensichtlich, dass die ursprüngliche Motivation dadurch nicht erreicht wird.
 Wenn beispielsweise 200 Kisten gepackt werden sollen, bleiben 170 Kisten neben 30 optimal gepackten ungepackt. \\
 Hierzu habe ich zwei Lösungsideen erstellt. Die grundlegende Motivation ist,
 die optimale Packung aufzugeben und stattdessen in menschlicher Zeit
-\footnote{menschliche Zeit = Lebenserwartung eines Menschen (~75 Jahre)} trotzdem eine gute Packung auch zu einer großen Menge von Kisten zu finden.
-%TODO: No Optimal Packer found... :(
+\footnote{menschliche Zeit $<<$ Lebenserwartung eines Menschen ($~75$ Jahre)} trotzdem eine gute Packung auch zu einer großen Menge von Kisten zu finden.
 \subsubsection{Bruteforce nach Aufteilung}
 \paragraph{Ansatz} Eine Möglichkeit wäre,
-den Bruteforce Algorithmus immer auf 30 Kisten loszulassen und danach diese Kistensätze nebeneinander zu stellen. \\
+den Bruteforce Algorithmus immer auf einen Teil der Kisten anzuwenden und danach diese so erzeugten Kistensätze nebeneinander zu stellen. \\
 Wichtig ist hierbei, dass die Kisten sinnvoll aufgeteilt werden, so dass jeder Kistenhaufen kleinere und größere Kisten hat um eine hohe Packdichte zu erreichen.
-%TODO:
-...
-%:TODO
+Wenn $tf$ die Anzahl Kisten pro Gruppe sein soll, so wird jede $tf$-ste Kiste 
 \subparagraph{Laufzeitverhalten}
-Dieser Algorithmus ist streng polynomiell. Genauer gesagt kann er sogar in $O(n \log n)$ Zeit ausgeführt werden.
+Dieser Algorithmus ist streng polynomiell. Genauer gesagt kann er sogar in linearer Zeit ausgeführt werden.
 Dies ergibt sich aus einer Laufzeitanaylse des Algorithmus. \\
-Zunächst müssen die Kisten sortiert werden in $O(n \log n)$.
-Das Aufteilen der Kisten in Gruppen braucht $O(n)$. Man erhält also $\frac{n}{30}$ Gruppen.
+Sei im folgenden $tf$ der Teilungsfaktor, also die Anzahl Kisten die jeweils eine Gruppe bilden.
+Das Aufteilen der Kisten in Gruppen braucht $O(n)$. Man erhält also $\frac{n}{tf}$ Gruppen.
 Eine dieser zu packen geschieht in konstanter Zeit. (Auch wenn der Bruteforce ursprünglich eine Komplexität von $O(m \cdot m!)$ besitzt,
-ist mit $m=30$ seine Laufzeit $O(30 \cdot 30!) = O(1)$, also konstant.)
-Daraus ergibt sich letzendlich \[ O(n\log n + n + \frac{n}{30} \cdot 1) = O(n\log n) \].
+ist mit $m=tf$ seine Laufzeit $O(tf \cdot tf!) = O(1)$, also konstant, bei konstantem tf.)
+Daraus ergibt sich letzendlich \[ O(n + n + \frac{n}{tf} \cdot 1) = O(n) \].
 \subsubsection{Online Packer}
 \paragraph{Ansatz}
 Ein etwas anderer Ansatz ist, Kistensätze inkrementiell zu erzeugen.
@@ -82,7 +83,7 @@ Daher, es wird ein Algorithmus erfordert,
 welcher zu einem - mehr oder weniger gut - gepacktem Kistensatz und einer zu packenden Kiste ein neuen Kistensatz liefert,
 der, möglichst dicht gepackt, diese enthält.
 Eine weitere Beschränkung, die ich an den Algorithmus stelle, ist, dass er in höchstens $O(n)$ Zeit diesen neuen Kistensatz liefert.
-Hat man nun solch einen Algorithmus, lassen sich alle Kisten zusammen in $O(n \cdot n)=O(n²)$ Zeit packen bei inkrementieller Kistensatzerzeugung. 
+Hat man nun solch einen Algorithmus, lassen sich alle Kisten zusammen in $O(n \cdot n)=O(n^2)$ Zeit packen bei inkrementieller Kistensatzerzeugung. 
 %TODO: Betrachte auch O(n²)?%
 \paragraph{Onlinealgorithmus}
 Dieser Algorithmus kann von Frau Y.\ jedoch auch verwendet werden, um eine Kiste in der eine Lieferung verpackt war,
@@ -98,7 +99,7 @@ Für nachfolgende Strategien betrachte ich deswegen auch immer die Laufzeit für
 \lstset{basicstyle=}
 \paragraph{Strategien}
 Es gibt unterschiedliche \emph{Strategien} um einen Platz für eine Kiste in einem Kistensatz zu finden.
-Recht naheliegend sind unteranderem folgende. \\
+Recht naheliegend sind unteranderem folgende.
 \begin{center}
 \begin{minipage}{.9\textwidth}
 \begin{description}
@@ -116,7 +117,7 @@ Diese suchen nämlich Kisten, die kleiner sind als die hinzuzufügende, welche j
 Da jedoch zur Sortierung die Kisten bekannt sein müssen, handelt es sich nicht mehr um einen Online- sondern einen Offlinealgorithmus.
 Die Existenzberechtigung dieses Algorithmus ergibt sich aus der Tatsache, dass bessere Ergebnisse bei vorheriger Sortierung erhalten werden können
 als mit dem ursprünglichem Onlinealgorithmus. \footnote{Siehe auch: \ref{algcont}}
-\subsection{Implementation}
+\subsection{Implementierung}
 \lstset{basicstyle=}
 Zunächt wurde ein Kern implementiert, welcher Kisten und Kistensätze sinnvoll abbildet und hilfreiche Funktionen zur Operation auf diesen bietet.
 Die Datentypen wurden als unveränderbare Objekte implementiert um die Algorithmen zu vereinfachen.
@@ -135,19 +136,23 @@ gepackt werden kann zurückliefert. Weitere Methoden erwähne ich bei Benutzung.
 \paragraph{Kistensatz}
 Da eine |Kiste| die Wurzel eines Kistenbaums ist und diesen repräsentiert, (Betrachten Sie eine |KisteLeer| als einen ein-elementigen Kistenbaum),
   muss ein Kistensatz lediglich Referenzen auf die einzelnen |Kiste|-Objekte speichern.
-Dies sollte zudem so geschehen, dass das Ersetzen eines [Teil]baumes möglichst billig ist.
+Es ergeben sich für die Datenstruktur, die den Kistenwald (Menge von Kistenbäumen) verwaltet folgende drei Vorraussetzungen. 
+\begin{enumerate}
+ \item Das Ersetzen eines [Teil]baumes sollte möglichst billig sein.
 Da das Ersetzen einer |Kiste| als Löschen und anschließendes Hinzufügen dieser in den Baum implementiert ist,
-  müssen sowohl die Lösch- als auch Hinzufügefunktionen schnelle Laufzeiten haben.
-Jede Veränderung einer Kiste hat solch eine Operation zur Folge, da die Datenstruktur unveränderbar ist.
-Außerdem müssen ``Duplikate'' zugelassen sein, da es passieren kann, das zwei Kisten genau die gleichen Maße haben.
-Die Kistenbäume eines Kistensatzes sollten so sortiert sein, dass ein Vergleichen nach Elementen möglichst billig ist.
-Diese drei Vorraussetzungen erfüllt meiner Ansicht nach ein geordneter Binärbaum am besten.
+  müssen sowohl die Lösch- als auch Hinzufügefunktionen kurze Laufzeiten haben.
+Da die Datenstruktur unveränderbar ist, liefert jede Veränderung in dem durch eine |Kiste| repräsentiertem Kistenbaum eine neues Objekt zurück.
+Dieses Objekt muss dann durch eine Lösch- und eine Hinzufügeoperation in den Baum des |KistenSatz| aktualisiert werden.
+ \item ``Duplikate'' müssen zugelassen sein, da es passieren kann, das zwei Kisten genau die gleichen Maße haben.
+ \item Die Kistenbäume eines Kistensatzes müssen so sortiert sein, dass ein Vergleichen nach Elementen billig ist.
+\end{enumerate}
+Diese drei Vorraussetzungen erfüllt meiner Ansicht nach ein geordneter Binärbaum am besten. \\ %TODO: Begründung!
 Es wurde also die Scala Standardklasse |TreeMap[Kiste,Int]| verwendet. Sie bildet jeweils eine |Kiste| k auf eine Zahl $i_k > 1$ ab.
 Diese Zahlen sind gleich der Anzahl der einzelnen |Kiste| (bzw. Kistenbaum) in diesem Kistensatz.
 Somit erfolgt eine hinzufügen einer Kiste k (Scala: |+(Kiste):Kistensatz| mit dem Hinzufügen von $k \rightarrow 1$ in den Binärbaum,
   bzw. wenn k schon erhalten ist, mit dem Setzen von $k \rightarrow i_k + 1$.
-Analog auch das Entfernen einer Kiste k (Scala: |-(Kiste):Kistensatz|), daher wenn k nicht enthalten oder $i_k = 1$,
-  dann entferne k aus dem Binärbaum, andernfalls setze $k \rightarrow i_k - 1$.
+Analog erfolgt auch das Entfernen einer Kiste k (Scala: |-(Kiste):Kistensatz|),
+  daher wenn k nicht enthalten oder $i_k = 1$ entferne k aus dem Binärbaum, andernfalls setze $k \rightarrow i_k - 1$.
 
 \paragraph{Kistenpacker}
 Da eine Menge von verschiedenen Algorithmen entwickelt wurden, bietete es sich an, von mehreren Algorithmen verwendete Funktionen auszulagern.

@@ -11,7 +11,7 @@
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{hyperref}
-\usepackage[textwidth=16.8cm,textheight=23cm]{geometry}
+\usepackage[textwidth=15.8cm,textheight=23cm]{geometry}
 \usepackage{textcomp}
 
 \usepackage[small,bf]{caption}
@@ -64,6 +64,7 @@
 
 \begin{document}
 \addtolength{\voffset}{0.28cm}
+\addtolength{\hoffset}{0.68cm}
 %\addtolength{\textheight}{0.8cm}
 
 \maketitle
@@ -72,7 +73,7 @@
  Dies ist die Dokumentation zu den von mir bearbeiteten Aufgaben 1 und 2 der 2. Runde des 29.
  Bundeswettbewerbs Informatik 2010/2011. Die mir zugeteilte Verwaltungsnummer ist 29.0108.01.
  Für alle Aufgabe werden jeweils die Lösungsidee und eine Programm-Dokumentation angegeben,
- sowie geeeignete Programm-Ablaufprotokolle und der Programm-Text selbst.
+ sowie geeeignete Programm-Ab\-lauf\-pro\-to\-kol\-le und der Programm-Text selbst.
  Auf die aus\-führ\-baren Lösungen wird in der Dokumentation verwiesen. Der Quelltext ist beigefügt.
  Ebenfalls enthalten sind weiterführende Gedankengegänge, diese erhalten ebenfalls einen eigenen Unterpunkt.
  In diesem ist sowohl kurz die Idee als auch die Implementationerläuterung enthalten.
@@ -105,15 +106,17 @@ Vergleichen Sie dies mit einem Eisberg, er zieht beim schmilzen die ganze Wärme
 Zum einen meiner Freundin\footnote{Meine eigene Perle der Informatik ;-]}, aber auch meiner Familie.
 Sie scheinen bereits ein Algorithmus entwickelt haben, mit meinen einsilbigen Antworten fertig zuwerden.
 \subsection{Dateistruktur der CD}
-Die Dateien auf der CD sind folgendermaßen strukturiert.
-Jede Aufgabe hat einen Ordner AufgabeX mit den beiden folgenden Unterordnern.\\
+Die Dateien auf der CD sind wie folgt strukturiert.
+Jede Aufgabe hat einen Ordner AufgabeX mit den zwei folgenden Unterordnern.\\
 \begin{tabular}{rl}
 \textbf{src}  & Unterordner, in dem die Quelltexte in der Paketstruktur (de/voodle/..) liegen \\
 \textbf{dist} & Unterordner, in dem ausführbare Dateien oder - wie bei Aufgabe 1 - \\
               & andere Erzeugnisse sowie benötigte Bibliotheken enthalten sind \\
 \end{tabular}
 \newline
-Zusätzlich ist die vorliegende Dokumentation digital unter \textbf{TeX-Doku-Einsendung-2910801-Tim-Taubner.pdf} im Wurzelverzeichnis zu finden.
+Zusätzlich ist die vorliegende Dokumentation digital unter
+\begin{center}\textbf{TeX-Doku-Einsendung-2910801-Tim-Taubner.pdf}\end{center}
+im Wurzelverzeichnis zu finden.
 Auch die \LaTeX-Quelldateien, mit der diese Dokumentation erzeugt wurden, ist im Verzeichnis ``TeX-Doku-Quelldateien'' zu finden.
 \subsection{Ausführvoraussetzungen}
 \label{Vor}
