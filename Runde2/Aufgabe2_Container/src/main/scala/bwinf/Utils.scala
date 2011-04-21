@@ -18,34 +18,45 @@ object Utils {
     a // return array
   }
 
-  def demonstrate(n: Int) = {
+  def demonstrate(perm: Seq[Int], print: Boolean = true) = {
     val startTime = System.currentTimeMillis
-    val perm = randPerm(n)
     val cycles = FastCycler cyclesOf perm
-    println("Time used for computing Cycles: " + (System.currentTimeMillis - startTime))
+    println("Time used for computing Cycles: " +
+            (System.currentTimeMillis - startTime))
+    if(print) {
+      println("The computed Cycles are: ")
+      println(cycles map (_.mkString("(", " ", ")")) mkString ("  ", "\n  ", ""))
+    }
     println("Number of cycles: " + cycles.length)
     val instrs = Instructor computeFromCycles cycles
     val endTime = System.currentTimeMillis
-    println("Time used: " + (endTime - startTime))
+    if(print) {
+      println("The generated Instructions (shortened) are: ")
+      val instrsGroups = instrs.view.take(20*12).map(_.short).grouped(12)
+      println(instrsGroups.map(_.mkString(" : "))
+              .mkString(" [ ", "\n : ",
+                        if(instrs.lengthCompare(20*12)>0) " ..." else " ] "))
+    }
+    println("Time used computing Instruction: " + (endTime - startTime))
     val gleis = new Gleis(perm)
-    val maschine = new Maschine(gleis)
+    val maschine = new Maschine(gleis, print)
     maschine interpret instrs
     println("Time used interpreting: " + (System.currentTimeMillis - endTime))
+    if(print) {
+      println("Gleis: ")
+      println(gleis)
+    }
     println("Verifying results...")
     gleis.waggons.zipWithIndex forall (xy => xy._1 == xy._2 + 1)
   }
 
-  object IO { // IO Helpers.
-    import java.io.{File,FileWriter}
-    def savePerm(perm: Seq[Int])(at: String) {
-      val fileWriter = new FileWriter(new File(at))
-      fileWriter.write(perm mkString " ")
-      fileWriter.flush
+  def demonstrate(n: Int, print: Boolean): Boolean = {
+    val perm = randPerm(n)
+    if(print) {
+      println("Permutation (shortened) is:")
+      println(perm.take(480).mkString(
+          "  (", " ", if(perm.lengthCompare(480) > 1) " ..." else ")"))
     }
-    def saveInstrs(instrs: Seq[Instruction])(at: String) {
-      val fileWriter = new FileWriter(new File(at))
-      fileWriter.write(instrs map (_.short) mkString " ")
-      fileWriter.flush
-    }
+    demonstrate(perm, print)
   }
 }

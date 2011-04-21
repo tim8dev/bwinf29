@@ -1,19 +1,13 @@
 #Source Hashes
-#Sat Apr 09 11:15:37 CEST 2011
-src/main/scala/de/voodle/tim/bwinf/kisten/core/online/OnlinePacker.scala=36824d0caeae31526a5eb2f4642b672fec79bd3f
-src/main/scala/de/voodle/tim/bwinf/kisten/bench/benchPackers.scala=5479af554556fa2ccb81da0d931265f015f37021
-src/main/scala/de/voodle/tim/bwinf/kisten/core/Raum.scala=c963a74d7f635d89da788c7d7b03634f8b085ec8
-src/main/scala/de/voodle/tim/bwinf/kisten/main/kisten.scala=9615eff77df5d7721ebccebc748eab6b6852287a
-src/main/scala/de/voodle/tim/bwinf/kisten/core/AufteilenderPacker.scala=14b9945fa08efcfee43e21a50cf153d6f7a6f1bb
-src/main/scala/de/voodle/tim/bwinf/kisten/core/kistenVergleiche.scala=5341a5b036173ea101d8a36a89c48781ae6a17a4
-src/main/scala/de/voodle/tim/bwinf/kisten/core/KistenSatz.scala=a93b692f8f0e02da259d595107e7826c47cba629
-src/main/scala/de/voodle/tim/bwinf/kisten/core/kistenpackers.scala=b4af56674ef64a8942b534102f22226c71cf56a9
-src/main/scala/de/voodle/tim/bwinf/kisten/core/online/strategien.scala=58544fff257cf79048ea36241ec5273afb5e1195
-src/main/scala/de/voodle/tim/bwinf/kisten/core/OptimalPacker.scala=88d4dd126c6f24dfb71d0ecc1adc3201708f1f70
-src/main/scala/de/voodle/tim/bwinf/kisten/bench/BenchAggregator.scala=9b7395acd850e822383cff9ef61c689ce63ee926
-src/main/scala/de/voodle/tim/bwinf/kisten/core/kisten.scala=21db569b7790667d18722fd47080e6997865e1ff
-src/main/scala/de/voodle/tim/bwinf/kisten/bench/benching.scala=c5c97b62851a640594b75770db495a9a6bea08a2
-src/main/scala/de/voodle/tim/bwinf/kisten/main/KistenLogger.scala=34e8e40a03d3883eb8cc5b17ee9a64388d8bfafc
-src/main/scala/de/voodle/tim/bwinf/kisten/mt/ActingPacker.scala=3cbc72e65d546dfe6c7b63cb8310e7181059f54c
-src/main/scala/de/voodle/tim/bwinf/kisten/main/KistenPacken.scala=a537afbbf801b016ce04cccf74aefcf8b3978439
-src/main/scala/de/voodle/tim/bwinf/kisten/mt/msgs.scala=cde38e4aa14e4aae0e72afac6a2f31f42c3184fc
+#Wed Apr 20 21:51:23 CEST 2011
+src/main/scala/de/voodle/tim/bwinf/kisten/AufteilenderPacker.scala=1548e746101b9f15a393ec5516efab287a858dad
+src/main/scala/de/voodle/tim/bwinf/kisten/OptimalPacker.scala=78198d8739932c29d4ae38193b76f5134b8f9b70
+src/main/scala/de/voodle/tim/bwinf/kisten/kisten.scala=308f96b29eaad5113529165ef7acbd1eabf2896c
+src/main/scala/de/voodle/tim/bwinf/kisten/AneinandergereihterKistensatz.scala=d1e903c80d7ca430846c0f4db8d682f718202f68
+src/main/scala/de/voodle/tim/bwinf/kisten/Kistenpacker.scala=4e6f05a252f694aba8a1a12145882e2ff83c41e8
+src/main/scala/de/voodle/tim/bwinf/kisten/Utils.scala=0ca10868e09b4f816fb9eb638fe7eb56280f73e4
+src/main/scala/de/voodle/tim/bwinf/kisten/StandardKisten.scala=4c9784527ef5e5f7840242bbd827e4811ea5f3e4
+src/main/scala/de/voodle/tim/bwinf/kisten/OnlinePacker.scala=e4b8a96325f94399c9bb59609b6960f2086d522e
+src/main/scala/de/voodle/tim/bwinf/kisten/KistenLogger.scala=237b66a2fb1c17e4a3ff02ce39eed61bfb6aef65
+src/main/scala/de/voodle/tim/bwinf/kisten/strategien.scala=e0ec51b1f1f135244196e75911ffbf62200d539f
+src/main/scala/de/voodle/tim/bwinf/kisten/Kistensatz.scala=857bf224e6d9056485dff21ad751372768b64dcd

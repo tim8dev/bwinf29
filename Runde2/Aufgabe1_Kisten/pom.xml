@@ -12,27 +12,6 @@
 
     <repositories>
         <repository>
-            <id>Akka</id>
-            <name>Akka Maven2 Repository</name>
-            <url>http://akka.io/repository/ </url>
-        </repository>
-        <repository>
-            <id>Multiverse</id>
-            <name>Multiverse Maven2 Repository</name>
-            <url>http://multiverse.googlecode.com/svn/maven-repository/releases/</url>
-        </repository>
-        <repository>
-            <id>GuiceyFruit</id>
-            <name>GuiceyFruit Maven2 Repository</name>
-            <url>http://guiceyfruit.googlecode.com/svn/repo/releases/ </url>
-        </repository>
-        <repository>
-            <id>JBoss</id>
-            <name>JBoss Maven2 Repository</name>
-            <url>https://repository.jboss.org/nexus/content/groups/public/ </url>
-        </repository>
-
-        <repository>
             <id>scala-tools-releases</id>
             <name>Scala-Tools Maven2 Repository Releases</name>
             <url>http://scala-tools.org/repo-releases</url>
@@ -63,21 +42,11 @@
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.googlecode.scalaz</groupId>
-            <artifactId>scalaz-core_${scala.bversion}</artifactId>
-            <version>5.0</version>
-        </dependency>
         <!--<dependency>
             <groupId>se.scalablesolutions.akka</groupId>
             <artifactId>akka-actor</artifactId>
             <version>1.0-RC3</version>
         </dependency>--> <!-- Disclude for now -->
-        <dependency>
-            <groupId>com.googlecode.scalaz</groupId>
-            <artifactId>scalaz-http_${scala.bversion}</artifactId>
-            <version>5.0</version>
-        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

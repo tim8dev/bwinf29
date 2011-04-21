@@ -1,15 +1,9 @@
 #External Dependencies
-#Sat Apr 09 11:15:37 CEST 2011
-/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/lib_managed/scala_2.8.1/test/specs_2.8.1-1.6.7.jar=src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala\:src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala
-/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/KisteHalb.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala
-/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/Kiste$.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala
-/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/PartialRaumA.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala
-/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/Kiste.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala
-/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/KisteVoll.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala
-/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/PartialRaumAB.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala
-/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/lib_managed/scala_2.8.1/test/scalacheck_2.8.1-1.8.jar=src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala\:src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala
-/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/KisteLeer.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala
-/usr/lib/jvm/java-6-sun-1.6.0.24/jre/lib/rt.jar=src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala\:src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala
-/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/project/boot/scala-2.8.1/lib/scala-library.jar=src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala\:src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala
-/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/Raum.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala\:src/test/scala/de/voodle/tim/bwinf/kisten/core/KistenSpec.scala
-/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/target/scala_2.8.1/classes/de/voodle/tim/bwinf/kisten/core/Raum$.class=src/test/scala/de/voodle/tim/bwinf/kisten/core/RaumSpec.scala
+#Wed Apr 20 21:51:23 CEST 2011
+/usr/lib/jvm/java-6-openjdk/jre/lib/rt.jar=
+/nfs/Projects/bwinf/Runde2/Aufgabe1_Kisten/lib_managed/scala_2.8.1/test/specs_2.8.1-1.6.7.jar=
+/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/lib_managed/scala_2.8.1/test/scalacheck_2.8.1-1.8.jar=
+/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/project/boot/scala-2.8.1/lib/scala-library.jar=
+/nfs/Projects/bwinf/Runde2/Aufgabe1_Kisten/lib_managed/scala_2.8.1/test/scalacheck_2.8.1-1.8.jar=
+/nfs/Projects/bwinf/Runde2/Aufgabe1_Kisten/project/boot/scala-2.8.1/lib/scala-library.jar=
+/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/lib_managed/scala_2.8.1/test/specs_2.8.1-1.6.7.jar=
