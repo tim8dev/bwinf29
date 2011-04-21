@@ -1,0 +1,1 @@
+bin/scala -classpath Aufgabe1/dist:Aufgabe2/dist

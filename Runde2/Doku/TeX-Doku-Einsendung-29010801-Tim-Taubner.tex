@@ -1,0 +1,189 @@
+\documentclass[a4paper,10pt,notitlepage]{scrreprt}
+\usepackage[utf8]{inputenc}
+
+%custom font:
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+%\usepackage[math]{iwona}
+\usepackage[ngerman]{babel}
+
+\usepackage{amsmath}\usepackage{amsfonts}\usepackage{amssymb}\usepackage{amsthm}
+
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage[pdftex]{hyperref}
+\hypersetup{colorlinks=true,linkcolor=darkblue}
+
+\usepackage[textwidth=15.88cm,textheight=23cm]{geometry}
+\usepackage{textcomp}
+
+\usepackage[small,bf]{caption}
+\usepackage{subfig}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{minitoc}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{Seite \thepage}
+\fancyfoot[C]{\footnotesize 29.\ BWINF, 2.\ Runde; Einsendung:\ Tim Taubner, Nr.\ 29.0108.01}
+
+\renewcommand{\thechapter}{\Alph{chapter}}
+\renewcommand{\thesection}{\arabic{section}}
+\setcounter{secnumdepth}{3}
+
+%Verhindern von pagebreaks bei chapter/toc
+\newcommand{\nobreakchap}{%
+  \renewcommand\chapter{\section}
+}
+\newcommand{\normalchap}{%
+  \renewcommand\chapter{%
+  \if@openright\cleardoublepage\else\clearpage\fi
+  \thispagestyle{\chapterpagestyle}%
+  \global\@topnum\z@
+  \@afterindentfalse
+  \secdef\@chapter\@schapter}
+}
+
+%opening
+\title{29. Bundeswettbewerb Informatik 2010/2011 2. Runde}
+\author{Tim Taubner, Verwaltungsnummer 29.0108.01}
+
+\definecolor{darkblue} {rgb}{0,0,.6}
+\definecolor{darkred}  {rgb}{.6,0,0}
+\definecolor{darkgreen}{rgb}{0,.3,0}
+
+\lstset{commentstyle=\color{darkgreen}\textbf, keywordstyle=\color{blue}\textbf}
+\lstset{inputencoding=utf8, extendedchars=true}
+\lstset{numbers=left, numberstyle=\tiny, numbersep=5pt}
+%Define Scala Language Highlighting
+\lstdefinelanguage{Scala}[]{Java}
+  {morekeywords={trait, object, sealed, override, val, var, lazy, def, yield, type},%, List, Int, Double, Seq, Ordered, Nil, Set},
+   %Ugly fix to ``Umlaute''
+   literate={ß}{{\ss}}1
+            {Ö}{{\"O}}1 {Ä}{{\"A}}1 {Ü}{{\"U}}1
+	    {ü}{{\"u}}1 {ä}{{\"a}}1 {ö}{{\"o}}1
+  }
+\lstMakeShortInline{|}
+
+\begin{document}
+
+\begin{titlepage}
+  \begin{samepage}
+  \maketitle
+  \vfill
+  \begin{abstract}
+   Dies ist die Dokumentation zu den von mir bearbeiteten Aufgaben 1 und 2 der 2.\ Runde des 29.\ Bundeswettbewerbs Informatik 2010/2011.
+   Die mir zugeteilte Verwaltungsnummer ist 29.0108.01.
+   In diesem Dokument erläutere ich meine Lösungen der Aufgaben.
+   Ich halte mich an den Gleiderungsvorschlag der der 1.\ Runde.
+   Es sind also die Lösungsideen, Algorithmenentwürfe, Implementierungen, Programmabläufe, Programmnutzungsanleitungen sowie Programmtexte enthalten.
+   Eigenständige Erweiterungen werden erläutert und als solche gekennzeichnet.\\
+
+   Sämtliche Dokumentation und die interaktiv ausführbaren Programme sind auf einer seperaten CD mitgeliefert.
+   Wie die erstellten Programme von der mitgelieferten CD aus gestartet werden können, ist im Abschnitt A, Allgemeines, erläutert.
+   Alle eingereichten Quelldateien und ausführbare Programmdistributionen wurden alleine von mir - Tim Taubner - erstellt.
+  \end{abstract}
+  \vfill
+  \setcounter{tocdepth}{0}
+  \setcounter{minitocdepth}{3}
+  \dominitoc
+\renewcommand{\contentsname}{Inhaltsübersicht}
+  \nobreakchap
+  \tableofcontents
+  \vfill
+  \normalchap
+  \end{samepage}
+\end{titlepage}
+
+\renewcommand*\mtctitle{\bfseries\Large Inhalt der Aufgabendokumentation}
+\nomtcrule
+
+\chapter{Allgemeines}
+\fancyhead[L]{\thechapter. Allgemeines}
+
+\section{Persönliche Anmerkungen} % TODO: Rewrite.
+\paragraph{Der BWInf und ich}
+ Der Bundeswettbewerb Informatik hat mich sehr begeistert.
+ Viel konnte ich bereits durch die 1. Runde lernen, z. B. wie eine passable Dokumentation erstellt werden sollte.
+ Auch das Ergebnis lässt sich sehen. Wenn ich gefragt werde, was ich eigentlich am PC mache,
+ klappe ich meinen Laptop auf und zeige die Dokumentation zur 1.\ Aufgabe\footnote{siehe Einsendung zur 1.\ Runde, Einsendungsnr.\ 108}  ``informatische Kunst''.
+ Viel anschaulicher lässt sich nicht zeigen, dass Informatik \emph{mehr} als nur Programmieren ist.
+\paragraph{Wahl der Programmiersprache}
+ Die von mir zur Aufgabenlösung benutzte Programmiersprache ist durchgehend Scala.
+ Ich bevorzuge Scala, weil es damit möglich ist, knappen und kompakten Code zu schreiben.
+ Ich bin mir durchaus bewusst, dass Scala noch keine weit verbreitete Sprache ist.
+ Trotzdem hoffe ich, dass der moderne und aussagekräftige Code allgemein für Informatiker gut lesbar ist.
+ Deswegen habe ich auch auf Pseudo-Code verzichtet,
+  weil er als zusätzliche Sprache und Syntax neben Scala und Mathematik eine zusätzliche Komplexität darstellen würde.
+ Stattdessen formuliere ich alle Algorithmen in Scala-Code und erläutere diesen.
+ Der Scala-Code ist meiner Meinung nach ebenso effektiv wie Pseudo-Code.
+ Lediglich wenige funktionale und objektorientierte Konstrukte müssen dem Leser bekannt sein.\footnote{Beispielsweise
+  sollte dem Leser bekannt sein, wie foldLeft, currying, Monaden, etc. funktionieren.}
+\paragraph{Danksagungen}
+ Ich erlaube mir hier, Personen zu danken, die mir zu der vorliegenden Arbeit verholfen haben.
+ Auch wenn alle Leistungen im Sinne des Wettbewerbs von mir erbracht wurden,
+  habe ich dazu viel Unterstützung von meiner Familie und meiner Freundin erhalten.
+\section{Dateistruktur der CD}
+ Die Dateien auf der CD sind wie folgt strukturiert.
+ Zu jeder Aufgabe wurde ein Ordner \textbf{AufgabeX} mit den zwei folgenden Unterordnern angelegt.\\
+
+ \begin{tabular}{ll}
+  \textbf{src}  & Quelltexte \\
+  \textbf{dist} & ausführbare Dateien, sowie zur Ausführung benötigte Bibliotheken \\
+ \end{tabular}\\ \newline
+ Zusätzlich ist die vorliegende Dokumentation unter
+ \begin{center}\textbf{TeX-Doku-Einsendung-29010801-Tim-Taubner.pdf}\end{center}
+ im Wurzelverzeichnis zu finden.
+ Auch die \LaTeX-Quelldateien, mit der diese Dokumentation erzeugt wurde, sind im Verzeichnis ``TeX-Doku-Quelldateien'' zu finden.
+\section{Systemvoraussetzungen zur Programmausführung}
+\label{Vor}
+Um die Programmbeispiele ausführen zu können, sollten folgende Voraussetzungen erfüllt sein:\\
+
+ \begin{tabular}{ll}
+  \textbf{Prozessor:}                & mindestens 1 GHz, empfohlen: $\geq$ 2 GHz \\
+  \textbf{Arbeitsspeicher:}          & mindestens 1024 MB, empfohlen: $\geq$ 2 GB \\
+  \textbf{Grafikkarte:}              & beliebig \\
+  \textbf{Getestete Betriebsysteme:} & Windows 7, Linux (Ubuntu 10.04, Kubuntu 10.10) \\
+  \textbf{Java Runtime:}             & mindestens Version 1.5 (Java 5), empfohlen: $\geq$ 1.6 \\
+ \end{tabular}
+\section{Starten der Kommandozeile}
+\subsection{Wurzelverzeichnis}
+ Im Wurzelverzeichnis der CD beginnt die Ordnerhierarchie der mitgelieferten Dateien.
+ Stellen Sie bitte sicher, dass Sie im Wurzelverzeichnis sind, bevor Sie die in den jeweiligen Aufgaben beschriebene Startanleitungen ausführen.
+ Das kann durch neues Starten der Kommandozeile gemäß folgender Anleitung erfolgen.
+\newcommand{\then}{\textrightarrow{} }
+\subsection{Unter Windows}
+ Unter Windows startet man die Kommandozeile durch: Start \then Ausführen \then `cmd' eingeben \then Kommandozeile.
+ Nun kann durch Angabe des Laufwerkbuchstabens des CD-Laufwerks (zumeist ``E:'') auf das Wurzelverzeichnis der CD gewechselt werden.
+\subsection{Unter GNOME}
+ Unter gängigen GNOME-Distributionen wie z. B. Ubuntu 8 startet man die Kommandozeile durch:
+ Applikationen \then System \then Terminal.
+ Die CD wird in Standarddistributionen unter /media/disk o.ä. eingehängt. Durch |cd /media/disk| wechselt man in das Wurzelverzeichnis der CD.
+\subsection{Unter KDE}
+ Unter aktuellen KDE-Distributionen wie z. B. Kubuntu 9 startet man die Kommandozeile durch:
+ KDE(KMenu) \then Applikationen \then System \then Terminal.
+ Die CD wird in Standarddistributionen unter /media/disk o.ä. eingehängt. Durch |cd /media/disk| wechselt man in das Wurzelverzeichnis der CD.
+\subsection{Unter Mac OS X}
+ Leider steht mir kein Mac zur Nutzung bereit, das Öffnen der Konsole sollte jedoch entweder selbsterklärend oder ähnlich der unter KDE/GNOME sein.
+ \\
+\section{Starten der Programme}
+\subsection{Starten der Kommandozeile}
+ Nachdem in einer Konsole im Wurzelverzeichnis die CD geöffnet ist, kann die interaktive Scala-Console (REPL) wie folgt gestartet werden.
+ Durch Eingabe von |./console| in der Konsole öffnet sich die interaktive Scala-Console.
+ Der Classpath wurde bereits richtig eingestellt und die Module beider Aufgaben wurden bereits importiert,
+  so dass die einzelnen Anweisungen in den Aufgaben direkt ausgeführt werden können.
+\subsection{Ausführen der Beispiele}
+ Alle Beispiele können nacheinander ausgeführt werden, indem Sie im Wurzelverzeichnis der CD |./examples| in der Konsole eingeben.
+ Die Beispiele können auch nach Aufgabe getrennt ausgeführt werden, indem Sie |./aufgabe1| oder |./aufgabe2| eingeben.
+\clearpage
+
+\fancyhead[L]{\thechapter. Aufgabe 1 - Kisten in Kisten in Kisten}
+\include{Aufgabe1n}
+\clearpage
+
+\fancyhead[L]{\thechapter. Aufgabe 2 - Containerklamüsel}
+\include{Aufgabe2}
+
+\end{document}
