@@ -1,1 +1,1 @@
-bin/scala -classpath Aufgabe1/dist:Aufgabe2/dist
+bin/scala -classpath Aufgabe1/dist/Kisten.jar:Aufgabe2/dist/Container.jar -i run.scala

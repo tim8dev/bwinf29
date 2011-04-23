@@ -12,7 +12,7 @@ object OfflinePacker {
   def apply(strategien: List[Strategie], sortieren: Boolean = true): OfflinePacker =
     OfflinePacker(OnlineAlgo(strategien), sortieren)
   def apply(sortieren: Boolean): OfflinePacker =
-    OfflinePacker(OnlineAlgo.standardStrategien, true)
+    OfflinePacker(OnlineAlgo.standardStrategien, sortieren)
   def apply(): OfflinePacker =
     OfflinePacker(OnlineAlgo.standardStrategien)
 }

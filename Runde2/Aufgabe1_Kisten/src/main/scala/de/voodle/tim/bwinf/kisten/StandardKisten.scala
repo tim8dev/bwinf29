@@ -1,6 +1,5 @@
 package de.voodle.tim.bwinf.kisten
 
-import core._
 import Kiste._ // Implicits importieren für schöne Syntax
 
 object StandardKisten { // Alle Angaben in cm

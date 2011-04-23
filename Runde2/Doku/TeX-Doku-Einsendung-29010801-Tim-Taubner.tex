@@ -77,17 +77,17 @@
    Dies ist die Dokumentation zu den von mir bearbeiteten Aufgaben 1 und 2 der 2.\ Runde des 29.\ Bundeswettbewerbs Informatik 2010/2011.
    Die mir zugeteilte Verwaltungsnummer ist 29.0108.01.
    In diesem Dokument erläutere ich meine Lösungen der Aufgaben.
-   Ich halte mich an den Gleiderungsvorschlag der der 1.\ Runde.
+   Ich halte mich an den Gliederungsvorschlag der 1.\ Runde.
    Es sind also die Lösungsideen, Algorithmenentwürfe, Implementierungen, Programmabläufe, Programmnutzungsanleitungen sowie Programmtexte enthalten.
    Eigenständige Erweiterungen werden erläutert und als solche gekennzeichnet.\\
 
-   Sämtliche Dokumentation und die interaktiv ausführbaren Programme sind auf einer seperaten CD mitgeliefert.
-   Wie die erstellten Programme von der mitgelieferten CD aus gestartet werden können, ist im Abschnitt A, Allgemeines, erläutert.
+   Sämtliche Dokumentation und die interaktiv ausführbaren Programme sind auf einer separaten CD mitgeliefert.
+   Wie die erstellten Programme gestartet werden können, ist im Abschnitt A, Allgemeines, erläutert.
    Alle eingereichten Quelldateien und ausführbare Programmdistributionen wurden alleine von mir - Tim Taubner - erstellt.
   \end{abstract}
   \vfill
-  \setcounter{tocdepth}{0}
-  \setcounter{minitocdepth}{3}
+\setcounter{tocdepth}{0}
+\setcounter{minitocdepth}{3}
   \dominitoc
 \renewcommand{\contentsname}{Inhaltsübersicht}
   \nobreakchap
@@ -103,7 +103,7 @@
 \chapter{Allgemeines}
 \fancyhead[L]{\thechapter. Allgemeines}
 
-\section{Persönliche Anmerkungen} % TODO: Rewrite.
+\section{Persönliche Anmerkungen}
 \paragraph{Der BWInf und ich}
  Der Bundeswettbewerb Informatik hat mich sehr begeistert.
  Viel konnte ich bereits durch die 1. Runde lernen, z. B. wie eine passable Dokumentation erstellt werden sollte.
@@ -115,7 +115,7 @@
  Ich bevorzuge Scala, weil es damit möglich ist, knappen und kompakten Code zu schreiben.
  Ich bin mir durchaus bewusst, dass Scala noch keine weit verbreitete Sprache ist.
  Trotzdem hoffe ich, dass der moderne und aussagekräftige Code allgemein für Informatiker gut lesbar ist.
- Deswegen habe ich auch auf Pseudo-Code verzichtet,
+ Deswegen habe ich auch auf Pseudocode verzichtet,
   weil er als zusätzliche Sprache und Syntax neben Scala und Mathematik eine zusätzliche Komplexität darstellen würde.
  Stattdessen formuliere ich alle Algorithmen in Scala-Code und erläutere diesen.
  Der Scala-Code ist meiner Meinung nach ebenso effektiv wie Pseudo-Code.
@@ -124,7 +124,7 @@
 \paragraph{Danksagungen}
  Ich erlaube mir hier, Personen zu danken, die mir zu der vorliegenden Arbeit verholfen haben.
  Auch wenn alle Leistungen im Sinne des Wettbewerbs von mir erbracht wurden,
-  habe ich dazu viel Unterstützung von meiner Familie und meiner Freundin erhalten.
+  habe ich dazu viel Unterstützung von meiner Familie - insbesondere von meinem Vater - und meiner Freundin erhalten.
 \section{Dateistruktur der CD}
  Die Dateien auf der CD sind wie folgt strukturiert.
  Zu jeder Aufgabe wurde ein Ordner \textbf{AufgabeX} mit den zwei folgenden Unterordnern angelegt.\\
@@ -167,16 +167,17 @@ Um die Programmbeispiele ausführen zu können, sollten folgende Voraussetzungen
  Die CD wird in Standarddistributionen unter /media/disk o.ä. eingehängt. Durch |cd /media/disk| wechselt man in das Wurzelverzeichnis der CD.
 \subsection{Unter Mac OS X}
  Leider steht mir kein Mac zur Nutzung bereit, das Öffnen der Konsole sollte jedoch entweder selbsterklärend oder ähnlich der unter KDE/GNOME sein.
- \\
 \section{Starten der Programme}
+\label{start}
 \subsection{Starten der Kommandozeile}
  Nachdem in einer Konsole im Wurzelverzeichnis die CD geöffnet ist, kann die interaktive Scala-Console (REPL) wie folgt gestartet werden.
- Durch Eingabe von |./console| in der Konsole öffnet sich die interaktive Scala-Console.
+ Durch Eingabe von |./run| (|run.bat| in Windows) in der Konsole öffnet sich die interaktive Scala-Console.
  Der Classpath wurde bereits richtig eingestellt und die Module beider Aufgaben wurden bereits importiert,
   so dass die einzelnen Anweisungen in den Aufgaben direkt ausgeführt werden können.
 \subsection{Ausführen der Beispiele}
  Alle Beispiele können nacheinander ausgeführt werden, indem Sie im Wurzelverzeichnis der CD |./examples| in der Konsole eingeben.
  Die Beispiele können auch nach Aufgabe getrennt ausgeführt werden, indem Sie |./aufgabe1| oder |./aufgabe2| eingeben.
+ (Unter Windows jeweils .bat an die Befehle hängen.)
 \clearpage
 
 \fancyhead[L]{\thechapter. Aufgabe 1 - Kisten in Kisten in Kisten}

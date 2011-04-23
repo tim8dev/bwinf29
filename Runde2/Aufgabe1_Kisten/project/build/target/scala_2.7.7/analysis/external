@@ -1,7 +1,5 @@
 #External Dependencies
-#Wed Apr 20 21:51:15 CEST 2011
-/nfs/Projects/bwinf/Runde2/Aufgabe1_Kisten/project/boot/scala-2.7.7/org.scala-tools.sbt/sbt/0.7.4/sbt_2.7.7-0.7.4.jar=Mvn.scala
-/nfs/Projects/bwinf/Runde2/Aufgabe1_Kisten/project/boot/scala-2.7.7/lib/scala-library.jar=Mvn.scala
-/usr/lib/jvm/java-6-openjdk/jre/lib/rt.jar=Mvn.scala
+#Sat Apr 23 12:02:59 CEST 2011
+/usr/lib/jvm/java-6-sun-1.6.0.24/jre/lib/rt.jar=Mvn.scala
 /home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/project/boot/scala-2.7.7/org.scala-tools.sbt/sbt/0.7.4/sbt_2.7.7-0.7.4.jar=Mvn.scala
 /home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/project/boot/scala-2.7.7/lib/scala-library.jar=Mvn.scala

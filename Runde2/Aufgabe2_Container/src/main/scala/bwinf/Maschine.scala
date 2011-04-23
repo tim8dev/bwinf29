@@ -26,11 +26,11 @@ class Maschine(protected val gleis: Gleis,
     interpret(instrs.toList,0,0,1)
   }
   // Attach point for further actions (for subclasses)
-  protected def act(instrs: Instruction) {}
+  protected def act(instrs: Option[Instruction]) {}
   
   @tailrec
   private def interpret(instrs: List[Instruction], con: Int, wag: Int, idx: Int): Gleis = {
-    act(instrs.head)
+    act(instrs.headOption)
     instrs match { // Recursivly check
       case Rotate :: xs =>
         interpret(xs,wag,con,idx)

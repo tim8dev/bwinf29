@@ -2,9 +2,10 @@ package de.voodle.tim.bwinf.kisten
 
 case object OptimalPacker extends Kistenpacker {
   def min(kistenListe: Seq[KisteLeer]) =
-    packe(sortiere(kistenListe)) min Kistensatz.Ordnung.nachVolumen
+    packe(kistenListe) min Kistensatz.Ordnung.nachVolumen
  
-  def packe(kisten: Seq[KisteLeer]) = (Set[Kistensatz]() /: kisten) ( packSchritt )
+  def packe(kistenListe: Seq[KisteLeer]) =
+    (Set[Kistensatz]() /: sortiere(kistenListe)) ( packSchritt )
 
   protected def packSchritt(sätze: Set[Kistensatz], kiste: KisteLeer) =
     if(sätze.isEmpty)

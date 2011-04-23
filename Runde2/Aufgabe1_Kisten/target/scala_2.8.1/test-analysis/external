@@ -1,9 +1,2 @@
 #External Dependencies
-#Wed Apr 20 21:51:23 CEST 2011
-/usr/lib/jvm/java-6-openjdk/jre/lib/rt.jar=
-/nfs/Projects/bwinf/Runde2/Aufgabe1_Kisten/lib_managed/scala_2.8.1/test/specs_2.8.1-1.6.7.jar=
-/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/lib_managed/scala_2.8.1/test/scalacheck_2.8.1-1.8.jar=
-/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/project/boot/scala-2.8.1/lib/scala-library.jar=
-/nfs/Projects/bwinf/Runde2/Aufgabe1_Kisten/lib_managed/scala_2.8.1/test/scalacheck_2.8.1-1.8.jar=
-/nfs/Projects/bwinf/Runde2/Aufgabe1_Kisten/project/boot/scala-2.8.1/lib/scala-library.jar=
-/home/tim/Projects/bwinf/Runde2/Aufgabe1_Kisten/lib_managed/scala_2.8.1/test/specs_2.8.1-1.6.7.jar=
+#Sat Apr 23 12:12:12 CEST 2011

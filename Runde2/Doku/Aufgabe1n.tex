@@ -1,40 +1,45 @@
 \lstset{language=Scala}
-\chapter{Erste bearbeitete Aufgabe: (1) Kisten in Kisten in Kisten}
+\chapter[Erste bearbeitete Aufgabe: (1) Kisten in Kisten in Kisten]{Erste bearbeitete Aufgabe: \newline (1) Kisten in Kisten in Kisten}
 \minitoc
 \clearpage
 \section{Lösungsidee}
  Um Frau Y. zu helfen, soll ein Algorithmus entwickelt werden, der zu gebenen Kisten diese so ineinander packt,
- dass die äußersten Kisten möglich geringes Volumen vorweisen.\\
- Meine Grundidee ist es, die Schachtelung der Kisten als binären Baum aufzufassen.\\
- Optimal wäre es natürlich, wenn die äußeren Kisten zusammengesehen ein minimales Außenvolumen bieten würden.
+ dass die äußersten Kisten in Summe ein möglichst geringes Volumen vorweisen.
+ Meine Grundidee ist es, die Schachtelung der Kisten als binären Baum aufzufassen.
+
+ Optimal wäre es natürlich, wenn die äußeren Kisten zusammen gesehen ein minimales Außenvolumen bieten würden.
  Dies kann in der Tat erreicht werden, wenn alle möglichen Schachtelungen berechnet werden und dann die mit dem kleinsten Außenvolumen zurückgegeben wird.
- Um jedoch nicht in jede Kiste nacheinander jede andere zu packen, wird eine klare Reihenfolge, in der die Kisten ineinander gepackt werden sollen, gesucht.
- Dies kann erreicht werden, indem die Kisten dem Volumen nach von groß nach klein zu sortieren.
+ Um jedoch nicht für jede Kiste nacheinander für jede andere zu überprüfen ob sie hineinpasst, wird eine klare Reihenfolge, in der die Kisten ineinander gepackt werden sollen, gesucht.
+ Dies kann erreicht werden, indem die Kisten dem Volumen nach von groß nach klein sortiert werden.
  Anschließend werden - beginnend bei der größten - alle Kisten nacheinander zu einer Schachtelung kombiniert.
- Diesen Ansatz nenne ich Brute-force\-Algorithmus und beschreibe ihn in \ref{bruteforce} genauer.
+ Diesen Ansatz nenne ich Brute-force-Algorithmus und beschreibe ihn in \ref{bruteforce} genauer.
  Ohne große Überlegungen lässt sich feststellen, dass solch ein Ansatz prinzipiell immer ein Optimum liefert.
  Problematisch wird es allerdings, wenn die Laufzeit in Betracht gezogen wird, die zum Berechnen benötigt wird.
- Denn wie wir später noch genauer sehen werden, lassen sich bereits Probleme mit kleiner Anzahl Kisten nicht mehr in akzeptabler Zeit lösen.
+ Denn, wie wir später noch genauer sehen werden, lassen sich bereits Probleme mit kleiner Anzahl Kisten nicht mehr in akzeptabler Zeit lösen.
  Deswegen betrachten wir nachfolgend noch weitere Ansätze und Algorithmen, die deutlich besser skalieren.
 \section{Algorithmen und Datenstrukturen}
 \subsection{Datenstrukturen}
- Um das Problem präzise bearbeiten zu können, möchte ich von mir verwendete Datenstrukturen - zum Teil auch mathematisch - beschreiben.\\
- Als einen \emph{Kistenbaum} bezeichne ich einen \emph{binären Baum} bei dem jeder Knoten eine Kiste repräsentiert.
- In diesem gilt für jeden Knoten $N$ und die durch ihm repräsentierte Kiste $K$, dass die Nachfolgerkisten,
- die durch die null, ein oder zwei Nachfolgerknoten von $N$ repräsentiert werden gleichzeitig in $K$ passen.
- Ein Kistenbaum stellt also eine äußere Kiste sowie alle enthaltenen verschachtelten Kisten dar.\\
+ Um das Problem präzise bearbeiten zu können, möchte ich die von mir verwendeten Datenstrukturen - zum Teil auch mathematisch - beschreiben.
+
+ Als einen \emph{Kistenbaum} bezeichne ich einen binären Baum bei dem jeder Knoten eine Kiste repräsentiert.
+ In diesem gilt für jeden Knoten $N$ und die durch ihn repräsentierte Kiste $K$, dass die Nachfolgerkisten,
+ die durch die null, ein oder zwei Nachfolgerknoten von $N$ repräsentiert werden, gleichzeitig in $K$ passen.
+ Ein Kistenbaum stellt also eine äußere Kiste sowie alle enthaltenen verschachtelten Kisten dar.
+
  Als einen \emph{Kistensatz} bezeichne ich eine Multimenge von Kistenbäumen.
- Ein Kistensatz kann also eine Kistenschachtelung im Sinne der Aufgabenstellung darstellen.\\
+ Ein Kistensatz kann also eine Lösung im Sinne der Aufgabenstellung darstellen.
+
  Das Grundproblem ist nun, zu gegebenen Kisten $k_1,k_2,\dots,k_n$
  einen Kistensatz $ks$ mit den Wurzeln $w_1,\dots,w_m$ seiner Kistenbäume zu erzeugen, wobei alle Kisten $k_1,k_2,\dots,k_n$ genau einmal enthalten sind.
- Seien $v_1,\dots,v_m$ die jeweiligen Volumina der Wurzeln $w_1,\dots,w_m$. Dann gilt es als weitere Aufgabe $\sum_{i=0}^{m}{v_i}$ zu minimieren.\\
+ Seien $v_1,\dots,v_m$ die jeweiligen Volumina der Wurzeln $w_1,\dots,w_m$. Dann gilt es als weitere Aufgabe $\sum_{i=0}^{m}{v_i}$ zu minimieren.
+
  Die Kisten $k_1,k_2,\dots,k_n$ werden als Liste aufgefasst, eine Menge ist ungeeignet da Kisten (mit gleichen Maßen) mehrfach vorkommen können.
 \subsection{Algorithmen}
- Nach diesem Abschnitt werden insgesamt drei Algorithmen vorgestellt.
- Der Erste, ``Brute-force-Algorithmus'' liefert zwar optimale Ergebnisee, allerdings ist seine Laufzeitkomplexität inpraktikabel hoch.
+ In den nachfolgenden Abschnitten werden insgesamt drei Algorithmen vorgestellt.
+ Der erste im Abschnitt \ref{bruteforce} liefert zwar optimale Ergebnisse, allerdings ist seine Laufzeitkomplexität unpraktikabel hoch.
  Es wird deswegen ein trade-off zwischen Laufzeit und Güte gemacht.
- Hierzu habe ich zwei weitere Lösungsideen erstellt, die unterschiedliche Komprimisse darstellen.
- Es ist offensichtlich, dass die ursprüngliche Motivation dadurch nicht erreicht wird.
+ Hierzu habe ich zwei weitere Lösungsideen in den Abschnitten \ref{auf} und \ref{ink} erstellt, die unterschiedliche Kompromisse darstellen.
+ Es ist offensichtlich, dass Optimalität dadurch nicht erreicht wird.
  Die grundlegende Motivation ist nun,
  das Streben nach Optimalität aufzugeben und stattdessen in menschlicher Zeit\footnote{menschliche Zeit $<<$ Lebenserwartung eines Menschen ($75$ Jahre)}
   trotzdem eine gute Packung auch zu einer großen Anzahl von Kisten zu finden.
@@ -44,77 +49,97 @@
 \subsubsection{Lösungsidee}
 \lstset{basicstyle=\ttfamily}
  Der oben bereits skizzierte Algorithmus soll nun präzisiert werden.
- Die Liste wird entsprechend dem Volumen von groß nach klein sortiert.
- Das heißt, dass jede Kiste $k$ an der Stelle $i$, in alle Vorgängerkisten $k_1, k_2, \dots, k_{i-1}$ passt.
- Dies wiederum ermöglicht die Kombination ``entlang'' der Liste.
- So müssen andere Reihenfolgen von Kisten nicht berücksichtigt werden, was den Algorithmus erheblich beschleunigt.
- Die Liste der Kisten wird also nacheinander zu Kistensätzen kombiniert.
- Die Hilfsfunktion |packSchritt| erzeugt aus einer Menge von Kistensätzen durch Hinzufügen einer gegebenen Kiste die Menge aller möglichen Kistensätze.
- Diese werden dann weiter mit der nächsten Kiste zu noch mehr Kistensätzen kombiniert.
- Am Ende sind alle Elemente der Eingabeliste abgearbeitet.
- Nun wird der Kistensatz ausgewählt, welcher das kleinste Außenvolumen hat und zurückgegeben. \\
+ Dieser Algorithmus |OptimalPacker| hat drei Teile.
+\begin{enumerate}
+ \item Die Liste wird entsprechend dem Volumen von groß nach klein sortiert.
+  Das heißt, dass jede Kiste $k$ an der Stelle $i$, in keine Nachfolgerkiste $k_i, k_{i+1}, \dots, k_n$ passt,
+   weil eine Kiste nur dann in eine andere Kiste passen kann, wenn ihr Volumen kleiner ist.
+  Dies wiederum ermöglicht die Kombination ``entlang'' der Liste.
+  So müssen andere Reihenfolgen von Kisten nicht berücksichtigt werden, was den Algorithmus erheblich beschleunigt.
+ \item Die resultierende Liste der Kisten wird nacheinander zu Kistensätzen kombiniert.
+  Die Hilfsfunktion |packSchritt| erzeugt aus einer Menge von Kistensätzen durch Hinzufügen einer gegebenen Kiste die Menge aller möglichen Kistensätze.
+  Diese werden dann weiter mit der nächsten Kiste zu noch mehr Kistensätzen kombiniert.
+  Am Ende sind alle Elemente der Eingabeliste abgearbeitet.
+ \item Nun wird der Kistensatz ausgewählt, welcher das kleinste Außenvolumen hat und zurückgegeben.
+\end{enumerate}
  Wichtig ist, um den Code zu verstehen, dass |(satz ++< kiste)| alle Möglichkeiten erzeugt,
  wie man die Kiste in einen |Kistensatz| einfügen kann\footnote{Nähere Erläuterungen dazu später, für den Algorithmus ist dies nicht direkt relevant.}.
-\\
+
 \lstset{basicstyle=\ttfamily\small}
 \begin{lstlisting}
-// Nacheinander für jede Kiste und jeden bereits erzeugten Kistensatz alle
-// möglichen Schachtelungskombiniationen mit dieser Kiste erzeugen.
-def packe = kisten.foldLeft(Set[Kistensatz]()) ( packSchritt )
-def packSchritt(sätze: Set[Kistensatz], kiste: Kiste) =
+def min(kistenListe: Seq[KisteLeer]) = {
+  val kistenSätze = packe(kistenListe)            // Schritt 1&2: siehe packe
+  kistenSätze min Kistensatz.Ordnung.nachVolumen //  Schritt 3: Minimum (nach Volumen)
+}
+
+def packe(kistenListe: Seq[KisteLeer]) = {
+  val kisten = sortiere(kistenListe) // Schritt 1: Sortieren
+  /* Schritt 2:
+   * Nacheinander für jede Kiste und jeden bereits erzeugten Kistensatz alle
+   * möglichen Schachtelungskombiniationen mit dieser Kiste erzeugen. */
+  kisten.foldLeft(Set[Kistensatz]()) ( packSchritt )
+}
+
+def packSchritt(sätze: Set[Kistensatz], kiste: KisteLeer) =
   if(sätze.isEmpty)
-    Set(Kistensatz(kiste :: Nil)) // Kistensatz nur mit der Kiste kiste
-  else
-    for { satz <- sätze                // Für jeden satz in sätze
-	  neuerSatz <- satz ++< kiste // erzeuge neue Möglichkeiten
-        } yield neuerSatz            // und gib diese zurück
+    Set(Kistensatz(kiste :: Nil)) // KistenSatz nur mit der Kiste
+  else for { satz <- sätze 		  // Für jeden satz in sätze
+	     neuerSatz <- satz ++< kiste // erzeuge neue Möglichkeiten
+           } yield neuerSatz            // und gib diese zurück
 \end{lstlisting}
 \lstset{basicstyle=\ttfamily}
 \subsubsection{Laufzeitverhalten}
  Das Laufzeitverhalten dieses Algorithmus' ist fatal. Es muss im letzten Schritt eine Kiste in bis zu $(n-1)!$ Kistensätze gepackt werden.
  Die Laufzeit, eine Kiste in einen Kistensatz zu packen, ist $O(n)$.
- Dies gilt, da jede Kiste $k$ des bestehenden Kistensatzes möglicherweise Möglichkeiten bietet, die neue Kiste in $k$ einzupacken.
- Wir erhalten also $n! + n \cdot (n-1)! +  (n-1) \cdot (n-2)! + \dots + 2 \cdot 1! + 1$. Sprich $O(n \cdot n!)$. \\
- Auch wenn der worst-case meist nicht erreicht wird, beispielsweise wenn es für 40 Kisten eher $20!$ Möglichkeiten gibt,
+ Dies gilt, da jede Kiste $k$ des bestehenden Kistensatzes bis zu $n$ Möglichkeiten bietet, die neue Kiste in $k$ einzupacken.
+ Wir erhalten also $n! + n \cdot (n-1)! +  (n-1) \cdot (n-2)! + \dots + 2 \cdot 1! + 1$. Sprich $O(n \cdot n!)$.
+
+ Auch wenn der Worstcase meist nicht erreicht wird, beispielsweise wenn es für 40 Kisten eher $20!$ Möglichkeiten gibt,
  würde die Berechnung aller Möglichkeiten bereits $8 \cdot 10^{15}$ Jahre benötigen,
-  unter der Annahme, dass das Prüfen und Hinzufügen einer Kiste in eine andere Kiste eine Nanosekunde dauert. \\
+  unter der Annahme, dass das Prüfen und Hinzufügen einer Kiste in eine andere Kiste eine Nanosekunde dauert.
+
  Unter der gleichen Annahme können etwa $15!$ Operationen in einer Stunde ausgeführt werden.
- Unter der Annahme, dass es etwa $x!$ Möglichkeiten für $2x$ Kisten gibt.\footnote{
-   Die Annahme erweist sich als durchaus realistisch, wie man in \ref{optAlg} sieht.}
+ Unter der Annahme, dass es etwa $x!$ Möglichkeiten für $2x$ Kisten gibt.
  können $2 \cdot (15-1)=28$ Kisten in einer Stunde in allen Möglichkeiten gepackt werden.
 \subsubsection{(Un)mögliche Parallelisierung}
  Eine Überlegung ist, das Laufzeitverhalten durch Parallelisierung zu verkürzen.
  Allerdings verspricht dies aufgrund der hohen Laufzeitkomplexität von $O(n \cdot n!)$ kaum Abhilfe.
  Selbst bei 100 Prozessoren, sprich einer hundertfachen Beschleunigung\footnote{Eine solche Beschleunigung wird in der Praxis nie erreicht,
- es muss immer ein gewisser Overhead für Synchronisation und sequentielle Programmabläufe berücksichtigt werden.}
+ es muss immer ein gewisser Overhead für Synchronisation und sequentielle Programmabläufe berücksichtigt werden.},
  können gerade mal $17!$ Operationen pro Stunde ausgeführt werden. Das entspricht $2 \cdot (17-1)=32$ Kisten.
- Es können also lediglich etwa $14\%$ ($32/28=1.1428\dots$) mehr Kisten gepackt werden, was nicht nennenswert ist.
+ Es können also lediglich etwa $14\%$ ($32/28=1,1428\dots$) mehr Kisten gepackt werden, was nicht nennenswert ist.
 \subsubsection{Problem der praktischen Nutzung}
  Frau Y. hat also ihre mittlerweile 28 Kisten optimal packen können. Dadurch ist nun Platz in ihrem Keller frei geworden.
  Allerdings empfindet sie es als widersprüchlich, dass sie genau deswegen nicht mehr Kisten in ihren Keller stellen kann, weil sie versucht eine optimale Lösung zu finden,
   was aber nur für kleine Kistenanzahlen gelingt.
- Wenn beispielsweise 200 Kisten gepackt werden sollen, bleiben 170 Kisten neben 30 optimal gepackten ungepackt. \\
+ Wenn beispielsweise 200 Kisten gepackt werden sollen, bleiben 170 Kisten neben 30 optimal gepackten ungepackt.
 \subsection{Brute-force-Algorithmus nach Aufteilung}
+\label{auf}
 \subsubsection{Lösungsidee}
- Eine Möglichkeit wäre, den Brute-force-Algorithmus immer nur auf eine Gruppe, also einen Teil der Kisten anzuwenden und danach diese so erzeugten Kistensätze nebeneinander zu stellen.\\
+ Eine Möglichkeit ist, den Brute-force-Algorithmus immer nur auf eine Gruppe,
+  also einen Teil der Kisten, anzuwenden und danach diese so erzeugten Kistensätze nebeneinander zu stellen.
+ 
  Sei $t$ die maximale Anzahl Kisten pro Gruppe.
  Dann funktioniert diese Variante ``Brute-force-Algorithmus nach Aufteilung'' so,
  dass der in \ref{bruteforce} beschriebene Algorithmus für jede Gruppe angewandt wird.
- Sei folgend $m$ die Anzahl Gruppen, die benötigt werden. Also die Länge der Kiste geteilt durch $t$.
+
+ Sei folgend $m$ die Anzahl Gruppen, also die Anzahl der Kisten geteilt durch $t$.
  Um die Kisten in Gruppen aufzuteilen, werden die Kisten einmal traversiert,
- dabei wird die erste Kiste der ersten Gruppe, die zweite Kiste der zweiten Gruppe, usw. und die $m.$ Kiste der $m.$ Gruppe.
- Dann werden die Gruppen wieder neu gezählt, also wird die $m+1.$ Kiste der ersten Gruppe, die $m+2.$ der zweiten, usw. zugeordnet. \\
- Nun soll dies noch anhand von Scala-Code erläutert und präzisiert werden.
- Zunächst werden die Kistengruppen mit Hilfe der Funktion |teileKisten| berechnet.
- Diese folgt dem oben genanntem Prinzip, ist allerdings sehr technisch und wird daher ausgelassen.
+ dabei wird die erste Kiste der ersten Gruppe, die zweite Kiste der zweiten Gruppe, usw.\ und die $m.$ Kiste der $m.$ Gruppe.
+ Dann werden die Gruppen wieder neu gezählt, also wird die $m+1.$ Kiste der ersten Gruppe, die $m+2.$ der zweiten, usw.\ zugeordnet.
+
+ Nun soll der Algorithmus noch anhand von Scala-Code erläutert und präzisiert werden.
+ Zunächst werden die Kistengruppen mit Hilfe der Funktion |teileKisten| berechnet (Z.\ 2).
+ Diese Funktion folgt dem oben genanntem Prinzip, ist allerdings sehr technisch und wird daher ausgelassen.
+ Dann wird für jede Kistengruppe der Algorithmus |OptimalPacker| aus \ref{bruteforce} aufgerufen (Z.\ 3 - 6).
+ Schließlich werden die Kistensätze nebeneinander gestellt und zurückgegeben (Z.\ 9 - 11).
 \begin{lstlisting}
 def min(kisten: Seq[KisteLeer]): Kistensatz = {
   val kistengruppen = teileKisten(kisten)
   val kistensätze = for { // Für jede Kistengruppe
     kistengruppe <- kistengruppen
-  } yield {
+  } yield
      OptimalPacker min kistengruppe // packe nach Brute-force
-  }
   
   kistensätze reduceLeft {       // Kombiniere Kistensätze
     _ neben _                   // stelle diese nebeneinander
@@ -123,14 +148,16 @@ def min(kisten: Seq[KisteLeer]): Kistensatz = {
 \end{lstlisting}
 
 \subsubsection{Laufzeitverhalten}
- Dieser Algorithmus ist streng polynomiell. Genauer gesagt kann er sogar in linearer Zeit ausgeführt werden.
- Dies ergibt sich aus einer Laufzeitanalyse des Algorithmus. \\
+ Dieser Algorithmus ist bezüglich seiner Laufzeit streng polynomiell. Genauer gesagt, kann er sogar in linearer Zeit ausgeführt werden.
+ Dies ergibt sich aus einer Laufzeitanalyse des Algorithmus.
+
  Sei im folgenden $t$ der Teilungsfaktor, also die Anzahl Kisten die jeweils eine Gruppe bilden.
  Das Aufteilen der Kisten in Gruppen braucht $O(n)$. Man erhält also $\frac{n}{t}$ Gruppen.
  Eine dieser Gruppen zu packen, geschieht in konstanter Zeit. Auch wenn der Brute-force-Algorithmus ursprünglich eine Komplexität von $O(m \cdot m!)$ besitzt,
  ist mit $m=t$ seine Laufzeit $O(t \cdot t!) = O(1)$, also konstant bei konstantem $t$.
- Daraus ergibt sich letzendlich eine Laufzeitkomplexität von \[ O(n + n + \frac{n}{t} \cdot 1) = O(n). \]
- Diese Laufzeitkomplexität ist sogar optimal, denn es muss in jedem Fall jede Kiste Laufzeit einmal betrachtet werden, spätestens bei der Ausgabe der Lösung.
+ Daraus ergibt sich letztendlich eine Laufzeitkomplexität für Gruppenbildung, Packen und Nebeneinanderstellen von
+  \[ O(n + n + \frac{n}{t} \cdot 1) = O(n). \]
+ Diese Laufzeitkomplexität ist sogar optimal, denn es muss in jedem Fall jede Kiste einmal betrachtet werden, spätestens bei der Ausgabe der Lösung.
 \subsubsection{Parallelisierung}
  Dieser Algorithmus lässt sich schnell und einfach parallelisieren.
  Die Aufteilung lässt sich parallelisieren, indem $\frac{n}{t}$ parallele Prozesse jeweils immer das $t.$ Element der Liste der Kisten in eine neue anfügen.
@@ -139,7 +166,8 @@ def min(kisten: Seq[KisteLeer]): Kistensatz = {
  Nach der Aufteilung kann jeder Prozess unabhängig von einander den jeweils minimalen Kistensatz berechnen.
  Anschließend müssen diese zusammengefasst werden. Auch dieser Schritt lässt sich parallelisieren.
  In jedem Schritt werden die unmittelbar nebeneinander gestarteten Prozesse zu einem kombiniert, indem die minimalen Kistensätze kombiniert werden.
- Es sind so also $\log_2(\frac{n}{t})$ Schritte nötig. Der Parallelisierungsgrad nimmt in jedem Schritt um die Hälfte ab.\\
+ Es sind so also $\log_2(\frac{n}{t})$ Schritte nötig. Der Parallelisierungsgrad nimmt in jedem Schritt um die Hälfte ab.
+
  Nun betrachten wird die benötigte Laufzeit für ein Problem der Größe $n$ auf einem System mit $p := \frac{n}{t}$ Prozessoren.
  Bis zum Kombinieren der Kistensätze laufen die Prozesse vollständig unabhängig voneinander.
  Also ist die Zeit hierfür gleich die des größten Einzelproblems, also konstant, wie oben dargestellt.
@@ -150,150 +178,164 @@ def min(kisten: Seq[KisteLeer]): Kistensatz = {
  Die Gesamtlaufzeit ist also \[O(1)+O(\log_2(\frac{n}{t}))=O(\log(\frac{n}{t})=O(\log n).\]
  Zusammenfassend lässt sich folgendes sagen:
  \emph{$n$ Kisten lassen sich mit dem Algorithmus ``Brute-force nach Aufteilung'' auf einem System mit $\frac{n}{t}$ Prozessoren in $O(\log n)$ Zeit zu einem Kistensatz packen.}
-\\
- Für ein System mit 8 Prozessoren lassen sich $8 \cdot t = 120$(mit $t=15$) Kisten in logarithmischer Zeit packen.
- Auf modernen Grafikkarten, die mehr als 1000 Prozessoren besitzen, lassen sich also $1000 \cdot 15=15000$ Kisten in logarithmischer Zeit packen.\\
- Leider ist dies nur ein theoretischer Wert, nach Amdahls Gesetz gibt es immer ein Teil des Algorithmus der sequentiell ausgeführt werden muss.
- Außerdem existiert - ebenfalls nach Amdahl - ein gewissern Synchronisationsoverhead.
-\subsection{Online-Algorithmus}
+
+ Für ein System mit 8 Prozessoren lassen sich bis zu $8 \cdot t = 120$ (mit $t=15$) Kisten in logarithmischer Zeit packen.
+ Auf modernen Grafikkarten, die mehr als 1000 Prozessoren besitzen, lassen sich also bis zu $1000 \cdot 15=15000$ Kisten in logarithmischer Zeit packen.\\
+ Leider ist dies nur ein theoretischer Wert. Denn nach dem Amdahlschem Gesetz\footnote{Brian Goetz; Tim Peierls; Joshua Bloch; Joseph Bowbeer; David Holmes; Doug Lea, Java Concurrency in Practice, S. 225}
+  gibt es immer einen Teil des Algorithmus' der sequentiell ausgeführt werden muss.
+ Außerdem existiert - ebenfalls nach Amdahl\footnote{eben da} - ein gewisser Synchronisationsoverhead.
+\subsection{Inkrementeller Algorithmus}
+\label{ink}
 \subsubsection{Lösungsidee}
- Ein etwas anderer Ansatz ist, Kistensätze inkrementiell zu erzeugen.
- Das heißt, zu einem - mehr oder weniger gut - gepacktem Kistensatz und einer zu packenden Kiste soll genau ein neuer Kistensatz mit der neuen Kiste geliefert werden.
- Dieser soll wiederum möglichst dicht gepackt sein.
+ Ein etwas anderer Ansatz ist, Kistensätze inkrementell zu erzeugen.
+ Das heißt, zu einem - mehr oder weniger gut - gepacktem Kistensatz und einer zu packenden Kiste soll genau ein neuer Kistensatz,
+  der zusätzlich die neue Kiste enthält, geliefert werden.
+ Dieser soll wiederum möglichst gut, also dicht gepackt sein.
  Eine weitere Beschränkung, die ich an den Algorithmus stelle, ist, dass er in höchstens $O(n)$ Zeit diesen neuen Kistensatz liefert.
- Mit solch einen Algorithmus lassen sich alle Kisten zusammen in $O(n \cdot n)=O(n^2)$ Zeit packen.
+ Mit solch einem Algorithmus lassen sich alle Kisten zusammen in $O(n \cdot n)=O(n^2)$ Zeit packen.
+ Im folgenden betrachten wir den Algorithmus zunächst als Online-Algorithmus, anschließend betrachten wir mögliche Strategien zum Hinzufügen einer Kiste
+  und schließlich betrachten wir den Algorithmus als Offline-Algorithmus.
 \subsubsection{Online-Algorithmus}
- Dieser Algorithmus kann von Frau Y.\ jedoch auch verwendet werden,
-  um eine neue Kiste in den bestehenden Kistensatz hinzuzufügen, ohne alles neu berechnen zu müssen.
+ Der oben skizzierte Algorithmus kann genutzt werden, dass immer sofort die nächste Kiste in einen vorhandenen Kistensatz hinzugefügt wird.
+ Der Algorithmus kann also von Frau Y.\ verwendet werden,
+  um eine neue Kiste in den bestehenden Kistensatz im Keller hinzuzufügen, ohne alles neu berechnen zu müssen.
  Der Algorithmus erzeugt einen Kistensatz also unabhängig von später hinzuzufügende Kisten.
  Es handelt sich also um einen Onlinealgorithmus. Die Entwicklung eines Onlinealgorithmus' ist in der Aufgabenstellung weder explizit noch implizit gefordert.
  Dieser stellt also eine Erweiterung dar.
  Diese fand ich insofern sinnvoll, da sie ein Anwendungsfall direkt erfüllt, nämlich genau den, wenn Frau Y. eine einzelne Kiste erhält.
- %Für Frau Y. ist es nun zwar möglich, einen neuen Kistensatz in linearer Zeit zu erhalten, aber es muss noch sichergestellt werden,
- %dass auch ein möglicherweise nötiges Umpacken in linearer Zeit ausgeführt werden kann.
- %Sprich, wir betrachten auch die ``Laufzeit'' Frau Y.'s und nicht die eines Computers.
- %Für nachfolgende Strategien betrachte ich deswegen auch immer die Laufzeit für das Umpacken, welches nötig ist um die Kiste hinzuzufügen.
+ Auf Code wird an dieser Stelle verzichtet. Im Prinzip ist dies wieder ein |foldLeft| über eine Liste, allerdings ist der restliche Code sehr technisch
+  und wird daher ausgelassen.
 \lstset{basicstyle=\ttfamily}
 \subsubsection{Strategien}
 \label{strats}
- Es gibt unterschiedliche \emph{Strategien} um einen Platz für eine Kiste in einem Kistensatz zu finden.
- Recht naheliegend sind unteranderem folgende.\\
+ Ein Algorithmus, der eine |Kiste| in linearer Zeit in einen |Kistensatz| packen kann, bezeichne ich als \emph{Strategie}
+ Es gibt eine Vielzahl an Strategien, recht naheliegend sind unter anderem folgende.\\
 
 \begin{tabular}{ll}
- \textbf{FindeHalbleeren}    & Sucht eine |KisteHalb| die noch Platz für die neue |Kiste| bietet. \\
- \textbf{FindeGößerenLeeren} & Sucht eine |KisteLeer| die noch Platz für die neue |Kiste| bietet. \\
- \textbf{FindeZwischenraum}  & Sucht eine |Kiste| die durch Entfernen einer Kind-|Kiste| k genug Platz \\
-                             & \hfill für die neue |Kiste| n bietet und die Kind-|Kiste| k in die neue |Kiste| n. \\
- \textbf{FindeKleinereWurzel}& Sucht eine Wurzel-|Kiste| die in die neue Kiste passt.      \\
-\end{tabular} \\
+ \textbf{FindeHalbleeren}    & Sucht eine |KisteHalb|, die noch Platz für die neue |Kiste| bietet. \\
+ \textbf{FindeGößerenLeeren} & Sucht eine |KisteLeer|, die noch Platz für die neue |Kiste| bietet. \\
+ \textbf{FindeZwischenraum}  & Sucht eine |Kiste|, die durch Entfernen einer Kind-|Kiste| genug Platz \\
+                             & \hfill für die neue |Kiste| bietet, die wiederum die Kind-|Kiste| aufnehmen kann. \\
+ \textbf{FindeKleinereWurzel}& Sucht eine Wurzel-|Kiste|, die in die neue Kiste passt.      \\
+\end{tabular}\\
 
+ Nun sollen die einzelnen Strategien noch genauer erläutert werden.
  Die Strategien suchen alle in allen Kistenbäumen eines Kistensatz mit Hilfe der |finde| Funktion die erste Kiste,
-  die bestimmte Vorraussetzungen erfüllt.
- Dabei wird in jeder Baum traversiert. Treffen die Vorraussetzungen nicht auf eine |Kiste| zu,
+  die bestimmte Voraussetzungen erfüllt.
+ Dabei wird jeder Baum traversiert. Treffen die Voraussetzungen nicht auf eine |Kiste| zu,
   so werden alle in die |Kiste| gepackten Nachfolgerkisten traversiert.
- Nachfolgend bezeichne ich mit |der| die einzufügende |Kiste|.
+ Nachfolgend bezeichne ich mit |kNeu| die einzufügende |Kiste|.
 \paragraph{FindeHalbleeren}
- Diese Strategie sucht eine |Kiste| |kh|, die bereits einen Nachfolger hat und trotzdem Platz für |der| bietet.
- Nachdem so eine |Kiste| gefunden wird, wird die |Kiste| |der| in |kh| eingefügt.
+ Diese Strategie sucht eine |Kiste| |kh|, die bereits einen Nachfolger hat und trotzdem Platz für |kNeu| bietet.
+ Nachdem so eine |Kiste| gefunden wird, wird die |Kiste| |kNeu| in |kh| eingefügt.
 \paragraph{FindeGrößerenLeeren}
- Diese Strategie verhält sich ähnlich wie |FindeHalbleeren|. Es wird jedoch eine Kiste |big| gesucht, die leer und größer als |der| ist.
+ Diese Strategie verhält sich ähnlich wie |FindeHalbleeren|. Es wird jedoch eine Kiste |big| gesucht, die leer und größer als |kNeu| ist.
 \paragraph{FindeZwischenraum}
- Dies ist die komplizierteste Strategie. Sie sucht eine |Kiste| k, die auf jeden Fall größer ist als |der| und zusätzlich folgende Bedingungen erfüllt.
- Falls |k| bereits einen Nachfolger |links| hat, so muss |der| größer als |links| sein.
+ Dies ist die komplizierteste Strategie. Sie sucht eine |Kiste| k, die auf jeden Fall größer ist als |kNeu| und zusätzlich folgende Bedingungen erfüllt.
+ Falls |k| bereits einen Nachfolger |links| hat, so muss |kNeu| größer als |links| sein.
  Falls |k| jedoch bereits zwei Nachfolger |links| und |rechts| hat, so muss einer der beiden folgenden Fälle erfüllt sein.
-  Entweder der |links|  passt in |der| und |k| hat Platz für |der| und |rechts|,
-          oder |rechts| passt in |der| und |k| hat Platz für |der| und |links|.
- Natürlich kann es auch sein, dass keiner der Fälle zutrifft. Trifft jedoch ein Fall zu, so packe die neue |Kiste| |der| in den entsprechenden Zwischenraum.
+  Entweder der |links|  passt in |kNeu| und |k| hat Platz für |kNeu| und |rechts|,
+          oder |rechts| passt in |kNeu| und |k| hat Platz für |kNeu| und |links|.
+ Natürlich kann es auch sein, dass keiner der Fälle zutrifft. Trifft jedoch ein Fall zu, so packe die neue |Kiste| |kNeu| in den entsprechenden Zwischenraum.
 \paragraph{FindeKleinereWurzel}
- Nun wurde noch eine Strategie implementiert, die eine Wurzel |kWurzel| sucht, die in |der| passt.
- Diese ist recht einfach, sobald gefunden wurde, wird |kWurzel| einfach in |der| gepackt.
+ Nun wurde noch eine Strategie implementiert, die eine Wurzel |kWurzel| sucht, die in |kNeu| passt.
+ Diese ist recht einfach, sobald gefunden wurde, wird |kWurzel| einfach in |kNeu| gepackt.
 \subsubsection{Offline-Algorithmus}
- Werden die Kisten vor dem inkrementiellem Packen nach Volumen von groß nach klein sortiert, können Strategien 3 und 4 ohne Beschränkung weggelassen werden.
+ Werden die Kisten vor dem inkrementellem Packen nach Volumen von groß nach klein sortiert,
+  können die Strategien |FindeZwischenraum| und |FindeKleinereWurzel| ohne Beschränkung weggelassen werden.
  Diese suchen nämlich Kisten, die kleiner sind als die hinzuzufügende, welche jedoch wegen der Sortierung nicht existieren können.
  Da jedoch zur Sortierung die Kisten bekannt sein müssen, handelt es sich nicht mehr um einen Online- sondern einen Offlinealgorithmus.
- Die Existenzberechtigung dieses Algorithmus ergibt sich aus der Tatsache, dass bessere Ergebnisse bei vorheriger Sortierung erhalten werden können
- als mit dem ursprünglichem Onlinealgorithmus\footnote{Siehe auch: \ref{algcont}}.
+ Die Existenzberechtigung dieses Algorithmus' ergibt sich aus der Tatsache, dass bessere Ergebnisse bei vorheriger Sortierung erhalten werden können,
+  als mit dem ursprünglichem Onlinealgorithmus.
 \clearpage
+
 \section{Implementierung}
 \lstset{basicstyle=\ttfamily}
- Zunächt wurde ein Kern implementiert, welcher Kisten und Kistensätze sinnvoll abbildet und hilfreiche Funktionen zur Operation auf diesen bietet.
- Die Datentypen wurden als unveränderbare Objekte implementiert um die Algorithmen zu vereinfachen.
+ In diesem Abschnitt wird die Implementierung erläutert. Der Programmtext ist in Abschnitt \ref{code1} abgedruckt.
+
+ Zunächst wurde ein Kern implementiert, welcher Kisten und Kistensätze sinnvoll abbildet und hilfreiche Funktionen zur Operation auf diesen bietet.
+ Die Datentypen wurden als unveränderbare Objekte implementiert, um die Algorithmen zu vereinfachen.
 \subsection{Kisten}
  Es gibt drei Arten von Kisten: |KisteLeer|, |KisteHalb| und |KisteVoll|.
  Eine |KisteLeer| enthält keine weitere |Kiste|, eine |KisteHalb| enthält eine |Kiste| und eine |KisteVoll| enthält zwei.
  Es wurde zunächst ein |trait Kiste| implementiert, welches eine externe Anwendungsschnittstelle bietet und eine interne Implementierungsschnittstelle,
  welche von den drei Unterklassen implementiert werden muss.
  Das |trait| wurde als |sealed| implementiert, das heißt, nur Klassen in der gleichen Datei dürfen dieses |trait| implementieren.
- Dies ermöglicht bessere Compiler-unterstützung bei Pattern-matching, da bekannt ist, dass es nur genau 3 Unterklassen von Kiste gibt. \\
- Neben der Implementierung von Standardmethoden wie |hashCode: Int| zur Hashcodeberechnung sowie |equals(Kiste): Kiste| als Äquivalenzdefinition
-  wurden auch zahlreiche anwendungspezifische Methoden und Felder implementiert.
- Hier beschränke ich mich auf die Vorstellung der wichtigsten Methoden und Felder. \\
- Eine |Kiste| besitzt die Felder |a,b,c: Int|, die jeweils das größte, zweitgrößte bzw. drittgrößte Maß darstellen.
- Unter anderen existiert die Methode |+<(Kiste): Set[Kiste]| welche alle Möglichkeiten \textbf{eine andere} |Kiste| in den durch \textbf{diese} |Kiste| definierten Kistenbaum
-  gepackt werden kann zurückliefert. Hierzu wird der gesamte Kistenbaum traversiert, indem die Methode |+<| rekursiv auf allen Nachfolgerkisten aufgerufen wird.
- Desweiteren wurden Methoden zum Vergleich zweier Kisten implementiert. Diese sind |>~(Kiste):Boolean| sowie |>=~(Kiste):Boolean|.
- Die erstere liefert zu einer anderen |Kiste der|, ob diese reinpasst. Die zweitere indes prüft, ob die |Kiste der| kleiner oder gleichgroße Maße hat.
+ Dies ermöglicht bessere Compiler-Unterstützung bei Pattern-matching, da bekannt ist, dass es nur genau 3 Unterklassen von Kiste gibt. \\
+ Neben der Implementierung von Standardmethoden wie |hashCode: Int| zur Hashcode-Berechnung sowie |equals(Kiste): Kiste| als Definition der Äquivalenz
+  wurden auch zahlreiche anwendungsspezifische Methoden und Felder implementiert.
+ Hier beschränke ich mich auf die Vorstellung der wichtigsten Methoden und Felder.
+
+ Eine |Kiste| besitzt die Felder |a,b,c: Int|, die jeweils das größte, zweitgrößte bzw.\ drittgrößte Außenmaß darstellen.
+ Die Methode |+<(Kiste): Set[Kiste]| liefert als Ergebnis alle Möglichkeiten wie \textbf{eine andere} |Kiste| in den durch \textbf{diese} |Kiste| definierten Kistenbaum
+  gepackt werden kann. Hierzu wird der gesamte Kistenbaum traversiert, indem die Methode |+<| rekursiv auf allen Nachfolgerkisten aufgerufen wird.
+ Weiter wurden Methoden zum Vergleich zweier Kisten implementiert. Diese sind |>~(Kiste):Boolean| sowie |>=~(Kiste):Boolean|.
+ Die erstere liefert zu einer anderen |Kiste der|, ob diese hineinpasst.
+ Die zweite prüft indes, ob die |Kiste der| kleinere oder gleichgroße Maße hat, also ob |der.a <= a| und |der.b <= b| und |der.c <= c| gilt.
 \subsection{Kistensatz}
- Da eine |Kiste| die Wurzel eines Kistenbaums ist und diesen repräsentiert, (Betrachten Sie eine |KisteLeer| als einen ein-elementigen Kistenbaum),
+ Da eine |Kiste| die Wurzel eines Kistenbaums ist und diesen repräsentiert, (betrachten Sie z.\ B.\ eine |KisteLeer| als einen einelementigen Kistenbaum),
   muss ein Kistensatz lediglich Referenzen auf die einzelnen |Kiste|-Objekte speichern.
- Es ergeben sich für die Datenstruktur, die den Kistenwald (Menge von Kistenbäumen) verwaltet folgende drei Vorraussetzungen. 
+ Es ergeben sich für die Datenstruktur, die den Kistensatz verwaltet, folgende drei Voraussetzungen. 
 \begin{enumerate}
- \item Das Ersetzen eines [Teil]baumes sollte möglichst billig sein.
-Da das Ersetzen einer |Kiste| als Löschen und anschließendes Hinzufügen dieser in den Baum implementiert ist,
-  müssen sowohl die Lösch- als auch Hinzufügefunktionen kurze Laufzeiten haben.
-Da die Datenstruktur unveränderbar ist, liefert jede Veränderung in dem durch eine |Kiste| repräsentiertem Kistenbaum eine neues Objekt zurück.
-Dieses Objekt muss dann durch eine Lösch- und eine Hinzufügeoperation in den Baum des |Kistensatz| aktualisiert werden.
+ \item Das Ersetzen eines [Teil]baums sollte möglichst billig sein.
+  Da das Ersetzen einer |Kiste| als Löschen und anschließendes Hinzufügen dieser in den Baum implementiert ist,
+   müssen sowohl die Lösch- als auch Hinzufügefunktionen kurze Laufzeiten haben.
+  Da die Datenstruktur unveränderbar ist, liefert jede Veränderung in dem durch eine |Kiste| repräsentiertem Kistenbaum eine neues Objekt zurück.
+  Dieses Objekt muss dann durch eine Lösch- und eine Hinzufügeoperation in den Baum des |Kistensatz| aktualisiert werden.
  \item Duplikate müssen zugelassen sein, da es passieren kann, das zwei Kisten genau die gleichen Maße haben.
- \item Die Kistenbäume eines Kistensatzes müssen so sortiert sein, dass ein Vergleichen nach Elementen billig ist.
+ \item Die Kistenbäume eines Kistensatzes müssen so sortiert sein, dass ein Vergleichen nach Elementen zwischen zwei Kistensätzen billig ist.
 \end{enumerate}
-Diese drei Vorraussetzungen erfüllt meiner Ansicht nach ein geordneter Binärbaum am besten.
-Es wurde also die Scala Standardklasse |TreeMap[Kiste,Int]| verwendet. Sie bildet jeweils eine |Kiste| k auf eine Zahl $i_k > 1$ ab.
+Diese drei Voraussetzungen erfüllt meiner Ansicht nach ein geordneter Binärbaum am besten.
+Es wurde also die Scala-Standardklasse |TreeMap[Kiste,Int]| verwendet. Sie bildet jeweils eine |Kiste| $k$ auf eine Zahl $i_k > 1$ ab.
 Diese Zahlen sind gleich der Anzahl der einzelnen |Kiste| (bzw. Kistenbaum) in diesem Kistensatz.
-Somit erfolgt eine hinzufügen einer Kiste k (Scala: |+(Kiste):Kistensatz| mit dem Hinzufügen von $k \rightarrow 1$ in den Binärbaum,
+Somit erfolgt das Hinzufügen einer Kiste k (Scala: |+(Kiste):Kistensatz| mit dem Hinzufügen von $k \rightarrow 1$ in den Binärbaum,
   bzw. wenn k schon erhalten ist, mit dem Setzen von $k \rightarrow i_k + 1$.
 Analog erfolgt auch das Entfernen einer Kiste k (Scala: |-(Kiste):Kistensatz|),
-  daher wenn k nicht enthalten oder $i_k = 1$ entferne k aus dem Binärbaum, andernfalls setze $k \rightarrow i_k - 1$.\\
+  daher wenn k nicht enthalten oder $i_k = 1$ entferne k aus dem Binärbaum, andernfalls setze $k \rightarrow i_k - 1$.
+
 Außerdem wurde noch die Methode |+<(Kiste): Set[Kistensatz]| implementiert, die zu einer Kiste die Menge aller Kistensätze liefert,
 in denen die neue Kiste in einer alten Kiste verpackt ist.
 Weiter liefert |++<(Kiste): Set[Kistensatz]| zusätzlich zu den durch |+<| berechneten Kistensätzen den durch |+| berechneten |Kistensatz|.
 Das heißt, |++<| liefert alle Kistensätze, die durch Hinzufügen der Kiste an einer beliebigen Stelle
  - also entweder in einer alten |Kist|e oder neben dem |Kistensatz| - möglich sind.
 \subsection{Kistenpacker}
-Da verschiedenn Algorithmen entwickelt wurden, bietet es sich an, von mehreren Algorithmen verwendete Funktionen auszulagern.
+Da verschiedene Algorithmen entwickelt wurden, bietet es sich an, von mehreren Algorithmen verwendete Funktionen auszulagern.
 Dies erfolgte in Scala durch Verwendung einer Klassenhierarchie.
 Die Wurzel der Hierarchie ist das |trait| |Kistenpacker|. Dieses definiert das Feld |kisten: List[KisteLeer]| sowie die Methode |min: Kistensatz|.
 |kisten| stellt die Liste der Kisten dar, die abgearbeitet werden sollen.
 |kisten| muss jedoch nicht die Eingabeliste sein, es ist beispielsweise auch möglich, dass eine Unterklasse die Kisten sortiert bevor sie abgearbeitet werden.
-Die Methode |min| soll den Kistensatz liefern, der möglichst geringes Außenvolumen aufweist.\\
+Die Methode |min| soll den Kistensatz liefern, der möglichst geringes Außenvolumen aufweist.
+
 Zusätzlich wurde eine Klasse |SortierenderPacker| geschrieben,
   die das Feld |kisten| von |Kistenpacker| überschreibt und diese mit den Kisten der sortierten Eingabeliste |kistenListe| initialisiert.
 \subsubsection{OptimalPacker}
 Der Brute-force-Algorithmus wurde in dem |object OptimalPacker| implementiert.
 Dieses wurde in etwa mit dem bereits im Entwurf dargestellten Codes implementiert.
-Die Methode |min|, die das Minimum zurückliefern soll, ruft |packe| auf, nachdem die Eingabeliste sortiert wurde.
+Die Methode |min|, die das Minimum zurück liefern soll, ruft |packe| auf, nachdem die Eingabeliste sortiert wurde.
 Dann wird aus der so berechneten Menge aller Kistensätze das Minimum ausgewählt, wobei die Ordnung nach Volumen benützt wird.
 \subsubsection{AufteilenderPacker}
-Der AufteilendePacker implementiert lediglich die Methode |min|.
+Der |Packer| |AufteilenderPacker| implementiert lediglich die Methode |min|.
 In dieser wird zunächst der Wert |m| berechnet, der die Anzahl der Gruppen darstellt.
 Dann wird das Feld |geteilteKisten| berechnet. Dieses soll die Gruppen als |Vector| von |List|en darstellen.
 Beginnend bei einem |Vector| mit leeren |List|en wird ein |foldLeft| über die |kisten| durchgeführt.
 Es werden die |Kiste|n in jedem Schritt an die im |Vector| nächste |List| angefügt.
-Beim Erreichen des Ende vom |Vector| wird wieder vom Anfang des |Vector|s angefangen.
+Beim Erreichen des Endes vom |Vector| wird wieder vom Anfang des |Vector|s angefangen.
 Anschließend wird für jede Gruppe das Minimum berechnet und anschließend durch einen |reduceLeft| Aufruf zu einem |Kistensatz| reduziert.
 \subsubsection{OnlineAlgo und OfflinePacker}
-Um den OfflinePacker gut implementieren zu können, wurde zunächst die Klasse |OnlineAlgo| implementiert, die ein aktuellen |Kistensatz| und eine Liste von Strategien enthält.
+Um den |OfflinePacker| gut implementieren zu können, wurde zunächst die Klasse |OnlineAlgo| implementiert, die den aktuellen |Kistensatz| und eine Liste von Strategien enthält.
 Die Klasse |OnlineAlgo| implementiert zwei Methoden.
-Die eine Methode |+(KisteLeer): OnlineAlgo| liefert den |OnlineAlgo| mit dem |Kistensatz| der durch Anwendung der Strategien die neue |Kiste| enthält.
-Hierbei werden alle Strategien mit |foldLeft| durchlaufen wobei so lange versucht wird eine Strategie anzuwenden, bis eine passende gefunden wurde.
+Die eine Methode |+(KisteLeer): OnlineAlgo| liefert den |OnlineAlgo| mit dem |Kistensatz|, der durch Anwendung der Strategien die neue |Kiste| enthält.
+Hierbei werden alle Strategien mit |foldLeft| durchlaufen, wobei so lange versucht wird eine Strategie anzuwenden, bis eine passende gefunden wurde.
 Wurde keine passende gefunden, wird die |Kiste| einfach neben den |Kistensatz| gestellt.
 Die andere Methode |++(Seq[KisteLeer]): OnlineAlgo| liefert einfach zu einer Sequenz von Kisten durch nacheinander Aufrufen von |+| mit einem |foldLeft|-Aufruf einen
-|OnlineAlgo| mit einem |Kistensatz| der alle neuen Kisten enthält.\\
+|OnlineAlgo| mit einem |Kistensatz| der alle neuen Kisten enthält.
+
 Mit dieser Klasse gestaltet sich die Implementierung des |OfflinePacker|s sehr einfach.
 Die Methode |min| muss lediglich die Methode |++| eines leeren |OnlineAlgo| aufrufen und dann den |Kistensatz|, der sich dadurch ergibt, zurückgeben.
 \paragraph{Strategien}
 Nun sollen noch die Implementierung der Strategien erläutert werden.
 Diese folgt den Prinzipien, die in \ref{strats} beschrieben sind.
-Es sind bei allen Strategien außer |FindeKleinereWurzel| jedoch noch nötig, den gesamten Kistenbaum ``über'' der gefunden Kiste anzupassen.
+Es ist bei allen Strategien außer |FindeKleinereWurzel| jedoch noch nötig, den gesamten Kistenbaum ``über'' der gefunden Kiste anzupassen.
 Da alle Datenstrukturen unveränderbar sind, muss entlang des Pfades nach oben der Kistenbaum neu aufgebaut werden.
 Deswegen liefert die Methode |find| von |Kistensatz|, mit der die Kiste gesucht wird, einen Pfad bis zur neuen Kiste zurück.
 Entlang diesem kann dann der Kistenbaum neu aufgebaut werden.
@@ -306,17 +348,16 @@ Soweit möglich, werden jeweils alle Algorithmen mit der gleichen Eingabeliste v
 \subsection{Kleines Beispiel}
 Betrachten wir folgende 7 Kisten und deren Gesamtvolumen:
 \begin{lstlisting}
-scala> val kisten = (10 x 10 x 10) :: (6 x 6 x 2) :: (6 x 4 x 2) ::
-                     (6 x  6 x  4) :: (8 x 8 x 8) :: (8 x 8 x 6) ::
-                     (6 x  4 x  2) :: Nil
-kisten: List[de.voodle.tim.bwinf.kisten.core.KisteLeer] =
-  List(KisteLeer(10,10,10), KisteLeer(8,8,8),
-       KisteLeer(8,8,6), KisteLeer(6,6,4),
-       KisteLeer(6,6,2), KisteLeer(6,4,2),
-       KisteLeer(6,4,2))
+scala> val kisten = (6 x 6 x 2) :: ( 6 x  4 x  2) ::
+                    (6 x 6 x 4) :: ( 8 x  8 x  8) :: (8 x 8 x 6) ::
+                    (6 x 4 x 2) :: (10 x 10 x 10) :: Nil
+kisten: List[de.voodle.tim.bwinf.kisten.KisteLeer] =
+  List(KisteLeer(6,6,2), KisteLeer(6,4,2), KisteLeer(6,6,4),
+       KisteLeer(8,8,8), KisteLeer(8,8,6), KisteLeer(6,4,2),
+       KisteLeer(10,10,10))
 
 scala> val v = kisten.map(_.v).sum // Das Gesamtvolumen der Kisten
-v: Int = 2336
+v: Int = 2208
 
 \end{lstlisting}
 
@@ -325,48 +366,57 @@ Als Erstes werden die Kisten mit |OptimalPacker| gepackt.
 Es werden zunächst alle Möglichkeiten berechnet und anschließend nur das Minimum.
 
 \begin{lstlisting}
-scala> val optKss = OptimalPacker packe kisten
+scala> val optKss = OptimalPacker packe kisten // Alle Möglichkeiten erzeugen
 optKss: scala.collection.immutable.Set[de.voodle.tim.bwinf.kisten.Kistensatz] = 
 Set({
-KisteLeer(6,4,2),
+KisteHalb(8,8,8)
+ \-KisteLeer(6,6,4),
+KisteVoll(10,10,10)
+ \-KisteVoll(8,8,6)
+  \-KisteLeer(6,6,2)
+  \-KisteLeer(6,4,2)
+ \-KisteLeer(6,4,2)
+}, {
 KisteLeer(6,4,2),
 KisteLeer(6,6,2),
 KisteLeer(6,6,4),
 KisteLeer(8,8,8),
-KisteLeer(8,8,8),
-KisteLeer(10,10,10)
+KisteVoll(10,10,10)
+ \-KisteLeer(8,8,6)
+ \-KisteLeer(6,4,2)
 }, {
+KisteLeer(6,4,2),
 KisteLeer(6,6,4),
+KisteLeer(8,8,6),
 KisteLeer(8,8,8),
-KisteHalb(8,8,8)
- \-KisteLeer(6,4,2),
 KisteVoll(10,10,10)
  \-KisteLeer(6,6,2)
  \-KisteLeer(6,4,2)
-}, {...
-
-scala> optKss.size // Anzahl berechneter Kistensätze
-res3: Int = 18
+}, { ...
+scala> val anzahl = optKss.size // Anzahl berechneter Kistensätze
+anzahl: Int = 216
 
 scala> val opt = OptimalPacker min kisten
 opt: de.voodle.tim.bwinf.kisten.Kistensatz = 
 {
-KisteVoll(8,8,8)
- \-KisteLeer(6,6,2)
+KisteVoll(8,8,6)
+ \-KisteLeer(6,4,2)
  \-KisteLeer(6,4,2),
 KisteHalb(10,10,10)
  \-KisteVoll(8,8,8)
   \-KisteLeer(6,6,4)
-  \-KisteLeer(6,4,2)
+  \-KisteLeer(6,6,2)
 }
 
-scala> opt.v
-res0: Int = 1512
+scala> val v = opt.v
+v: Int = 1384
 \end{lstlisting}
 
 \subsubsection*{AufteilenderPacker}
-Der Aufteilungsgrad ist $t=4$.
-Die Kisten werden also wie folgt in die vier Gruppen aufgeteilt.\\
+Als zweites wird der Algorithmus |AufteilenderPacker| genutzt.
+Der Aufteilungsgrad sei $t=4$.
+Die Kisten werden also wie folgt in die vier Gruppen aufgeteilt.
+
 \begin{tabular}{ll}
  1. und 5. Kiste & in die 1. Gruppe, \\
  2. und 6. Kiste & in die 2. Gruppe, \\
@@ -379,65 +429,68 @@ scala> val auf = AufteilenderPacker(4) min kisten
 auf: de.voodle.tim.bwinf.kisten.Kistensatz = 
 {
 KisteVoll(8,8,8)
- \-KisteLeer(6,6,4)
- \-KisteLeer(6,6,2),
-KisteHalb(10,10,10)
- \-KisteVoll(8,8,8)
-  \-KisteLeer(6,4,2)
-  \-KisteLeer(6,4,2)
+ \-KisteLeer(6,4,2)
+ \-KisteLeer(6,4,2),
+KisteVoll(10,10,10)
+ \-KisteHalb(8,8,6)
+  \-KisteLeer(6,6,4)
+ \-KisteLeer(6,6,2)
 }
 
-scala> auf.v
-res1: Int = 1512
+scala> val v = auf.v
+v: Int = 1512
 \end{lstlisting}
- Wir sehen hier, dass das Volumen gleich groß ist wie beim Optimum größer ist.
- Dies liegt daran, dass die Kistengruppen in diesem Beispiel gerade so sind,
-  dass es optimal gepackt werden kann.
+ Wir sehen hier, dass das Volumen größer als beim Optimum ist.
+ Dies liegt daran, dass in diesem Beispiel die Kisten |(10 x 10 x 10)| und |(8 x 8 x 6)| in der gleichen Kistengruppen sind.
+ Diese müssten jedoch beide Wurzel sein, um eine optimale Packung erreichen zu können.
 
 \subsubsection*{OfflinePacker}
-Im folgenden wird mit OfflinePacker gepackt.
-
+ Schließlich wird mit |OfflinePacker| gepackt.
+ Es wird ein |OfflinePacker| mit leerer Parameterliste erzeugt, somit werden die |standardStrategien| benützt und die Kisten vor dem Packen sortiert.
 \begin{lstlisting}
 scala> val off = OfflinePacker() min kisten
 off: de.voodle.tim.bwinf.kisten.Kistensatz = 
 {
-KisteHalb(8,8,8)
- \-KisteLeer(6,4,2),
-KisteHalb(8,8,8)
+KisteLeer(6,4,2),
+KisteHalb(8,8,6)
  \-KisteLeer(6,6,4),
-KisteVoll(10,10,10)
- \-KisteLeer(6,6,2)
- \-KisteLeer(6,4,2)
+KisteHalb(10,10,10)
+ \-KisteVoll(8,8,8)
+  \-KisteLeer(6,6,2)
+  \-KisteLeer(6,4,2)
 }
 
 scala> off.v
-res2: Int = 2024
+res2: Int = 1432
 
 \end{lstlisting}
- Hier ist das Volumen deutlich größer als beim Optimum |opt|.
- Dies liegt schlichtweg daran, dass die Kisten in der ``falschen'' Reihenfolge gepackt werden.
-\\
+ Hier ist das Volumen ebenfalls größer als beim Optimum |opt|, jedoch kleiner als |auf|.
+ Die Strategien des |OfflinePacker| finden für die letzte zu packende Kiste (6 x 4 x 2) keinen Platz mehr.
+
 \subsection{Algorithmus-Vergleich}
 \label{algcont}
  Anschließend sollen nun die Algorithmen mit größeren Beispielen verglichen werden.
  In diesem Teilabschnitt betrachten wir insbesondere die Packdichte und Laufzeit.
  Wir vergleichen bei den kleinen Beispielen die Algorithmen Brute-force, Brute-force nach Aufteilung, sowie OfflinePacker mit verschiedenen Strategien.
  Bei den mittleren und größeren Beispielen müssen wir auf den Algorithmus Brute-force verzichten, den dieser lässt sich nicht mehr in passabler Zeit ausführen.
-\paragraph{Hinweise}
+\paragraph{Hinweis}
  Alle Zeitangaben sind in Millisekunden.
- Das Verhältnis zwischen der Summer aller Volumen der ungepackten Kisten zu dem Endvolumen der äußeren Kisten bezeichne ich als Komprimierungsgrad.
-\paragraph{Hilsfunktion}
- Zunächst wird eine Hilfsfunktion definiert, die zu einer Anzahl eine Funktion zurückliefert, die so viele zufällige Kisten erzeugt wie übergeben.
+ Das Verhältnis zwischen der Summe aller Volumen der ungepackten Kisten zu dem Endvolumen der äußeren Kisten bezeichne ich als Komprimierungsgrad.
+ Es gilt also
+ \[ \text{Komprimierungsgrad} = \dfrac{\sum\text{Volumen der ungepackten Kisten}}{\sum\text{Envolumen der äußeren Kisten}} \]
+\paragraph{Hilfsfunktion}
+ Zunächst wird eine Hilfsfunktion definiert, die zu einer Anzahl eine Funktion zurück liefert, die so viele zufällige Kisten erzeugt wie übergeben.
 \begin{lstlisting}
 scala> def kisten(anzahl: Int) =
-         () => StandardKisten.zufallKisten(80,80,80) take anzahl toList
+  () => StandardKisten.zufallKisten(80,80,80) take anzahl toList
 kisten: (anzahl: Int)() => List[de.voodle.tim.bwinf.kisten.KisteLeer]
 \end{lstlisting}
- Außerdem definieren wir uns noch eine Funktion |großeKisten|, die ähnlich wie die obere Funktion zufällig erzeugte Kisten zurückgibt.
- Allerdings erzeugt diese Kisten bis zu einer Größe von 8000 x 8000 x 8000.
+ Außerdem definieren wir uns noch eine Funktion |großeKisten|, die ähnlich wie die obere Funktion zufällig erzeugte Kisten zurück gibt.
+ Allerdings erzeugt diese Kisten bis zu einer Größe von 1000 x 1000 x 1000.
 \begin{lstlisting}
 scala> def großeKisten(anzahl: Int) =
-         () => StandardKisten.zufallKisten(1000,1000,1000) take anzahl toList
+  () => StandardKisten.zufallKisten(1000,1000,1000) take anzahl toList
+großeKisten: (anzahl: Int)() => List[de.voodle.tim.bwinf.kisten.KisteLeer]
 \end{lstlisting}
 
 \subsection{Kleine Anzahl Kisten}
@@ -466,7 +519,7 @@ Anschließend teste ich nochmal mit Kistenanzahlen von 10 und 12, jedoch mit gle
 
 \begin{lstlisting}
 scala> val (aufKd, aufZeit) =
-	 Utils.bench(AufteilenderPacker(4), kisten(8), 1000, verbose = false)
+       Utils.bench(AufteilenderPacker(4), kisten(8), 1000, verbose = false)
 Packer: AufteilenderPacker(4)
 Wiederholungen  Komprimierungsgrad      Zeit
 1000            1,23                    0
@@ -479,7 +532,7 @@ Nun nochmal mit gleichbleibendem Aufteilungsgrad $t=4$.
 
 \begin{lstlisting}
 scala> val (aufKd, aufZeit) =
-	 Utils.bench(AufteilenderPacker(4), kisten(8), 1000, verbose = false) 
+       Utils.bench(AufteilenderPacker(4), kisten(8), 1000, verbose = false) 
 Packer: AufteilenderPacker(4)
 Wiederholungen  Komprimierungsgrad      Zeit
 1000            1,22                    0
@@ -489,7 +542,7 @@ aufZeit: Long = 0
 [...] // Aufrufe mit 10 bzw. 12 Kisten
 \end{lstlisting}
 \paragraph{OfflinePacker}
-Anschließend wird auf gleiche Weise der |OfflinePacker| mit den Standard Strategien gebechnt.
+Anschließend wird auf gleiche Weise der |OfflinePacker| mit den Standard Strategien getestet.
 \begin{lstlisting}
 scala> val (offKd, offZeit) =
 	 Utils.bench(OfflinePacker(), kisten(8), 1000, verbose = false)
@@ -503,29 +556,34 @@ offZeit: Long = 0
 
 [...] // Aufrufe mit 10 bzw. 12 Kisten
 \end{lstlisting}
-\subsubsection{Ergebnisse}
 \subsubsection*{Komprimierungsgrad}
-\begin{tabular}{llll}
+\begin{tabular}{lrrr}
 \textbf{Algorithmus} 	& \textbf{8 Kisten} 	& \textbf{10 Kisten} 	& \textbf{12 Kisten} 	\\
- OptimalPacker       	& 1,4               	& 1,46              	& 1,54               	\\
+ OptimalPacker       	& 1,40               	& 1,46              	& 1,54               	\\
  AufteilenderPacker ($t=\frac{n}{2}$)  	& 1,23	& 1,27			& 1,32			\\
  AufteilenderPacker ($t=4$)	 	& 1,22	& 1,19			& 1,22			\\
  OfflinePacker		& 1,32			& 1,39			& 1,43			\\
-\end{tabular}
+\end{tabular}\\
+
+ Den höchsten Komprimierungsgrad erzielt wie erwartet der |OptimalPacker|.
+ Der |AufteilenderPacker| fällt hinter den |OfflinePacker| zurück.
+ Außerdem ist der Komprimierungsgrad bei $t=\frac{n}{2}$ ein Stück weit größer als bei $t=4$.
+
 \subsubsection*{Laufzeit}
-\begin{tabular}{llll}
+\begin{tabular}{lrrr}
 \textbf{Algorithmus} 	& \textbf{8 Kisten} 	& \textbf{10 Kisten} 	& \textbf{12 Kisten} 	\\
  OptimalPacker       	& 3               	& 49              	& 1273               	\\
  AufteilenderPacker  	& 0		 	& 0			& 0			\\
  OfflinePacker		& 0			& 0			& 0			\\
-\end{tabular}
+\end{tabular}\\
+
  Bereits hier kann erkannt werden, wie schlecht der Brute-force-Algorithmus skaliert.
  Bei lediglich 2 Kisten mehr braucht |OptimalPacker| bereits über 20 mal länger. \\
  Es lässt sich ebenfalls erkennen, dass |OfflinePacker| und |AufteilenderPacker| - gegenüber |OptimalPacker|
   bei kleinen Kistenzahlen so wesentlich schneller sind, dass die Laufzeiten (bei diesen kleinen Kistenanzahlen) nicht mal gemessen werden können.
 
 \subsection{Mittlere Anzahl Kisten}
- Nachdem Ausscheiden von |OptimalPacker| testen wir nun in der Größenordnung von 100 Kisten.
+ Nach dem Ausscheiden von |OptimalPacker| testen wir nun in der Größenordnung von 100 Kisten.
  Genauer gesagt testen wir mit den Anzahlen 88, 100 sowie 128.
  Auch teste wir nun nicht mehr 1000 Mal, sondern lediglich 256 Mal.
  Um zu sehen, wie sich die Algorithmen bei unterschiedlichen Größen der Kisten verhalten, wird zusätzlich mit der |großeKisten| Funktion getestet.
@@ -545,15 +603,15 @@ offZeit: Long = 0
  AufteilenderPacker ($t=10$)	& 1,46		& 1,46			& 1,44			\\
  OfflinePacker			& 2,49		& 2,57			& 2,72			\\
  OfflinePacker (1 Strategie)	& 2,27		& 2,35			& 2,48			\\
-\end{tabular}
+\end{tabular}\\
 
- Der erreichte Komprimierungsgrad mit |OfflinePacker| ist über 2 und deultich über dem Komprimierungsgrad, der mit |AufteilenderPacker|
+ Der erreichte Komprimierungsgrad mit |OfflinePacker| ist größer als 2 und damit deutlich über dem Komprimierungsgrad, der mit |AufteilenderPacker|
   erreicht werden konnte. Außerdem lässt sich beobachten, dass der Komprimierungsgrad mit steigender Kistenzahl steigt.
  Dies lässt sich damit erklären, dass die Kistensätze durch mehr Kisten, besser ``gesättigt'' werden können.
- Vergleicht man diese Ergebnisse zum einfachsten |OfflinePacker|,
-  mit der einzigen Strategie |FindeGrößerenLeeren| und ohne Sortieren vor dem Packen.
+ Vergleicht man diese Ergebnisse zum einfachsten |OfflinePacker| mit der einzigen Strategie |FindeGrößerenLeeren| und ohne Sortieren vor dem Packen,
+  so erhält man bei den kleineren Kisten deutlich schlechtere Werte, bei den großen Kisten jedoch nur leicht schlechtere.
  Interessanterweise liefert der aufteilende Packer auch mit $t=10$ kaum bessere Werte als mit $t=9$.
- Allerdings braucht er deultich länger, da die Laufzeit exponentiell mit $t$ steigt.
+ Allerdings braucht er deutlich länger, da die Laufzeit exponentiell mit $t$ steigt.
 
 \subsubsection*{Laufzeit}
 \begin{tabular}{llll}
@@ -567,7 +625,8 @@ offZeit: Long = 0
  AufteilenderPacker ($t=10$)	& 477		& 680			& 732			\\
  OfflinePacker			& 3		& 4			& 7			\\
  OfflinePacker (1 Strategie)	& 2		& 3			& 5			\\
-\end{tabular}
+\end{tabular}\\
+
   //TODO!
 
 \subsection{Große Anzahl Kisten}
@@ -587,7 +646,16 @@ offZeit: Long = 0
  AufteilenderPacker ($t=9$)  	& 1,43		& 1,43			& 1,43			\\
  OfflinePacker			& 4,45		& 5,49			& 6,64			\\
  OfflinePacker (1 Strategie)	& 4,01		& 4,8			& 5,8			\\
-\end{tabular}
+\end{tabular} \\
+
+ Der mit |OfflinePacker| erreichte Komprimierungsgrad ist jetzt sogar deutlich über doppelt so groß als der Komprimierungsgrad des aufteilendem Packer.
+ Dies lässt sich im direktem Vergleich erkennen.
+ Während der Komprimierungsgrad bei |AufteilenderPacker| konstant tief auf etwa 1,4 bleibt,
+  steigt der Komprimierungsgrad beim |OfflinePacker| bis auf über 3,4 an!
+ Dies lässt sich an der Funktionsweise erklären.
+ Da der |OnlinePacker| immer im gesamtem Kistensatz nach einem neuem Platz für eine Kiste sucht, kann er die Anzahl der Kisten ausnutzen.
+ Der aufteilende Packer packt jedoch immer $t$, also 9 bzw. 10 Kisten ineinander.
+ Diese Kistengruppen haben jeweils etwa die gleiche Dichte, also auch der gesamte Kistensatz.
 
 \subsubsection*{Laufzeit}
 \begin{tabular}{llll}
@@ -600,31 +668,21 @@ offZeit: Long = 0
  AufteilenderPacker ($t=9$)  	& 1388		& 2850			& 5862			\\
  OfflinePacker			& 182		& 633			& 2302			\\
  OfflinePacker (1 Strategie)	& 180		& 669			& 2527			\\
-\end{tabular}
+\end{tabular} \\
 
  Bei dem aufteilendem Packer lässt sich ganz klar die lineare Laufzeitkomplexität beobachten.
  Von etwa 1075 ms auf etwa 2200 ms respektive 4400 ms bei jeweils verdoppelter Anzahl an Kisten ist hierfür ein klares Indiz. \\
- Der mit |OfflinePacker| erreichte Komprimierungsgrad ist jetzt sogar deutlich über doppelt so groß als der Komprimierungsgrad des aufteilendem Packer.
- Dies lässt sich im direktem Vergleich erkennen.
- Während der Komprimierungsgrad bei |AufteilenderPacker| konstant tief auf etwa 1,4 bleibt,
-  steigt der Komprimierungsgrad beim |OfflinePacker| bis auf über 3,4 an!
- Dies lässt sich an der Funktionsweise erklären.
- Da der |OnlinePacker| immer im gesamtem Kistensatz nach einem neuem Platz für eine Kiste sucht, kann er die Anzahl der Kisten ausnutzen.
- Der aufteilende Packer packt jedoch immer $t$, also 9 bzw. 10 Kisten ineinander.
- Diese Kistengruppen haben jeweils etwa die gleiche Dichte, also auch der gesamte Kistensatz.
  Außerdem lässt sich bereits - trotz absolut schnellerer Laufzeit - die schlechtere Komplexitätsstufe von |OnlinePacker| erkennen.
  Denn wie erkennbar steigt die Laufzeit nicht linear mit der Kistenanzahl, sondern quadratisch.
- Der Algorithmus braucht etwa 340 ms bei 800 Kisten, $1340 (\approx 340 \cdot 4)$ ms bei 1600 Kisten sowie $5290 (\approx 1340 \cdot 4)$ ms bei 3200 Kisten.
+ Der Algorithmus braucht etwa 340 ms bei 800 Kisten, $1340 (\approx 340 \cdot 4)$ ms bei 1600 Kisten sowie $5290\ (\approx 1340 \cdot 4)$ ms bei 3200 Kisten.
  Bei Verdopplung der Kisten braucht er also etwa viermal so lange.
 
 \subsection{Riesige Anzahl Kisten}
-Anschließend vergleichen wir noch kurz das Laufzeitverhalten bei 10000, 80000 respektive 888888 Kisten.
-Wir testen mit alle nKistenanzahlen zwei mal.
-\subsubsection*{AufteilenderPacker}
-Nun kriegt wieder der aufteilende Packer zuerst eine Chance.
+Anschließend vergleichen wir noch kurz das Laufzeitverhalten bei 10000 respektive 80000 Kisten.
+Wir testen mit allen Kistenanzahlen zwei Mal.
 \begin{lstlisting}
 scala> val (aufKd, aufZeit) =
-	 Utils.bench(AufteilenderPacker(9), kisten(10000), 2, verbose = false) 
+	 Utils.bench(AufteilenderPacker(9), kisten(10000), 2, false) 
 Packer: AufteilenderPacker(9)
 Wiederholungen  Komprimierungsgrad      Zeit
 2               1,43                    14620
@@ -632,10 +690,11 @@ aufKd: BigDecimal = 1.432
 aufZeit: Long = 14620
 
 scala> val (offKd, offZeit) =
-	 Utils.bench(OfflinePacker(), kisten(10000), 2, verbose = false) 
+	 Utils.bench(OfflinePacker(), kisten(10000), 2, false) 
 Packer: OfflinePacker(OnlineAlgo({
 
-},List(FindeGrößerenLeeren, FindeZwischenraum, FindeHalbleeren, FindeKleinereWurzel)),true)
+},List(FindeGrößerenLeeren, FindeZwischenraum,
+       FindeHalbleeren, FindeKleinereWurzel)),true)
 Wiederholungen  Komprimierungsgrad      Zeit
 2               4,02                    56835
 offKd: BigDecimal = 4.018
@@ -644,42 +703,43 @@ offZeit: Long = 56835
 
 \subsubsection*{Komprimierungsgrad}
 \begin{tabular}{llll}
-\textbf{Algorithmus} 	& \textbf{10000 Kisten} & \textbf{80000 Kisten} & \textbf{888888 Kisten} \\
- AufteilenderPacker ($t=9$)  	& 1,43		& 1,43			& 			 \\
- OfflinePacker			& 4,02		& 			& 		\vspace*{.48em} \\
-\textbf{Große Kisten} & & & \\
- AufteilenderPacker ($t=9$)  	& 1,44		& 1,44			& 			\\
- OfflinePacker			& 9,17		& 16,89			& 			\\
-\end{tabular} \\
+\textbf{Algorithmus} 	& \textbf{10000 Kisten} & \textbf{80000 Kisten} \\
+ AufteilenderPacker ($t=9$)  	& 1,43		& 1,43			\\
+ OfflinePacker			& 4,02		& 			\vspace*{.48em} \\
+\textbf{Große Kisten} & & \\
+ AufteilenderPacker ($t=9$)  	& 1,44		& 1,44			\\
+ OfflinePacker			& 9,17		& 16,89			\\
+\end{tabular}\\
 
  Hier lassen sich sogar Komprimierungsgrade bis deutlich über 10 beobachten.
- Das heißt, bei Kisten, dessen Größen gleichmäßig von 1 x 1 x 1 bis 1000 x 1000 x 1000 verteilt sind,
-  lässt sich der Platzverbrauch auf ein Zehntel reduzieren!
- Der Aufteilende Packer erreicht wie erwartet einen Komprimierungsgrad von 1,44.
- Dieser Komprimierungsgrad lässt sich in der Regel mit jeder beliebigen Kistenanzahl erreichen.
- 
+ Das heißt, bei 80000 Kisten, dessen Größen gleichmäßig von 1 x 1 x 1 bis 1000 x 1000 x 1000 verteilt sind,
+  lässt sich der Platzverbrauch auf weniger als ein Zehntel reduzieren!
 
+ Der Aufteilende Packer erreicht wie erwartet weiterhin einen Komprimierungsgrad von 1,44.
+ Dieser Komprimierungsgrad lässt sich in der Regel mit jeder etwas größeren Kistenanzahl erreichen.
+ 
 \subsubsection*{Laufzeit}
 \begin{tabular}{llll}
-\textbf{Algorithmus} 	& \textbf{10000 Kisten} & \textbf{80000 Kisten} & \textbf{888888 Kisten} \\
- AufteilenderPacker ($t=9$)  	& TODO		& 117073		& 			 \\
- OfflinePacker			& 56835		& 			& 		\vspace*{.48em} \\
-\textbf{Große Kisten} & & & \\
- AufteilenderPacker ($t=9$)  	& 17142		& 146574		& 			\\
- OfflinePacker			& 18898		& 934460		& 			\\
-\end{tabular} \\
+\textbf{Algorithmus} 	& \textbf{10000 Kisten} & \textbf{80000 Kisten} \\
+ AufteilenderPacker ($t=9$)  	& 14620		& 117073		\\
+ OfflinePacker			& 56835		& 			\vspace*{.48em} \\
+\textbf{Große Kisten} & & \\
+ AufteilenderPacker ($t=9$)  	& 17142		& 146574		\\
+ OfflinePacker			& 18898		& 934460		\\
+\end{tabular}
 
 \subsection{Fazit}
 Zusammenfassend lässt sich sagen, dass der |OptimalPacker| für Kistenanzahlen bis 12 der beste ist, denn er liefert garantiert optimale Ergebnisse.
 Ab der 13. Kiste ist seine Laufzeit jedoch nicht mehr kontrollierbar.
-Für Kistenzahlen von 13 bis 3200 empfiehlt sich, den |OfflinePacker| mit standardStrategien zu benützen.
+Für Kistenzahlen von 13 bis 3200 empfiehlt sich, den |OfflinePacker| mit Standardstrategien zu benützen.
 Er bietet hier gute Komprimierungsgrade und trotzdem akzeptable Laufzeit.
 Der |AufteilendePacker| lässt sich nur sinnvoll ab 3200 Kisten einsetzen, da er deutlich schlechtere Komprimierungsgrade als der |OfflinePacker| liefert.
-Um diese zu erhöhen müsste der Teilungsfaktor erhöht werden, was wiederum die Laufzeit dramatisch wachsen lässt.
-Bemerken muss man hier jedoch auch, dass der |AufteilendePacker| auch über mehrere Prozessoren skalieren lässt.
-Dies ermöglicht Berechnungen bis über hunderttausend.
+Um diese zu erhöhen müsste der Teilungsfaktor erhöht werden, was wiederum die Laufzeit dramatisch wachsen lassen würde.
+Bemerken muss man hier jedoch auch, dass sich der |AufteilendePacker| auch über mehrere Prozessoren skalieren lässt.
+Dies ermöglicht Berechnungen mit bis zu über hunderttausend Kisten.
+Bei großen Kisten 
 
-\newpage
+\clearpage
 \section{Programmnutzung}
 \lstset{basicstyle=\ttfamily}
 Die Nutzung des Programms erfolgt primär über eine Scala-Console mit richtig eingestelltem Classpath.
@@ -704,8 +764,8 @@ kiste: de.voodle.tim.bwinf.kisten.KisteLeer = KisteLeer(8,8,4)
 
 \end{lstlisting}
 Um zufällige Kisten zu erzeugen, bedient man sich der Methode |zufallKisten| aus |StandardKisten|.
-Hierbei müssen die Maximalewerte angegeben werden.
-Die Methode erzeugt eine unendliche Liste, also muss noch angeben werden, wieviele Kisten erzeugt werden sollen.
+Hierbei müssen die Maximalwerte angegeben werden.
+Die Methode erzeugt eine unendliche Liste, also muss noch angeben werden, wie viele Kisten erzeugt werden sollen.
 Danach sollte dies mit |toList| in eine normale Scala-liste umgewandelt werden.
 Um beispielsweise 800 Kisten mit Maximalwerten von 80 cm in jede Richtung zu erzeugen, geht man wie folgend vor.
 \begin{lstlisting}
@@ -729,7 +789,7 @@ kisten: List[de.voodle.tim.bwinf.kisten.KisteLeer] =
 \end{lstlisting}
 Es wurden außerdem noch einige gängigen Kistenmaße aus dem Internet recherchiert.
 Diese finden Sie ebenfalls unter |StandardKisten|.
-Nachfolgend zeige ich eingige Beispiele.
+Nachfolgend zeige ich einige Beispiele.
 \begin{lstlisting}
 scala> val kisten =
          dinodrei :: buecherkarton :: umzugskarton :: paroli :: Nil
@@ -779,7 +839,7 @@ KisteLeer(72,69,21)
 \end{lstlisting}
 Für den OfflinePacker müssen indes Strategien angegeben werden.
 In dem Beispiel werden alle Strategien benutzt.
-Es kann jedoch auch die Reihenfolge variert werden.
+Es kann jedoch auch die Reihenfolge variiert werden.
 \begin{lstlisting}
 scala> val strategien = FindeHalbleeren   :: FindeGrößerenLeeren ::
                         FindeZwischenraum :: FindeKleinereWurzel :: Nil
@@ -804,8 +864,8 @@ KisteLeer(72,69,21)
 \subsection{Benchmarking eines Algorithmus}
 \subsubsection{Volumina}
  Hier wird beschrieben, wie Volumina von Kistensätzen und Listen bzw. Mengen von Kisten berechnet werden können.
- Dies macht insbesondere Sinn, um einen Packungsgrad, also Verhältnis von Anfangsvolumen und Endvolumen berechnen möchte.
-\\
+ Dies macht insbesondere Sinn, um einen Komprimierungsgrad, also Verhältnis von Anfangsvolumen und Endvolumen berechnen möchte.
+
 \paragraph{Volumen einer Kistenliste bzw. -menge}
  Angenommen, wir haben in |kisten| eine |List| von |Kiste|n. Dann kann das Volumen wie folgt berechnet werden.
 \begin{lstlisting}
@@ -821,7 +881,7 @@ res0: Int = 286593
 \end{lstlisting}
 \subsubsection{Benchmarking}
 Um möglichst gute Vergleiche zwischen Algorithmen liefern zu können,
-wurde zum Benchmarken von Algorithmen in dem Modul |Utils| die Methode |bench(Kistenpacker, Int, Int): (Double, Long)| implementiert.
+wurde zum Benchmarking von Algorithmen in dem Modul |Utils| die Methode |bench(Kistenpacker, Int, Int): (Double, Long)| implementiert.
 Diese gibt zu einem |Kistenpacker|,
 einer Anzahl von Kisten sowie einer Anzahl von Wiederholungen die durchschnittlich erreichte Packungsdichte sowie die benötigte Durchschnittszeit zurück.
 Beispielsweise kann so ein |OfflinePacker| nur mit der Strategie |FindeHalbleeren| getestet werden.
@@ -838,4 +898,5 @@ zeit: Long = 10
   denn da ohne andere Strategie nie eine halbleere Kiste erzeugt wird, ist und bleibt die Packungsdichte einfach 1.
  Hier dient es lediglich zur Demonstration der Benutzung.
 \section{Programmtext}
+\label{code1}
 %TODO:!

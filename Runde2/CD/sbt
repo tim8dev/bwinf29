@@ -1,4 +1,0 @@
-#Simple Build Tool Launcher
-#java -Xmx1024M -jar `dirname $0`/sbt-launch.jar "$@"
-# Suggested by Lift Wiki, so no more OutOfMemoryExceptions while testing with Jetty
-java -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=4096m -Xmx4096M -Xss32M -jar `dirname $0`/sbt-launch.jar "$@"
