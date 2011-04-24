@@ -25,9 +25,13 @@ Man beachte, dass die Container so ``in einem Stück'' getauscht und an die rich
 \end{lstlisting}
 \lstset{basicstyle=\ttfamily}
 Um den Begriff eines Zyklus' genauer einzuführen, zitiere ich folgend Beutelspacher\footnote{Definitionen, Sätze und Erklärung übernommen aus Lineare Algebra, Albrecht Beutelspacher, S.174f}.
-\\
-``[Sei $S_n$ die Menge aller Permutation von $[1,n]$ in sich.]
-Eine Permutation $\pi$[$\in S_n$, ] wird ein \emph{Zyklus} [...] genannt, falls - grob gesprochen - die Elemente, die von $\pi$ bewegt werden,
+Da von Beutelspacher einige hier nicht eingeführten Begriffe verwendet wurden, habe ich diese ersetzt.
+Alle eigenständigen Änderungen wurden mit eckigen Klammern (`\{' und `\}') markiert, um Verwechslung mit den als mathematische Symbole verwendeten eckigen Klammern zu vermeiden.
+\begin{quotation}
+\textbf{Anfang Zitat}
+
+``\{Sei $S_n$ die Menge aller Permutation von $[1,n]$ in sich.\}
+Eine Permutation $\pi$\{$\in S_n$, \} wird ein \emph{Zyklus} \{\dots\} genannt, falls - grob gesprochen - die Elemente, die von $\pi$ bewegt werden,
 zyklisch vertauscht werden. Genauer gesagt: Eine Permutation $\pi$ heißt zyklisch,
 falls es ein $ i \in $[$1_n$] und eine natürliche Zahl $k$ gibt, so dass die folgenden drei Bedingungen gelten:
 \begin{enumerate}
@@ -37,16 +41,19 @@ falls es ein $ i \in $[$1_n$] und eine natürliche Zahl $k$ gibt, so dass die fo
 \end{enumerate}
 Die kleinste natürliche Zahl k mit obiger Eigenschaft wird die \emph{Länge} des Zyklus $\pi$ genannt.
 Ein Zyklus der Länge k heißt auch k-Zyklus. Wir schreiben dann \[\pi=(i\;\pi(i)\;\pi^2(i) \; \dots \;\pi^{k-1}(i)).\]
-[\dots]
+\{\dots\}
 \paragraph{Darstellung einer Permutation als Produkt disjunkter Zyklen.}
 \emph{Jede Permutation kann als Produkt zyklischer Permutationen geschrieben werden, von denen keine zwei ein Element gemeinsam haben.}\\
 \emph{Das heißt: Zu jedem $\pi \in S_n$ gibt es zyklische Permutationen $\zeta_1,\dots,\zeta_s \in S_n$,
 so dass folgende Eigenschaften erfüllt sind: \\
  - $\pi=\zeta_1\cdot \zeta_2 \cdot \ldots \cdot \zeta_s$ \\
- - kein Element aus $[1,n]$], das [..] in $\zeta_i$ vorkommt, kommt in $\zeta_j$ vor ($i,j=1, \dots,n, i \neq j$).\\
-(Das bedeutet: Wenn ein Element $x \in X$ in einem Zyklus $\zeta_i$ ``vorkommt'',
+ - kein Element aus \{$[1,n]$\}, das \{\dots\} in $\zeta_i$ vorkommt, kommt in $\zeta_j$ vor ($i,j=1, \dots,n, i \neq j$).\\
+(Das bedeutet: Wenn ein Element $x \in$\{$[1,n]$\} in einem Zyklus $\zeta_i$ ``vorkommt'',
  so wird $x$ von jedem anderen Zyklus $\zeta_j \: (j \neq i)$ fest gelassen.)
 }''
+
+\textbf{Ende Zitat}
+\end{quotation}
 
 Die Darstellung der Permutation als Produkt disjunkter Zyklen erweist sich als günstig,
 denn nun kann das Problem in folgende zwei Teile aufgebrochen werden.
@@ -67,14 +74,10 @@ Durch entsprechend richtige ``Konkatenation'' bzw. ``Verschachtelung'' der Befeh
  ein nach dem in der Aufgabenstellung vorgegebenem Gütekriterium optimaler Weg des Krans erstellen.
 Der durch Ausführung der berechneten Instruktionen abzufahrende Weg ist also minimal.
 \section{Algorithmen und Datenstrukturen}
-\subsection{Anmerkung zur Notation}
-Vor der folgenden, eigentlichen Dokumentation möchte ich noch von mir verwendete Konventionen erläutern.
-Betrachte ich in einem Teil der nachfolgenden Dokumentation und Erläuterung Code, bzw. Codeausschnitte,
-benutze ich |monospaced Font| sowie die im Code benutzten Bezeichner, um diese darzustellen.
 
 Zur Erläuterung mathematischer Überlegungen wird der $math-Mode$ von \TeX benutzt.
-Statt beispielsweise |perm| für eine Permutation oder |cycle| für einen oben beschrieben Zyklus als Bezeichner im ``code-Mode'' benutze ich $\pi$ respektive $\zeta$ im ``math-Mode''.
-für korrespondierende mathematische Überlegungen.
+Statt beispielsweise |perm| für eine Permutation oder |cycle| für einen oben beschrieben Zyklus als Bezeichner im ``code-Mode'' benutze ich $\pi$ respektive $\zeta$ im ``math-Mode''
+ für korrespondierende mathematische Überlegungen.
 Es werden also die jeweils passenderen Bezeichner und Symbole verwendet.
 
 Um den Code kompakt zu halten, werden folgende sogenannte ``type aliases'' verwendet.
@@ -88,16 +91,16 @@ Um den Code kompakt zu halten, werden folgende sogenannte ``type aliases'' verwe
 Permutationen auf $[1,n]$ können in einer indexierten Liste jeder Art, beispielsweise einem Array, gespeichert werden.
 Da in der Informatik jedoch indexierte Listen (insbesondere Arrays) meist Indizes aus $[0,n[$ besitzen muss dies geeignet beachtet werden.
 Der Definitionsbereich ist also um eins ``nach links'' verschoben.
-Zur Darstellung einer Permutation im Code wird |perm: Seq[Int]| benutzt, also eine Sequenz (z. B. Array, List) von Zahlen benutzt.
+Zur Darstellung einer Permutation im Code wird |perm: Seq[Int]| benutzt, also eine Sequenz (z. B. |Array| oder |List|) von Zahlen benutzt.
 Um die Zahl |p| zu finden, auf die |i| durch |perm| abgebildet wird, gilt |p = perm(i-1)| und nicht |p = perm(i)|.
 \subsubsection{Gleis}
 Es wird außerdem noch eine Datenstruktur benötigt, um das Gleis mit Containerstellplätzen und Waggons abzubilden.
-Hierfür werden zwei Arrays verwaltet, die zu jedem Index den Container speichern der auf dem Containerstellplatz bzw. dem Waggon steht.
+Hierfür werden zwei Arrays verwaltet, die zu jedem Index den Container speichern, der auf dem Containerstellplatz bzw. dem Waggon steht.
 Auch hier sind die Indizes um ``eins nach links'' verschoben.
 Die Implementierung dieser Datenstruktur wird in \ref{gleis} genauer erläutert.
 \subsubsection{Kraninstruktionen}
-Es gibt mehrere Befehle, die ein Kran nach der Aufgabenstellung ausgeführt werden können.
-Natürlich gibt es mehrere Mengen von Instruktionen, die die Funktionalitäten abbilden können, ich entschied mich jedoch für folgende Variante mit sieben verschiedenen \emph{Kraninstruktionen}.
+Es gibt mehrere Befehle, die ein Kran nach der Aufgabenstellung ausführen kann.
+Ich verwende die folgenden sieben \emph{Kraninstruktionen}.
 
 \begin{center}
 \begin{tabular}{ll}
@@ -112,22 +115,23 @@ Natürlich gibt es mehrere Mengen von Instruktionen, die die Funktionalitäten a
 \end{tabular}
 \end{center}
 
-Die Befehle |MoveRight| bzw. |MoveLeft| werden zusammengefasst mit |Move(x -> y)| dargestellt.
+Seinen $x,y$ zwei beliebige Indizes dann können die Befehle |MoveRight| bzw. |MoveLeft| zusammengefasst mit |Move(x -> y)| dargestellt werden.
 Wenn $x < y$ so stellt dies ein |MoveRight| dar, bei $x >= y$ ein |MoveLeft|.
+Gelesen werden kann |Move(x -> y)| als ``bewege Kran von x nach y''.
 
 \subsection{Ergebnisoptimaler Algorithmus}
-In diesem Abschnitt wird zunächst ein Algorithmus entworfen, der optimale Ergebnisse (im Sinne von kürzesten Kranwegen) berechnet.
-Dann wird die Optimalität bewiesen und anschließend das Laufzeitverhalten dieses Algorithmus betrachtet, welches gut, jedoch nicht bestmöglich ist.
-Im darauf folgendem Abschnitt wird ein Algorithmus vorgestellt, der sowohl optimale Ergebnisse berechnet, als auch optimale Laufzeitkomplexität vorweist.
+In diesem Abschnitt wird zunächst ein Algorithmus entworfen, der optimale Ergebnisse (im Sinne von kürzesten Kranwegen) berechnet (\ref{slow_cycler}).
+Danach wird die Optimalität bewiesen (\ref{opt_res}) und anschließend wird das Laufzeitverhalten dieses Algorithmus betrachtet, welches gut, jedoch nicht bestmöglich ist (\ref{slow}).
+Im nächsten Abschnitt \ref{fast_cycler} wird ein Algorithmus vorgestellt, der sowohl optimale Ergebnisse berechnet, als auch optimale Laufzeitkomplexität vorweist.
 \subsubsection{Entwurf}
 \label{slow_cycler}
 \paragraph{Finden eines Zyklus'}
-Der Entwurf dieses Algorithmus' ergibt sich aus den Vorüberlegungen. Zunächst wird die Zerlegung in disjunkte Zyklen berechnet.
+Der Entwurf dieses Algorithmus' ergibt sich aus der Lösungsidee. Zunächst wird die Zerlegung in disjunkte Zyklen berechnet.
 Hierfür wird folgende Hilfsfunktion |cycle| zur Berechnung \emph{eines} Zyklus' verwendet.\\
 Salopp gesagt, hangelt man sich so lange - bei einem Startindex beginnend - durch die Permutation, bis man wieder beim Anfangswert ankommt.
 Genauer betrachtet, liefert die Unterfunktion |step| die verbleibenden Zahlen des Zyklus' hinter |idx| als Liste.
 Die Unterfunktion |step| bricht mit der leeren Liste ab, wenn |start| wieder erreicht wird.
-Andernfalls reicht |step| den aktuellen Wert |idx| vor die restlichen - rekursiv durch |step| - berechneten Zahlen.
+Andernfalls reiht |step| den aktuellen Wert |idx| vor die restlichen - rekursiv durch |step| - berechneten Zahlen.
 Die Funktion |cycle| braucht nur mehr |step| mit |start| aufzurufen.
 \lstset{basicstyle=\ttfamily}
 \begin{lstlisting}
@@ -139,8 +143,8 @@ def cycle(perm: Seq[Int], start: Int): Cycle = {
 }
 \end{lstlisting}
 Das Ergebnis von |cycle| ist also ein Zyklus der oben beschrieben Form $(i \pi(i) \pi^2(i) \dots \pi^{k-1}(i))$ dargestellt
-als |start :: perm(start-1) :: perm(perm(start-1)-1) :: |\dots| :: Nil|,
-wichtig ist hierbei zu beachten, dass die Waggonnummer, auf den der Container an der Stelle |idx| gebracht werden muss,
+als |start :: perm(start-1) :: perm(perm(start-1)-1) :: |\dots| :: Nil|.
+Wichtig ist hierbei zu beachten, dass die Waggonnummer, auf den der Container an der Stelle |idx| gebracht werden muss,
  durch |perm(idx-1)| dargestellt wird.
 \paragraph{Finden aller Zyklen}
 Nun lässt sich auch recht einfach ein Algorithmus zum Finden der disjunkten Zyklen einer Permutation angeben.
@@ -148,7 +152,7 @@ Die folgend dargestellte rekursive Funktion |cyclesOf| liefert eine Liste von di
 die die Permutation darstellen. Um disjunkte Zyklen zu finden, müssen jeweils alle bisher abgearbeiteten Zahlen gespeichert werden.
 Dies erfolgt in einem |Set| (standardmäßig ein |HashSet| in Scala).
 
-In jedem Rekursionsschritt wird zunächst der neue Startwert mit |find| gesucht.
+In jedem Rekursionsschritt wird zunächst mit |find| der neue Startwert gesucht.
 Dieser ist die kleinste Zahl von |1| bis |perm.length| die noch nicht abgearbeitet wurde, also die nicht in |handled| enthalten ist.
 Wurde ein Startwert |start| gefunden, dann wird anschließend der neue Zyklus |newCycle| mit der Hilfsfunktion |cycle| berechnet.
 Zudem wird die neue Menge aller abgearbeiteten Zahlen |newHandled| gebildet, indem alle Zahlen aus |newCycle| in |handled| eingefügt werden.
@@ -159,13 +163,13 @@ Es wird dann die leere Liste |Nil| zurückgegeben.
 \lstset{basicstyle=\ttfamily}
 \begin{lstlisting}
 def cyclesOf(perm: Seq[Int], handled: Set[Int]): Cycles =
-  // Suchen des Startswertes, dann das Ergebnis matchen
+  // Suchen des Startwertes, dann das Ergebnis matchen
   (1 to perm.length) find (i => !handled.contains(i)) match {
       case Some(start) => // Wenn es ein Startwert start gibt
         val newCycle = cycle(perm, start)
         val newHandled = handled ++ newCycle
         newCycle :: cyclesOf(perm, newHandled)
-      case None => // Wenn kein Startwert gefunden wurde
+      case None =>        // Wenn kein Startwert gefunden wurde
         Nil
     }
 \end{lstlisting}
@@ -173,10 +177,15 @@ def cyclesOf(perm: Seq[Int], handled: Set[Int]): Cycles =
 Anhand der berechneten Zyklen wird im nächsten Schritt die Instruktionskette, also die Befehle für die Kranbewegungen, errechnet.
 Hierfür wird zunächst die folgend dargestellte Methode |computeFromCycles| definiert,
 welche sich einer - gleich anschließend betrachteten - weiteren Funktion |computeCycle| bedient.
+Diese Funktion berechnet zunächst mit |computeCycle| die benötigten Instruktionen.
+Die letzte Instruktion, die von |computeCycle| generiert wird, ist immer ein |PutWag|, dieses ist jedoch überflüssig und wird daher mit |init| gelöscht.
+Da aber |computeCycle| davon ausgeht, dass vor einem Aufruf bereits ein Container aufgehoben wurde,
+ muss noch ein |TakeCon| vor der Instruktionskette angehängt werden.
+Außerdem soll eine Liste zurückgegeben werden, weswegen die Instruktionskette zu solch einer umgewandelt wird.
 \lstset{basicstyle=\ttfamily}
 \begin{lstlisting}
 def computeFromCycles(cycles: Cycles): Seq[Instruction] = {
-  // Lösche letzen Befehl (immer ein PutWag) mit init
+  // Lösche letzten Befehl (immer ein PutWag) mit init
   val (instrs, _) = computeCycle(cycles.head, cycles.tail).init
   TakeCon :: // Nimm den ersten Container schonmal auf
     instrs.toList // Wandel den ListBuffer in List um.
@@ -189,11 +198,13 @@ so dass alle Elemente der gegebenen Zyklen an die richtige Position gebracht wer
 Hierbei geht |computeCycle| davon aus, dass bereits der 1. Container des Zyklus' auf den Kran gehoben wurde und noch kein anderer Container des Zyklus' bewegt wurde.
 Außerdem werden Container immer auf der Containerseite und nicht auf der Waggonseite des Gleises transportiert.
 Das Grundprinzip des Algorithmus' ist es, dass nacheinander alle Elemente des Zyklus' abgearbeitet werden.
-Dazu wird ein |foldLeft| über den Zyklus ausgeführt.
+Dazu wird ein |foldLeft| über den Zyklus ausgeführt (vgl.\ Z.\ 17).
 Damit der Kran auch wieder zum ersten Element (Startposition) zurückgefahren wird, wird dieser Startwert |first| an den Zyklus angehängt.
-In jedem Schritt werden die bisherigen Instruktionen |instrs|, die verbleibenden Nachfolgerzyklen |cyclesleft| und das vorherige Element |prev|
-an die Hilfsmethode |step| übergeben. \\
-Im folgenden ist zwecks Lesbarkeit der Code dargestellt mit Deklaration aber ohne Definition der Hilfsfunktion |step|.
+In jedem Schritt werden die bisherigen Instruktionen |instrs|, die verbleibenden Nachfolgerzyklen |cyclesLeft| und das vorherige Element |prev|
+an die Hilfsmethode |step| übergeben (vgl.\ Z.\ 20).
+Anschließend werden die durch |foldLeft| erzeugten Instruktionen und restlichen Zyklen zurück\-ge\-ge\-ben (vgl.\ Z.\ 22).
+
+Im folgenden ist zwecks Lesbarkeit der Code dargestellt mit Deklaration aber ohne Definition der Hilfsfunktion |step| (vgl.\ Z.\ 7f).
 Der Funktionsrumpf folgt später.
 Außerdem wird speziell für die |step| Funktion der type-alias |Step| für das Tuple |(ListBuffer[Instruction], Cycles, Int)| benutzt.
 \lstset{basicstyle=\ttfamily}
@@ -213,24 +224,24 @@ def computeCycle(cycle: Cycle, other: Cycles):
   val initial = (ListBuffer[Instruction](), other, erster)
   // Arbeite alle Elemente des Zyklus' ab
   val (instrs, cyclesLeft, last) =
-    // foldLeft über den Zyklus, das erste Element hinten angehängt.
+    // foldLeft über den Zyklus; das erste Element hinten angehängt.
     (cycle.tail :+ erster).foldLeft(initial) {
       case ((instrs, cyclesLeft, prev), cur) =>
-        // Die Parameter jeweils step geben.
+        // Die Argumente des foldLefts an step "durchreichen".
 	step(instrs, cyclesLeft, prev, cur)
     }
   (instrs, cyclesLeft)
 }
 \end{lstlisting}
 \lstset{basicstyle=\ttfamily}
-Die Hilfsfunktion |step| unterscheidet 3 Fälle (diese sind hinter den |case| Anweisungen in Klammern in den Kommentaren im nachfolgenden Codeausschnitt markiert).
+Die Hilfsfunktion |step| unterscheidet 3 Fälle (diese sind hinter den |case| Anweisungen in Klammern in den Kommentaren im Codeausschnitt markiert).
 \begin{enumerate}
- \item Wenn das letzte betrachtete Element |prev| das Maximum |max| ist und es einen nächsten Zyklus |nextCycle| gibt,
+ \item Wenn das zuletzt betrachtete Element |prev| das Maximum |max| ist und es einen nächsten Zyklus |nextCycle| gibt,
        dessen erstes Element |next| eins weiter rechts von |max| bzw. |prev| ist, dann konkateniere die Zyklen entsprechend.
        Das heißt, es werden erst mit |computeCycle| die Instruktionen |cycleInstrs| für die nächsten Zyklen berechnet
        und diese anschließend angehängt. Zudem müssen ein paar wenige Instruktionen ``zwischen'' den Zyklen,
        also vor und nach |cycleInstrs| generiert werden. Anschließend wird |step| nochmals aufgerufen,
-       diesmal mit den neuen Instruktionen |extraInstrs| und keinen restlichen Zyklen, da diese bereits alle abgearbeitet sind.
+       diesmal mit den neuen Instruktionen |extraInstrs| und ohne restliche Zyklen, da diese bereits alle abgearbeitet sind.
  \item Wenn das aktuell betrachtete Element |cur| größer als das erste Element |next| des nächsten Zyklus' |nextCycle| ist,
        dann wird zunächst der nächste Zyklus abgearbeitet.
        Hierfür wird |computeCycle| mit |nextCycle| und den restlichen Zyklen |cyclesLeft.tail| aufgerufen.
@@ -240,7 +251,6 @@ Die Hilfsfunktion |step| unterscheidet 3 Fälle (diese sind hinter den |case| An
  \item Wenn weder der 1. noch der 2. Fall zutrifft, werden lediglich Instruktionen generiert,
        die den Kran von |prev| nach |cur| bewegen, den aktuellen Container auf den Waggon ablegen und dann den Container auf dem Containerstellplatz aufheben.
 \end{enumerate}
-Anschließend werden die durch |foldLeft| erzeugten Instruktionen und restlichen Zyklen zurück\-ge\-ge\-ben.\\
 Folgend ist der Scala-Code abgebildet, welcher die Hilfsfunktion |step| darstellt.
 Dieser Codeausschnitt ist deutlich komplexer als die vorherigen. Deswegen wurden entsprechend Kommentare und Markierungen hinzugefügt.
 \lstset{basicstyle=\ttfamily}
@@ -250,18 +260,18 @@ type Step = (ListBuffer[Instruction], Cycles, Int)
 def step(instrs: ListBuffer[Instruction], cyclesLeft: Cycles,
          prev: Int, cur: Int): Step =
   cyclesLeft.headOption match {
-   // Gibt es ein nächsten Zyklus direkt nach diesem beginnend?
+   // Gibt es einen nächsten Zyklus direkt nach diesem beginnend?
    // ===== (1) =====
    case Some(nextCycle @ (next :: _)) if prev==max && max+1==next =>
-     // Wenn ja, "konkateniere" diese.
+     // Wenn ja, "konkateniere" diese Zyklen.
      val (cycleInstrs, _) =
        computeCycle(cyclesLeft.head, cyclesLeft.tail)
      val extraInstrs = instrs ++=
        ListBuffer(PutCon, MoveRight, TakeCon) ++=
        cycleInstrs ++= ListBuffer(MoveLeft, TakeCon)
      step(extraInstrs, Nil, prev, cur)
-   // Gibt es ein nächsten Zyklus
-   // und beginnt dieser vor dem nächsten Element?
+   // Gibt es einen nächsten Zyklus und beginnt er
+   // vor dem nächsten Elementn dieses Zyklus?
    // ===== (2) =====
    case Some(nextCycle @ (next :: _)) if cur > next =>
      // Wenn ja, dann arbeite erst nextCycle ab.
@@ -289,15 +299,15 @@ Um dies zu zeigen, wird bewiesen, dass die Zyklen richtig gefunden werden.
 \paragraph{Korrektheit von cycle}
 Zunächst wird die Korrektheit der Hilfsfunktion |cycle| gezeigt.
 Das heißt, wir vergewissern uns, dass |cycle| zu einer gegebenen Permutation |perm| immer den Zyklus findet, der an dem Startindex |start| beginnt.
-Da ich nachfolgend nun mathematisch Argumentieren möchte, ersetzte ich die Programmbezeichnungen durch mathematische Bezeichnungen.
+Da ich nachfolgend nun mathematisch argumentieren möchte, ersetzte ich die Programmbezeichnungen durch mathematische Bezeichnungen.
 Konkret stelle ich |perm| durch $\pi$, den gesuchten Zyklus durch $\zeta$ und |start| durch $i$ dar.
 Es ist also ein Zyklus $\zeta$ der folgenden Form gesucht.
 \[ \zeta = (i, \zeta(i),\zeta^2(i), \dots, \zeta^{k-i}(i)) \]
-Für alle $x$ die im Zyklus $\zeta$ enthalten sind gilt $\zeta(x) = \pi(x)$.
-Weiter sind genau die Elemente \linebreak $i, \zeta(i),\zeta^2(i), \dots, \zeta^{k-i}(i)$ in $\zeta$ enthalten, also gilt
+Da für alle $x$ die im Zyklus $\zeta$ enthalten sind, $\zeta(x) = \pi(x)$ gilt und genau die Elemente
+\linebreak $i, \zeta(i),\zeta^2(i), \dots, \zeta^{k-i}(i)$ in $\zeta$ enthalten sind, gilt also
 \[ \zeta = (i, \zeta(i),\zeta^2(i), \dots, \zeta^{k-i}(i)) = (i, \pi(i),\pi^2(i), \dots, \pi^{k-1}(i)) \]
-Nun betrachten wir nochmals die Funktionsweise von |cycle|, bzw. von |step|.
-Wir behaupten zunächst, |step| liefert zu einer Zahl $j = \pi^x(i)$ mit $x \in {0,\dots,k}$ die Zahlen $\pi^x(i), \pi^{x+1}(i), \dots, \pi^{k-1}(i)$.
+Nun betrachten wir nochmals die Funktionsweise von |cycle| bzw.\ von |step|.
+Wir behaupten zunächst, |step| liefert zu einer Zahl $j = \pi^x(i)$ mit $x \in \{0,\dots,k\}$ die Zahlen $\pi^x(i), \pi^{x+1}(i), \dots, \pi^{k-1}(i)$.
 Dies machen wir uns durch Induktion über $x$ klar. Sei also $x = k$.
 Dann gilt nach Definition eines Zyklus' $j = \pi^x(i) = \pi^k(i) = i$, also bricht |step| hier ab und liefert die leere Liste, was in der Tat korrekt ist.
 Nun können wir annehmen, |step| liefert für ein $j = \pi^x(i)$ mit $x \leq k$ und $x > 0$ bereits die Zahlen $\pi^x(i), \pi^{x+1}(i), \dots, \pi^{k-1}(i)$.
@@ -310,49 +320,73 @@ Wird nun |step| - wie in |cycle| - mit $j = \pi^0(i) = i$, also $x = 0$ aufgeruf
 \paragraph{Korrektheit von cyclesOf}
 Im Folgenden können wir uns also der Korrektheit von |cycle| sicher sein. Nun soll die Korrektheit von |cyclesOf| gezeigt werden.
 Auch hier wähle ich mathematische Symbole und Bezeichner.
-Die Liste der disjunkten Zyklen, die |cyclesOf| berechnen soll bezeichne ich mit $\zeta_1, \zeta_2, \dots, \zeta_d$, die Menge aller fertigen Elemente |handled| mit $Z$.
+Die Liste der disjunkten Zyklen, die |cyclesOf| berechnen soll, bezeichne ich mit $\zeta_1, \zeta_2, \dots, \zeta_c$, die Menge aller fertigen Elemente |handled| mit $Z$.
 Wir wollen also beweisen, dass |cyclesOf| zu einer gegebenen Permutation $\pi$ und einer leeren Menge von ``fertigen'' Elementen eine Liste
-von disjunkten Zyklen $\zeta_1, \zeta_2, \dots, \zeta_d$ zurückgibt, wobei $d$ die Anzahl disjunkter Zyklen ist und $x < y \Leftrightarrow \ min(\zeta_x) < min(\zeta_y)$ für alle $x,y=0 \dots o$.
+von disjunkten Zyklen $\zeta_1, \zeta_2, \dots, \zeta_c$ zurückgibt, wobei $c$ die Anzahl disjunkter Zyklen ist und $x < y \Leftrightarrow \ min(\zeta_x) < min(\zeta_y)$ für alle $x,y=1 \dots c$.
 Es sollen also nach Startwert sortierte Zyklen zurückgeliefert werden.
 Es wird im folgenden wieder Induktion verwendet.
-Im Induktionsanfang soll also gezeigt werden, dass |cyclesOf| für $Z = \zeta_1 \cup \zeta_2 \cup \dots \cup \zeta_d$ alle verbleibende Zyklen - nämlich gar keine - findet.
+Im Induktionsanfang soll also gezeigt werden, dass |cyclesOf| für $Z = \zeta_1 \cup \zeta_2 \cup \dots \cup \zeta_c$ alle verbleibende Zyklen - nämlich gar keine - findet.
 Da $Z$ alle Zahlen der Permutation, also $[1,n]$ enthält, kann auch keine Zahl gefunden werden, die nicht in $Z$ enthalten ist. Somit bricht der Algorithmus mit der leeren Liste ab.
 Dies ist korrekt, denn es sind bereits alle Zyklen gefunden.
-Nun gelte, dass |cyclesOf| für ein $x \in \{0, \dots, d\}$ und $Z = \zeta_1 \cup \zeta_2 \cup \dots \cup \zeta_{x-1} \cup \zeta_x$ die Zyklen $\zeta_{x+1}, \dots, \zeta_d$ findet.
+Nun gelte, dass |cyclesOf| für ein $x \in \{1, \dots, c\}$ und $Z = \zeta_1 \cup \zeta_2 \cup \dots \cup \zeta_{x-1} \cup \zeta_x$ die Zyklen $\zeta_{x+1}, \dots, \zeta_c$ findet.
 Wir zeigen, dass dies auch für $x \rightarrow x-1$ gilt.
 Zunächst wird der Wert $s \in \{1, \dots, n\}$ ($s=$|start|, $n$ ist die Länge von $\pi$) mit $s \notin Z$ gesucht.
-Nun wird der neue Zyklus $\zeta_x$ berechnet. Dieser ist sicher disjunkt von den zuvor berechneten Zyklen, da er bei $s \notin Z$ beginnt.
+Nun wird der neue Zyklus $\zeta_{(x-1)+1}$ berechnet. Dieser ist sicher disjunkt von den zuvor berechneten Zyklen, da er bei $s \notin Z$ beginnt.
 Anschließend wird |cyclesOf| rekursiv aufgerufen, mit |handled| = $\zeta_1 \cup \dots \cup \zeta_{x-1} \cup \zeta_{x}$.
-Dieser Aufruf liefert nach Induktionsannahme die Zyklen $\zeta_{x+1}, \dots, \zeta_d$.
-Also werden insgesamt die Zyklen $\zeta_{x}, \zeta_{x+1}, \dots, \zeta_d$ ausgegeben.
-Das auch die Sortierung richtig ist, sieht man anhand der Tatsache, dass immer der kleinstmögliche Startwert gesucht wird.
-Also ist auch dieser Algorithmus korrekt, bei Aufruf von |cyclesOf| mit $Z = \{\}$ werden nämlich die Zyklen $\zeta_1, \dots, \zeta_d$ zurückgegeben.
+Dieser Aufruf liefert nach Induktionsannahme die Zyklen $\zeta_{x+1}, \dots, \zeta_c$.
+Also werden insgesamt die Zyklen $\zeta_{x}, \zeta_{x+1}, \dots, \zeta_c$ ausgegeben.
+Dass auch die Sortierung richtig ist, sieht man anhand der Tatsache, dass immer der kleinstmögliche Startwert gesucht wird.
+Also ist auch dieser Algorithmus korrekt, bei Aufruf von |cyclesOf| mit $Z = \{\}$ werden nämlich die Zyklen $\zeta_1, \dots, \zeta_c$ zurückgegeben.
 \paragraph{Optimalität des Ergebnisses}
-Anschließend zeigen wir die Optimalität vom eigentlichem Algorithmus, die Berechnung der Instruktionen.
+Anschließend zeigen wir die Optimalität vom eigentlichem Algorithmus, die Berechnung der Kraninstruktionen.
 Diese machen wir uns klar, indem wir uns erst für eine beliebige Containerkonstellation, also eine beliebige Permutation überlegen, wie ein optimaler Weg aussehen muss.
 \subparagraph{Äquivalenzklassen}
 Sei $\pi$ eine beliebige Permutation über $X := [1,n]$ und $Z := \{\zeta_1, \zeta_2, \dots, \zeta_d\}$ die disjunkten Zyklen, die $\pi$ darstellen.
 Nun teilen wir diese Zyklen in die Äquivalenzklassen $A_1, \dots, A_a$ auf.
-In jeder Äquivalenzklasse sollen - grob gesprochen - nur Zyklen sein, die sich ``überschneiden''.
-Wir definieren uns zunächst eine Äquivalenzrelation $\equiv$.
+Die Äquivalenzklassen sollen das Intervall $[1,n]$ in disjunkte Intervalle aufteilen, die zusammen wiederum $[1,n]$ ergeben.
+Für eine Äquivalenzklasse, die das Intervall $[x,y]$ darstellt, müssen alle Zyklen zwischen $x$ und $y$ liegen.
+Folgend definieren wir nun unsere Äquivalenzrelation $\equiv$, die diese Eigenschaften erfüllen soll.
+
 Seien $\eta,\theta \in Z$ zwei Zyklen der Länge $k$ bzw. $l$ der Form $e, \eta(e), \dots, \eta^{k-1}(e)$ bzw. $t, \theta(t), \dots, \theta^{l-1}(t)$.
 Weiter seien $E := \{e, \eta(e), \dots, \eta^{k-1}(e)$ und $T := \{t, \theta(t), \dots, \theta^{l-1}(t)\}$, also jeweils die Mengen der ``bewegten'' Elemente der Zyklen.
-Sei o.B.d.A. $\min(E) \leq \min(T)$ (andernfalls vertauschen wir $\eta$ und $\theta$). Dann gilt $\eta \equiv \theta$ dann, wenn $\max(T) \leq \max(E)$.
-Salopp gesagt, gilt $\eta \equiv \theta$ gdw. $\theta$ nicht ``innerhalb'' von $\eta$ liegt.
+Dann gilt die Äquivalenz wie folgt.
+\[ \eta \equiv \theta := [\min(E) \leq \min(T) \leq \max(E) \vee \min(T) \leq \min(E) \leq \max(T) ]^+ \]
 
 Nun machen wir uns noch klar, dass $\equiv$ auch wirklich eine Äquivalenzrelation auf $Z$ ist.
 Die Reflexivität ist einfach, sei $\eta \in Z$ Zyklus und $E := $ alle Elemente von $\eta$ (die nicht fest gelassen werden).
-Dann gilt $\min(E) \leq \min(E)$, also gilt $\eta \equiv \eta$.
-
-Die Symmetrie ist ebenfalls sehr anschaulich, da wir o.B.d.A. $\min(E) \leq \min(T)$ angenommen haben,
-können wir ebenfalls o.B.d.A. annehmen $\min(T) \leq \min(E)$ und $\equiv$ wäre nach Definition somit symmetrisch.
-
-Also zeigen wir folgend die Transitivität.
-Seien $\eta, \theta, \iota \in Z, \eta \neq \theta \neq \iota$ und es gelte $\eta \equiv \theta$ und $\theta \equiv \iota$.
-Seien $E,T,I$ die Mengen der Zyklen $\eta, \theta, \iota$.
-Dann gilt nach Definition von $\equiv$ $\min(E) \leq \min(T) \leq \min(I) \wedge \max(E) \geq \max(T) \geq \max(I)$, also gilt auch $E \equiv I$.
+Dann gilt $\min(E) \leq \min(E) \leq \max(E)$, also gilt $\eta \equiv \eta$.
+Die Symmetrie ist ebenfalls recht anschaulich, da $\equiv$ bereits symmetrisch definiert ist.
+Die Transitivität folgt aus der Definition als transitive Hülle.
 Die Relation $\equiv$ ist also eine Äquivalenzrelation.
+
+Anschließend zeigen wir noch, dass die durch die Äquivalenzrelationen geformten Äquivalenzklassen auch wirklich das Intervall $[1,n]$ in
+ disjunkte Intervalle aufteilen.
+Seien also $\zeta_1, \zeta_2, \dots, \zeta_c$ die disjunkten Zyklen, die als Produkt eine Permutation $\pi$ der Länge $n$ ergeben.
+Seien weiter $A_1, \dots, A_a$ die Äquivalenzklassen, in die $\equiv$ die Zyklen aufteilt.
+Nun setzen wir $\min(A)$ einer Äquivalenzklasse $A$ auf das Minimum der Menge aller Elemente der Zyklen, die $A$ enthält.
+Genauso setzten wir $\max(A)$ auf das Maximum aller Elemente der Zyklen, die $A$ enthält.
+
+Nachfolgend betrachten wir die Zyklen als Intervalle. Sie $\eta$ ein Zyklus und $E$ die Menge der Elemente, die nicht fest gelassen werden.
+Dann betrachte ich diesen Zyklus als Intervall $[\min(E), \max(E)]$.
+
+Nun nehmen wir an, dass es zwei Äquivalenzklassen $A,B$ gibt, die sich überschneiden.
+Sei o.B.d.A. $\min(A) \leq \min(B)$. Da diese sich überschneiden sollen, sei außerdem $\min(B) \leq \max(A)$.
+Es gibt nun Zyklen $\eta, \theta$ mit den Intervallen $[e, \max(A)]$ bzw.\ $[\min(B), t]$.
+Wir betrachten zunächst folgende drei Fälle für $e$. \\
+Falls $e < \min(B)$, gilt $\eta \equiv \theta$, denn $e \leq \min(B) \leq \max(A)$.
+Dies ist ein Widerspruch, denn $\eta$ und $\theta$ sind nicht in der gleichen Äquivalenzklasse.\\
+Falls $e > \min(B)$, gilt 
+Falls $e = \min(B)$
+
+Seien $\eta_1, \dots, \eta_e$, $e \in \{1,\dots, c\}$ die Zyklen einer Äquivalenzklasse $A_x$, $x \in \{1, \dots, a\}$.
+Seien weiter $E_1, \dots, E_e$ die Mengen der Elemente, die von jeweiligem Zyklus nicht fest gelassen werden.
+Nun zeigen wir folgendes. Für jedes $E_y$, $y \in \{1, \dots, e\}$ gilt $\min(A_x) \leq \min(E_y) \wedge \max(E_y) \leq \max(A_x)$.
+Dies folgt unmittelbar aus der Definition von $\min(A_x)$ bzw.\ $\max(A_x)$. Denn diese sind als Maximalwert aller Zyklen definiert.
+Angenommen es also nun zwei Äquivalenzklassen $A_i, A_j$, $i,j \in \{1, \dots, a\}$ mit $\min(A_i) \leq \min(A_j) \leq \max(A_i)$.
+Nehmen wir weiter an, $\min(A_j) \leq \max(A_j)$. \emph{\textbf{Dies kann nicht sein, weil es nicht sein kann.}} TODO!
+
 \subparagraph{Der optimale Weg}
+%TODO: !
 Was sagen uns jetzt aber die Äquivalenzklassen? Wir erinnern uns, dass die Zyklen einer Äquivalenzklasse sich ``überschneiden''.
 Gibt es jetzt aber mehr als eine Äquivalenzklasse, heißt dass, das es eine Stelle $x$ gibt, die nicht innerhalb des Bereichs - also dem Bereich zwischen Minimum und Maximum - eines Zyklus liegt.
 Dies aber führt dazu, dass hier extra Fahrten notwendig sind. Außerdem müsse diese speziell berücksichtigt werden.
@@ -387,15 +421,15 @@ auf der kein Container ``in die richtige Richtung'' transportiert wird.
 Also entweder kein Container (->Leerfahrt) oder aber ein Container der eigentlich von einem Ort $o >= x$ zum Wagen $i <= x$ gebracht werden muss.
 Da jedoch alle Zyklen innerhalb eine Äquivalenzklasse ohne Leerfahrt abgearbeitet werden können,
 sind neben den $a \cdot 2$ Leerfahrten zwischen Äquivalenzklassen keine weiteren Leerfahrten nötig.
-Auch sind keine Fahrten in ``falsche'' Richtungen innerhalb einer Äquivalenzklasse nötig, da alle Zyklen an einem Stück abgearbeitet werden können. %TODO!
+Auch sind keine Fahrten in ``falsche'' Richtungen innerhalb einer Äquivalenzklasse nötig, da alle Zyklen an einem Stück abgearbeitet werden können.
 Ein Container $i$ muss zudem nie über die Grenzen einer Äquivalenzklasse transportiert werden, da $\pi(i)$ auf jeden Fall in den selben Grenzen liegt.
 
 Nun muss noch gezeigt werden, dass der Algorithmus alle Voraussetzungen erfüllt und einen optimalen Weg liefert.
 Dafür müssen lediglich folgende drei Aspekte gezeigt werden.
 \begin{enumerate}
- \item Der erzeugte Weg ist ein zusammenhängender Weg. (Keine Sprünge)
- \item Jeder Container wird an die richtige Position gebracht.
- \item Es werden keine ``unnötige'' Fahrten erzeugt. \\
+ \item[a)] Der erzeugte Weg ist ein zusammenhängender Weg. (Keine Sprünge)
+ \item[b)] Jeder Container wird an die richtige Position gebracht.
+ \item[c)] Es werden keine ``unnötige'' Fahrten erzeugt. \\
        (Leerfahrten innerhalb einer Äquivalenzklasse, oder Fahrten ``in die falsche Richtung'').
 \end{enumerate}
 Das jeweils die richtige Instruktionen zum Drehen des Krankopfes, Ablegen und Aufnehmen von Containern erzeugt werden, wird hier nicht bewiesen.
@@ -423,7 +457,6 @@ Es muss also irgendwann Fall 1 eintreten.
 Im letzen Fall, dem dritten, wird der aktuelle Container auf |cur| gebracht.
 Da dies genau die Stelle ist auf der er muss, ist auch die 2. Voraussetzung gegeben.
 Die 3. Vorraussetzungen ist ebenfalls gegeben, in obiger Argumentation wurde bereits gezeigt, dass nur Leerfahrten erzeugt werden, die die Äquivalenzklassen verbinden.
-%PUH! Ask papa, if this \emph{reaaly} should be such a full-blown prove!
 
 Nun müssen lediglich die Annahmen bewiesen werden, von denen ausgegangen wurde.
 Der obige Beweis ging von der Annahme aus, dass |computeCycle| immer Instruktionen erzeugt, die den Kran wieder auf die Ausgangsposition bringen.
@@ -441,11 +474,12 @@ Später kommt der Kran wieder zurück und hebt den dort zwischengelagerten Conta
 Wir zeigten also, dass der Algorithmus - und damit im Groben auch die Implementierung - optimale Ergebnisse liefert.
 
 \subsubsection{Laufzeitverhalten}
+\label{slow}
 Zunächst wird das Laufzeitverhalten des Algorithmus zum Finden der Zyklen analysiert.
 |cyclesOf| berechnet in jedem Schritt den neuen Startwert |start|.
 Dazu wird die Folge 1 bis zur Permutationslänge $n$ traversiert bis ein Wert gefunden wird der noch nicht abgearbeitet - sprich in |handled| enthalten - ist.
 Nimmt man an, dass das Prüfen auf Enthaltensein konstanten Zeitaufwand darstellt (beispielsweise bei Verwendung eines |HashSet|s), dann ergibt dies insgesamt eine Komplexität von $O(n)$.
-Die Berechnung eines Zyklus benötigt höchstens die Traversierung der Permutation, also ebenfalls $O(n)$. %TODO: Genauer!
+Die Berechnung eines Zyklus benötigt höchstens die Traversierung der Permutation, also ebenfalls $O(n)$.
 Anschließend werden die Zahlen, die im Zyklus enthalten sind, in |handled| eingefügt. Unter Annahme, dass wiederum ein |HashSet| verwendet wird, ergibt das eine Komplexität von $O(n)$.
 Anschließend erfolgt der rekursive Aufruf. Sei $c$ die Anzahl der Zyklen, dann wird |cyclesOf| $c$-mal aufgerufen.
 Die Laufzeitkomplexität zur Finden der Zyklen ist also $O(c \cdot n)$. 
@@ -476,32 +510,33 @@ Da wir nun gezeigt haben, dass |step| abzüglich der Fälle 1 und 2 (die ja nich
 Die Funktion |computeFromCycle| ruft |computeCycle| so auf, dass für jeden Zyklus ein |computeCycle|-Aufruf nötig ist. Jeder Zyklus muss schließlich abgearbeitet werden.
 Sei im Folgenden $Z$ die disjunkten Zyklen die die Permutation darstellen und $k(\zeta)$ die Länge eines Zyklus $\zeta$.
 Da für jeden Zyklus $\zeta \in Z$ der Länge $z$ ein Aufruf mit $O(z)$ nötig wird, ist die Gesamtkomplexität
-\[O(\sum_{i=0}^{o}{O(k(\zeta_i))})=O(O(\sum_{i=0}^{o}{k(\zeta_i)}))=O(n)\]
+\[O(\sum_{i=0}^{c}{O(k(\zeta_i))})=O(O(\sum_{i=0}^{c}{k(\zeta_i)}))=O(n)\]
 Das letzte Gleichheitszeichen gilt, da die Summe der Längen von allen disjunkten Zyklen genau die der Permutation ist.
+
 Somit haben wir die Laufzeit von $O(n)$ für |computeFromCycles| und $O(c \cdot n)$ für alle Algorithmen in der Verkettung gezeigt.
 \clearpage
 \subsection{Ergebnis- und laufzeitoptimaler Algorithmus} %Erweiterung!
 Das Laufzeitverhalten von $O(c \cdot n)$ ist zwar bereits recht gut, da die Anzahl der Zyklen im Normalfall nicht linear mit $n$ steigen.
 (Eine zufällig erzeugte Permutation mit $10^7$ Elementen hat meist weniger als 20 Zyklen).
-Der Worstcase bei $n/2$ Zyklen führt jedoch zu einer Worstcase-Komplexität von $O(n^2)$.
+Der Worst-case bei $n/2$ Zyklen führt jedoch zu einer Worst-case-Komplexität von $O(n^2)$.
 
 Deshalb soll als Erweiterung die Laufzeitkomplexität weiter verringert werden.
 
-Außerdem sind die Algorithmen, wie sie oben angegeben sind, nicht tail-recursive.
-Das heißt bei jedem rekursivem Aufruf wird ein neuer Stack-frame allokiert.
+Außerdem sind die Algorithmen, wie sie im Abschnitt \ref{slow_cycler} angegeben sind, nicht endrekursiv.
+Das heißt, bei jedem rekursivem Aufruf wird ein neuer Stack-frame allokiert.
 Der Speicher hat also einen hohen Speicherplatzverbrauch.
-In der Praxis heißt dies, dass nur eine Rekursionstiefe von höchstens 10000 möglich ist.
-Die Entwicklung eines Laufzeitoptimalen Algorithmus betrachte ich als Erweiterung im Sinne der Allgemeinen Hinweise in den Aufgaben.
+In der Praxis heißt dies, dass nur eine Rekursionstiefe von höchstens 10.000 möglich ist.
+Die Entwicklung eines laufzeitoptimalen Algorithmus' betrachte ich als Erweiterung im Sinne der Allgemeinen Hinweise in den Aufgaben.
 Diese ist sinnvoll, denn - wie später in \ref{scalability} gezeigt -
 lassen sich damit zu einer Permutation (die die Container darstellt)
 mit einer Länge in der Größenordnung $10^7$ innerhalb weniger Minuten Instruktionen berechnen, die einen optimalen Weg liefern.
 \subsubsection{Verbesserung}
 \label{fast_cycler}
 Die Verbesserung - und Schwierigkeit - besteht darin, den bisherigen limitierenden Faktor, nämlich die Berechnung der Zyklen zu optimieren.
-Außerdem müssen alle rekursiven Funktionen umgeschrieben werden, so dass sie vom Scala-Compiler tail-call optimiert werden können.
+Außerdem müssen alle rekursiven Funktionen umgeschrieben werden, so dass der Scala-Compiler eine Tailrekursionseliminierung vornehmen kann.
 Das heißt, alle rekursiven Aufrufe einer Funktion müssen der letzte Befehl einer Funktion sein.
 
-Zunächst wurde die Cycle Methode auf folgenden Code optimiert. (Die |@tailrec|-Annotation weist daraufhin, dass die Funktion tail-call optimiert werden kann und soll.)
+Zunächst wurde die Methode |cycle| Funktion auf folgenden Code optimiert. (Die |@tailrec|-Annotation weist daraufhin, dass eine Tailrekursionseliminierung durchgeführt werden kann und soll.)
 \begin{lstlisting}
 def cycle(perm: Seq[Int], start: Int): Cycle = {
   @tailrec def step(ready: List[Int], idx: Int): Cycle =
@@ -512,23 +547,24 @@ def cycle(perm: Seq[Int], start: Int): Cycle = {
   (start :: step(Nil, perm(start - 1)))
 }
 \end{lstlisting}
-Die Änderungen betreffen wesentlich die |step| Methode. Diese hat nun zwei Parameter |ready| und |idx|.
-In |ready| werden alle bisherig gefundene Elemente eines Zyklus akkumuliert.
-Bei Rekursionsabbruch muss dementsprechend die umgekehrte Liste zurückgegeben werden, da in einer Liste LIFO gilt.
+Die Änderungen betreffen wesentlich die Methode |step|. Diese hat nun zwei Parameter |ready| und |idx|.
+In |ready| werden alle bisherig gefundenen Elemente eines Zyklus' akkumuliert.
+Bei Rekursionsabbruch muss dementsprechend die umgekehrte Liste zurückgegeben werden (vgl.\ Z.\ 4), da in einer Liste ``last in first out'' gilt.
 Es soll jedoch das zuerst gefundene Element auch als erstes in der Liste stehen.
 Falls die Abbruchbedingung noch nicht erreicht wurde, wird |step| aufgerufen, mit dem aktuellen Index |idx| an |ready| angefügt und dem neuem Index |perm(idx-1)|.
 Im Gegensatz zum alten |cycle| wird |step| neben dem Startwert |perm(start-1)| zusätzlich noch mit der leeren Liste |Nil| aufgerufen.
 
-Nun wurde auch |cyclesOf| optimiert. Statt in einem |Set| werden die bereits fertigen Zahlen in einem |Boolean|-|Array| dargestellt.
-Der Container mit der Nummer |i| ist genau dann bereits abgehandelt, sobald |handled(i-1)=true|.
+Nun wurde auch |cyclesOf| optimiert, wie im nachfolgendem Codeausschnitt dargestellt. Statt in einem |Set| werden die bereits fertigen Zahlen in einem Boolean-Array dargestellt.
+Der Container mit der Nummer |i| ist genau dann bereits abgehandelt, sobald |handled(i-1) == true|.
 Neben der veränderten Darstellung der fertigen Zahlen werden außerdem zwei zusätzliche Parameter benutzt.
-Der erste, |ready| speichert ähnlich wie bei dem Neuen |cycle| die vor dem Aufruf ``gesammelten'' Ergebnisse, in diesem Fall also die bereits gefundenen Zyklen.
-Der zweite Paremter ist |prev|. Hier wird der Startwert des vorherigen Zyklus - oder wenn es keinen vorherigen gab 0 - übergeben.
-Die Abbruchbedingung bleibt die gleiche, es wird jedoch die akkumulierten Ergebnisse aus |ready| - wieder wie oben - nach Umkehrung der Reihenfolge zurückgegeben.
+Der erste Parameter |ready| speichert ähnlich wie bei dem neuen verbessertem |cycle| die vor dem Aufruf ``gesammelten'' Ergebnisse.
+In diesem Fall werden also die bereits gefundenen Zyklen akkumuliert.
+Der zweite Parameter ist |prev|. Hier wird entweder der Startwert des vorherigen Zyklus' oder falls es keinen vorherigen gibt 0 übergeben.
+Die Abbruchbedingung bleibt die gleiche, es werden jedoch die akkumulierten Ergebnisse aus |ready| - wieder wie oben bei |cycle| - nach Umkehrung der Reihenfolge zurückgegeben.
 Die Suche nach dem nächsten Element ist ebenfalls abgeändert.
-Es wird nichtmehr bei 1 angefangen zu suchen, sondern beim Startwert des vorherigen Zyklus' |prev| um eins nach rechts verschoben.
+Es wird nicht mehr bei 1 angefangen zu suchen, sondern beim Startwert des vorherigen Zyklus' |prev| um eins nach rechts verschoben.
 Denn der Startwert des vorherigen Zyklus (und auch alle davor) wurden bestimmt bereits abgearbeitet.
-Auch die Suchbedingung ist anders, es wird nicht mehr auf nicht-Enthaltensein geprüft, sondern ob im Array an der Stelle |i-1| nicht |true| gesetzt ist.
+Auch die Suchbedingung ist anders, es wird nicht mehr auf Nichtenthaltensein geprüft, sondern ob im Array an der Stelle |i-1| nicht |true| gesetzt ist.
 Außerdem müssen die neuen Zahlenwerte nicht mehr in eine Menge eingefügt werden, sondern die Elemente des Arrays an den entsprechenden Indizes müssen auf |true| gesetzt werden.
 Der rekursive Aufruf erfolgt zudem als letzter Befehl,
 zusätzlich werden die neuen abgearbeiteten Zyklen |aCycle :: ready| und der Startwert des Zyklus |start| übergeben.
@@ -549,25 +585,26 @@ def cyclesOf(ready: List[Cycle], perm: Seq[Int],
 
 \subsubsection{Optimale Ergebnisse}
 Wie oben (in \ref{opt_res}) bereits gezeigt, können aus korrekten, sortierten Zyklen Instruktionen, die einen optimalen Weg für den Kran liefern, berechnet werden.
-Deshalb muss hier lediglich noch gezeigt werden, dass der neue Algorithmus wiederum korrekte und sortierte Zyklen berechnet. \\
-Im Prinzip wurden nur mehrere Elemente ersetzt. Die eigentliche Logik gilt immernoch. Insofern liefern auch die neuen Funktionen die gewünschten Zyklen.
+Deshalb muss hier lediglich noch gezeigt werden, dass der neue Algorithmus wiederum korrekte und sortierte Zyklen berechnet. 
+
+Im Prinzip wurden nur mehrere Elemente ersetzt. Die eigentliche Logik gilt immer noch. Insofern liefern auch die neuen Funktionen die gewünschten Zyklen.
 Die Änderungen wurden oben jeweils so erklärt, dass gleichzeitig die Korrektheit begründet wird.
 
 \subsubsection{Optimale Laufzeitkomplexität}
 Die Laufzeit von |cyclesOf| ist $O(n)$, wie ich folgend zeige.
 
 Zunächst zeige ich, dass die Gesamtkomplexität aller |cycle| Aufrufe $O(n)$ ist.
-Jede Zahl wird genau einmal in ein Zyklus eingefügt, da diese disjunkt sind.
+Jede Zahl wird genau einmal in einen Zyklus eingefügt, da diese disjunkt sind.
 Weiter zeige ich nun, dass auch die Summe aller anderen Befehle in |cyclesOf| eine Gesamtkomplexität von $O(n)$ aufweisen.
-Die |for|-Schleife wird nach gleicher Argumentation wie oben ebenfalls insgesamt $O(n)$-mal durchlaufen.
+Die |for|-Schleife (vgl.\ Z.\ 7f in |cylesOf|) wird, nach gleicher Argumentation wie oben, ebenfalls insgesamt $O(n)$-mal durchlaufen.
 Der Rest sind Operationen, für die nur konstanter Zeitaufwand nötig ist. Die Laufzeitkomplexität hängt nun lediglich von der Suchfunktion ab.
-Das Prüfen im Array benötigt $O(1)$ Zeit. Da die Suche immer von $prev+1$ bis zum nächsten Wert $start$ durchlaufen wird, der später wiederum $prev$ im nächsten Aufruf von |cyclesOf| ist,
+Das Prüfen im Array benötigt $O(1)$ Zeit. Da die Suche immer von |prev+1| bis zum nächsten Wert |start| durchlaufen wird, der später wiederum |prev| im nächsten Aufruf von |cyclesOf| ist,
 wird auch insgesamt $O(n)$-mal im Array geprüft. Insgesamt liegt also eine Laufzeitkomplexität von $O(n)$ vor.
 Da auch |computeFromCycles| lineare Laufzeitkomplexität vorweisen kann, ist die Gesamtkomplexität $O(n)$.
 
 Da jedoch jeder Container auf einen Waggon gebracht werden muss, muss für jeden Container mindestens ein Befehl erzeugt werden.
 Bei $n$ Container sind dies also $n$ Befehle. Das setzt einen Algorithmus mit einer Laufzeitkomplexität von mindestens $O(n)$ voraus.
-Der erstellte Algorithmus hat also \textbf{optimale Laufzeitkomplexität}.
+Der erstellte Algorithmus hat also \emph{optimale Laufzeitkomplexität}.
 
 \subsubsection{Mögliche Parallelisierung}
 Es wurden Überlegungen zur Parallelisierung des Algorithmus zur Berechnung der Instruktionen gemacht.
@@ -581,75 +618,100 @@ Grob gesehen gliedert sich die Implementierung in folgende Module und Klassen.
 \begin{center}
 \begin{tabular}{ll}
  \textbf{Cycler} & Algorithmen zur Berechnung der Zyklen \\
- \empty          & (In den zwei Varianten langsamer (|SlowCycler|) und schneller (|FastCycler|))\\
- \textbf{Instructor} & Algorithmus zur Berechnung der Instruktionen aus den Zyklen \\
+ \empty          & (in den zwei Varianten |SlowCycler| und |FastCycler|)\\
+ \textbf{Instructor} & Algorithmus zur Berechnung der Kraninstruktionen aus den Zyklen \\
  \textbf{Gleis} & Datenstruktur zur Verwaltung der Containerstellplätze und Waggons \\
  \textbf{Instructions} & Die Instruktionen, die dem Kran mitteilen, was ausgeführt werden muss \\
  \textbf{Maschine} & Klasse zur Simulation einer Maschine \\
- \textbf{ListBuffer} & modifizierte Variante der standardmäßigem Scala-Klasse |ListBuffer| \\
+ \textbf{ListBuffer} & modifizierte Variante der standardmäßigen Scala-Klasse |ListBuffer| \\
  \textbf{Utils} & hilfreiche Methoden \\
 \end{tabular}
 \end{center}
 
+ In den folgenden Abschnitten werden jeweils kurz die Implementierungen erläutert.
+ Der vollständige Programmtext findet sich am Ende dieser Dokumentation in \ref{code2}.
+
 \subsection{Cycler - Berechnung der Zyklen}
-Da beide Algorithmen zur Zyklenfindung implementiert werden, ist ein |trait| |Cycler| implementiert,
-welches die einzige Methode des Moduls |cyclesOf(Seq[Int]): Cycles| definiert.
-Diese soll zu einer gegebenen Permutation eine Liste von nach Startelementen sortierte Zyklen zurückgeben.
-Die Implementierung des |SlowCycler| erfolgte wie in \ref{slow_cycler}, die des |FastCycler| nach \ref{fast_cycler}.
+ Da beide Algorithmen zur Zyklenfindung implementiert werden, ist ein |trait| |Cycler| implementiert (vgl.\ Z.\ 8),
+  welches die einzige Methode des Moduls |cyclesOf(Seq[Int]): Cycles| definiert.
+ Diese soll zu einer gegebenen Permutation eine Liste von nach Startelementen sortierten Zyklen zurückgeben.
+ Die Implementierung des |SlowCycler| (vgl.\ Z.\ 23) erfolgte wie in \ref{slow_cycler}, die des |FastCycler| (vgl.\ Z.\ 34) nach \ref{fast_cycler}.
 
 \subsection{Instructor - Berechnung der Kraninstruktionen}
-Anschließend wurden im Modul |Instructor| Funktionen zur Berechnung der Instruktionen erstellt.
+Im Modul |Instructor| wurden Funktionen zur Berechnung der Instruktionen erstellt.
 Diese gliedern sich in die extern zu benutzenden Funktionen sowie die intern benötigten Hilfsfunktionen.
-Extern zu verwenden sind |compute(Seq[Int], Cycler): Seq[Instruction]| zur Berechnung ausgehend von einer Permutation,
-sowie |computeFromCycles(Cycles): Seq[Instruction]| zur Berechnung der Liste der Instruktionen aus - meist vorher bereits berechneten - Zyklen.
+Extern zu verwenden sind |compute(Seq[Int], Cycler): Seq[Instruction]| (vgl.\ Z.\ 7) zur Berechnung ausgehend von einer Permutation,
+sowie |computeFromCycles(Cycles): Seq[Instruction]| (vgl.\ Z.\ 9) zur Berechnung der Liste der Instruktionen aus - meist vorher bereits berechneten - Zyklen.
 Die erstere vereinfacht die Benutzung dadurch, dass nur die Permutation angegeben werden muss (die Zyklen werden dann automatisch berechnet).
-Die interne Hilfsfunktion, die die eigentliche Berechnung definiert ist |computeCycle(Cycle, Cycles): (ListBuffer[Instruction], Cycles)|.
+Die interne Hilfsfunktion, die die eigentliche Berechnung definiert, ist |computeCycle(Cycle, Cycles): (ListBuffer[Instruction], Cycles)| (vgl.\ Z.\ 18).
 Diese gibt zu einem zu bearbeitenden Startzyklus und den restlichen Zyklen eine Liste von Instruktionen und eine Liste von unbearbeiteten Zyklen zurück.
 
 \subsection{Gleis - Speichern des Zustands}
 \label{gleis}
 Die Datenstruktur zum Speichern des aktuellen Status' der Container, Containerstellplätze und Waggons wird in der Klasse |Gleis| implementiert.
 Ein |Gleis| verwaltet zwei Arrays der Länge $n$. Das erste Array |con| speichert die jeweilige Containernummer auf dem zugehörigen Containerstellplatz.
-Das andere Array |wag| speichert die jeweilige Nummer des Container auf einem Waggon.
-Zu Beginn wird das Array |con| mit der Permutation initialisiert. \\
+Das andere Array |wag| speichert die jeweilige Nummer des Containers auf einem Waggon.
+Zu Beginn wird das Array |con| mit der Permutation initialisiert.
+Falls |con| oder |wag| an einer Position keinen Container enthält, wird dies durch den Wert 0 dargestellt.
 Ein |Gleis| definiert Methoden zum Setzen und Aufheben - also Löschen - von Containern an einem bestimmtem Index.
-Ein |Gleis| stellt |takeCon(Int): Int| zum Löschen auf den Containerstellplätzen bzw. |takeWag(Int): Int| zum Löschen auf den Waggons bereit.
-Die Methoden |putCon((Int, Int)): Int| und |putWag((Int, Int)): Int| werden zum Setzen von Container auf den Containerstellplätzen bzw. den Waggons bereitgestellt.
-Außerdem wurde die |toString: String| Methode über\-schrie\-ben, um eine formatierte Ausgabe zu erhalten.
-Die oben genannten Methoden werden zur Manipulation der Containernummern zu den jeweiligen Containerstellplätzen, bzw. Waggons verwendet.
+Ein |Gleis| stellt \ |takeCon(Int): Int| (vgl.\ Z.\ 21)\  zum Löschen auf den Containerstellplätzen bzw.\ \ |takeWag(Int): Int| (vgl.\ Z.\ 20)\  zum Löschen auf den Waggons bereit.
+Die Methoden \ |putCon((Int, Int)): Int| (vgl.\ Z.\ 23)\  und \ |putWag((Int, Int)): Int| (vgl.\ Z.\ 22)\  werden zum Setzen von Containern auf den Containerstellplätzen bzw. den Waggons bereitgestellt.
+Außerdem wurde die \ |toString: String|\  Methode über\-schrie\-ben, um eine formatierte Ausgabe zu erhalten.
+Die oben genannten Methoden werden zur Manipulation der Containernummern zu den jeweiligen Containerstellplätzen bzw.\ Waggons verwendet.
 Die genauere Verwendung wird bei späterer Referenz beschrieben.
 
-\subsection{Instructions - Geben der Anweisungen}
+\subsection{Instructions - Die Anweisungen}
 Es wurden mehrere Objekte implementiert, die die einzelnen Befehle darstellen.
 Es wurden |TakeWag|, |TakeCon|, |PutWag| und |PutCon| also Lege- und Hebebefehle erstellt, sowie |Rotate| als Rotationsbewegung des Kranes.
 Diese spielen für den Weg des Kranes keine Rolle.
-Die Befehle, die den Kranweg unmittelbar beeinflussen, sind |Move| bzw. |MoveLeft| und |MoveRight|. |Move| ist hierbei die Superklasse der beiden anderen.
+Die Befehle, die den Kranweg unmittelbar beeinflussen, sind |Move| bzw. |MoveLeft| und |MoveRight|. Hierbei ist |Move| die Superklasse der beiden anderen.
 
 \subsection{Maschine - Interpretieren der Kraninstruktionen}
-Um die erzeugten Instruktionen interpretieren zu können, wurde die Klasse |Maschine| geschrieben.
+Um die erzeugten Instruktionen interpretieren, also simuliert ausführen zu können, wurde die Klasse |Maschine| geschrieben.
 Diese stellt eine Methode |interpret| dar, die eine Befehlskette ausführt.
 Eine |Maschine| nutzt ein |Gleis|, um den Zustand zu speichern.
 Außerdem wurde die Klasse so gestaltet, dass Unterklassen leicht geschrieben werden können, um beispielsweise eine echte Kransteuerung anzubinden.
 
 \subsection{ListBuffer - Erweiterung der Standardklasse ListBuffer}
-Um die Befehlsketten effizient erstellen zu können wird eine Datenstruktur benötigt,
-auf der das Anhängen einer zweiten Befehlskette in konstanter Zeit implementiert werden kann.
-Anschließend muss sie beginnend bei dem zuerst eingefügtem Element der Einfügereihenfolge folgend in linearer Zeit traversierbar sein.
-Diese Bedingungen erfüllt - leider - keine Standardklasse aus der Scala Collections API.
-Deswegen wurde die Klasse |ListBuffer| um das Anhängen eines zweiten |ListBuffer|s mit konstantem Zeitaufwand erweitert.
+ Um die Befehlsketten effizient erstellen zu können, wird eine Datenstruktur benötigt,
+  auf der das Anhängen einer zweiten Befehlskette in konstanter Zeit implementiert werden kann.
+ Anschließend muss sie beginnend bei dem zuerst eingefügtem Element der Einfügereihenfolge folgend in linearer Zeit traversierbar sein.
+ Diese Bedingungen erfüllt - leider - keine Standardklasse aus der Scala-Collections API.
+ Deswegen wurde die Klasse |ListBuffer| um das Anhängen eines zweiten |ListBuffer|s mit konstantem Zeitaufwand erweitert.
 
 \subsection{Utils - Helfende Methoden}
-Weitere Methoden, die nützlich im Rahmen der Nutzung des Programms sind, jedoch nicht direkt zur Implementierung der Aufgabenlösung dienen,
-wurden in das Modul |Utils| ausgelagert. Besondere Bedeutung hat die Funktion |randPerm|, die zu einer gegebenen Permutationslänge
-eine zufällige Permutation berechnet. %TODO: Cite where alg came from?
-Außerdem wurden auch Methoden zum Speichern der Instruktionsketten und Permutationen implementiert.
+ Weitere Methoden, die nützlich im Rahmen des Programms sind, jedoch nicht direkt zur Implementierung der Aufgabenlösung dienen,
+  wurden in das Modul |Utils| ausgelagert. Besondere Bedeutung hat die Funktion |randPerm|, die zu einer gegebenen Permutationslänge
+  eine zufällige Permutation berechnet (vgl.\ Z.\ 6-19).
+ Außerdem wurden auch Methoden zum Speichern der Instruktionsketten und Permutationen implementiert.
 
 \clearpage
 \section{Programmabläufe}
+ In diesem Abschnitt sind Programmabläufe dargestellt. Diese sind einerseits Testfälle, die praktische Indizien für die Korrektheit und Optimalität liefern.
+ Andererseits stellen diese auch für sich ein Erkenntnisgewinn dar, insbesondere die Spezialfälle sind hier interessant.
+
+ Im Abschnitt \ref{aufgabenstellung} wird das Beispiel aus der Aufgabenstellung ausgeführt, anschließend werden in \ref{special_cases} Spezialfälle diskutiert.
+ Darauf folgend werden in \ref{random_perms} mit zufällig erzeugten Permutationen getestet.
+ Zum Schluss wird der in \ref{fast_cycler} entworfene Algorithmus auf Skalierbarkeit in der Praxis getestet (\ref{scalability}).
+ 
+\paragraph{Hinweis} Die Instruktionen wurden zwecks Platzsparens abgekürzt. Die Abkürzungen sind folgende.
+ \begin{center}
+  \begin{tabular}{llll}
+   |TC| & |TakeCon| & |TW| & |TakeWag| \\
+   |PC| & |PutCon|  & |PW| & |PutWag|   \\
+   |ML| & |MoveLeft|& |MR| & |MoveRight| \\
+    |R| & |Rotate|        \\
+  \end{tabular}
+ \end{center}
+
 \subsection{Beispiel aus der Aufgabenstellung}
+\label{aufgabenstellung}
 Nachfolgend ist der Ablauf, der sich bei Eingabe des Beispiels aus der Aufgabenstellung ergibt, dargestellt.
+
+In der Zeile 15 ist die anhand der Permutation ausgerechnete, mindestens benötigte Weglänge $m$ ausgegeben.
+In der Zeile 16 ist die tatsächliche Weglänge $l$ ausgegeben.
 \begin{lstlisting}
-scala> val perm = Seq(4,3,2,1)               
+scala> val perm = Seq(4,3,2,1)
 perm: Seq[Int] = List(4, 3, 2, 1)
 
 scala> val verified = Utils demonstrate perm 
@@ -662,7 +724,7 @@ The generated Instructions (shortened) are:
  [ TC(0) : MR(1) : R(0) : TC(0) : R(0) : PC(0) : R(0) : MR(1)
  : R(0) : PW(0) : TC(0) : ML(1) : R(0) : PW(0) : TC(0) : MR(2)
  : R(0) : PW(0) : TC(0) : ML(3) : R(0) : PW(0) ] 
-Time used computing Instruction: 26
+Time used computing Instructions: 26
 1 2 3 4;(m=8)
 4 3 2 1;(l=8)
 -->     (1)
@@ -675,10 +737,10 @@ Verifying results...
 verified: Boolean = true
 \end{lstlisting}
  Bemerkenswert ist hier, dass der erstellte Algorithmus in diesem Fall exakt den gleichen Weg liefert wie im Beispiel der Aufgabenstellung angegeben.
- Es gibt jedoch noch verschiedene andere Wege.
+ Es gibt jedoch noch verschiedene andere optimale Wege.
  Beispielsweise kann das Prüfen auf überlappende Zyklen erst beim Zurückfahren erfolgen.
  Andere Möglichkeiten für einen optimalen Weg wären die nachfolgend dargestellte Abläufe.
- Es gibt also insgesamt vier verschieden Fahrpläne, die für das Beispiel einen optimalen Weg ergeben.
+ Es gibt also insgesamt vier verschiedene Fahrpläne, die für das Beispiel einen optimalen Weg ergeben.
 \begin{lstlisting}                   
 1 2 3 4;(m=8)	1 2 3 4;(m=8)	1 2 3 4;(m=8)
 4 3 2 1;(l=8)	4 3 2 1;(l=8)	4 3 2 1;(l=8)
@@ -690,6 +752,7 @@ verified: Boolean = true
 \end{lstlisting}
 \clearpage
 \subsection{Spezialfälle}
+\label{special_cases}
 Nachfolgend betrachten wir einige Spezialfälle. Gezeigt werden sowohl kleine Beispiele mit 4 oder 8 Containern, aber auch größere mit 20 Container.
 \subsubsection*{Äquivalenzklassen}
 Betrachten wir folgende Permutation $\pi = (2 1) (4 3)$.
@@ -706,7 +769,7 @@ Number of cycles: 2
 The generated Instructions (shortened) are: 
  [ TC : MR(1) : R : PW : TC : MR(1) : R : TC : R : PC : R : MR(1)
  : R : PW : TC : ML(1) : R : PW : TC : ML(1) : ML(1) : R : PW ] 
-Time used computing Instruction: 21
+Time used computing Instructions: 21
 1 2 3 4;(m=4)
 2 1 4 3;(l=6)
 -->     (1)
@@ -733,7 +796,7 @@ Ein Spezialfall ist die Identität als Permutation. Das heißt $\pi(x) = x$.
 Hierbei bildet jeder Container eine eigene Äquivalenzklasse, da keine überschneidenden Zyklen existieren.
 Nachfolgend wird also die nötigte Kranfahrt für 20 bereits in der richtigen Reihenfolge auf den Containerstellplätzen liegenden Container simuliert.
 \begin{lstlisting}
-scala> val perm = (1 to 20)                   
+scala> val perm = (1 to 20) // Identität erzeugen
 perm: scala.collection.immutable.Range.Inclusive
  with scala.collection.immutable.Range.ByOne =
   Range( 1,  2,  3,  4,  5,  6,  7,  8,  9, 10,
@@ -784,7 +847,7 @@ The generated Instructions (shortened) are:
  : ML(0) : R : PW : TC : ML(1) : ML(0) : R : PW : TC : ML(1)
  : ML(0) : R : PW : TC : ML(1) : ML(0) : R : PW : TC : ML(1)
  : ML(0) : R : PW : TC : ML(1) : ML(0) : R : PW ] 
-Time used computing Instruction: 1
+Time used computing Instructions: 1
  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20;(m=0)
  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20;(l=38)
 --->                                                       (1)
@@ -856,15 +919,19 @@ Hier ist zwar $m = 0$, denn es muss kein einziger Container nach links oder rech
 Allerdings gibt es $20-1=19$ Äquivalenzklassen, die ``konkateniert'' werden müssen.
 In dem Optimalitätsbeweis haben wir bewiesen, dass der minimale Weg $w = a \cdot 2 + \sum_{i = 1}^{n}{\lvert i-\pi(i)\rvert}$ ist.
 Da $a=20-1=19$ und $\sum_{i = 1}^{n}{\lvert i-\pi(i)\rvert} = 0$, ist $w = 19 \cdot 2 = 38$. Also ist auch der tatsächlich gefahrene Weg $l = w$, also optimal.
+
+Außerdem bemerkenswert ist, dass die Weglänge von 38 für \textbf{jede} Permutation der Länge 20 zurückgelegt werden muss.
+Denn der Kran muss auf jeden Fall bis zum letzten Container und wieder zurück an die Startposition, also $2 \cdot (n-1)$ Weglängen zurücklegen, wobei $n$ die Länge der Permutation ist.
 \subsection{Zufällig erzeugte Permutationen}
+\label{random_perms}
 \subsubsection*{1. Beispiel}
-Ein nächstes - etwas größeres Beispiel ergibt sich aus zufälliger Erzeugung einer Permutation der Länge 20.
+Ein nächstes, etwas größeres Beispiel ergibt sich aus zufälliger Erzeugung einer Permutation der Länge 20.
 \lstset{basicstyle=\ttfamily}
 \begin{lstlisting}
 scala> import de.voodle.tim.bwinf.container._                                               
 import de.voodle.tim.bwinf.container._
 
-scala> val verified = Utils demonstrate perm 
+scala> val verified = Utils.demonstrate(20, print = true) 
 Time used for computing Cycles: 8
 The computed Cycles are: 
   (1 5 6)
@@ -883,7 +950,7 @@ The generated Instructions (shortened) are:
  : TC : MR(7) : R : PW : TC : ML(3) : R : PW : TC : MR(1) : R : PW
  : TC : MR(3) : R : PW : TC : ML(17) : R : PW : TC : MR(2) : R : PW
  : TC : MR(1) : R : PW : TC : ML(5) : R : PW ] 
-Time used computing Instruction: 36
+Time used computing Instructions: 36
  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20;(m=92)
  5  2 14  9  6  1  4 12 11  8 18 19 13 15 10 17 20  7 16  3;(l=92)
 --->                                                       (1)
@@ -918,14 +985,13 @@ Verifying results...
 verified: Boolean = true
 \end{lstlisting}
 Permutationen bis zu einer Länge von 20 können wie gezeigt problemlos in der Konsole angezeigt und dargestellt werden.
-Durch das gewählte - an die Aufgabenstellung angelehnte - Ausgabeformat können auch die zu fahrende Wege gut in der Konsole dargestellt werden.
+Durch das gewählte - an die Aufgabenstellung angelehnte - Ausgabeformat können auch die zu fahrenden Wege gut in der Konsole dargestellt werden.
 Auch die Optimalität des Weges kann leicht nachvollzogen werden.
-In der ersten Zeile ist die anhand der Permutation ausgerechnete mindestens benötigte Weglänge $m$ ausgegeben.
-In der zweiten Zeile ist die anhand der Instruktionen berechnete Weglänge $l$ ausgegeben. Wie zu sehen, stimmen diese überein.
+Denn die anhand der Permutation ausgerechnete Weglänge $m$ stimmt mit der tatsächlichen Weglänge $l$ überein.
 \subsubsection*{2. Beispiel}
 Folgend ist nun noch die Bearbeitung einer weiteren zufälligen Permutation der Länge 20 dargestellt.
 \begin{lstlisting}
-scala> val verified = Utils demonstrate (20,true)
+scala> val verified = Utils.demonstrate(20, print = true) 
 Permutation (shortened) is:
   (3 11 13 6 9 14 10 7 4 1 19 12 15 5 16 17 18 20 2 8)
 Time used for computing Cycles: 0
@@ -945,7 +1011,7 @@ The generated Instructions (shortened) are:
  : R : PW : TC : MR(1) : R : PW : TC : MR(2) : R : PW : TC : ML(12)
  : R : PW : TC : ML(1) : R : PW : TC : MR(3) : R : PW : TC : ML(9)
  : R : PW ] 
-Time used computing Instruction: 0
+Time used computing Instructions: 0
  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20;(m=106)
  3 11 13  6  9 14 10  7  4  1 19 12 15  5 16 17 18 20  2  8;(l=106)
 --->                                                       (1)
@@ -978,40 +1044,56 @@ Waggons:    1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
 Verifying results...
 verified: Boolean = true
 \end{lstlisting}
+Auch hier ist die Optimalität gegeben, wie man an $m = l$ sieht.
+Interessant zu beobachten ist, dass die minimale Weglänge nicht konstant für eine Permutationslänge ist.
+Obwohl beide Permutationen die Länge 20 haben, müssen in diesem 2. Beispiel längere Wege zurückgelegt werden.
 \subsection{Demonstration der Skalierbarkeit}
 \label{scalability}
 Nun soll die Skalierbarkeit demonstriert werden,
-die als Erweiterung in Form von tail-rekursiven Funktionen und linearer Laufzeitkomplexität implementiert wurde.\\
-Hierfür erzeugen wir eine zufällige Permutation mit einer Länge von $2^22$ (etwa 4,2 Millionen), die unsere Container darstellt.
+die als Erweiterung in Form von endrekursiven Funktionen und linearer Laufzeitkomplexität implementiert wurde.\\
+Hierfür erzeugen wir eine zufällige Permutation mit einer Länge von $2^{22}$ (etwa 4,2 Millionen), die unsere Container darstellt.
+Längere Permutation sind in der Realität nicht zu erwarten, denn wenn jeder Container nach Standard 40 Fuß lang ist, ergibt dies eine Gesamtlänge $g$ des Gleises von
+ \[ g = 40 \cdot 2^{22}\ \text{Fuß} = 167.772.160\ \text{Fuß} \approx 51.137\ \text{km}. \]
+Dies ist bereits deutlich länger als der Umfang der Erde am Äquator.
 Anschließend werden wie oben auch, die Instruktionen berechnet und interpretiert.
 Für Demonstrationszwecke wird außerdem die benötigte Zeit für jeden Schritt berechnet.
 Dies hat nicht das Ziel genaue Benchmarkwerte zu liefern, sondern vielmehr einen Anhaltspunkt für das Laufzeitverhalten darzustellen.
 Hierfür wurde eine kleine Scala-Methode geschrieben welche im Modul |Utils| zu finden ist.
 \begin{lstlisting}
-scala> val verified = Utils demonstrate (math.pow(2,22).toInt,false)
-Time used for computing Cycles: 3544
-Number of cycles: 14
-Time used computing Instruction: 15200
-Time used interpreting: 8234
+scala> val verified = Utils.demonstrate(math.pow(2,22).toInt, false)
+Time used for computing Cycles: 3784
+Number of cycles: 17
+Time used computing Instructions: 22682
+(m=5863759046970)
+(l=5863759046970)
+Time used interpreting: 46230
 Verifying results...
 verified: Boolean = true
 \end{lstlisting}
 \lstset{basicstyle=\ttfamily}
-Interessant ist hier die Beobachtung, dass es nur 14 Zyklen gibt, bei einer Permutationslänge von $2^22$.
-Insgesamt wurden 15200 Millisekunden, also gute 15 Sekunden bzw. knapp eine Viertel Minuten benötigt, um die Instruktionen zu berechnen.
+Interessant ist hier die Beobachtung, dass es nur 17 Zyklen gibt, bei einer Permutationslänge von $2^{22}$.
+Insgesamt wurden 22.682 Millisekunden, also gute 2 Sekunden bzw. gut eine Drittel-Minute benötigt, um die Instruktionen zu berechnen.
 Dies ist ein praktischer Beleg der oben theoretisch bewiesenen guten Laufzeitkomplexität.
-Nach der Berechnung der Instruktionen wurden diese testweise interpretiert. Hierfür wurden gute 8 Sekunden benötigt.
+Nach der Berechnung der Instruktionen wurden diese testweise interpretiert. Hierfür wurden gute 46 Sekunden benötigt.
 Zum Schluss wurde außerdem verifiziert, dass jeder Container auf der richtigen Position ist.
+Auch dieses Beispiel liefert ein optimalen Weg, wie man an $m = l = 5863759046970$ sieht.
+Dieser Weg wäre in der Realität nur schwer zu erreichen, denn nimmt man an, dass der Kran keine Zeit für das Aufheben und Aufnehmen von Containern braucht,
+ sowie pro Sekunde eine Weglänge zurücklegen kann (bei 40 Fuß Containerlänge wären das etwa 44 km/h), so ergibt sich folgende Rechnung.
+\[l\ s = 5863759046970 / 3600\ h = 1628822000 / 24\ d = 67867583 / 365,25\ y = 185811,32\ y = 1,8 \cdot 10^{5}\ y \]
+Es müssten also über \textbf{hundert-achtzig-tausend} Jahre gefahren werden!
+\clearpage
+
 \section{Programmnutzung}
 \lstset{basicstyle=\ttfamily}
 Die Nutzung des Programms erfolgt primär über eine Scala-Console mit richtig eingestelltem Classpath.
-Um dies einfach zu erreichen, empfehle Ich, die Scala-Console nach Anleitung im Teil Allgemeines(\ref{start}) zu befolgen.
-Nachfolgend ist immer der Befehl hinter ``scala> '' angegeben. In den darauf folgenden Zeilen ist die Ausgabe dargestellt.
+Um dies einfach zu erreichen, empfehle ich, die Scala-Console nach Anleitung im Teil Allgemeines(\ref{start}) zu starten.
+Nachfolgend ist immer der Befehl hinter |scala> | angegeben. In den darauf folgenden Zeilen ist die Ausgabe dargestellt.
 Die notwendigen Module und Klassen wurden bereits importiert, sofern nach der oben referenzierten Anleitung vorgegangen wurde.
 \subsection{Permutationen erzeugen}
 Permutationen erzeugt man entweder durch direkte Eingabe oder man lässt eine randomisierte Permutation für eine gegebene Länge erzeugen.
-Um eine Permutation direkt einzugeben können, kann man einfach die Hilfsfunktionen der Scala-Bibliothek benutzen.
-Man erzeugt und Speichert einfach das Bild der Permutation in einer |Seq|. Die Permutation aus der Aufgabenstellung gibt man beispielsweise wie folgt ein.
+
+Um eine Permutation direkt einzugeben, kann man einfach die Hilfsfunktionen der Scala-Bibliothek benutzen.
+Man erzeugt und speichert einfach das Bild der Permutation in einer |Seq|. Die Permutation aus der Aufgabenstellung gibt man beispielsweise wie folgt ein.
 \begin{lstlisting}
 scala> val perm = Seq(4,3,2,1)
 perm: Seq[Int] = List(4, 3, 2, 1)  
@@ -1024,13 +1106,13 @@ perm: scala.collection.mutable.IndexedSeq[Int] =
   WrappedArray(4, 2, 1, 3)  
 \end{lstlisting}
 \subsection{Kraninstruktionen erzeugen}
-Nachdem nun eine Permutation erzeugt wurde, kann die Methode |compute| des Moduls |Instructor| verwendet werden, um die Instruktionen zu berechnen.
+Nachdem nun eine Permutation erzeugt wurde, kann die Methode |compute| des Moduls |Instructor| verwendet werden, um die Kraninstruktionen zu berechnen.
 \begin{lstlisting}
 scala> val instrs = Instructor compute perm
 instrs: Seq[de.voodle.tim.bwinf.container.Instruction] = List(Take...
 \end{lstlisting}
-Es können auch - wenn man wollen - zunächst die Zyklen berechnet werden, mit dem schnellerem |FastCycler| oder mit dem langsameren |SlowCycler|.
-Hierzu wird einfach die Methode |cyclesOf| aufgerufen, z. B. wie nachfolgend angegeben.
+Es können auch - wenn man will - zunächst die Zyklen berechnet werden, mit dem schnellerem |FastCycler| oder mit dem langsameren |SlowCycler|.
+Hierzu wird einfach die Methode |cyclesOf| aufgerufen. Zum Beispiel wie nachfolgend angegeben.
 \begin{lstlisting}
 scala> val cycles = FastCycler cyclesOf perm
 cycles: de.voodle.tim.bwinf.container.Cycler.Cycles =
@@ -1049,8 +1131,10 @@ instrs: Seq[de.voodle.tim.bwinf.container.Instruction] = List(Take...
  Nun wurde bereits eine Instruktionskette |instrs| erzeugt.
  Die in der Aufgabenstellung skizzierte Maschine wurde implementiert, um die Kraninstruktionen ausführen zu können.
  Es kann natürlich auch ein eigener Interpreter geschrieben werden, der die Instruktionen interpretiert.
- Deswegen wurde in der Klasse |Maschine| extra die Methode |act(instr: Instruction): Unit| implementiert, so dass eine Unterklasse Extrafunktionen bereitstellen kann. \\
- Am einfachsten ist es, eine |Maschine| zu erzeugen, diese die Instruktionen ausführen zu lassen und anschließend die Ausgabe zu betrachten. \\
+ Deswegen wurde in der Klasse |Maschine| extra die Methode |act(instr: Option[Instruction]): Unit| implementiert, so dass eine Unterklasse Extrafunktionen bereitstellen kann.
+
+ Am einfachsten ist es, eine |Maschine| zu erzeugen, diese die Instruktionen ausführen zu lassen und anschließend die Ausgabe zu betrachten.
+
  Erzeugen der |Maschine|:
 \begin{lstlisting}
 scala> val maschine = new Maschine(new Gleis(perm),true)
@@ -1073,36 +1157,34 @@ Container: _ _ _ _
 Waggons:   1 2 3 4
 \end{lstlisting}
 \subsection{Zeitmessung}
-Wenn Sie zusätzlich noch die Skalierbarkeit nachvollziehen wollen,
-empfehle ich Ihnen, die Funktion |demonstrate| im Modul |Utils| auszuprobieren.
+Wenn die Skalierbarkeit nachvollzogen werden soll,
+empfehle sich die Funktion |demonstrate| im Modul |Utils| auszuprobieren.
 Um beispielsweise für 100.000 Container Instruktionen ausführen zu lassen und anschließend verifizieren zu lassen,
-ob auch jeder Container am richtigen Platz angekommen ist, führen Sie folgende Befehle aus.
+ob auch jeder Container am richtigen Platz angekommen ist, führt man folgende Befehle aus.
 Die Zeitangaben sind jeweils in Millisekunden.
 \begin{lstlisting}
-scala> val verified = Utils demonstrate 100000 
-Time used for computing Cycles: 707
-Number of cycles: 12
-Time used computing Instruction: 852
-Time used interpreting: 82
+scala> val verified = Utils.demonstrate(100000, print = false)
+Time used for computing Cycles: 54
+Number of cycles: 20
+Time used computing Instructions: 343
+(m=3338582674)
+(l=3338582674)
+Time used interpreting: 469
 Verifying results...
 verified: Boolean = true
 \end{lstlisting}
 
-\begin{flushright}
-\begin{footnotesize}
-\emph{Bemerkung:} Die Ausgaben der Konsole wurden per Hand nachformatiert zwecks besserer Einbettung in den Textfluss.
-\end{footnotesize}
-\end{flushright}
-
-\clearpage
-\addtolength{\topmargin}{-.8cm}
-\enlargethispage{2.8cm}
-\addtolength{\textwidth}{1.8cm}
-\section{Programmtext}
+\addtolength{\textheight}{2.08cm}
+\lstset{xleftmargin=-0cm,xrightmargin=-.8cm}
 \fontsize{8pt}{8.4pt}
-Alle Quelldateien finden sich auf der CD unter |Aufgabe2/src/|.
-\subsection{Cycler}
 \lstset{basicstyle=\ttfamily\small}
+\clearpage
+\setlength{\voffset}{-.68cm}
+\setlength{\hoffset}{-.8cm}
+\section{Programmtext}
+\label{cod2}
+Alle Quelldateien dieser Aufgabe finden sich auf der CD unter |Aufgabe2/src/|.
+\subsection{Cycler}
 \begin{lstlisting}
 package de.voodle.tim.bwinf.container
 import annotation.tailrec
@@ -1259,7 +1341,6 @@ class Gleis(initCon: Seq[Int]) {
   def waggons = Vector(wag: _*)
 }
 \end{lstlisting}
-\clearpage
 \subsection{Instructions}
 \begin{lstlisting}
 package de.voodle.tim.bwinf.container
@@ -1355,72 +1436,6 @@ class Maschine(protected val gleis: Gleis,
 }
 object Maschine {
   private def digits(num: Int) = (math.log10(num) + 1).floor.toInt
-}
-\end{lstlisting}
-\clearpage
-\subsection{Utils}
-\begin{lstlisting}
-package de.voodle.tim.bwinf.container
-
-object Utils {
-  import scala.util.Random
-  import scala.collection.mutable.IndexedSeq
-  def randPerm(n: Int) = {
-    // Make sure we don't convert it to an WrappedArray to often.
-    val a: IndexedSeq[Int] = new Array[Int](n)
-    // Init array // O(n)
-    for (idx <- 0 until n) a(idx) = idx + 1
-    // randomize array // O(n)
-    for (i <- n to 2 by -1) {
-      val di = Random.nextInt(i)
-      val swap = a(di)
-      a(di) = a(i-1)
-      a(i-1) = swap
-    }
-    a // return array
-  }
-
-  def demonstrate(perm: Seq[Int], print: Boolean = true) = {
-    val startTime = System.currentTimeMillis
-    val cycles = FastCycler cyclesOf perm
-    println("Time used for computing Cycles: " +
-      (System.currentTimeMillis - startTime))
-    if(print) {
-      println("The computed Cycles are: ")
-      println(cycles.map(_.mkString("(", " ", ")")).mkString("  ", "\n  ", ""))
-    }
-    println("Number of cycles: " + cycles.length)
-    val instrs = Instructor computeFromCycles cycles
-    val endTime = System.currentTimeMillis
-    if(print) {
-      println("The generated Instructions (shortened) are: ")
-      val instrsGroups = instrs.view.take(20*12).map(_.short).grouped(12)
-      println(instrsGroups.map(_.mkString(" : "))
-              .mkString(" [ ", "\n : ",
-                        if(instrs.lengthCompare(20*12)>0) " ..." else " ] "))
-    }
-    println("Time used computing Instruction: " + (endTime - startTime))
-    val gleis = new Gleis(perm)
-    val maschine = new Maschine(gleis, print)
-    maschine interpret instrs
-    println("Time used interpreting: " + (System.currentTimeMillis - endTime))
-    if(print) {
-      println("Gleis: ")
-      println(gleis)
-    }
-    println("Verifying results...")
-    gleis.waggons.zipWithIndex forall (xy => xy._1 == xy._2 + 1)
-  }
-
-  def demonstrate(n: Int, print: Boolean): Boolean = {
-    val perm = randPerm(n)
-    if(print) {
-      println("Permutation (shortened) is:")
-      println(perm.take(480).mkString(
-        "  (", " ", if(perm.lengthCompare(480) > 1) " ..." else ")"))
-    }
-    demonstrate(perm, print)
-  }
 }
 \end{lstlisting}
 \clearpage
@@ -1778,3 +1793,70 @@ object ListBuffer extends SeqFactory[ListBuffer] {
     new GrowingBuilder(new ListBuffer[A])
 }
 \end{lstlisting}
+\clearpage
+\subsection{Utils}
+\begin{lstlisting}
+package de.voodle.tim.bwinf.container
+
+object Utils {
+  import scala.util.Random
+  import scala.collection.mutable.IndexedSeq
+  def randPerm(n: Int) = {
+    // Make sure we don't convert it to an WrappedArray to often.
+    val a: IndexedSeq[Int] = new Array[Int](n)
+    // Init array // O(n)
+    for (idx <- 0 until n) a(idx) = idx + 1
+    // randomize array // O(n)
+    for (i <- n to 2 by -1) {
+      val di = Random.nextInt(i)
+      val swap = a(di)
+      a(di) = a(i-1)
+      a(i-1) = swap
+    }
+    a // return array
+  }
+
+  def demonstrate(perm: Seq[Int], print: Boolean = true) = {
+    val startTime = System.currentTimeMillis
+    val cycles = FastCycler cyclesOf perm
+    println("Time used for computing Cycles: " +
+      (System.currentTimeMillis - startTime))
+    if(print) {
+      println("The computed Cycles are: ")
+      println(cycles.map(_.mkString("(", " ", ")")).mkString("  ", "\n  ", ""))
+    }
+    println("Number of cycles: " + cycles.length)
+    val instrs = Instructor computeFromCycles cycles
+    val endTime = System.currentTimeMillis
+    if(print) {
+      println("The generated Instructions (shortened) are: ")
+      val instrsGroups = instrs.view.take(20*12).map(_.short).grouped(12)
+      println(instrsGroups.map(_.mkString(" : "))
+              .mkString(" [ ", "\n : ",
+                        if(instrs.lengthCompare(20*12)>0) " ..." else " ] "))
+    }
+    println("Time used computing Instructions: " + (endTime - startTime))
+    val gleis = new Gleis(perm)
+    val maschine = new Maschine(gleis, print)
+    maschine interpret instrs
+    println("Time used interpreting: " + (System.currentTimeMillis - endTime))
+    if(print) {
+      println("Gleis: ")
+      println(gleis)
+    }
+    println("Verifying results...")
+    gleis.waggons.zipWithIndex forall (xy => xy._1 == xy._2 + 1)
+  }
+
+  def demonstrate(n: Int, print: Boolean): Boolean = {
+    val perm = randPerm(n)
+    if(print) {
+      println("Permutation (shortened) is:")
+      println(perm.take(480).mkString(
+        "  (", " ", if(perm.lengthCompare(480) > 1) " ..." else ")"))
+    }
+    demonstrate(perm, print)
+  }
+}
+\end{lstlisting}
+\clearpage

@@ -1,5 +1,4 @@
 package de.voodle.tim.bwinf.kisten
-import scala.annotation.tailrec
 
 object LogStufe extends Enumeration {
   type LogStufe = Value

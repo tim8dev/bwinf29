@@ -1,7 +1,6 @@
 package de.voodle.tim.bwinf.kisten
 
 import java.math.RoundingMode.{UP => ROUND_UP}
-
 import java.text.DecimalFormat
 
 object Utils {
