@@ -37,7 +37,7 @@ if "%_JAVACMD%"=="" set _JAVACMD=java
 
 rem We use the value of the JAVA_OPTS environment variable if defined
 set _JAVA_OPTS=%JAVA_OPTS%
-if "%_JAVA_OPTS%"=="" set _JAVA_OPTS=-Xmx256M -Xms32M
+if "%_JAVA_OPTS%"=="" set _JAVA_OPTS=-Xmx2048M -Xms64M
 
 set _TOOL_CLASSPATH=
 if "%_TOOL_CLASSPATH%"=="" (

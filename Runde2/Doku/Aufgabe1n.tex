@@ -39,6 +39,8 @@
  Seien $v_1,\dots,v_m$ die jeweiligen Volumina der Wurzeln $w_1,\dots,w_m$. Dann gilt es als weitere Aufgabe $\sum_{i=0}^{m}{v_i}$ zu minimieren.
 
  Die Kisten $k_1,k_2,\dots,k_n$ werden als Liste aufgefasst, eine Menge ist ungeeignet da Kisten (mit gleichen Maßen) mehrfach vorkommen können.
+
+\clearpage
 \subsection{Algorithmen}
  In den nachfolgenden Abschnitten werden insgesamt drei Algorithmen vorgestellt.
  Der erste im Abschnitt \ref{bruteforce} liefert zwar optimale Ergebnisse, allerdings ist seine Laufzeitkomplexität unpraktikabel hoch.
@@ -69,7 +71,7 @@
 \end{enumerate}
  Wichtig ist, um den Code zu verstehen, dass |(satz ++< kiste)| alle Möglichkeiten erzeugt,
  wie man die Kiste in einen |Kistensatz| einfügen kann.\footnote{Nähere Erläuterungen dazu später, für den Algorithmus ist dies nicht direkt relevant.}
-
+\vfill
 \lstset{basicstyle=\ttfamily\small}
 \begin{lstlisting}
 def min(kistenListe: Seq[KisteLeer]) = {
@@ -94,6 +96,8 @@ def packSchritt(sätze: Set[Kistensatz], kiste: KisteLeer) =
            } yield neuerSatz            // und gib diese zurück
 \end{lstlisting}
 \lstset{basicstyle=\ttfamily}
+\vfill
+
 \subsubsection{Laufzeitverhalten}
  Das Laufzeitverhalten dieses Algorithmus' ist fatal. Es muss im letzten Schritt eine Kiste in bis zu $(n-1)!$ Kistensätze gepackt werden.
  Die Laufzeit, eine Kiste in einen Kistensatz zu packen, ist $O(n)$.
@@ -119,6 +123,8 @@ def packSchritt(sätze: Set[Kistensatz], kiste: KisteLeer) =
  Allerdings empfindet sie es als widersprüchlich, dass sie genau deswegen nicht mehr Kisten in ihren Keller stellen kann, weil sie versucht eine optimale Lösung zu finden,
   was aber nur für kleine Kistenanzahlen gelingt.
  Wenn beispielsweise 200 Kisten gepackt werden sollen, bleiben 170 Kisten neben 30 optimal gepackten ungepackt.
+
+\clearpage
 \subsection{Brute-force-Algorithmus nach Aufteilung}
 \label{auf}
 \subsubsection{Lösungsidee}
@@ -191,6 +197,8 @@ def min(kisten: Seq[KisteLeer]): Kistensatz = {
  Leider ist dies nur ein theoretischer Wert. Denn nach dem Amdahlschem Gesetz\footnote{Goetz, Brian; Peierls, Tim; Bloch, Joshua; Bowbeer, Joseph; Holmes, David; LeaDoug: Java Concurrency in Practice, S.\ 225 ff., Addison-Wesley, 2006}
   gibt es immer einen Teil des Algorithmus' der sequentiell ausgeführt werden muss.
  Außerdem existiert - ebenfalls nach Amdahl\footnote{eben da} - ein gewisser Synchronisationsoverhead.
+
+\clearpage
 \subsection{Inkrementeller Algorithmus}
 \label{ink}
 \subsubsection{Lösungsidee}
@@ -221,7 +229,7 @@ def min(kisten: Seq[KisteLeer]): Kistensatz = {
 \begin{center}
 \begin{tabular}{ll}
  \textbf{FindeHalbleeren}    & Sucht eine |KisteHalb|, die noch Platz für die neue |Kiste| bietet. \\
- \textbf{FindeGrößerenLeeren} & Sucht eine |KisteLeer|, die noch Platz für die neue |Kiste| bietet. \\
+ \textbf{FindeGroesserenLeeren} & Sucht eine |KisteLeer|, die noch Platz für die neue |Kiste| bietet. \\
  \textbf{FindeZwischenraum}  & Sucht eine |Kiste|, die durch Entfernen einer Kind-|Kiste| genug Platz für \\
                              & die neue |Kiste| bietet, die wiederum die Kind-|Kiste| aufnehmen kann. \\
  \textbf{FindeKleinereWurzel}& Sucht eine Wurzel-|Kiste|, die in die neue Kiste passt.      \\
@@ -237,7 +245,7 @@ def min(kisten: Seq[KisteLeer]): Kistensatz = {
 \paragraph{FindeHalbleeren}
  Diese Strategie sucht eine |Kiste| |kh|, die bereits einen Nachfolger hat und trotzdem Platz für |kNeu| bietet.
  Nachdem so eine |Kiste| gefunden wird, wird die |Kiste| |kNeu| in |kh| eingefügt.
-\paragraph{FindeGrößerenLeeren}
+\paragraph{FindeGroesserenLeeren}
  Diese Strategie verhält sich ähnlich wie |FindeHalbleeren|. Es wird jedoch eine Kiste |big| gesucht, die leer und größer als |kNeu| ist.
 \paragraph{FindeZwischenraum}
  Dies ist die komplizierteste Strategie. Sie sucht eine |Kiste| k, die auf jeden Fall größer ist als |kNeu| und zusätzlich folgende Bedingungen erfüllt.
@@ -250,7 +258,7 @@ def min(kisten: Seq[KisteLeer]): Kistensatz = {
  Nun wurde noch eine Strategie implementiert, die eine Wurzel |kWurzel| sucht, die in |kNeu| passt.
  Diese ist recht einfach, sobald gefunden, wird |kWurzel| einfach in |kNeu| gepackt.
 \paragraph{Standard-Strategien}
- Diese vier Strategien nenne ich auch \emph{Standard-Strategien}, wenn sie in der Reihenfolge FindeGrößerenLeeren, FindeZwischenraum, FindeHalbleeren, FindeKleinereWurzel verwendet werden.
+ Diese vier Strategien nenne ich auch \emph{Standard-Strategien}, wenn sie in der Reihenfolge FindeGroesserenLeeren, FindeZwischenraum, FindeHalbleeren, FindeKleinereWurzel verwendet werden.
 \subsubsection{Offline-Algorithmus}
  Werden die Kisten vor dem inkrementellem Packen nach Volumen von groß nach klein sortiert,
   können die Strategien |FindeZwischenraum| und |FindeKleinereWurzel| ohne Beschränkung weggelassen werden.
@@ -458,6 +466,7 @@ v: Int = 1512
  Dies liegt daran, dass in diesem Beispiel die Kisten |(10 x 10 x 10)| und |(8 x 8 x 6)| in der gleichen Kistengruppen sind.
  Diese müssten jedoch beide Wurzel sein, um eine optimale Packung erreichen zu können.
 
+\clearpage
 \subsubsection*{OfflinePacker}
  Schließlich wird mit |OfflinePacker| gepackt.
  Es wird ein |OfflinePacker| mit leerer Parameterliste erzeugt, somit werden die |standardStrategien| benutzt und die Kisten vor dem Packen sortiert.
@@ -481,6 +490,7 @@ res2: Int = 1432
  Hier ist das Volumen ebenfalls größer als beim Optimum |opt|, jedoch kleiner als |auf|.
  Die Strategien des |OfflinePacker| finden für die letzte zu packende Kiste (6 x 4 x 2) keinen Platz mehr.
 
+\clearpage
 \subsection{Algorithmus-Vergleich}
 \label{algcont}
  In diesem Abschnitt sollen nun die Algorithmen für größere Beispielen miteinander verglichen werden.
@@ -508,6 +518,7 @@ scala> def großeKisten(anzahl: Int) =
 großeKisten:(anzahl: Int)()=>List[de.voodle.tim.bwinf.kisten.KisteLeer]
 \end{lstlisting}
 
+\clearpage
 \subsection{Kleine Anzahl Kisten}
 \label{optAlg}
  Unter einer kleinen Anzahl Kisten verstehe ich etwa 10 Kisten. Nachfolgend wird also immer mit 8, 10 bzw. 12 Kisten gemessen.
@@ -520,7 +531,7 @@ großeKisten:(anzahl: Int)()=>List[de.voodle.tim.bwinf.kisten.KisteLeer]
  Die folgenden Zeilen 1-7 zeigen das Beispiel für 8 Kisten.
 \begin{lstlisting}
 scala> val (optKd, optZeit) =
-  Utils.bench(OptimalPacker, kisten(8), 1000, verbose = false)
+  KUtils.bench(OptimalPacker, kisten(8), 1000, verbose = false)
 Packer: OptimalPacker
 Wiederholungen  Komprimierungsgrad      Zeit
 8       	1,4                     3
@@ -535,7 +546,7 @@ Anschließend teste ich nochmal mit Kistenanzahlen von 10 und 12, jedoch mit gle
 Gezeigt ist hier ebenfalls das Beispiel für 8 Kisten.
 \begin{lstlisting}
 scala> val (aufKd, aufZeit) =
-  Utils.bench(AufteilenderPacker(4), kisten(8), 1000, verbose = false)
+  KUtils.bench(AufteilenderPacker(4), kisten(8), 1000, verbose = false)
 Packer: AufteilenderPacker(4)
 Wiederholungen  Komprimierungsgrad      Zeit
 1000            1,23                    0
@@ -549,10 +560,10 @@ aufZeit: Long = 0
 Schließlich wird auf gleiche Weise der |OfflinePacker| mit den Standard-Strategien getestet. Gezeigt ist wieder der Fall für 8 Kisten.
 \begin{lstlisting}
 scala> val (offKd, offZeit) =
-  Utils.bench(OfflinePacker(), kisten(8), 1000, verbose = false)
+  KUtils.bench(OfflinePacker(), kisten(8), 1000, verbose = false)
 Packer: OfflinePacker(OnlineAlgo({
 
-},List(FindeGrößerenLeeren, FindeZwischenraum,
+},List(FindeGroesserenLeeren, FindeZwischenraum,
        FindeHalbleeren, FindeKleinereWurzel)),true)
 Wiederholungen  Komprimierungsgrad      Zeit
 1000            1,32                    0
@@ -561,6 +572,7 @@ offZeit: Long = 0
 
 [...] // Aufrufe mit 10 bzw. 12 Kisten
 \end{lstlisting}
+\clearpage
 In den beiden folgenden Tabellen sind alle Ergebnisse der Beispielprogrammausführungen zusammengefasst.
 \subsubsection*{Komprimierungsgrad}
 \begin{center}
@@ -596,6 +608,7 @@ In den beiden folgenden Tabellen sind alle Ergebnisse der Beispielprogrammausfü
   bei kleinen Kistenzahlen wesentlich schneller sind, so dass die Laufzeiten (bei diesen kleinen Kistenanzahlen) nicht einmal gemessen werden können
   und somit zu 0 gerundet werden.
 
+\clearpage
 \subsection{Mittlere Anzahl Kisten}
  Nach dem Ausscheiden von |OptimalPacker| testen wir nun in der Größenordnung von 100 Kisten.
  Genauer gesagt, testen wir mit den Anzahlen 88, 100 sowie 128.
@@ -630,7 +643,7 @@ In den beiden folgenden Tabellen sind alle Ergebnisse der Beispielprogrammausfü
  Dies lässt sich damit erklären, dass die Kistensätze durch mehr Kisten, besser ``gesättigt'' werden können. 
  Interessanterweise liefert der aufteilende Packer auch mit $t=10$ kaum bessere Werte als mit $t=8$.
  Allerdings braucht er - wie wir unten noch genauer betrachten - deutlich länger, da die Laufzeit exponentiell mit $t$ steigt.
- Als Vergleich werden hier noch die Ergebnisse des einfachsten |OfflinePacker|s mit der einzigen Strategie |FindeGrößerenLeeren| und ohne Sortieren vor dem Packen angegeben.
+ Als Vergleich werden hier noch die Ergebnisse des einfachsten |OfflinePacker|s mit der einzigen Strategie |FindeGroesserenLeeren| und ohne Sortieren vor dem Packen angegeben.
 
 \subsubsection*{Laufzeit [in Millisekunden]}
 \begin{center}
@@ -657,6 +670,7 @@ In den beiden folgenden Tabellen sind alle Ergebnisse der Beispielprogrammausfü
  Als vernünftige Indizen für die Laufzeitkomplexität sind die Ergebnisse nicht geeignet,
   da die Abweichungen bei diesen kleineren Beispielen relativ gesehen noch zu hoch sind.
 
+\clearpage
 \subsection{Große Anzahl Kisten}
  Nun sollen große Anzahlen von Kisten getestet werden. Genauer gesagt 800, 1600 und 3200 Kisten.
  Neben dem Variieren der Kistenanzahl, werden wir außerdem noch die Größe der Kisten verändern.
@@ -716,6 +730,7 @@ In den beiden folgenden Tabellen sind alle Ergebnisse der Beispielprogrammausfü
  Der Algorithmus braucht 348 ms bei 800 kleinen Kisten, $1340\ (\approx 348 \cdot 4 = 1392)$ ms bei 1.600 Kisten sowie $5290\ (\approx 1340 \cdot 4 = 5360)$ ms bei 3.200 Kisten.
  Bei Verdopplung der Kisten braucht der |OfflinePacker| also etwa viermal so lange.
 
+\clearpage
 \subsection{Riesige Anzahl Kisten}
  Abschließend vergleichen wir noch kurz das Laufzeitverhalten bei 10.000 respektive 80.000 Kisten.
  Ich entschied mich für den Teilungsgrad $t=9$, da mit $t=10$ kaum bessere Ergebnisse erzielt werden können, aber eine deutlich höhere Laufzeit erfordert wird.
@@ -762,6 +777,7 @@ In den beiden folgenden Tabellen sind alle Ergebnisse der Beispielprogrammausfü
  Hier zeigt sich ganz klar die bessere Laufzeitkomplexität des aufteilenden Packers.
  Die Linearität der Laufzeit lässt noch deutlich höhere Kistenanzahlen zu, wie wir später nochmal sehen werden.
 
+\clearpage
 \subsection{Fazit}
 Zusammenfassend lässt sich sagen, dass der |OptimalPacker| für Kistenanzahlen bis 12 der beste ist, denn er liefert garantiert optimale Ergebnisse.
 Ab der 13. Kiste ist seine Laufzeit jedoch nicht mehr kontrollierbar.
@@ -776,12 +792,15 @@ Dies ermöglicht Berechnungen mit bis zu über hunderttausend Kisten.
 Zuletzt soll noch einmal demonstriert werden, was die lineare Komplexität in der Praxis heißt.
 Nachfolgend ein Benchmark des Algorithmus' |AufteilenderPacker| mit $t=8$ und 888.888 Kisten.
 \begin{lstlisting}
-scala> Utils.bench(AufteilenderPacker(8), kisten(888888), 1, false)
+scala> KUtils.bench(AufteilenderPacker(8), kisten(888888), 1, false)
 Packer: AufteilenderPacker(8)
 Wiederholungen  Komprimierungsgrad      Zeit
 1               1,4                     1716431
 res5: (BigDecimal, Long) = (1.401,1716431)
 \end{lstlisting}
+In Scala liefert jeder Ausdruck einen Wert zurück. Da in dem obigem Aufruf der Wert jedoch keiner Variable explizit zugewiesen wird,
+ wird der Wert einer generierten Variable |resX| zugewiesen, wobei |X| mit jedem solchen Aufruf inkrementiert wird.
+
 Wie zu sehen, wurden 1.716.431 Millisekunden, also etwa 1.716 Sekunden benutzt. Dies ist eine knappe halbe Stunde und somit noch völlig im machbaren Bereich.
 \clearpage
 \section{Programmnutzung}
@@ -805,9 +824,6 @@ Die Methode erzeugt eine unendliche Liste, also muss noch angeben werden, wie vi
 Danach sollte dies mit |toList| in eine normale Scala-Liste umgewandelt werden.
 Um beispielsweise 800 Kisten mit Maximalwerten von 80 in jeder Dimension zu erzeugen, geht man wie folgt vor.
 \begin{lstlisting}
-scala> import StandardKisten._
-import StandardKisten._
-
 scala> val kisten = zufallKisten(80,80,80) take 800 toList
 kisten: List[de.voodle.tim.bwinf.kisten.KisteLeer] =
   List(KisteLeer(59,26,6),  KisteLeer(79,33,32), KisteLeer(78,34,25),
@@ -833,8 +849,9 @@ scala> val kisten =
 kisten: List[de.voodle.tim.bwinf.kisten.KisteLeer] =
   List(KisteLeer(43,35,10), KisteLeer(41,34,32), KisteLeer(63,33,31),
        KisteLeer(61,35,34))
-
 \end{lstlisting}
+
+\clearpage
 \subsection{Erstellung der Schachtelung}
 Die Schachtelung erstellt man, indem die Methode |min| eines |Kistenpacker|s aufgerufen wird.
 Um die Schachtelung mit |OptimalPacker| auszuführen, gibt man Folgendes in die Konsole ein.
@@ -875,15 +892,16 @@ KisteHalb(70,53,37)
 KisteLeer(72,69,21)
 }
 \end{lstlisting}
+\clearpage
 Für den |OfflinePacker| können Strategien angegeben werden. Bei Eingabe einer leeren Parameterliste werden einfach die Standard-Strategien benutzt.
 Außerdem kann angegeben werden, ob sortiert werden soll oder nicht.
 In dem folgendem Beispiel werden alle von mir implementierten Strategien benutzt, sowie wird die Sortierung nicht benutzt.
 Es kann jedoch auch die Reihenfolge variiert werden.
 \begin{lstlisting}
-scala> val strategien = FindeHalbleeren   :: FindeGrößerenLeeren ::
+scala> val strategien = FindeHalbleeren   :: FindeGroesserenLeeren ::
                         FindeZwischenraum :: FindeKleinereWurzel :: Nil
 strategien: List[de.voodle.tim.bwinf.kisten.Strategie] =
-  List(FindeHalbleeren, FindeGrößerenLeeren,
+  List(FindeHalbleeren, FindeGroesserenLeeren,
        FindeZwischenraum, FindeKleinereWurzel)
 
 scala> val min =OfflinePacker(strategien, sortieren = false) min kisten
@@ -898,8 +916,9 @@ KisteVoll(70,53,37)
  \-KisteLeer(45,12,8),
 KisteLeer(72,69,21)
 }
-
 \end{lstlisting}
+
+\clearpage
 \subsection{Benchmarking eines Algorithmus'}
 \subsubsection{Volumina}
  Hier wird beschrieben, wie Volumina von Kistensätzen und Listen von Kisten berechnet werden können.
@@ -927,17 +946,16 @@ kv: Int = 286593
 scala> val komprimierungsgrad = v.toDouble / kv
 komprimierungsgrad: Double = 2,2806279
 \end{lstlisting}
-
 \subsubsection{Benchmarking}
  Um möglichst gute Vergleiche zwischen Algorithmen liefern zu können,
-  wurde zum Benchmarking die Methode |def bench(Kistenpacker, () => Seq[KisteLeer], Int, Boolean): (BigDecimal, Long)| im Modul |Utils| implementiert.
+  wurde zum Benchmarking die Methode |def bench(Kistenpacker, () => Seq[KisteLeer], Int, Boolean): (BigDecimal, Long)| im Modul |KUtils| implementiert.
  Diese gibt zu einem |Kistenpacker|,
   einer Funktion zur Erzeugung von Kisten sowie einer Anzahl von Wiederholungen den durchschnittlich erreichten Komprimierungsgrad sowie die benötigte Durchschnittszeit in Millisekunden zurück.
  Zusätzlich kann die Ausgabe beschränkt werden, indem zusätzlich |false| am Ende der Parameterliste übergeben wird.
  Beispielsweise kann so ein |OfflinePacker| nur mit der Strategie |FindeHalbleeren| der 80 Kisten mit zufälliger Größe packt, wie folgt getestet werden.
 \begin{lstlisting}
 scala> val (packungsdichte, zeit) =
-  Utils.bench(OfflinePacker(FindeHalbleeren :: Nil),
+  KUtils.bench(OfflinePacker(FindeHalbleeren :: Nil),
               () => zufallKisten(80,80,80) take 80 toList, 2) 
 Packer: OfflinePacker(OnlineAlgo({
 
@@ -963,12 +981,14 @@ zeit: Long = 5
 
 \addtolength{\textheight}{0cm}
 \lstset{xleftmargin=-.8cm,xrightmargin=-.8cm}
-\fontsize{8pt}{8.4pt}
+%\fontsize{8pt}{8.4pt}
 \lstset{basicstyle=\ttfamily\small}
+
 \clearpage
 \section{Programmtext}
 \label{code1}
 Alle Quelldateien dieser Aufgabe finden sich auf der CD unter |Aufgabe1/src/|.
+\clearpage
 \subsection{Kisten}
 \begin{lstlisting}
 package de.voodle.tim.bwinf.kisten
@@ -1178,6 +1198,7 @@ case class PartialKisteAB(a: Int, b: Int) {
 }
 \end{lstlisting}
 
+\clearpage
 \subsection{Kistensatz}
 \begin{lstlisting}
 package de.voodle.tim.bwinf.kisten
@@ -1278,6 +1299,7 @@ object Kistensatz {
   }
 }
 \end{lstlisting}
+\clearpage
 \subsection{Kistenpacker}
 \begin{lstlisting}
 package de.voodle.tim.bwinf.kisten
@@ -1335,6 +1357,7 @@ case class AufteilenderPacker (t: Int = 15) extends Kistenpacker {
   }
 }
 \end{lstlisting}
+\clearpage
 \subsubsection{OfflinePacker und OnlineAlgo}
 \begin{lstlisting}
 package de.voodle.tim.bwinf.kisten
@@ -1375,7 +1398,7 @@ object OnlineAlgo { // Hilfsmethoden zum schnellen erzeugen! :)
     OnlineAlgo(kistenSatz, standardStrategien)
 
   def standardStrategien =
-    FindeGrößerenLeeren :: // (2)
+    FindeGroesserenLeeren :: // (2)
     FindeZwischenraum   :: // (3)
     FindeHalbleeren     :: // (1)
     FindeKleinereWurzel :: // (4)
@@ -1383,7 +1406,8 @@ object OnlineAlgo { // Hilfsmethoden zum schnellen erzeugen! :)
 }
 \end{lstlisting}
 
-\subsubsection*{Strategien}
+\clearpage
+\subsubsection{Strategien}
 
 \begin{lstlisting}
 package de.voodle.tim.bwinf.kisten
@@ -1425,7 +1449,7 @@ case object FindeHalbleeren extends Strategie {
         Some(kisten - alteKiste + neueKiste)
     }
 }
-case object FindeGrößerenLeeren extends Strategie {
+case object FindeGroesserenLeeren extends Strategie {
   protected def finde(kisten: Kistensatz)(der: KisteLeer) =
     kisten.find {
       big => (big >~ der) && big.istLeer
@@ -1474,19 +1498,19 @@ case object FindeKleinereWurzel extends Strategie {
     }
 }
 \end{lstlisting}
+
+\clearpage
 \subsection{Helfer}
-\subsubsection{Utils}
+\subsubsection{KUtils}
 \begin{lstlisting}
 package de.voodle.tim.bwinf.kisten
 
-import java.math.RoundingMode.{UP => ROUND_UP}
+import java.math.RoundingMode.{UP => ROUND_UP}, java.math.MathContext
 import java.text.DecimalFormat
 
-object Utils {
+object KUtils {
   import StandardKisten._ // Standardkartongrößen
-  import KistenLogger._
-  import LogStufe._
-  import java.math.MathContext
+  import KistenLogger._, LogStufe._
 
   private val logger = KistenLogger(print, getNextFileWriter)
   import logger.logge
@@ -1607,4 +1631,3 @@ case class KistenLogger(printer: String => Any, dateiAusgabe: String => Any) {
 \setlength{\voffset}{0cm}
 \lstset{xleftmargin=0cm,xrightmargin=-0cm}
 \lstset{basicstyle=\ttfamily}
-\fontsize{10pt}{10.8pt}

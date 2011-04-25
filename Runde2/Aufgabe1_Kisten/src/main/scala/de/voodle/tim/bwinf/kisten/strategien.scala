@@ -37,7 +37,7 @@ case object FindeHalbleeren extends Strategie {
         Some(kisten - alteKiste + neueKiste)
     }
 }
-case object FindeGrößerenLeeren extends Strategie {
+case object FindeGroesserenLeeren extends Strategie {
   protected def finde(kisten: Kistensatz)(der: KisteLeer) =
     kisten.find {
       big => (big >~ der) && big.istLeer

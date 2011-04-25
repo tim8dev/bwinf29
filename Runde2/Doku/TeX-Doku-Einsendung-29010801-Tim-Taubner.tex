@@ -46,9 +46,9 @@
   \secdef\@chapter\@schapter}
 }
 
-%\usepackage{titlesec}
-%\titlespacing*{\chapter}{0pt}{-88pt}{20pt}
-%\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{}{20pt}{\Huge \thechapter.\ }
+\usepackage{titlesec}
+\titlespacing*{\chapter}{0pt}{-18pt}{20pt}
+\titleformat{\chapter}[display]{\normalfont\sffamily}{\normalfont 29.\ BWINF, 2.\ Runde; Einsendung:\ Tim Taubner, Nr.\ 29.0108.01}{18pt}{\Huge\bfseries \thechapter.\ }
 
 %opening
 \title{29. Bundeswettbewerb Informatik 2010/2011 2. Runde}
@@ -184,10 +184,12 @@ Um die Programmbeispiele ausführen zu können, sollten folgende Voraussetzungen
  Durch Eingabe von |./run| (|run.bat| in Windows) in der Konsole öffnet sich die interaktive Scala-Console.
  Der Classpath wurde bereits richtig eingestellt und die Module beider Aufgaben wurden bereits importiert,
   so dass die einzelnen Anweisungen in den Aufgaben direkt ausgeführt werden können.
+
+ Die Scala-Console kann durch Eingabe von |exit| wieder geschlossen werden.
 \subsection{Ausführen der Beispiele}
- Alle Beispiele können nacheinander ausgeführt werden, indem im Wurzelverzeichnis der CD |./examples| in der Konsole eingeben wird.
- Die Beispiele können auch nach Aufgabe getrennt ausgeführt werden, nämlich durch Eingabe von |./aufgabe1| bzw.\ |./aufgabe2|.
- (Unter Windows bitte jeweils |.bat| Befehle benützen.)
+ Alle Beispiele können nacheinander ausgeführt werden, indem im Wurzelverzeichnis der CD |./examples| (|examples.bat| unter Windows) in der Konsole eingeben wird.
+ Die Beispiele können auch nach Aufgabe getrennt ausgeführt werden,
+  nämlich durch Eingabe von |./aufgabe1| (|aufgabe1.bat| unter Windows) bzw.\ |./aufgabe2| (|aufgabe2.bat| unter Windows).
 \clearpage
 
 \fancyhead[L]{\thechapter. Aufgabe 1 - Kisten in Kisten in Kisten}

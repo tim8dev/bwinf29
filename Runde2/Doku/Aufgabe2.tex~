@@ -1,5 +1,5 @@
 \lstset{language=Scala}
-\chapter{Zweite bearbeitete Aufgabe: (2) Containerklamüsel}
+\chapter[Zweite bearbeitete Aufgabe: (2) Containerklamüsel]{Zweite bearbeitete Aufgabe: \newline (2) Containerklamüsel}
 \minitoc
 \clearpage
 \section{Lösungsidee}
@@ -27,7 +27,8 @@ Man beachte, dass die Container so ``in einem Stück'' getauscht und an die rich
 Um den Begriff eines Zyklus' genauer einzuführen, zitiere ich folgend Beutelspacher\footnote{Definitionen, Sätze und Erklärung übernommen aus Lineare Algebra, Albrecht Beutelspacher, S.174f}.
 Da von Beutelspacher einige hier nicht eingeführten Begriffe verwendet wurden, habe ich diese ersetzt.
 Alle eigenständigen Änderungen wurden mit doppelten geschweiften Klammern (`\{\{' und `\}\}') markiert, um Verwechslung mit den als mathematische Symbole verwendeten eckigen Klammern zu vermeiden.
-Auslassungen markiere ich mit `\{\{\dots\}\}'  \\
+Auslassungen markiere ich mit `\{\{\dots\}\}'
+\vspace{1em}  \\
 \textbf{Anfang Zitat}
 \begin{quotation}
 \{\{Sei $S_n$ die Menge aller Permutation von $[1,n]$ in sich.\}\}
@@ -40,11 +41,10 @@ falls es ein $i \in $\{\{$S_n$]\}\} und eine natürliche Zahl $k$ gibt, so dass 
 (3) jedes Element, das verschieden von $i,\pi(i),\pi^2(i),\dots,\pi^{k-1}(i), \pi^k(i) (=i)$ ist, wird von $\pi$ fest gelassen.
 
 Die kleinste natürliche Zahl $k$ mit obiger Eigenschaft wird die \emph{Länge} des Zyklus $\pi$ genannt.
-Ein Zyklus der Länge $k$ heißt auch $k$-Zyklus. Wir schreiben dann \[\pi=(i\;\pi(i)\;\pi^2(i) \; \dots \;\pi^{k-1}(i)).\]
-\{\{\dots\}\}
+Ein Zyklus der Länge $k$ heißt auch $k$-Zyklus. Wir schreiben dann \[\hspace{10em} \pi=(i\;\pi(i)\;\pi^2(i) \; \dots \;\pi^{k-1}(i)). \hspace{8em} \{\{\dots\}\}\]
+
 \paragraph{Darstellung einer Permutation als Produkt disjunkter Zyklen.}
 \emph{Jede Permutation kann als Produkt zyklischer Permutationen geschrieben werden, von denen keine zwei ein Element gemeinsam haben.}
-
 \emph{Das heißt: Zu jedem $\pi \in S_n$ gibt es zyklische Permutationen $\zeta_1,\dots,\zeta_s \in S_n$,
 so dass folgende Eigenschaften erfüllt sind: \\
  - $\pi=\zeta_1\cdot \zeta_2 \cdot \ldots \cdot \zeta_s$ \\
@@ -54,7 +54,8 @@ so dass folgende Eigenschaften erfüllt sind: \\
 \end{quotation}
 \nopagebreak[4]
 \textbf{Ende Zitat}
-
+\vfill
+\clearpage
 Die Darstellung der Permutation als Produkt disjunkter Zyklen erweist sich als günstig,
 denn nun kann das Problem in folgende zwei Teile aufgebrochen werden.
 
@@ -208,6 +209,7 @@ Anschließend werden die durch |foldLeft| erzeugten Instruktionen und restlichen
 Im folgenden ist zwecks Lesbarkeit der Code dargestellt mit Deklaration aber ohne Definition der Hilfsfunktion |step| (vgl.\ Z.\ 7f).
 Der Funktionsrumpf folgt später.
 Außerdem wird speziell für die |step| Funktion der type-alias |Step| für das Tuple |(ListBuffer[Instruction], Cycles, Int)| benutzt.
+\clearpage
 \lstset{basicstyle=\ttfamily}
 \begin{lstlisting}
 def computeCycle(cycle: Cycle, other: Cycles):
@@ -235,6 +237,8 @@ def computeCycle(cycle: Cycle, other: Cycles):
 }
 \end{lstlisting}
 \lstset{basicstyle=\ttfamily}
+\clearpage
+\label{faelle}
 Die Hilfsfunktion |step| unterscheidet 3 Fälle (diese sind hinter den |case|-Anweisungen in Klammern in den Kommentaren im Codeausschnitt markiert).
 \begin{enumerate}
  \item Wenn das zuletzt betrachtete Element |prev| das Maximum |max| ist und es einen nächsten Zyklus |nextCycle| gibt,
@@ -265,8 +269,7 @@ def step(instrs: ListBuffer[Instruction], cyclesLeft: Cycles,
    // ===== (1) =====
    case Some(nextCycle @ (next :: _)) if prev==max && max+1==next =>
      // Wenn ja, "konkateniere" diese Zyklen.
-     val (cycleInstrs, _) =
-       computeCycle(cyclesLeft.head, cyclesLeft.tail)
+     val (cycleInstrs, _) = computeCycle(cyclesLeft.head,cyclesLeft.tail)
      val extraInstrs = instrs ++=
        ListBuffer(PutCon, MoveRight, TakeCon) ++=
        cycleInstrs ++= ListBuffer(MoveLeft, TakeCon)
@@ -279,8 +282,7 @@ def step(instrs: ListBuffer[Instruction], cyclesLeft: Cycles,
      val (cycleInstrs, newCyclesLeft) =
        computeCycle(nextCycle, cyclesLeft.tail)
      val newInstrs = instrs ++=
-       ListBuffer(Move(prev -> next),
-                  Rotate, TakeCon,
+       ListBuffer(Move(prev -> next), Rotate, TakeCon,
                   Rotate, PutCon, Rotate) ++= cycleInstrs
      step(newInstrs, newCyclesLeft, next, cur)
    // ===== (3) =====
@@ -351,7 +353,9 @@ Folgend definieren wir nun unsere Äquivalenzrelation $\equiv$, die diese Eigens
 Seien $\eta,\theta \in Z$ zwei Zyklen der Länge $k$ bzw. $l$ der Form $e, \eta(e), \dots, \eta^{k-1}(e)$ bzw. $t, \theta(t), \dots, \theta^{l-1}(t)$.
 Weiter seien $E := \{e, \eta(e), \dots, \eta^{k-1}(e)\}$ und $T := \{t, \theta(t), \dots, \theta^{l-1}(t)\}$, also jeweils die Mengen der ``bewegten'' Elemente der Zyklen.
 Dann gilt die Äquivalenz wie folgt.
-\[ \eta \equiv \theta := [\min(E) \leq \min(T) \leq \max(E) \vee \min(T) \leq \min(E) \leq \max(T) ]^+ \]
+\[ \eta \equiv \theta\ \ \text{genau dann, wenn}\ \ [\min(E) \leq \min(T) \leq \max(E) \vee \min(T) \leq \min(E) \leq \max(T) ]^+ \]
+Hierbei notiert $R^+$ die transitive Hülle von $R$.
+In Worten ausgedrückt, sind zwei Zyklen genau dann äquivalent, wenn sie sich in einem oder mehreren Schritten wechselseitig überlappen.
 
 Nun machen wir uns noch klar, dass $\equiv$ auch wirklich eine Äquivalenzrelation auf $Z$ ist.
 Die Reflexivität ist einfach, sei $\eta \in Z$ Zyklus und $E := $ alle Elemente von $\eta$ (die nicht fest gelassen werden).
@@ -366,59 +370,59 @@ Seien also $A_1, \dots, A_a$ die Äquivalenzklassen, in die $\equiv$ die Zyklen 
 Nun setzen wir $\min(A)$ einer Äquivalenzklasse $A$ auf das Minimum der Menge aller Elemente der Zyklen, die $A$ enthält.
 Genauso setzten wir $\max(A)$ auf das Maximum aller Elemente der Zyklen, die $A$ enthält.
 
-Nun wollen wir uns veranschaulichen, dass für eine Äquivalenzklasse $A_x$, mit dem Minimum $a := \min(A_x)$ sowie dem Maximum $b := \max(A_X)$ folgendes gilt.
-Für jedes $i \in [a, b]$ gibt es genau einen Zyklus $\eta \in A_x$, der diesen nicht festlässt.\\
+Nun wollen wir uns veranschaulichen, dass für eine Äquivalenzklasse $A_x$, mit dem Minimum $a := \min(A_x)$ sowie dem Maximum $b := \max(A_x)$ Folgendes gilt:
+Für jedes $i \in [a, b]$ gibt es genau einen Zyklus $\zeta \in A_x$, der diesen nicht festlässt.\\
 Die Eindeutigkeit folgt aus der Disjunktheit der Zyklen. Dass der Zyklus in $A_x$ enthalten ist, lässt sich wie folgt veranschaulichen.
 Sei $\theta$ der an $a$ beginnende Zyklus und $\eta$ der an $b$ endende Zyklus. Seien weiter $T,E$ die Mengen der nicht fest gelassenen Elemente von $\theta, \eta$.
 Dass $\theta, \eta \in A_x$ ist klar, denn sonst wären die Minima und Maxima von $A_x$ nicht $a,b$.
 Nun unterscheiden wir zwischen zwei Fällen.\\ % Hier ist kein Fehler mehr!
-(1) Falls $\min(T) \leq \min(E) \leq \max(T)$, dann muss entweder $\zeta \equiv \theta$ oder $\zeta \equiv \eta$ gelten.
+(1) Falls $a = \min(T) \leq \min(E) \leq \max(T)$, dann muss entweder $\zeta \equiv \theta$ oder $\zeta \equiv \eta$ gelten.
     Denn falls $i \leq \max(T)$, so gilt aber gleichzeitig $\min(T) \leq i$, also $\zeta \equiv \theta$.
-    Andernfalls gilt $i > \max(T)$, also $\min(E) < i \leq \max(E)$. Somit gilt $\zeta \equiv \eta$.\\
+    Andernfalls gilt $i > \max(T)$, also $\min(E) < i \leq \max(E) = b$. Somit gilt $\zeta \equiv \eta$.\\
 (2) Andernfalls gibt es die Zyklen $\iota_1, \iota_2, \dots, \iota_j$ mit den zugehörigen Mengen $I_1, I_2, \dots, I_j$ für die Folgendes gilt.
 \[ (\min(T) \leq \min(I_1) \leq \max(T)) \wedge (\min(I_1) \leq \min(I_2) \leq \max(I_1)) \wedge \dots \wedge (\min(I_j) \leq \min(E) \leq \max(I_j)) \]
-Das es diese gibt, folgt aus der Definition von $\equiv$ als transitive Hülle.
-Denn gäbe es diese Zyklen ``zwischen'' $\theta$ und $\zeta$ nicht, so wären diese nicht äquivalent.
-Nun muss aber $i$ zwischen Schranken von einem $\iota_y$ sein, da alle $\iota_1, \dots, \iota_j$ zusammengefasst das ganze Intervall $[a,b]$ abdecken.
-Also muss auch $\eta \equiv \iota_y$ gelten und somit $\eta \equiv \theta$.\\
-Wie haben also gezeigt, dass $\eta \in A_x$.
+Dass es diese gibt, folgt aus der Definition von $\equiv$ als transitive Hülle.
+Denn gäbe es diese Zyklen ``zwischen'' $\theta$ und $\eta$ nicht, so wären diese nicht äquivalent.
+Nun muss aber $i$ zwischen den Schranken von einem $\iota_y$ sein, da alle $\iota_1, \dots, \iota_j$ zusammengefasst das ganze Intervall $[a,b]$ abdecken.
+Also muss auch $\zeta \equiv \iota_y$ gelten und somit $\zeta \equiv \theta$.\\
+Wie haben also gezeigt, dass $\zeta \in A_x$.
 
 Schließlich wollen wir zeigen, dass das Intervall $[1,n]$ durch die Äquivalenzklassen in disjunkte Intervalle aufgeteilt wird.
 Angenommen dies wäre nicht der Fall, so müsste es eine Stelle $i$ geben, die in beiden Äquivalenzklassen enthalten sind.
-Allerdings gäbe es dann in jeder Äquivalenzklassen einen Zyklus $\theta$ bzw.\ $\eta$, der diese Stelle $i$ enthält.
+Allerdings gäbe es dann in beiden Äquivalenzklassen einen Zyklus $\theta$ bzw.\ $\eta$, der diese Stelle $i$ enthält.
 Die Zyklen sind jedoch nach Definition disjunkt, also ist dies ein Widerspruch.
 
 \subparagraph{Der optimale Weg}
 Was sagen uns jetzt aber die Äquivalenzklassen? Wir erinnern uns, dass diese das Intervall $[1,n]$ in disjunkte Intervalle aufteilen.
-Gibt es jetzt aber mehr als eine Äquivalenzklasse, heißt dass, das es eben mehrere solche disjunkten Intervalle gibt.
+Gibt es jetzt aber mehr als eine Äquivalenzklasse, heißt das, dass es eben mehrere solche disjunkten Intervalle gibt.
 
 Betrachtet wir nun nochmals den zunächst gewählten Problemlösungsansatz, nämlich beginnend beim ``ersten'' Zyklus alle Zyklen zu bearbeiten und bei Überschneidungen zu unterbrechen.
 Aber wir haben gerade erst gezeigt, dass es eben auch Zyklen geben kann, die sich \emph{nicht} überschneiden!
-Denn mit diesem Ansatz würden wir nur die erste Äquivalenzklasse abarbeiten, nämlich die, die sich überschneiden, bzw.\ über die transitive Hülle der sich überschneidenden Zyklen.
+Denn mit diesem Ansatz würden wir nur die erste Äquivalenzklasse abarbeiten, nämlich die, die sich überschneiden.
 
-Deshalb muss das Ende einer Äquivalenzklasse berücksichtigt werden. (Im Code wäre dies Fall (1) in der Hilfsmethode |step| von |computeCycle|)
+Deshalb muss das Ende einer Äquivalenzklasse berücksichtigt werden. (Im Code ist dies Fall (1) in der Hilfsmethode |step| von |computeCycle|).
 Sobald das Ende der Äquivalenzklasse erreicht wird, muss unterbrochen werden, die nächste Äquivalenzklasse abgearbeitet werden und schließlich wieder fortgefahren werden.
 
 Der Algorithmus erkennt das Äquivalenzklassenende korrekt. Es wird immer das bisherige Maximum $max$ aus dem aktuell bearbeiteten Zyklus $\eta$ gebildet.
 Beginnt ein Zyklus $\theta$ direkt nach diesem Maximum $max$, so wird unterbrochen.
 Wie man sich leicht veranschaulicht, ist das die korrekte Unterbrechung, denn wäre $\theta$ nicht aus einer anderen Äquivalenzklasse,
-würde er bereits vorher durch verschachtelte Unterbrechung abgearbeitet worden sein. Es wären also vorher bereits Unterbrechungen der Abarbeitungen passiert.
+würde er bereits vorher durch verschachtelte Unterbrechung abgearbeitet worden sein. Es wären also vorher bereits Unterbrechungen der Abarbeitungen erfolgt.
 Ist dies aber nicht der Fall, gibt es kein Zyklus, der über $max$ hinausreicht und somit sind die Zyklen $\eta$ und $\theta$ mit Sicherheit nicht äquivalent.
 
 Nun formuliere ich einen Satz über den optimalen Weg von Zyklen.
 \begin{center}
 \begin{minipage}[c]{.8\textwidth}
- Der im Sinne der Aufgabenstellung \emph{\textbf{optimale Weg}} $w$ zu einer die Containerpositionen beschreibenden Permutation $\pi$ mit Länge $n$,
-  die durch die disjunkten Zyklen $Z$ dargestellt werden kann, ist Folgender.
- Sei $a$ die Anzahl der Äquivalenzklassen, in die $Z$ durch $\equiv$ aufgeteilt wird.
- Dann ist der optimale Weg \[w = a \cdot 2 + \sum_{i = 1}^{n}{\lvert i-\pi(i)\rvert}. \]
+ Der im Sinne der Aufgabenstellung \emph{optimale Weg} $w$ zu einer die Containerpositionen beschreibenden Permutation $\pi$ mit Länge $n$,
+  die durch die disjunkten Zyklen $Z$ dargestellt werden kann, ist Folgender:
+ Sei $a$ die Anzahl der Äquivalenzklassen, in die $Z$ durch $\equiv$ aufgeteilt wird, dann ist der optimale Weg
+ \[w = a \cdot 2 + \sum_{i = 1}^{n}{\lvert i-\pi(i)\rvert}. \]
 \end{minipage}
 \end{center}
 Dies machen wir uns wie folgt klar. Zunächst betrachte man den Ausdruck $a \cdot 2$.
 Da \emph{kein} Container über diese ``Grenze'' gebracht werden muss, aber trotzdem der Kran mindestens einmal zu jeder Position gebracht werden muss, sind hier Leerfahrten nötig.
 Genauer gesagt sind \emph{zwei} Leerfahrten nötig, da der Kran (mindestens) einmal hinüber und einmal zurück gebracht werden muss.
 Zurück deswegen, weil er zum Schluss auf jeden Fall an der ersten Position wieder angelangen soll.
-Folgend setzen wir $w_s := \sum_{i = 1}^{n}{\lvert i-\pi(i)\rvert}$
+Folgend setzen wir $w_s := \sum_{i = 1}^{n}{\lvert i-\pi(i)\rvert}$.
 Nach meiner Behauptung muss also die Summe der Wege innerhalb der Äquivalenzklassen genau gleich $w_s$ sein.
 Da immer nur \emph{ein} Container an der Position $c$ auf einmal transportiert werden kann,
 und zwar jeweils von $c$ nach $\pi(c)$ ist dieser Weg auf jeden Fall zurückzulegen, also muss $w$ auf jeden Fall größer oder gleich $w_s$ sein.
@@ -426,102 +430,102 @@ Also genügt folgend zu betrachten, dass die Summe $w_a$ der minimalen Wege inne
 Angenommen, dies wäre nicht so, also $w_a > w_s$.
 Dann müsste es neben den Fahrten vom Containerstellplatz zu der dazugehörigen Waggonpositionen noch mindestens eine weitere Fahrt von $x$ nach $y$ geben,
 auf der kein Container ``in die richtige Richtung'' transportiert wird.
-Also entweder kein Container (->Leerfahrt) oder aber ein Container der eigentlich von einem Ort $o >= x$ zum Wagen $i <= x$ gebracht werden muss.
-Da jedoch alle Zyklen innerhalb eine Äquivalenzklasse ohne Leerfahrt abgearbeitet werden können,
+Also entweder kein Container (->Leerfahrt) oder aber ein Container der eigentlich von einem Ort $o >= x$ zum Waggon $i <= x$ gebracht werden muss.
+Da jedoch alle Zyklen innerhalb einer Äquivalenzklasse ohne Leerfahrt abgearbeitet werden können,
 sind neben den $a \cdot 2$ Leerfahrten zwischen Äquivalenzklassen keine weiteren Leerfahrten nötig.
 Auch sind keine Fahrten in ``falsche'' Richtungen innerhalb einer Äquivalenzklasse nötig, da alle Zyklen an einem Stück abgearbeitet werden können.
-Ein Container $i$ muss zudem nie über die Grenzen einer Äquivalenzklasse transportiert werden, da $\pi(i)$ auf jeden Fall in den selben Grenzen liegt.
+Ein Container $i$ muss zudem nie über die Grenzen einer Äquivalenzklasse transportiert werden, da $\pi(i)$ auf jeden Fall in denselben Grenzen liegt.
 
 Nun muss noch gezeigt werden, dass der Algorithmus alle Voraussetzungen erfüllt und einen optimalen Weg liefert.
-Dafür müssen lediglich folgende drei Aspekte gezeigt werden.
+Dafür müssen lediglich folgende drei Eigenschaften gezeigt werden.
 \begin{enumerate}
- \item[a)] Der erzeugte Weg ist ein zusammenhängender Weg. (Keine Sprünge)
+ \item[a)] Der erzeugte Weg ist ein zusammenhängender Weg (keine Sprünge).
  \item[b)] Jeder Container wird an die richtige Position gebracht.
- \item[c)] Es werden keine ``unnötige'' Fahrten erzeugt. \\
+ \item[c)] Es werden keine ``unnötigen'' Fahrten erzeugt. \\
        (Leerfahrten innerhalb einer Äquivalenzklasse, oder Fahrten ``in die falsche Richtung'').
 \end{enumerate}
-Das jeweils die richtige Instruktionen zum Drehen des Krankopfes, Ablegen und Aufnehmen von Containern erzeugt werden, wird hier nicht bewiesen.
-Es geht hier ausschließlich um den optimalen Weg. Zunächst machen wir uns 1.\ klar. Sei $i$ die jeweilige Position des Krans (im Code |prev|).
-Dann gilt zu Beginn $i = 1$. Hier wird mit der ersten Zyklenabarbeitung begonnen. In jedem Schritt wird zwischen den o.g. 3 Fällen unterschieden.
+Dass jeweils die richtige Instruktionen zum Drehen des Krankopfes, Ablegen und Aufnehmen von Containern erzeugt werden, wird hier nicht bewiesen.
+Es geht hier ausschließlich um den optimalen Weg. Zunächst machen wir uns a)\ klar. Sei $i$ die jeweilige Position des Krans (im Code |prev|).
+Dann gilt zu Beginn $i = 1$. Hier wird mit der ersten Zyklenabarbeitung begonnen. In jedem Schritt wird zwischen den drei Fällen der Hilfsfunktion |step| (\ref{faelle}) unterschieden.
 Im ersten Fall gilt $i=max$ und der nächste Zyklus beginnt bei $max+1=i+1$.
-Es wird zunächst die Fahrt MoveRight generiert, dann die Zyklen des nächsten Algorithmus angehängt und schließlich wieder eine MoveLeft Fahrt generiert.
+Es wird zunächst die Fahrt MoveRight generiert, dann die Zyklen des nächsten Algorithmus' angehängt und schließlich wieder eine MoveLeft Fahrt generiert.
 MoveRight bewegt den Kran um 1, MoveLeft um -1. Also ist der Weg hier zusammenhängend.
-(Unter der Annahme, das der Kran durch |cycleInstrs| wieder auf die Ursprungsposition bewegt wird, dies wird unten gezeigt.)
+(Unter der Annahme, dass der Kran durch |cycleInstrs| wieder auf die Ursprungsposition bewegt wird, dies wird unten gezeigt.)
 Im zweiten Fall gilt |cur| $>$ |next|. Da |nextCycle| bereits abgearbeitet worden wäre, wenn |prev| $\geq$ |cur|, gilt |prev| < |cur| < |next|.
 Der nächste Zyklus überschneidet sich also mit diesem.
-Auch hier ist der Weg zusammenhängend, wie man sich leicht klar macht, denn nach ausführen von |cycleInstrs| wird der Kran wieder an die Position |next| gebracht.
-Von dort kann er im nächsten Schritt durch |step| wieder weiter gebracht werden.
-Im dritten Fall ist es trivial, der Container wird von |prev| nach |cur| gebracht, also ist er ebenfalls zusammenhängend.
+Auch hier ist der Weg zusammenhängend, wie man sich leicht klar macht, denn nach Ausführen von |cycleInstrs| wird der Kran wieder an die Position |next| gebracht.
+Von dort kann er im nächsten Schritt durch |step| wieder weitergebracht werden.
+Im dritten Fall ist es trivial, der Container wird von |prev| nach |cur| gebracht, also ist der Weg ebenfalls zusammenhängend.
 
-Nun zeigen wir die 2. Eigenschaft. Hier unterscheiden wir wieder zwischen den 3 Fällen.
+Nun zeigen wir die Eigenschaft b). Hier unterscheiden wir wieder zwischen den 3 Fällen von |step|.
 Außerdem nehmen wir an, dass wir in einem Schritt immer bereits den vorherigen Container aufgehoben haben, der auf |cur| gebracht werden soll.
 Im ersten Fall wird der Container zunächst an der Position |max| gelassen, anschließend wird die nächste Äquivalenzklasse abgearbeitet und wieder eins nach links gefahren.
 Der Kran ist dann wieder an der Position |max| und kann den Container aufnehmen und |step| neu aufrufen, jedoch ohne Nachfolgezyklen, womit der 3. Fall vorliegt.
 Im zweiten Fall ist die Überlegung ähnlich. Der aktuelle Container wird bei |next| zwischengespeichert, der Kran fährt den Nachfolgezyklus ab und kommt wieder an |next| an.
 Dort nimmt er den zwischengespeicherten Container wieder auf.
 Es wird im Anschluss wieder |step| aufgerufen, wodurch wieder einer der drei Fälle eintritt.
-Das nicht immer Fall 2 eintritt, lässt sich daran erkennen, dass jedes mal mindestens ein Zyklus weniger an |step| übergeben wird.
+Dass nicht immer Fall 2 eintritt, lässt sich daran erkennen, dass jedes Mal mindestens ein Zyklus weniger an |step| übergeben wird.
 Es muss also irgendwann Fall 1 eintreten.
-Im letzen Fall, dem dritten, wird der aktuelle Container auf |cur| gebracht.
-Da dies genau die Stelle ist auf der er muss, ist auch die 2. Voraussetzung gegeben.
-Die 3. Vorraussetzungen ist ebenfalls gegeben, in obiger Argumentation wurde bereits gezeigt, dass nur Leerfahrten erzeugt werden, die die Äquivalenzklassen verbinden.
+Im letzten Fall, dem dritten, wird der aktuelle Container auf |cur| gebracht.
+Da dies genau die Stelle ist, auf die er positioniert werden muss, ist auch Eigenschaft b) gegeben.
+Die Eigenschaft c) ist ebenfalls gegeben, denn in obiger Argumentation wurde bereits gezeigt, dass nur Leerfahrten erzeugt werden, die die Äquivalenzklassen verbinden.
 
 Nun müssen lediglich die Annahmen bewiesen werden, von denen ausgegangen wurde.
 Der obige Beweis ging von der Annahme aus, dass |computeCycle| immer Instruktionen erzeugt, die den Kran wieder auf die Ausgangsposition bringen.
-Dies soll nun noch gezeigt werden. Da der letzte Container der abgearbeitet wird (innerhalb einem |computeCycle| Aufruf) |first|=|cycle.head| ist.
-Da durch die |foldLeft| Anweisungen der Kran zuletzt auf |cur|=|first| gebracht wird, ist der Kran wieder auf der Ausgangsposition.
+Dies soll nun noch gezeigt werden. Da der letzte Container der abgearbeitet wird (innerhalb eines |computeCycle|-Aufrufs) |first|=|cycle.head| ist,
+ und weil durch die |foldLeft|-Anweisungen der Kran zuletzt auf |cur|=|first| gebracht wird, ist der Kran wieder auf der Ausgangsposition.
 
 Zuletzt soll noch gezeigt werden, dass ein Container nie ``auf einen anderen'' gelegt wird, sprich dass die ``Zwischenspeicherung'' funktioniert.
-Nun, alle Container werden erst dann auf einen Waggon gelegt wenn diese auf ihrer finalen Position sind.
+Nun, alle Container werden erst dann auf einen Waggon gelegt, wenn diese auf ihrer finalen Position sind.
 Getauscht - wie es in der Aufgabenstellung genannt wird - muss nur im Fall 2,
 also wenn bei der Abarbeitung des Elements $z$ eines Zyklus $\zeta$ bei $i$ ein neuer Zyklus $\eta$ beginnt und die Abarbeitung unterbrochen werden muss.
-Zu diesem Zeitpunkt ist der Container $\eta(i)$ an der Position $i$. Der Kran kann einfach sein bisherigen Container auf die andere Seite schwenken, den Container $\eta(i)$
+Zu diesem Zeitpunkt ist der Container $\eta(i)$ an der Position $i$. Der Kran kann einfach seinen bisherigen Container auf die andere Seite schwenken, den Container $\eta(i)$
 aufheben und nochmals schwenken und den ursprünglichen Container wieder absetzen.
-Später kommt der Kran wieder zurück und hebt den dort zwischengelagerten Container wieder auf und fährt gemäß einem weiteren |step| Aufruf weiter.
+Später kommt der Kran wieder zurück und hebt den dort zwischengelagerten Container wieder auf und fährt gemäß einem weiteren |step|-Aufruf weiter.
 
-Wir zeigten also, dass der Algorithmus - und damit im Groben auch die Implementierung - optimale Ergebnisse liefert.
+Wir haben also bewiesen, dass der Algorithmus - und damit im Groben auch die Implementierung - optimale Ergebnisse liefert.
 
 \subsubsection{Laufzeitverhalten}
 \label{slow}
-Zunächst wird das Laufzeitverhalten des Algorithmus zum Finden der Zyklen analysiert.
+Zunächst wird das Laufzeitverhalten des Algorithmus' zum Finden der Zyklen analysiert.
 |cyclesOf| berechnet in jedem Schritt den neuen Startwert |start|.
-Dazu wird die Folge 1 bis zur Permutationslänge $n$ traversiert bis ein Wert gefunden wird der noch nicht abgearbeitet - sprich in |handled| enthalten - ist.
+Dazu wird die Folge 1 bis zur Permutationslänge $n$ traversiert bis ein Wert gefunden wird, der noch nicht abgearbeitet - sprich in |handled| enthalten - ist.
 Nimmt man an, dass das Prüfen auf Enthaltensein konstanten Zeitaufwand darstellt (beispielsweise bei Verwendung eines |HashSet|s), dann ergibt dies insgesamt eine Komplexität von $O(n)$.
-Die Berechnung eines Zyklus benötigt höchstens die Traversierung der Permutation, also ebenfalls $O(n)$.
-Anschließend werden die Zahlen, die im Zyklus enthalten sind, in |handled| eingefügt. Unter Annahme, dass wiederum ein |HashSet| verwendet wird, ergibt das eine Komplexität von $O(n)$.
+Die Berechnung eines Zyklus' benötigt höchstens die Traversierung der Permutation, also ebenfalls $O(n)$.
+Anschließend werden die Zahlen, die im Zyklus enthalten sind, in |handled| eingefügt. Unter der Annahme, dass wiederum ein |HashSet| verwendet wird, ergibt das eine Komplexität von $O(n)$.
 Anschließend erfolgt der rekursive Aufruf. Sei $c$ die Anzahl der Zyklen, dann wird |cyclesOf| $c$-mal aufgerufen.
-Die Laufzeitkomplexität zur Finden der Zyklen ist also $O(c \cdot n)$. 
+Die Laufzeitkomplexität zum Finden der Zyklen ist also $O(c \cdot n)$. 
 
 Desweiteren untersuchen wir das Laufzeitverhalten von |computeFromCycles|. Wir wollen beweisen, dass |computeFromCycles| eine Laufzeitkomplexität von $O(n)$ hat.
-|computeCycle| wird so oft aufgerufen, wie es Container gibt, also $c$ mal.
-Betrachten wir also die Laufzeitkomplexität eines |computeCycle| Aufrufs abzüglich rekursiver Aufrufe.
+|computeCycle| wird so oft aufgerufen, wie es Container gibt, also $c$-mal.
+Betrachten wir also die Laufzeitkomplexität eines |computeCycle|-Aufrufs abzüglich rekursiver Aufrufe.
 Innerhalb eines Aufrufs zu einem Zyklus $\zeta$ der Länge $z$ wird zunächst der maximal Wert $max$ berechnet.
 Dies hat eine Komplexität von $O(z)$ laut Scala-Dokumentation. Dies liegt nahe, denn der Maximalwert lässt sich durch einmalige Traversierung aller Elemente berechnen.
 Anschließend erfolgt der |foldLeft|-Ausdruck. Hierbei wird der Zyklus traversiert, also wird |step| $z+1$ mal aufgerufen, da das erste Element noch am Schluss angehängt ist.
-Welche Komplexität hat nun |step|? Betrachtet man die 3 Fälle genauer, kommt man zu dem Schluss dass |step| eine Komplexität von $O(1)$ hat.
-Für den Fall 3 ist es trivial. Im Fall 1 wird nix anderes gemacht, als |computeCycle| aufzurufen und eine konstante Menge an Instruktionen anzuhängen.
+Welche Komplexität hat nun |step|? Betrachtet man die 3 Fälle genauer, kommt man zu dem Schluss, dass |step| eine Komplexität von $O(1)$ hat.
+Für den Fall 3 ist es trivial. Im Fall 1 wird nichts anderes gemacht, als |computeCycle| aufzurufen und eine konstante Menge an Instruktionen anzuhängen.
 Anschließend wird wieder |step| aufgerufen. Wie oft kommt aber Fall 1 \emph{insgesamt} - also in allen |computeCycle|-Aufrufen zusammen - vor?
-Da Fall 1 nur bei einer ``Äquivalenzklassengrenze'' vorkommt und diese danach ``auflöst'', wird er höchstens $a$ mal ausgeführt, wobei $a$ die Anzahl Äquivalenzklassen ist.
+Da Fall 1 nur bei einer ``Äquivalenzklassengrenze'' vorkommt und diese danach ``auflöst'', wird er höchstens $a$-mal ausgeführt, wobei $a$ die Anzahl Äquivalenzklassen ist.
 Da $a <= n$, lässt sich die Laufzeit von Fall 1 vernachlässigen, wir wollen ja eine Komplexität von $O(n)$ beweisen.
 Nun betrachten wir also den Fall 2. Auch in diesem wird nicht mehr als ein |computeCycle|-Aufruf und eine konstante Anzahl Konkatenationen getätigt.
 Anschließend wird ebenfalls |step| neu aufgerufen. Also betrachten wir wieder, wie oft der Fall 2 eintritt.
-Er tritt immer genau dann auf, wenn eine Überschneidung von zwei Zyklen vorliegt. Diese wird in Fall 2 danach aufgelöst, wird also nur einmal als Fall 2 bearbeitet.
-Im Allgemeinen gibt es jedoch bis zu $n^2$ Überschneidungen, denn es kann sein, dass sich jeder mit jedem schneidet. Daher muss es noch genauer betrachtet werden.
+Er tritt immer genau dann auf, wenn eine Überschneidung von zwei Zyklen vorliegt. Diese Überschneidung wird in Fall 2 danach aufgelöst, sie wird also nur einmal als Fall 2 bearbeitet.
+Im Allgemeinen gibt es jedoch bis zu $n^2$ Überschneidungen, denn es kann sein, dass sich jeder mit jedem schneidet. Daher muss dieser Fall noch genauer betrachtet werden.
 Es wird nämlich ein sich überschneidender Zyklus $\zeta$ nur einmal als solcher erkannt und abgearbeitet. Das machen wir uns wie folgt klar.
 Sobald ein Zyklus während der Abarbeitung eines Zyklus $\eta$ als ein sich überschneidender erkannt wird, wird für diesen ein |computeCycle|-Aufruf getätigt.
-Dieser liefert neue Zyklen zurück, in denen auf keinen Fall Zyklen sind die sich mit $\zeta$ überschneiden, da diese durch den Fall 2 ``abgefangen'' wurden.
-Also werden alle Zyklen, die sich mit $\zeta$ und $\eta$ überschneiden nur bei der Abarbeitung von $\zeta$ erkannt, nicht mehr jedoch bei folgenden |step| Aufrufen
+Dieser liefert neue Zyklen zurück, in denen auf keinen Fall Zyklen sind, die sich mit $\zeta$ überschneiden, da diese durch den Fall 2 ``abgefangen'' wurden.
+Also werden alle Zyklen, die sich mit $\zeta$ und $\eta$ überschneiden nur bei der Abarbeitung von $\zeta$ erkannt, nicht mehr jedoch bei folgenden |step|-Aufrufen
 in der Abarbeitung von $\eta$. Jeder Zyklus kann also höchstens einmal als ein sich überschneidender Zyklus erkannt werden. Somit fällt auch der Fall 2 nicht ins Gewicht.
 Da wir nun gezeigt haben, dass |step| abzüglich der Fälle 1 und 2 (die ja nicht ins Gewicht fallen) eine Komplexität von $O(1)$ hat, ist klar, dass
 |computeCycle| abzüglich anderer |computeCycle|-Aufrufe eine Laufzeitkomplexität von $O(z)$ hat.
 
 Die Funktion |computeFromCycle| ruft |computeCycle| so auf, dass für jeden Zyklus ein |computeCycle|-Aufruf nötig ist. Jeder Zyklus muss schließlich abgearbeitet werden.
-Sei im Folgenden $Z$ die disjunkten Zyklen die die Permutation darstellen und $k(\zeta)$ die Länge eines Zyklus $\zeta$.
+Sei im Folgenden $Z$ die Menge der disjunkten Zyklen, die die Permutation darstellen und $k(\zeta)$ die Länge eines Zyklus $\zeta$.
 Da für jeden Zyklus $\zeta \in Z$ der Länge $z$ ein Aufruf mit $O(z)$ nötig wird, ist die Gesamtkomplexität
 \[O(\sum_{i=0}^{c}{O(k(\zeta_i))})=O(O(\sum_{i=0}^{c}{k(\zeta_i)}))=O(n)\]
 Das letzte Gleichheitszeichen gilt, da die Summe der Längen von allen disjunkten Zyklen genau die der Permutation ist.
 
-Somit haben wir die Laufzeit von $O(n)$ für |computeFromCycles| und $O(c \cdot n)$ für alle Algorithmen in der Verkettung gezeigt.
+Somit haben wir die Laufzeit von $O(n)$ für |computeFromCycles| und $O(c \cdot n)$ für alle Algorithmen in der Verkettung der $c$ Zyklen gezeigt.
 \clearpage
 \subsection{Ergebnis- und laufzeitoptimaler Algorithmus}
 \label{fast_cycler}
@@ -699,8 +703,9 @@ Außerdem wurde die Klasse so gestaltet, dass Unterklassen leicht geschrieben we
 
  Im Abschnitt \ref{aufgabenstellung} wird das Beispiel aus der Aufgabenstellung ausgeführt, anschließend werden in \ref{special_cases} Spezialfälle diskutiert.
  Darauf folgend wird in \ref{random_perms} mit zufällig erzeugten Permutationen getestet.
- Zum Schluss wird der in \ref{fast_cycler} entworfene Algorithmus auf Skalierbarkeit in der Praxis getestet (\ref{scalability}).\\
-\textbf{Hinweis} Die Instruktionen wurden zwecks Platzsparens abgekürzt. Die Abkürzungen sind folgende.
+ Zum Schluss wird der in \ref{fast_cycler} entworfene Algorithmus auf Skalierbarkeit in der Praxis getestet (\ref{scalability}).
+
+\paragraph{Hinweis} Die Instruktionen wurden zwecks Platzsparens abgekürzt. Die Abkürzungen sind folgende.
  \begin{center}
   \begin{tabular}{llll}
    |TC| & |TakeCon| & |TW| & |TakeWag| \\
@@ -709,6 +714,7 @@ Außerdem wurde die Klasse so gestaltet, dass Unterklassen leicht geschrieben we
     |R| & |Rotate|  &      &      \\
   \end{tabular}
  \end{center}
+\clearpage
 \subsection{Beispiel aus der Aufgabenstellung}
 \label{aufgabenstellung}
 Folgend ist der Ablauf, der sich bei Eingabe des Beispiels aus der Aufgabenstellung ergibt, dargestellt.
@@ -993,6 +999,8 @@ Da $a=20-1=19$ und $\sum_{i = 1}^{n}{\lvert i-\pi(i)\rvert} = 0$, ist $w = 19 \c
 
 Außerdem bemerkenswert ist, dass die Weglänge von 38 für \emph{jede} Permutation der Länge 20 zurückgelegt werden muss.
 Denn der Kran muss auf jeden Fall bis zum letzten Container und wieder zurück an die Startposition, also $2 \cdot (n-1)$ Weglängen zurücklegen, wobei $n$ die Länge der Permutation ist.
+
+\clearpage
 \subsection{Zufällig erzeugte Permutationen}
 \label{random_perms}
 \subsubsection*{1. Beispiel}
@@ -1119,6 +1127,7 @@ verified: Boolean = true
 Auch hier ist die Optimalität gegeben, wie man an $m = l$ sieht.
 Interessant zu beobachten ist, dass die minimale Weglänge nicht konstant für eine Permutationslänge ist.
 Obwohl beide Permutationen die Länge 20 haben, müssen in diesem 2. Beispiel längere Wege zurückgelegt werden.
+\clearpage
 \subsection{Demonstration der Skalierbarkeit}
 \label{scalability}
 Nun soll die Skalierbarkeit demonstriert werden,
@@ -1199,6 +1208,7 @@ Anschließend können die Instruktionen auch direkt aus den Zyklen berechnet wer
 scala> val instrs = Instructor computeFromCycles cycles
 instrs: Seq[de.voodle.tim.bwinf.container.Instruction] = List(Take...
 \end{lstlisting}
+\clearpage
 \subsection{Simulation der Kranmaschine}
  Nun wurde bereits eine Instruktionskette |instrs| erzeugt.
  Die in der Aufgabenstellung skizzierte Maschine wurde implementiert, um die Kraninstruktionen ausführen zu können.
@@ -1228,6 +1238,9 @@ res1: de.voodle.tim.bwinf.container.Gleis =
 Container: _ _ _ _
 Waggons:   1 2 3 4
 \end{lstlisting}
+In Scala liefert jeder Ausdruck einen Wert zurück. Da in dem obigem Aufruf der Wert jedoch keiner Variable explizit zugewiesen wird,
+ wird der Wert einer generierten Variable |resX| zugewiesen, wobei |X| mit jedem solchen Aufruf inkrementiert wird.
+
 \subsection{Zeitmessung}
 Wenn die Skalierbarkeit nachvollzogen werden soll,
 empfiehlt sich die Funktion |demonstrate| im Modul |Utils| auszuprobieren.
@@ -1247,11 +1260,9 @@ verified: Boolean = true
 \end{lstlisting}
 
 \lstset{xleftmargin=-.8cm,xrightmargin=-.8cm}
-\fontsize{8pt}{8.4pt}
 \lstset{basicstyle=\ttfamily\small}
 \clearpage
 \section{Programmtext}
-\secttoc
 \label{code2}
 Alle Quelldateien dieser Aufgabe finden sich auf der CD unter |Aufgabe2/src/|.
 \clearpage\subsection{Cycler}

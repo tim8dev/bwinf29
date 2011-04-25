@@ -36,7 +36,7 @@ object OnlineAlgo { // Hilfsmethoden zum schnellen erzeugen! :)
     OnlineAlgo(kistenSatz, standardStrategien)
 
   def standardStrategien =
-    FindeGrößerenLeeren :: // (2)
+    FindeGroesserenLeeren :: // (2)
     FindeZwischenraum   :: // (3)
     FindeHalbleeren     :: // (1)
     FindeKleinereWurzel :: // (4)
