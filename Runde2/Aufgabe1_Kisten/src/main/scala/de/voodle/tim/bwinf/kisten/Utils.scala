@@ -46,19 +46,6 @@ object Utils {
 
   private def zufallsKisten(n: Int) = List.fill(n)(zufall)
 
-  private val testKisten: List[KisteLeer] = {
-    (umzugskarton  *3 :::
-     buecherkarton *1 :::
-     kleiderbox    *1 :::
-     pizzakarton   *2 :::
-     arthur        *2 :::
-     fluschi       *1 :::
-     christoph     *2 :::
-     paroli        *1 :::
-     postmeister   *1 :::
-     chachacha     *1)
-  }
-
   // Hilfsmethode zum benchen.
   private def bench[T](packer: =>T): (T, Long) = {
     val startZeit = System.currentTimeMillis
