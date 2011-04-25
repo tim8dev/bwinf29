@@ -1,5 +1,4 @@
 package de.voodle.tim.bwinf.kisten
-
 import math._
 
 sealed abstract class Kiste extends Ordered[Kiste] {
@@ -62,7 +61,6 @@ sealed abstract class Kiste extends Ordered[Kiste] {
   def *(anzahl: Int) = List.fill(anzahl)(this)
 }
 
-// Mem. cons.: 2*8(java,scala) + 4*4(a,b,c,v) + 4(hash) = 36 -> 40 (bytes)
 case class KisteLeer private[kisten](a: Int, b: Int, c: Int) extends Kiste {
   def kinder = Seq.empty
 
@@ -74,7 +72,7 @@ case class KisteLeer private[kisten](a: Int, b: Int, c: Int) extends Kiste {
     case _ => -1                // Sonst muss dieser Leere als Kleinerer weichen
   }
 
-  override val hashCode = // kann nie <0 sein; Nutze den Companion, für die Hashfunktion.
+  override val hashCode = // Nutze den Companion, für die Hashfunktion.
     31*(31*(31* + super.hashCode) + KisteLeer.hashCode)
 
   // Überschreibe wegen Types!
@@ -82,7 +80,6 @@ case class KisteLeer private[kisten](a: Int, b: Int, c: Int) extends Kiste {
   override def *(anzahl: Int) = List.fill(anzahl)(this)
 }
 
-// Mem. consump.: 2*8(java,scala) + 8(links ref) + 4*4(a,b,c,v) + 4(hash) = 44 -> 48 (bytes)
 case class KisteHalb private[kisten](a: Int, b: Int, c: Int, links: Kiste) extends Kiste {
   override def istLeer = false
   def kinder = Seq(links)
@@ -116,13 +113,10 @@ case class KisteHalb private[kisten](a: Int, b: Int, c: Int, links: Kiste) exten
     31*(31*(31*(31* + super.hashCode) + links.hashCode) + KisteHalb.hashCode)
 }
 
-// Mem. consump.: 2*8(java,scala) + 2*8(links,rechts ref) + 4*4(a,b,c,v) + 1(lgr) + 4(hash) = 53 -> 56 (bytes) [64]
 case class KisteVoll private[kisten](a: Int, b: Int, c: Int, links: Kiste, rechts: Kiste) extends Kiste {
   override def istLeer = false
-  //require(links ⊆ rechts, "Links muss kleiner-gleich rechts sein!")
   def kinder = Seq(links, rechts)
 
-  // Nicht klar, ob nl >= rechts, oder nicht. (bzw. links >= nr)
   def ersetzeLinks(nl: Kiste)  = Kiste(a,b,c, nl, rechts)
   def ersetzeRechts(nr: Kiste) = Kiste(a,b,c, links,  nr)
 

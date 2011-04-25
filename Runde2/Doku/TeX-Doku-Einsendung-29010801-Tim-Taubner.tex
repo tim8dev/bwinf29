@@ -46,6 +46,10 @@
   \secdef\@chapter\@schapter}
 }
 
+%\usepackage{titlesec}
+%\titlespacing*{\chapter}{0pt}{-88pt}{20pt}
+%\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{}{20pt}{\Huge \thechapter.\ }
+
 %opening
 \title{29. Bundeswettbewerb Informatik 2010/2011 2. Runde}
 \author{Tim Taubner, Verwaltungsnummer 29.0108.01}
@@ -67,6 +71,8 @@
   }
 \lstMakeShortInline{|}
 
+\parskip3pt
+
 \begin{document}
 
 \begin{titlepage}
@@ -79,7 +85,7 @@
    In diesem Dokument erläutere ich meine Lösungen der Aufgaben.
    Ich halte mich an den Gliederungsvorschlag der 1.\ Runde.
    Es sind also die Lösungsideen, Algorithmenentwürfe, Implementierungen, Programmabläufe, Programmnutzungsanleitungen sowie Programmtexte enthalten.
-   Eigenständige Erweiterungen werden erläutert und als solche gekennzeichnet.\\
+   Eigenständige Erweiterungen werden erläutert und als solche gekennzeichnet.
 
    Sämtliche Dokumentation und die interaktiv ausführbaren Programme sind auf einer separaten CD mitgeliefert.
    Wie die erstellten Programme gestartet werden können, ist im Abschnitt A, Allgemeines, erläutert.
@@ -101,6 +107,7 @@
 \nomtcrule
 
 \chapter{Allgemeines}
+\label{allgemein}
 \fancyhead[L]{\thechapter. Allgemeines}
 
 \section{Persönliche Anmerkungen}
@@ -127,19 +134,19 @@
   habe ich dazu viel Unterstützung von meiner Familie - insbesondere von meinem Vater - und meiner Freundin erhalten.
 \section{Dateistruktur der CD}
  Die Dateien auf der CD sind wie folgt strukturiert.
- Zu jeder Aufgabe wurde ein Ordner \textbf{AufgabeX} mit den zwei folgenden Unterordnern angelegt.\\
+ Zu jeder Aufgabe wurde ein Ordner \textbf{AufgabeX} mit den zwei folgenden Unterordnern angelegt.
 
  \begin{tabular}{ll}
   \textbf{src}  & Quelltexte \\
   \textbf{dist} & ausführbare Dateien, sowie zur Ausführung benötigte Bibliotheken \\
- \end{tabular}\\ \newline
+ \end{tabular}\\
  Zusätzlich ist die vorliegende Dokumentation unter
  \begin{center}\textbf{TeX-Doku-Einsendung-29010801-Tim-Taubner.pdf}\end{center}
  im Wurzelverzeichnis zu finden.
  Auch die \LaTeX-Quelldateien, mit der diese Dokumentation erzeugt wurde, sind im Verzeichnis ``TeX-Doku-Quelldateien'' zu finden.
 \section{Systemvoraussetzungen zur Programmausführung}
 \label{Vor}
-Um die Programmbeispiele ausführen zu können, sollten folgende Voraussetzungen erfüllt sein:\\
+Um die Programmbeispiele ausführen zu können, sollten folgende Voraussetzungen erfüllt sein:
 
  \begin{tabular}{ll}
   \textbf{Prozessor:}                & mindestens 1 GHz, empfohlen: $\geq$ 2 GHz \\
@@ -175,9 +182,9 @@ Um die Programmbeispiele ausführen zu können, sollten folgende Voraussetzungen
  Der Classpath wurde bereits richtig eingestellt und die Module beider Aufgaben wurden bereits importiert,
   so dass die einzelnen Anweisungen in den Aufgaben direkt ausgeführt werden können.
 \subsection{Ausführen der Beispiele}
- Alle Beispiele können nacheinander ausgeführt werden, indem Sie im Wurzelverzeichnis der CD |./examples| in der Konsole eingeben.
- Die Beispiele können auch nach Aufgabe getrennt ausgeführt werden, indem Sie |./aufgabe1| oder |./aufgabe2| eingeben.
- (Unter Windows jeweils .bat an die Befehle hängen.)
+ Alle Beispiele können nacheinander ausgeführt werden, indem im Wurzelverzeichnis der CD |./examples| in der Konsole eingeben wird.
+ Die Beispiele können auch nach Aufgabe getrennt ausgeführt werden, nämlich durch Eingabe von |./aufgabe1| bzw.\ |./aufgabe2|.
+ (Unter Windows bitte jeweils |.bat| Befehle benützen.)
 \clearpage
 
 \fancyhead[L]{\thechapter. Aufgabe 1 - Kisten in Kisten in Kisten}

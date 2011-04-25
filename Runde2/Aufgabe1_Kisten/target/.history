@@ -102,3 +102,5 @@ compile
 console
 ~test
 console
+ls
+console

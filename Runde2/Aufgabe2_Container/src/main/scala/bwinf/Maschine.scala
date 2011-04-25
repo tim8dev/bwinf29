@@ -10,9 +10,14 @@ class Maschine(protected val gleis: Gleis,
   private val arrow = "-" * (numLength+1)
 
   private def minLength =
-    gleis.container.zipWithIndex.map { case (v,i) => ((i+1)-v).abs } sum
+    gleis.container.zipWithIndex.map { case (v,i) => BigInt(((i+1)-v).abs) } sum
 
-  def log(str: =>Any) = if(print) println(str) else ()
+  def log(str: =>Any)(implicit forcePrint: Option[String] = None) = forcePrint match {
+      case Some(force) if print => println(str + force)
+      case Some(force) => println(force)
+      case None if print => println(str)
+      case _ => ()
+    }
   
   def logInts(ints: =>Seq[Int]): String =
     (for(i <- ints) yield {
@@ -21,8 +26,8 @@ class Maschine(protected val gleis: Gleis,
       }) mkString (" ")
 
   def interpret(instrs: Seq[Instruction]): Gleis = {
-    log(logInts(1 to length) + ";(m=" + minLength + ")")
-    log(logInts(gleis.container) + ";(l=" + instrs.map(_.len).sum + ")")
+    log(logInts(1 to length) + ";")(Some("(m=" + minLength + ")"))
+    log(logInts(gleis.container) + ";")(Some("(l=" + instrs.map(i => BigInt(i.len)).sum + ")"))
     interpret(instrs.toList,0,0,1)
   }
   // Attach point for further actions (for subclasses)

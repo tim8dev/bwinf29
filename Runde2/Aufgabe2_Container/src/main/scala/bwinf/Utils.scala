@@ -37,7 +37,7 @@ object Utils {
               .mkString(" [ ", "\n : ",
                         if(instrs.lengthCompare(20*12)>0) " ..." else " ] "))
     }
-    println("Time used computing Instruction: " + (endTime - startTime))
+    println("Time used computing Instructions: " + (endTime - startTime))
     val gleis = new Gleis(perm)
     val maschine = new Maschine(gleis, print)
     maschine interpret instrs
